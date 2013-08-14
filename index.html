@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Curiosity : Curiosity is a generic frontend for facetting, displaying and editing data from any elasticsearch index." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Curiosity</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/pagesjaunes/curiosity">View on GitHub</a>
+
+          <h1 id="project_title">Curiosity</h1>
+          <h2 id="project_tagline">Curiosity is a generic frontend for facetting, displaying and editing data from any elasticsearch index.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/pagesjaunes/curiosity/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/pagesjaunes/curiosity/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="curiosity" class="anchor" href="#curiosity"><span class="octicon octicon-link"></span></a>curiosity</h1>
+
+<p>Curiosity is a generic frontend for facetting, displaying and editing data from any elasticsearch index.
+Development repo is here: <a href="http://github.com/pagesjaunes/curiosity">http://github.com/pagesjaunes/curiosity</a></p>
+
+<h2>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h2>
+
+<p>Curiosity is a client side tool, written in javascript (with MVC support from angularjs), that aims to make possible to explore bigdata from an elasticsearch index, regardless of the index structure.</p>
+
+<p>It lets the user :</p>
+
+<ul>
+<li>Choose an elasticsearch server from a list ;</li>
+<li>Choose an index and a doc type, discovered from the selected server ;</li>
+</ul><p>Then, the fields are found out by the tool, and the user is able to :</p>
+
+<ul>
+<li>Pick the fields he wants to be displayed ;</li>
+<li>Pick the fields he wants to be facetted.</li>
+</ul><p>Once done, the user can dig into the data, using the chosen facets and/or the full text search.</p>
+
+<p>Moreover, he can select a document from the view, edit it and thus :</p>
+
+<ul>
+<li>Modify any value ;</li>
+<li>Modify a field structure</li>
+</ul><p>Once validated, the changes are indexed in elasticsearch. If the user adds a field, it is then available for being displayed or facetted !</p>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<p>The elasticsearch documents should have been indexed with a mapping that makes "full-text" search available on every fields.
+Before indexing your data, you may set this generic mapping (replacing INDEX_NAME by your own index, and DOC_NAME by the doc type you are adressing) :</p>
+
+<p><code>curl -XPUT 'ES_SERVER:PORT/INDEX_NAME/_mapping' -d '{
+    "DOC_NAME" : {
+        "dynamic_templates" : [
+            {
+                "facette_template" : {
+                    "match" : "*",
+                    "match_mapping_type" : "string",
+                    "mapping" : {
+                        "type" : "multi_field",
+                        "fields" : {
+                            "{name}_fulltext" : {"type": "string", "index" : "analyzed"},
+                            "{name}" : {"type": "string", "index" : "not_analyzed"}
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}'</code></p>
+
+<p>Every field will be indexed for "full-text" search AND facetting. </p>
+
+<h2>
+<a name="demo" class="anchor" href="#demo"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>No demo available yet.</p>
+
+<h2>
+<a name="status" class="anchor" href="#status"><span class="octicon octicon-link"></span></a>Status</h2>
+
+<p>This version is not usable yet : for testing the concept, run the prototype tool (curiosityPoc on github).</p>
+
+<p>MVC refactoring with angularjs.</p>
+
+<h2>
+<a name="copyright-and-license" class="anchor" href="#copyright-and-license"><span class="octicon octicon-link"></span></a>Copyright and License</h2>
+
+<pre><code>Curiosity - BigData Explorer
+Copyright (C) 2013  Fabrice Depaulis for PagesJaunes
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+</code></pre>
+
+<p>.. _jsoneditor: <a href="https://github.com/josdejong/jsoneditor">https://github.com/josdejong/jsoneditor</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Curiosity maintained by <a href="https://github.com/pagesjaunes">pagesjaunes</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
