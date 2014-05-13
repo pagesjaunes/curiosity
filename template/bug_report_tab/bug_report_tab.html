@@ -1,0 +1,25 @@
+<!-- bug_report_tab.html !-->
+<div class="input-group request-input"> 
+	<span class="input-group-addon">
+		{{ info.txt.bugReport.Title }}
+	</span>
+	<input class="form-control" ng-model="bugReport.title" type="text"></input>
+</div>
+
+<div class="input-group request-input"> 
+	<span class="input-group-addon">
+		{{ info.txt.bugReport.Contact }}
+	</span>
+	<input class="form-control" ng-model="bugReport.contact" type="text" placeholder="your@email.com"></input>
+</div>
+
+<div>
+	<textarea ng-model="bugReport.content" class="form-control" row="6">
+	</textarea>
+</div>
+
+<div>
+	<button class="btn" ng-click="send()" ng-class="{'btn-default':!bugReport.sent,'btn-success':bugReport.sent}"> 
+		{{ info.txt.bugReport.Send }}
+	</button>
+</div>
