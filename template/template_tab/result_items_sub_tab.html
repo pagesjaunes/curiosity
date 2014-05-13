@@ -1,0 +1,44 @@
+<div class="col-sm-6">
+	<div class="input-group">
+		<span class="input-group-addon">Template</span>
+		<select ng-model="template.selected" ui-select2 class="form-control" ng-change="changeTemplate()">
+			<option ng-repeat="template in template.list" value="{{$index}}" >{{ template.name }}</option>  
+		</select>
+	</div>
+</div>
+<div class="spacer"></div>
+<div class="btn-group col-sm-2 btn-keyword">
+	<button ng-click="new()" class="btn btn-default">New</button>
+	<button ng-click="save()" class="btn btn-default">Save</button>
+	<button ng-click="delete()" class="btn btn-default" >Delete</button>	
+</div>
+<div class="spacer"></div>
+<div class="col-sm-6 btn-keyword">
+	<div class="input-group">
+		<span class="input-group-addon">Template's name</span>
+		<input type="text" ng-model="template.currentTemplate.name" class="form-control"></input>
+	</div>
+</div>
+<div class="spacer"></div>
+<div class="col-sm-8 btn-keyword">
+	<textarea ui-tinymce="tiny.tinymceOptions" ng-model="template.currentTemplate.value">
+	</textarea>
+</div>
+<div class="col-sm-4">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				Fields
+			</h3>
+		</div>
+		<div class="panel-body">
+			<span ng-repeat="field in info.mappings track by $index" class="field col-sm-3" >
+				<a href ="#" ng-click="addField(field.ancestor)" title="{{ field.ancestor  }}">
+					{{ field.name }}
+				</a>
+			</span>
+			<div class="spacer"></div>
+		</div>
+	</div>
+</div>
+<div class="spacer"></div>

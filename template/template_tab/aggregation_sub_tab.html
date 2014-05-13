@@ -1,0 +1,54 @@
+<h3>Assocication</h3>	
+<div>
+	<div class="col-sm-5">
+		<div class="input-group">
+			<span class="input-group-addon">Aggregation Type</span>
+			<select ng-model="template.aggregation.aggSelected" ui-select2 class="form-control" ng-change="changeTemplate()">
+				<option ng-repeat="agg in template.aggregation.possibleAggregation" value="{{agg.type}}">
+					{{ agg.type }}
+				</option>  
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-5">
+		<div class="input-group">
+			<span class="input-group-addon">Template</span>
+			<select ng-model="template.aggregation.tplSelected" ui-select2 class="form-control" ng-change="changeTemplate()">
+				<option value="default">Default</option>
+				<option ng-repeat="tpl in template.aggregation.list" value="{{tpl.name}}">
+					{{ tpl.name }}
+				</option>  
+			</select>
+		</div>
+	</div>
+	<button class="btn btn-default col-sm-1" ng-click="updateAggAssoc()">Update</button>
+	<div class="spacer"></div>
+</div>
+
+<h3>Edition</h3>	
+<div class="col-sm-6">
+	<div class="input-group">
+		<span class="input-group-addon">Template</span>
+		<select ng-model="template.aggregation.selected" ui-select2 class="form-control" ng-change="changeAggTemplate()">
+			<option ng-repeat="template in template.aggregation.list" value="{{$index}}" >{{ template.name }}</option>  
+		</select>
+	</div>
+</div>
+<div class="spacer"></div>
+<div class="btn-group col-sm-2 btn-keyword">
+	<button ng-click="newAggTpl()" class="btn btn-default">New</button>
+	<button ng-click="saveAggTpl()" class="btn btn-default">Save</button>
+	<button ng-click="deleteAggTpl()" class="btn btn-default" >Delete</button>	
+</div>
+<div class="spacer"></div>
+<div class="col-sm-6 btn-keyword">
+	<div class="input-group">
+		<span class="input-group-addon">Template's name</span>
+		<input type="text" ng-model="template.aggregation.currentTemplate.name" class="form-control"></input>
+	</div>
+</div>
+<div class="spacer"></div>
+<div class="col-sm-8 btn-keyword">
+	<textarea ui-tinymce="tiny.tinymceOptions" ng-model="template.aggregation.currentTemplate.value">
+	</textarea>
+</div>

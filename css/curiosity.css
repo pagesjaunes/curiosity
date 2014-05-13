@@ -1,0 +1,174 @@
+/* curiosity.css */ 
+
+/* Global */
+
+.spacer {
+  clear: both;
+  width : 0;
+  height :  0;
+}
+
+#loading-image {
+  margin-top : -5px;
+}
+
+.btn-with-image {
+  padding : 4px 2px;
+}
+
+#content {
+  position :relative;
+  height : 100%;
+}
+
+.tab {
+}
+
+/* header */
+#header {
+	position : relative;
+}
+
+#bar {
+  margin : 10px;
+}
+
+#search-nav {
+	width : 200px;
+}
+
+.info-header {
+	padding-top : 7px;
+}
+
+/* query Tab */ 
+
+.request-input {
+  margin-bottom: 10px;
+}
+
+.panel-request {
+  padding : 0;
+}
+
+#json-panel {
+  margin-top: 10px;
+}
+
+#field-selector span {
+	overflow: hidden;
+}
+
+#jsonQuerry {
+	margin: 0 0 8px 0 ;
+}
+
+#result-per-page {
+  padding-left: 0px;
+}
+
+.field {
+  overflow: hidden;
+}
+
+/* Result Tab */
+
+
+#result-bar {
+  margin :10px 0;
+}
+
+.pagination-result {
+  margin :0;
+}
+
+/* Keywords tab */
+
+.btn-keyword {
+  margin-top :10px;
+}
+
+.gridStyle {
+  border: 1px solid rgba(0, 0, 0, 0);
+  margin-top : 10px;
+  width : 500px;
+  height : 500px;
+  border-color: #E7E7E7;
+  border-radius: 4px;
+}
+
+/* Mapping Tabs */
+
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
+}
+
+/* AggregationTab */ 
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.aggregations-list li {
+  list-style-type: none;
+  width : 300px;
+  margin-top: 10px;
+}
+
+.aggregations-list li .panel-body .input-group {
+  margin-top: 5px;
+}
+
+.aggregations-list li .btn-group {
+  margin-top : 10px;
+}
+
+/* Result Tab */
+
+.aggregations-list  > ul {
+  padding-left : 10px;
+}
+
+#query-result, #aggregation-result, #sidebar-resizer {
+  float: left;
+}
+
+.caret-btn-xs {
+  padding: 7px 5px 8px 5px;
+}
+
+.glyph-btn-xs {
+  padding : 4px 5px;
+}
+
+#aggregation-result {
+    width: 20%;
+    overflow: auto;
+    border-top: 1px solid #CCCCCC;
+}
+
+#query-result {
+    overflow: hidden;
+    width : 79%;
+    border-top: 1px solid #CCCCCC;
+}
+
+#sidebar-resizer {
+    background-color: #D9EDF7;
+    height : 100%;
+    width: 6px;
+    cursor: e-resize; 
+}
+
+#sidebar-resizer:hover {
+    background-color: #31708F;
+}
+
+#query-result h4 {
+  padding-left : 15px;
+}

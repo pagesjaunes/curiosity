@@ -1,0 +1,44 @@
+<div>
+	<div class="panel panel-info panel-request">
+		<div class="panel-heading">
+		<h3 class="panel-title col-sm-10">{{ agg.agg.type }} on {{agg.agg.field}}</h3>
+			<span class="col-sm-2 glyphicon " ng-class="{'glyphicon-plus': !agg.showAgg, 'glyphicon-minus':agg.showAgg}" ng-click="agg.showAgg =!agg.showAgg"></span>
+			<div class="spacer"></div>
+		</div>
+		<div class="panel-body" ng-show="!agg.showAgg">
+			<div>
+				<div class="col-sm-5"><input placeholder="Search" ng-model="agg.agg.searchText" class="form-control input-sm" type="text" /></div>
+				<div class="col-sm-7 input-group input-group-sm">
+					<span class="input-group-btn">
+						<button ng-click="switchPredicate(agg.agg, 'key', 'doc_count')" class="btn btn-default">
+							{{ agg.agg.predicate }}
+						</button>
+					</span>
+					<input ng-model="agg.agg.nbResult" class="form-control" type="number" />
+					<span class="input-group-btn">
+						<button class="btn btn-default btn-with-image" ng-click="agg.agg.reverse = !agg.agg.reverse"> 
+							<span class="glyphicon" ng-class="{'glyphicon-arrow-up':!agg.agg.reverse,'glyphicon-arrow-down':agg.agg.reverse}">
+							</span>
+						</button>
+					</span>
+				</div>
+				<div class="spacer"></div>
+			</div>
+			<div ng-repeat="bucket in agg.buckets | filter:agg.agg.searchText | orderBy:agg.agg.predicate:!agg.agg.reverse | limitTo:agg.agg.nbResult">
+				<span class="col-sm-10"> 
+					<label><a href="#" ng-click="addTermsAggregationFilter(agg, bucket)">{{bucket.key}} :</a></label> 
+					{{bucket.doc_count}} 
+				</span> 
+				<span class="col-sm-2 glyphicon" ng-class="{'glyphicon-plus': !bucket.showNested, 'glyphicon-minus':bucket.showNested}" ng-click="bucket.showNested =!bucket.showNested" ng-if="hasNestedAgg(bucket)"></span>
+				<div class="spacer"></div>
+				<div ng-show="bucket.showNested">
+					<ul>
+						<li ng-repeat="(key, agg) in bucket">
+							<div ng-if="isAgg(key)" ng-include="agg.agg.template"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

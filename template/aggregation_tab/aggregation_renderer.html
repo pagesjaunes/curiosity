@@ -1,0 +1,32 @@
+<div class="panel" ng-class="{'panel-info':agg.obj.nested, 'panel-success':!agg.obj.nested}">
+	<div class="panel-body">
+		<div class="input-group">
+			<span class="input-group-addon">Type</span>
+			<select ng-model="agg.idx" ui-select2 class="form-control" ng-change="modifieAgg(agg)">
+				<option ng-repeat="(key, value) in aggregation.possibleAggregation" value="{{ key }}" >
+					{{ value.type }}
+				</option>
+			</select>  
+		</div>
+		<div class="input-group">
+			<span class="input-group-addon">Field</span>
+			<input type="text" ng-model="agg.obj.field" class="form-control" ng-focus="aggregation.focused = agg">
+		</div>
+		<div class="input-group" ng-repeat="param in agg.obj.params">
+			<span class="input-group-addon">{{param.name}}</span>
+			<input type="{{ param.type }}" ng-model="param.value" class="form-control">
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-danger" ng-click="deleteAgg(agg, key)">
+				<span class="glyphicon glyphicon-remove-sign"></span>		
+			</button>
+			<button ng-if="agg.obj.nested" class="btn btn-info" ng-click="addAggregation(agg.obj.nestedAgg)">
+				<span class="glyphicon glyphicon-plus"></span>				
+			</button>
+		</div>
+		<ul>
+			<li ng-repeat="(key,agg) in agg.obj.nestedAgg" ng-include="'template/aggregation_tab/aggregation_renderer.html'">
+			</li>
+		</ul>
+	</div>
+</div>

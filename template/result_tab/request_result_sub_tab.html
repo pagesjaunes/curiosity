@@ -1,0 +1,91 @@
+<div id="result-bar">
+	<div class="col-sm-4">
+		<div class="input-group">
+			<span class="input-group-addon">Template</span>
+			<select ng-model="query.templateSelected" ui-select2 ng-change="selectTemplate()" class="form-control">
+				<option ng-repeat="template in template.list" value="{{$index}}" >{{ template.name }}</option>  
+			</select>
+			<span class="input-group-addon">
+				<input type="checkbox" ng-model="query.useTemplate">
+			</span>
+		</div>
+	</div>
+
+	<div class="col-sm-3">
+		<input ng-model="searchText" type="text" class="form-control" placeholder="Search">
+	</div>
+
+	<div class="col-sm-3">
+		<ul class="pager pagination-result">
+			<li ng-class="{'disabled':query.page==0}">
+				<a href="#" ng-click="firstPage()">&larr; First</a>
+			</li>
+			<li ng-class="{'disabled':query.page==0}">
+				<a href="#" ng-click="prevPage()">Prev</a>
+			</li>
+			<li class="disabled">
+				<a href="#" >{{ query.page + 1 }} / {{ query.maxPage + 1}}</a></li>
+			<li ng-class="{'disabled':query.page==query.maxPage}">
+					<a href="#" ng-click="nextPage()">Next</a>
+			</li>
+			<li  ng-class="{'disabled':query.page==query.maxPage}">
+				<a href="#" ng-click="lastPage()">Last &rarr;</a>
+			</li>
+		</ul>
+	</div>
+		
+	<div class="col-sm-2">
+		<div class="input-group">
+			<span class="input-group-addon">Page </span>
+			<input type="number" ng-model="query.page" min="0" max="{{query.maxPage}}"class="form-control">
+			<span class="input-group-btn">
+				<button class="btn btn-default" ng-click="search('no')">Go</button>
+			</span>
+		</div>			
+	</div>
+	<div class="spacer"></div>
+</div>
+<div id="aggregation-filter-bar">
+	<h4 ng-click="query.showAggregationFilter = !query.showAggregationFilter">
+		Aggregation Filter 
+		<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!query.showAggregationFilter,'glyphicon-chevron-up':query.showAggregationFilter}">	
+		</span>
+	</h3>
+	<div class="col-sm-3" ng-repeat="field in query.aggregationFilter" ng-show="query.showAggregationFilter">
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+			{{field.field}}
+			<span class="glyphicon glyphicon-remove" ng-click="removeAggFilter(query.aggregationFilter, $index)"></span>
+			</div>
+			<div class="panel-body"> 
+				<div class="btn-group" ng-repeat="agg in field.agg"> 					
+					<button class="btn btn-xs glyph-btn-xs" ng-click="removeAggFilter(field.agg, $index)" ng-class="{'btn-warning':agg.opBool == 'AND','btn-danger':agg.opBool == 'NOT', 'btn-success':agg.opBool == 'OR'  }">
+						<span class="glyphicon glyphicon glyphicon-remove"></span> 				
+					</button>
+					<button class="btn btn-xs dropdown-toggle" data-toggle="dropdown" ng-class="{'btn-warning':agg.opBool == 'AND','btn-danger':agg.opBool == 'NOT', 'btn-success':agg.opBool == 'OR'  }">
+						{{ agg.key }} <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#" ng-click="setBoolOpAggFilter(agg,'OR')">Or</a></li>
+						<li><a href="#" ng-click="setBoolOpAggFilter(agg,'AND')">And</a></li>
+						<li><a href="#" ng-click="setBoolOpAggFilter(agg,'NOT')">Not</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="spacer"></div>
+</div>	
+
+<div ng-if="!query.useTemplate">
+	<table class="table table-striped col-sm-12">
+		<tr ng-repeat="doc in query.queryResults.hits.hits | filter:searchText">
+			<td>{{ doc }}</td>
+		</tr>
+	</table>
+	<div class="spacer"></div>
+</div>
+
+<div ng-if="query.useTemplate">
+	<div ng-repeat="item in query.queryResults.hits.hits | filter:searchText" ng-include="query.template.name"></div>
+</div>

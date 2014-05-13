@@ -1,0 +1,69 @@
+<div class="col-sm-7">
+	
+	<div class="input-group request-input"> 
+		<span class="input-group-addon">Simplified request</span>
+		<input ng-change="updateQuery()" ng-model="query.queryTerm" type="text" ng-trim="false" class="form-control"></input>
+	</div>
+
+	<div class="input-group request-input"> 
+		<span class="input-group-addon">Complexe request</span>
+		<input class="form-control" ng-model="query.queryValue" type="text"></input>
+	</div>
+	
+	
+	<div class="col-sm-3" id="result-per-page">
+		<div class="input-group">
+			<label class="input-group-addon">Result per page </label>
+			<input class="form-control" ng-model="query.nbResult"></input>
+		</div>
+	</div>
+	<button ng-click="search() " class="btn btn-default col-sm-1"><span class="glyphicon glyphicon-search"></span> Search</button>
+	
+	<div class="spacer"></div>
+	
+	<div class="panel panel-default" id="json-panel">
+  		<div class="panel-heading" ng-click="query.showJson=!query.showJson">
+  			<h3 class="panel-title">
+  				<a class="col-sm-11" href="#" title="Show the query in json">Json Querry</a>
+  				<span class="glyphicon col-sm-1" ng-class="{'glyphicon-collapse-down': !query.showJson, 'glyphicon-collapse-up': query.showJson}"></span>
+  				<div class="spacer"></div>
+  			</h3>
+  		</div>
+  		<div class="panel-body" ng-show="query.showJson">
+    		{{ query.queryJson }}
+  		</div>
+	</div>
+</div>
+
+<div class="col-sm-5">
+	<div class="col-sm-6">
+		<div class="panel panel-info panel-request">
+	  		<div class="panel-heading">
+	  			<h3 class="panel-title">
+	  				Keywords
+	  			</h3>
+	  		</div>
+	  		<div class="panel-body">
+	    		<span ng-repeat="keyWord in query.keyWordsDisplay track by $index" class="field col-sm-3" ><a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a></span>
+				<div class="spacer"></div>
+	  		</div>
+		</div>
+	</div>
+
+	<div class="col-sm-6">
+		<div class="panel panel-info panel-request">
+	  		<div class="panel-heading">
+	  			<h3 class="panel-title">
+	  				Fields
+	  			</h3>
+	  		</div>
+	  		<div class="panel-body">
+	  			<div ng-repeat="field in query.mappings track by $index" class="field col-sm-3 dropdown" >
+	  				<a href ="#" ng-click="addKeyWord(field.ancestor)" title="{{ field.ancestor  }}">{{ field.name }}</a>
+	  			</div>
+				<div class="spacer"></div>
+			</div>
+		</div>
+	</div>
+	<div class="spacer"></div>
+</div>

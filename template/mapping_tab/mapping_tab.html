@@ -1,0 +1,14 @@
+<div>
+	<div class="col-sm-6">
+		<div class="input-group">
+			<span class="input-group-addon">Document Type</span>
+			<select ng-model="test" class="form-control" ui-select2 >
+				<option ng-repeat="(key,field) in mappings">{{key}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="spacer"></div>
+</div> 
+<ul ng-repeat="mapping in mappings">
+	<li ng-repeat="(key,field) in mapping.properties" ng-include="'template/mapping_tab/mapping_renderer.html'"></li>
+</ul>
