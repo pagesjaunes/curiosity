@@ -1,0 +1,86 @@
+<html ng-app="curiosity"> 
+	<head>
+		<meta charset="utf-8" />
+		<meta content="Generic client for facetting, displaying and editing data from any elasticsearch index" name="description">
+		<title>Curiosity - Exploring BigData</title>
+		<!-- CSS !-->    
+			<!-- Latest compiled and minified CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/ng-grid.css" rel="stylesheet">
+		<link href="css/select2.css" rel="stylesheet">
+		<link href="css/select2-bootstrap.css" rel="stylesheet">
+		<link href="css/curiosity.css" rel="stylesheet">
+
+		<!-- Dependency  Libs !--> 
+			<!-- Latest compiled and minified JavaScript -->
+		<script type="text/javascript" src="vendor/jquery/jquery-2.1.0.min.js"></script>
+		<script type="text/javascript" src="vendor/angular/angular.js"></script>
+		<script type="text/javascript" src="vendor/angular/angular-sanitize.js"></script>
+		<script type="text/javascript" src="vendor/angular/ng-grid-2.0.7.min.js"></script>
+		<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
+		<script type="text/javascript" src="vendor/angular-ui-select2/select2.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap/ui-bootstrap-tpls-0.10.0.min.js"></script>
+		<script type="text/javascript" src="vendor/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript" src="vendor/ui-tiny/tinymce.js"></script>
+		<script type="text/javascript" src="vendor/elastic/elastic2.min.js"></script>
+		<script type="text/javascript" src="vendor/elastic/elastic-angular-client.min.js"></script>
+		<script type="text/javascript" src="vendor/elastic/elasticsearch.angular.min.js"></script>
+		
+		<!-- Project specique files !-->
+			<!-- Conf file !-->
+		<script type="text/javascript" src="conf.js"></script>
+			<!-- Service and stuff !-->
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/utils/interpret.js"></script>
+		<script type="text/javascript" src="js/utils/elasticSearchJsFunc.js"></script>
+		<script type="text/javascript" src="js/utils/keyWordCtrlUtils.js"></script>
+		<script type="text/javascript" src="js/utils/mappingCtrlUtils.js"></script>
+		<script type="text/javascript" src="js/utils/aggregationCtrlUtils.js"></script>	
+		<script type="text/javascript" src="js/utils/confUtils.js"></script>
+			<!-- Directive !-->
+		<script type="text/javascript" src="js/directive/resizer.js"></script>			
+			<!-- Controllers !--> 
+		<script type="text/javascript" src="js/controller/curiosityCtrl.js"></script>
+		<script type="text/javascript" src="js/controller/templateCtrl.js"></script>
+		<script type="text/javascript" src="js/controller/queryCtrl.js"></script>
+		<script type="text/javascript" src="js/controller/keyWordCtrl.js"></script>
+		<script type="text/javascript" src="js/controller/mappingCtrl.js"></script>
+		<script type="text/javascript" src="js/controller/aggregationCtrl.js"></script>
+		<script type="text/javascript" src="js/controller/resultCtrl.js"></script>
+	</head>
+	<body>
+		<div ng-controller="curiosityCtrl">
+			<div ng-controller="queryCtrl">
+				<div id="header" ng-include="'template/common/header.html'">
+				</div>
+				<div id="content"> 	
+					<!-- Query Panel !-->
+					<div ng-show="info.tab == 0" class="tab" ng-include="'template/request_tab/request_tab.html'"> 
+					</div>
+					
+					<!-- Result Panel !-->
+					<div ng-show="info.tab == 1" class="tab" ng-include="'template/result_tab/result_tab.html'" ng-controller="resultCtrl">
+					</div>
+
+					<!-- Mapping Pannel !-->
+					<div ng-show="info.tab == 2" class="tab" ng-include="'template/mapping_tab/mapping_tab.html'" ng-controller="mappingCtrl">
+					</div>
+					
+					<!-- KeyWord Panel !-->
+					<div ng-show="info.tab == 3" class="tab" ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl">
+					</div>
+					
+					<!-- Aggregation Panel !-->  
+					<div ng-show="info.tab == 4" class="tab" ng-include="'template/aggregation_tab/aggregation_tab.html'" ng-controller="aggregationCtrl">
+					</div>
+
+					<!-- Template Panel !-->
+					<div ng-show="info.tab == 5" class="tab" ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl">
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
