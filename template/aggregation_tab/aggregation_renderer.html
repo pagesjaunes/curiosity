@@ -1,7 +1,7 @@
-<div class="panel" ng-class="{'panel-info':agg.obj.nested, 'panel-success':!agg.obj.nested}">
+<div class="panel" ng-class="{'panel-info':!agg.error, 'panel-danger':agg.error}">
 	<div class="panel-body">
 		<div class="input-group">
-			<span class="input-group-addon">Type</span>
+			<span class="input-group-addon">{{ info.txt.aggregation.aggregation_renderer.Type }}</span>
 			<select ng-model="agg.idx" ui-select2 class="form-control" ng-change="modifieAgg(agg)">
 				<option ng-repeat="(key, value) in aggregation.possibleAggregation" value="{{ key }}" >
 					{{ value.type }}
@@ -9,7 +9,7 @@
 			</select>  
 		</div>
 		<div class="input-group">
-			<span class="input-group-addon">Field</span>
+			<span class="input-group-addon">{{ info.txt.aggregation.aggregation_renderer.Field }}</span>
 			<input type="text" ng-model="agg.obj.field" class="form-control" ng-focus="aggregation.focused = agg">
 		</div>
 		<div class="input-group" ng-repeat="param in agg.obj.params">

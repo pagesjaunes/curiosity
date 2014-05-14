@@ -4,36 +4,9 @@ function($scope, $templateCache, $http, conf, agg){
 	$scope.template.currentTemplate = {};
 	$scope.template.tab = 0;
 	$scope.template.aggregation = {};
+	$scope.template.selected = -1;
+	$scope.template.aggregation.selected = -1;
 	$scope.template.aggregation.currentTemplate = {};
-	$scope.tiny = {};	
-
-	$scope.tiny.tinymceOptions = {
-		verify_html: false,
-		selector: "textarea",
-	 	plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table contextmenu directionality",
-        "emoticons paste textcolor"
-    	],
-		toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
-		toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | inserttime preview | forecolor backcolor",
-		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
-
-		menubar: false,
-		toolbar_items_size: 'small',
-
-		style_formats: [
-		{title: 'Bold text', inline: 'b'},
-		{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-		{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-		{title: 'Example 1', inline: 'span', classes: 'example1'},
-		{title: 'Example 2', inline: 'span', classes: 'example2'},
-		{title: 'Table styles'},
-		{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-		],
-	};
-
 	// EVENT
 
 	$scope.$on("ConfLoaded", function() {
@@ -70,6 +43,17 @@ function($scope, $templateCache, $http, conf, agg){
 			gConf[indice]._source.templates = $scope.template.list;
 			$scope.conf.saveDocument("template");
 		}
+	}
+	/**
+	* $scope.delete 
+	* Remove the selected template from the local template list
+	*/
+	$scope.delete = function () {
+		if (typeof($scope.template.selected) !== "undefined" && $scope.template.selected >= 0) {
+			$scope.template.list.splice($scope.template.selected, 1);
+			$scope.template.currentTemplate = {};
+			$scope.template.selected = -1;
+		}	
 	}
 
 
@@ -129,11 +113,19 @@ function($scope, $templateCache, $http, conf, agg){
 	$scope.saveAggTpl = function(){
 		var indice = conf.getConfDocumentIndice("aggregationsTemplates");
 		if (indice >= 0){
-			console.log($scope.template.aggregation.list);
 			gConf[indice]._source.templates = $scope.template.aggregation.list;
 			$scope.conf.saveDocument("aggregationsTemplates");
 		}
 	}
+
+	$scope.deleteAggTpl = function () {
+		if (typeof ($scope.template.aggregation.selected) !== "undefined" && $scope.template.aggregation.selected > 0) {
+			$scope.template.aggregation.currentTemplate = {};
+			$scope.template.aggregation.list.splice($scope.template.aggregation.selected, 1);
+			$scope.template.aggregation.selected = -1;		
+		}
+	}
+
 
 	/**
 	* $scope.initAggTemplate 

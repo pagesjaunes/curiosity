@@ -15,7 +15,8 @@ var global_text = {
 			Results : "Results",
 			Mapping : "Mapping",
 			Keywords : "Keywords",
-			Templates : "Templates"
+			Templates : "Templates",
+			BugReport : "Bug report / suggestions"
 		}
 	},
 	aggregation : {
@@ -80,5 +81,11 @@ var global_text = {
 			TemplateName : "Template's name",
 			Fields : "Field"
 		}
+	},
+	bugReport : {
+		Contact:"Contact",
+		Title:"Title",
+		Send:"Send"
 	}
+
 }

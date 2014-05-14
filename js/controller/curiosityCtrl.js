@@ -9,9 +9,10 @@ function($scope, $http, elasticClient, ejsResource, conf){
 	$scope.info.mappings = [];
 	$scope.info.loading = false;
 	$scope.info.err = false;
+	$scope.info.txt = global_text;
 	$scope.conf = {};
 	$scope.info.selectedIndex = "";
-
+	$scope.info.version = globalConf.version;
 	/* EVENTS */
 	$scope.$on("ConfLoaded", function() {
 		$scope.connectServer(globalConf.defaultServer); /* Init the Index list */
@@ -53,4 +54,33 @@ function($scope, $http, elasticClient, ejsResource, conf){
 	$scope.conf.saveDocument = function(type) {
 		conf.sendConfDocument(client, type);
 	}
+
+	$scope.tiny = {};	
+
+	$scope.tiny.tinymceOptions = {
+		verify_html: false,
+	 	plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons paste textcolor"
+    	],
+		toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
+		toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | inserttime preview | forecolor backcolor",
+		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+
+		menubar: false,
+		toolbar_items_size: 'small',
+
+		style_formats: [
+		{title: 'Bold text', inline: 'b'},
+		{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
+		{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
+		{title: 'Example 1', inline: 'span', classes: 'example1'},
+		{title: 'Example 2', inline: 'span', classes: 'example2'},
+		{title: 'Table styles'},
+		{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
+		],
+	};
+
 }]);

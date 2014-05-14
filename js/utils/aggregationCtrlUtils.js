@@ -12,6 +12,9 @@ function clone(obj)
 }*/
 
 Curiosity.provider("agg", function() {
+	/**
+	*	aggrega class definition 
+	*/
 	function aggrega(type, field, params, nested, constructor){
 		this.type = type;
 		this.template = type + "_template";
@@ -30,6 +33,13 @@ Curiosity.provider("agg", function() {
 		}
 	}
 
+	/**
+	* builtAggregationRec 
+	* Associate the result of aggregation performed with the object builted previously with the ui.
+	* The goal of this function is to retreive an creat a link between nested aggregation and their parents
+	* @param aggLaunched : object built by the user
+	* @param aggResult :  the aggField in elasticsearch response
+	*/
 	function builtAggregationRec(aggLaunched, aggResult){
 		var re = new RegExp("^" + "agg_" + ".*");
 		for (var key in aggResult) {
@@ -52,13 +62,24 @@ Curiosity.provider("agg", function() {
 			}
 		}
 	}
+	
+	/**
+	* addAggregationFilterToQuery
+	* Add to the a string the value of aggregation filter
+	* @param query : modified string
+	* @param filter : filter to apply   
+	*/
 	function addAggregationFilterToQuery(query, filter) {
+		if (typeof(query) === "undefined")
+			query = "";
 		var i = 0;
+		first = false;
 		while (i < filter.length) {
 			var j = 0;
 			if (filter[i].agg.length) {
-				if (i > 0)
+				if (first)
 					query+= " AND ";
+				first = true;
 				query += " " + filter[i].field + ":("; 
 				while (j < filter[i].agg.length) {				
 					if (j > 0 || filter[i].agg[j].opBool == "NOT") {
@@ -74,7 +95,7 @@ Curiosity.provider("agg", function() {
 	return (query);
 	}
 
-
+	// TODO : REFACTORING !!!!!!!!!!!!!!!!!!!
 	function builtRangeAgg(obj) {
 		obj.autoSetName();
 		var result = ejs.RangeAggregation(name);
@@ -82,7 +103,6 @@ Curiosity.provider("agg", function() {
 		result.range(obj.params[0].value, obj.params[1].value);
 		return (result);
 	}
-
 
 	function builtTermAgg(obj) {
 		obj.autoSetName();
@@ -108,7 +128,6 @@ Curiosity.provider("agg", function() {
 		return (result);	
 	}
 
-
 	function builtDateHistogramAgg(obj) {
 		obj.autoSetName();
 		var result = ejs.DateHistogramAggregation(obj.name);
@@ -116,8 +135,6 @@ Curiosity.provider("agg", function() {
 		result.interval(obj.params[0].value);
 		return (result);	
 	}
-
-
 
 	function builtDateRangeAgg(obj) {
 		obj.autoSetName();
@@ -127,14 +144,12 @@ Curiosity.provider("agg", function() {
 		return (result);	
 	}
 
-
 	function builtExtendedStatsAgg(obj) {
 		obj.autoSetName();
 		var result = ejs.ExtendedStatsAggregation(obj.name);
 		result.field(obj.field);
 		return (result);	
 	}
-
 
 	function builtHistogramAgg(obj) {
 		obj.autoSetName();
@@ -144,14 +159,12 @@ Curiosity.provider("agg", function() {
 		return (result);	
 	}
 
-
 	function builtMaxAgg(obj) {
 		obj.autoSetName();
 		var result = ejs.MaxAggregation(obj.name);
 		result.field(obj.field);
 		return (result);	
 	}
-
 
 	function builtMinAgg(obj) {
 		obj.autoSetName();
@@ -336,13 +349,39 @@ Curiosity.provider("agg", function() {
 		
 			"aggregationFilterEmpty" : function(tab) {
 				var i = 0;
-				console.log(tab);
 				while (i < tab.length) {
 					if (tab[i].agg.length)
 						return (false);
 					i++;
 				}
 				return (true);
+			},
+
+			// TODO : add a check on agg params
+			"builtAggregationArray" : function (array)
+			{
+				var result = new Array();
+				var i = 0;
+				while (i < array.length){
+					if (typeof(array[i].obj.field) !== "undefined" && array[i].obj.field != ""){
+						var tmp = array[i].obj.constructor(array[i].obj);
+						array[i].error = false;
+						if (array[i].obj.nested) {
+							var nested = this.builtAggregationArray(array[i].obj.nestedAgg);
+							var j = 0;
+							while (j < nested.length) {
+								tmp.agg(nested[j]);
+								j++;
+							} 
+						}
+						result.push(tmp);
+					}
+					else {
+						array[i].error = true;
+					}
+					i++;
+				}
+				return(result);
 			}
 		}
 	};

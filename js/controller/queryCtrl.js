@@ -7,6 +7,8 @@ Curiosity.controller('queryCtrl', ['$scope', '$http', 'elasticClient','ejsResour
 	    var client = elasticClient.getClient(globalConf.curentServer);
     	var request;
     	var finalQuery = ejs.QueryStringQuery();
+		
+		// TODO : Clean initialisation
 		$scope.tab = 0;
 	    $scope.query = {};
     	$scope.selectedKeyWord = "";
@@ -24,13 +26,14 @@ Curiosity.controller('queryCtrl', ['$scope', '$http', 'elasticClient','ejsResour
 	    $scope.query.page = 0;
 	    $scope.query.maxPage = 0;
 	    $scope.query.aggregation = {};
+	    $scope.query.autoRefresh = false;
 	    $scope.query.showAggregationFilter = true;
 	    $scope.query.aggregationArray = [];
 		$scope.query.aggregationFilter = [];
 	    $scope.query.prevAgg = [];
 	    $scope.query.aggregation.aggs = {};
 	    $scope.template = {};
-	
+
 	    /* EVENTS */
 		$scope.$on('UpdateKeyWord',function (){
 			refreshKeyWordList();
@@ -91,7 +94,7 @@ Curiosity.controller('queryCtrl', ['$scope', '$http', 'elasticClient','ejsResour
 			$scope.query.lastWord = getLastWord($scope.query.queryTerm);
 			$scope.query.keyWordsDisplay = keyWordFilter($scope.query.keyWords, $scope.query.lastWord);
 			$scope.query.mappings = fieldFilter($scope.info.mappings, $scope.query.lastWord);
-			$scope.query.queryJson	= builtRequestObj();
+			builtRequestObj();
 			if ($scope.query.queryTerm.length && $scope.query.queryTerm.charAt($scope.query.queryTerm.length - 1) == " ") {
 				smallSearch();
 			}
@@ -120,6 +123,7 @@ Curiosity.controller('queryCtrl', ['$scope', '$http', 'elasticClient','ejsResour
 			}
 			request.size($scope.query.nbResult);
 			request.from($scope.query.nbResult * $scope.query.page);
+			$scope.query.queryJson = request;
 			return (request);
 		}
 
@@ -139,7 +143,7 @@ Curiosity.controller('queryCtrl', ['$scope', '$http', 'elasticClient','ejsResour
 				gRequestResult = resp;
 				$scope.query.hits  = $scope.query.queryResults.hits.total;
 				$scope.query.maxPage = Math.floor($scope.query.hits / $scope.query.nbResult);
-				if (typeof(noResest) == "undefined")
+				if (typeof(noResest) === "undefined")
 					$scope.query.page = 0;
 				$scope.$broadcast("queryLaunched");
 			}, function err(err) {
@@ -177,8 +181,7 @@ Curiosity.controller('queryCtrl', ['$scope', '$http', 'elasticClient','ejsResour
 
 		$scope.lastPage = function() {
 			$scope.query.page = $scope.query.maxPage;
-			$scope.search("no");
-			
+			$scope.search("no");		
 		}
 
 		$scope.nextPage = function() {

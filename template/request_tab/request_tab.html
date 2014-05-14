@@ -1,30 +1,33 @@
 <div class="col-sm-7">
 	
 	<div class="input-group request-input"> 
-		<span class="input-group-addon">Simplified request</span>
+		<span class="input-group-addon">{{ info.txt.request.SimplifiedRequest }}</span>
 		<input ng-change="updateQuery()" ng-model="query.queryTerm" type="text" ng-trim="false" class="form-control"></input>
 	</div>
 
 	<div class="input-group request-input"> 
-		<span class="input-group-addon">Complexe request</span>
+		<span class="input-group-addon">{{ info.txt.request.ComplexeRequest }}</span>
 		<input class="form-control" ng-model="query.queryValue" type="text"></input>
 	</div>
 	
 	
 	<div class="col-sm-3" id="result-per-page">
 		<div class="input-group">
-			<label class="input-group-addon">Result per page </label>
+			<label class="input-group-addon">{{ info.txt.request.ResultPerPage }}</label>
 			<input class="form-control" ng-model="query.nbResult"></input>
 		</div>
 	</div>
-	<button ng-click="search() " class="btn btn-default col-sm-1"><span class="glyphicon glyphicon-search"></span> Search</button>
+	<button ng-click="search() " class="btn btn-default col-sm-1">
+		<span class="glyphicon glyphicon-search"></span> 
+		{{ info.txt.request.Search }}
+	</button>
 	
 	<div class="spacer"></div>
 	
 	<div class="panel panel-default" id="json-panel">
   		<div class="panel-heading" ng-click="query.showJson=!query.showJson">
   			<h3 class="panel-title">
-  				<a class="col-sm-11" href="#" title="Show the query in json">Json Querry</a>
+  				<a class="col-sm-11" href="#" title="Show the query in json">{{ info.txt.request.JsonQuery }}</a>
   				<span class="glyphicon col-sm-1" ng-class="{'glyphicon-collapse-down': !query.showJson, 'glyphicon-collapse-up': query.showJson}"></span>
   				<div class="spacer"></div>
   			</h3>
@@ -40,7 +43,7 @@
 		<div class="panel panel-info panel-request">
 	  		<div class="panel-heading">
 	  			<h3 class="panel-title">
-	  				Keywords
+	  				{{ info.txt.request.Keywords }}
 	  			</h3>
 	  		</div>
 	  		<div class="panel-body">
@@ -54,7 +57,7 @@
 		<div class="panel panel-info panel-request">
 	  		<div class="panel-heading">
 	  			<h3 class="panel-title">
-	  				Fields
+	  				{{ info.txt.request.Fields }}
 	  			</h3>
 	  		</div>
 	  		<div class="panel-body">

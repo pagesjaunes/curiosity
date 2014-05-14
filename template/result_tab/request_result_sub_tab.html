@@ -1,7 +1,7 @@
 <div id="result-bar">
 	<div class="col-sm-4">
 		<div class="input-group">
-			<span class="input-group-addon">Template</span>
+			<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Template }}</span>
 			<select ng-model="query.templateSelected" ui-select2 ng-change="selectTemplate()" class="form-control">
 				<option ng-repeat="template in template.list" value="{{$index}}" >{{ template.name }}</option>  
 			</select>
@@ -18,28 +18,28 @@
 	<div class="col-sm-3">
 		<ul class="pager pagination-result">
 			<li ng-class="{'disabled':query.page==0}">
-				<a href="#" ng-click="firstPage()">&larr; First</a>
+				<a href="#" ng-click="firstPage()">&larr; {{ info.txt.result.request_sub_tab.First }}</a>
 			</li>
 			<li ng-class="{'disabled':query.page==0}">
-				<a href="#" ng-click="prevPage()">Prev</a>
+				<a href="#" ng-click="prevPage()">{{ info.txt.result.request_sub_tab.Prev }}</a>
 			</li>
 			<li class="disabled">
 				<a href="#" >{{ query.page + 1 }} / {{ query.maxPage + 1}}</a></li>
 			<li ng-class="{'disabled':query.page==query.maxPage}">
-					<a href="#" ng-click="nextPage()">Next</a>
+					<a href="#" ng-click="nextPage()">{{ info.txt.result.request_sub_tab.Next }}</a>
 			</li>
 			<li  ng-class="{'disabled':query.page==query.maxPage}">
-				<a href="#" ng-click="lastPage()">Last &rarr;</a>
+				<a href="#" ng-click="lastPage()">{{ info.txt.result.request_sub_tab.Last }} &rarr;</a>
 			</li>
 		</ul>
 	</div>
 		
 	<div class="col-sm-2">
 		<div class="input-group">
-			<span class="input-group-addon">Page </span>
+			<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Page }} </span>
 			<input type="number" ng-model="query.page" min="0" max="{{query.maxPage}}"class="form-control">
 			<span class="input-group-btn">
-				<button class="btn btn-default" ng-click="search('no')">Go</button>
+				<button class="btn btn-default" ng-click="search('no')">{{ info.txt.result.request_sub_tab.Go }}</button>
 			</span>
 		</div>			
 	</div>
@@ -47,7 +47,7 @@
 </div>
 <div id="aggregation-filter-bar">
 	<h4 ng-click="query.showAggregationFilter = !query.showAggregationFilter">
-		Aggregation Filter 
+		{{ info.txt.result.request_sub_tab.AggregationFilter }}
 		<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!query.showAggregationFilter,'glyphicon-chevron-up':query.showAggregationFilter}">	
 		</span>
 	</h3>
@@ -66,9 +66,21 @@
 						{{ agg.key }} <span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#" ng-click="setBoolOpAggFilter(agg,'OR')">Or</a></li>
-						<li><a href="#" ng-click="setBoolOpAggFilter(agg,'AND')">And</a></li>
-						<li><a href="#" ng-click="setBoolOpAggFilter(agg,'NOT')">Not</a></li>
+						<li>
+							<a href="#" ng-click="setBoolOpAggFilter(agg,'OR')">
+								{{ info.txt.result.request_sub_tab.Or }}
+							</a>
+						</li>
+						<li>
+							<a href="#" ng-click="setBoolOpAggFilter(agg,'AND')">
+								{{ info.txt.result.request_sub_tab.And }}
+							</a>
+						</li>
+						<li>
+							<a href="#" ng-click="setBoolOpAggFilter(agg,'NOT')">
+								{{ info.txt.result.request_sub_tab.Not }}
+							</a>
+						</li>
 					</ul>
 				</div>
 			</div>

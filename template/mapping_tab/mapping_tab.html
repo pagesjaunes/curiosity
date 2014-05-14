@@ -1,7 +1,7 @@
 <div>
 	<div class="col-sm-6">
 		<div class="input-group">
-			<span class="input-group-addon">Document Type</span>
+			<span class="input-group-addon">{{ info.txt.mapping.DocumentT }}</span>
 			<select ng-model="test" class="form-control" ui-select2 >
 				<option ng-repeat="(key,field) in mappings">{{key}}</option>
 			</select>

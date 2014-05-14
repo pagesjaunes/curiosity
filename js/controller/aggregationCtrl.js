@@ -19,26 +19,6 @@ Curiosity.controller('aggregationCtrl', function($scope, $templateCache, agg){
 
 	$scope.validateAgg = function()
 	{
-		$scope.query.aggregationArray = builtAggregationArray($scope.query.aggregation.aggs);
+		$scope.query.aggregationArray = agg.builtAggregationArray($scope.query.aggregation.aggs);
 	}
-
-	function builtAggregationArray(array)
-	{
-		var result = new Array();
-		var i = 0;
-		while (i < array.length){
-			var tmp = array[i].obj.constructor(array[i].obj);
-			if (array[i].obj.nested) {
-				var nested = builtAggregationArray(array[i].obj.nestedAgg);
-				var j = 0;
-				while (j < nested.length) {
-					tmp.agg(nested[j]);
-					j++;
-				} 
-			}
-			result.push(tmp);
-			i++;
-		}
-		return(result);
-	} 
 });

@@ -31,6 +31,13 @@ Curiosity.provider("conf", function(){
 		"templates":[]
 	};
 
+	var bugReportDefault = 
+	{
+		"type":"bugreport",
+		"list":[]
+	};
+
+
 	/*
 	* An array which contains all default conf document
 	*/

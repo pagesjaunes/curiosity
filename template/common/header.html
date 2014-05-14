@@ -1,25 +1,26 @@
 <div id="header-content">
-	<h1 class="col-sm-9">Curiosity</h1>
+	<h1 class="col-sm-9">Curiosity <span class="version">{{ info.version }}</span></h1>
 	<div class="col-sm-3">
-		<div class="input-group">
-			<span class="input-group-addon" >Server</span>
+		<div class="input-group margin-top">
+			<span class="input-group-addon" >{{ info.txt.header.Server }}</span>
 			<select ng-model="info.selectedServer" ng-change="connectServer(info.selectedServer, false)" ui-select2 class="form-control">
 				<option ng-repeat="server in info.serverList" value ="{{ server }}" >{{ server }}</option>  
 			</select>
 			<div class="input-group-btn">
 				<button type="button" class="btn btn-info" ng-click="info.displayNewServer = !info.displayNewServer">
-					New </span>
+					{{ info.txt.header.New }}
 				</button>
 			</div>
 		</div>
 		<div class="input-group" ng-show="info.displayNewServer == true">
 			<span class="input-group-addon">
-				Add a new server 
+					{{ info.txt.header.AddServer }}				
 			</span>
 			<input type="text" class="form-control" ng-model="info.newServer">
 			</input>
-			<span class="input-group-btn" >
-				<button class="btn" ng-click="connectServer(info.newServer, true)" ng-class="{'btn-success':info.connected, 'btn-danger':!info.connected}"> 	Connect 
+			<span class="input-group-btn" >				
+				<button class="btn" ng-click="connectServer(info.newServer, true)" ng-class="{'btn-success':info.connected, 'btn-danger':!info.connected}">
+					{{ info.txt.header.Connect }}
 				</button>
 			</span>
 		</div>
@@ -27,7 +28,9 @@
 	<div class="spacer"></div>
 	<div id="bar" ng-include="'template/common/navBar.html'"></div>
 	<nav class="navbar navbar-default container" >
-		<a class="navbar-brand">Index</a>	
+		<a class="navbar-brand">
+			{{ info.txt.header.Index }}
+		</a>	
 		<form class="navbar-form navbar-left">
         	<div class="form-group" id="search-nav">
 				<select ng-model="info.selectedIndex" ng-change="selectIndex()" ui-select2 class="form-control">
@@ -41,16 +44,26 @@
         	<div class="form-group">
 				<input ng-change="updateQuery()" ng-model="query.queryTerm" type="text" ng-trim="false" class="form-control" placeholder="Query"></input>
 			</div>
-			<button ng-click="search()" class="btn btn-default" ><span class="glyphicon glyphicon-search"></span> Search</button>
+			<button ng-click="search()" class="btn btn-default" >
+				<span class="glyphicon glyphicon-search"></span> 
+				{{ info.txt.header.Search }}
+			</button>
 		</form>
+		<span class="navbar-brand navbar-left">
+			{{ info.txt.header.AutoRefresh }}			
+			<input type="checkbox" ng-model="query.autoRefresh">
+		</span>
+		<a href="#" class="navbar-brand navbar-right" title="">
+			<span class="glyphicon glyphicon-info-sign"></span>
+		</a>
 		<a href="#" class="navbar-brand navbar-right">
-			<span class="label label-primary">Hits : {{query.hits}} </span>	
+			<span class="label label-primary">{{ info.txt.header.Hits }}{{query.hits}} </span>	
     	</a>
     	<a href="#" class="navbar-brand navbar-right" ng-show="info.loading">
 			<span><img src="resources/ajax-loader.gif" id="loading-image"></img></span>
 		</a>
 		<a ng-show="info.err" class="navbar-brand navbar-right">
-			<span class="label label-danger">Error</span>
-		</a>	
+			<span class="label label-danger">{{ info.txt.header.Error }}</span>
+		</a>
 	</nav>
 </div>

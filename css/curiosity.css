@@ -24,6 +24,10 @@
 .tab {
 }
 
+.margin-top {
+  margin-top: 10px;
+}
+
 /* header */
 #header {
 	position : relative;
@@ -39,6 +43,11 @@
 
 .info-header {
 	padding-top : 7px;
+}
+
+.version {
+  font-style: italic;
+  font-size: 14px;
 }
 
 /* query Tab */ 

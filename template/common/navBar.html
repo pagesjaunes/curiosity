@@ -2,22 +2,25 @@
 <div id="navBar">
 	<ul class="nav nav-tabs">
 		<li ng-class="{'active':info.tab == 0}">
-			<a href="#" ng-click="info.tab = 0">Request</a>
+			<a href="#" ng-click="info.tab = 0">{{ info.txt.header.navBar.Request }}</a>
 		</li>
 		<li ng-class="{'active':info.tab == 4}">
-			<a href="#" ng-click="info.tab = 4">Aggregations</a>
+			<a href="#" ng-click="info.tab = 4">{{ info.txt.header.navBar.Aggregations }}</a>
 		</li>
 		<li ng-class="{'active':info.tab == 1}">
-			<a href="#" ng-click="info.tab = 1">Results</a>
+			<a href="#" ng-click="info.tab = 1">{{ info.txt.header.navBar.Results }}</a>
 		</li>
 		<li ng-class="{'active':info.tab == 2}">
-			<a href="#" ng-click="info.tab = 2">Mapping</a>
+			<a href="#" ng-click="info.tab = 2">{{ info.txt.header.navBar.Mapping }}</a>
 		</li>
 		<li ng-class="{'active':info.tab == 3}">
-			<a href="#" ng-click="info.tab = 3">Keywords</a>
+			<a href="#" ng-click="info.tab = 3">{{ info.txt.header.navBar.Keywords }}</a>
 		</li>
 		<li ng-class="{'active':info.tab == 5}">
-			<a href="#" ng-click="info.tab = 5">Templates</a>
+			<a href="#" ng-click="info.tab = 5">{{ info.txt.header.navBar.Templates }}</a>
+		</li>
+		<li ng-class="{'active':info.tab == 6}">
+			<a href="#" ng-click="info.tab = 6">{{ info.txt.header.navBar.BugReport }}</a>
 		</li>
 		<div class="spacer"></div>
 	</ul>

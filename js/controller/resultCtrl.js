@@ -6,11 +6,21 @@ Curiosity.controller('resultCtrl', function($scope , agg){
 		agg.builtAggregation($scope.query.prevAgg, $scope.query.resultAgg);
 	});
 
+	/**
+	* isAgg
+	* check a string is an aggrgation name
+	* @param key : the string to check
+	* @return : true if it's match false instead
+	*/
 	$scope.isAgg = function (key){
 		var re = new RegExp("^" + "agg_" + ".*");
 		return (re.test(key));
 	}
 
+	/**
+	* hasNestedAgg 
+	* check if a aggregation's bucket have nested aggregation
+	*/
 	$scope.hasNestedAgg = function (bucket) {
 		var re = new RegExp("^" + "agg_" + ".*");
 		for (key in bucket) {
@@ -20,8 +30,11 @@ Curiosity.controller('resultCtrl', function($scope , agg){
 		return (false);
 	}
 
+	/**
+	* switchPredicate
+	* Switch the value of an aggregation predicate between two value passed in parameters
+	*/
 	$scope.switchPredicate = function (agg, pre1, pre2) {
-		console.log (agg);
 		if (agg.predicate == pre1) {
 			agg.predicate = pre2
 		}
@@ -29,18 +42,28 @@ Curiosity.controller('resultCtrl', function($scope , agg){
 			agg.predicate = pre1
 		}
 	}
-
+	
 	$scope.addTermsAggregationFilter = function (aggr, bucket) {
 		agg.addAggregationFilter($scope.query.aggregationFilter, "Terms", aggr.agg.field, bucket.key)
+		if ($scope.query.autoRefresh){
+			$scope.search();
+		}
 	}
 
 	$scope.removeAggFilter = function(tab, index)
 	{
 		tab.splice(index, 1);
+		if ($scope.query.autoRefresh){
+			$scope.search();
+		}
 	}
 
 	$scope.setBoolOpAggFilter = function (agg, op)
 	{
+		var prev = agg.opBool;
 		agg.opBool = op;
+		if (prev != op){
+			$scope.search();
+		}
 	}
 })
