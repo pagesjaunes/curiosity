@@ -41,7 +41,7 @@ Curiosity.provider("conf", function(){
 	/*
 	* An array which contains all default conf document
 	*/
-	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate];
+	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate, bugReportDefault];
 	
 
 	this.$get = function (elasticFunc) {

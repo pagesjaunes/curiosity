@@ -15,7 +15,7 @@ Curiosity.provider("agg", function() {
 	/**
 	*	aggrega class definition 
 	*/
-	function aggrega(type, field, params, nested, constructor){
+	function aggrega(type, field, params, nested, constructor, ejsConstrucor){
 		this.type = type;
 		this.template = type + "_template";
 		this.name = "";
@@ -25,6 +25,7 @@ Curiosity.provider("agg", function() {
 		this.nested = nested;
 		this.nestedAgg = new Array();
 		this.constructor = constructor;
+		this.ejsConstrucor = ejsConstrucor;
 
 		this.autoSetName = function() {
 			this.name = this.field.split('.');
@@ -95,7 +96,7 @@ Curiosity.provider("agg", function() {
 	return (query);
 	}
 
-	// TODO : REFACTORING !!!!!!!!!!!!!!!!!!!
+	// TODO : MORE REFACTORING !!!!!!!!!!!!!!!!!!!
 	function builtRangeAgg(obj) {
 		obj.autoSetName();
 		var result = ejs.RangeAggregation(name);
@@ -113,21 +114,14 @@ Curiosity.provider("agg", function() {
 		return (result);
 	}
 
-
-	function builtAvgAgg(obj) {
+	function builtNoParamAgg(obj)
+	{
 		obj.autoSetName();
-		var result = ejs.AvgAggregation(obj.name);
+		var result = obj.ejsConstrucor(obj.name);
 		result.field(obj.field);
-		return (result);	
+		return (result);
 	}
-
-	function builtCardinalityAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.CardinalityAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
+	
 	function builtDateHistogramAgg(obj) {
 		obj.autoSetName();
 		var result = ejs.DateHistogramAggregation(obj.name);
@@ -144,13 +138,6 @@ Curiosity.provider("agg", function() {
 		return (result);	
 	}
 
-	function builtExtendedStatsAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.ExtendedStatsAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
 	function builtHistogramAgg(obj) {
 		obj.autoSetName();
 		var result = ejs.HistogramAggregation(obj.name);
@@ -159,88 +146,28 @@ Curiosity.provider("agg", function() {
 		return (result);	
 	}
 
-	function builtMaxAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.MaxAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
-	function builtMinAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.MinAggregation(obj.name);
-		result.field(obj.field);
-		return (result);
-	}
-
-	function builtMissingAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.MissingAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
-	function builtStatsAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.StatsAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
-	function builtSignificantTermsAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.SignificantTermsAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
-	function builtSumAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.SumAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
-	function builtValueCountAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.ValueCountAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-	
-	function builtMissingAgg(obj) {
-		obj.autoSetName();
-		var result = ejs.MissingAggregation(obj.name);
-		result.field(obj.field);
-		return (result);	
-	}
-
-	function newMissingAgg  () {
-		return new aggrega("Missing", "", [], false, builtMinAgg);
-	}
-
 	function newMinAgg  () {
-		return new aggrega("Min", "", [], false, builtMinAgg);
+		return new aggrega("Min", "", [], false, builtNoParamAgg, ejs.MinAggregation);
 	}
 
 	function newMissingAgg () {
-		return new aggrega("Missing", "", [], false, builtMissingAgg);
+		return new aggrega("Missing", "", [], false, builtNoParamAgg, ejs.MissingAggregation);
 	}
 
 	function newSignificantTermsAgg () {
-		return new aggrega("SignificantTerms", "", [], true, builtSignificantTermsAgg);
+		return new aggrega("SignificantTerms", "", [], true, builtNoParamAgg, ejs.SignificantTermsAggregation);
 	}
 
 	function newStatsAgg () {
-		return new aggrega("Stats", "", [], false, builtStatsAgg);
+		return new aggrega("Stats", "", [], false, builtNoParamAgg, ejs.StatsAggregation);
 	}
 
 	function newSumAgg () {
-		return new aggrega("Sum", "", [], false, builtSumAgg);
+		return new aggrega("Sum", "", [], false, builtNoParamAgg, ejs.SumAggregation);
 	}
 
 	function newValueCountAgg () {
-		return new aggrega("ValueCount", "", [], false, builtValueCountAgg);
+		return new aggrega("ValueCount", "", [], false, builtNoParamAgg, ejs.ValueCountAggregation);
 	}
 
 	function newRangeAgg () {
@@ -252,11 +179,11 @@ Curiosity.provider("agg", function() {
 	}
 
 	function newAvgAgg () {
-		return new aggrega("Avg", "", [], false, builtAvgAgg)
+		return new aggrega("Avg", "", [], false, builtNoParamAgg, ejs.AvgAggregation)
 	}
 
 	function newCardinalityAgg () {
-		return new aggrega("Cardinality", "", [], false, builtCardinalityAgg);
+		return new aggrega("Cardinality", "", [], false, builtNoParamAgg, ejs.CardinalityAggregation);
 	}
 
 	function newDateHistogramAgg () {
@@ -268,7 +195,7 @@ Curiosity.provider("agg", function() {
 	}
 
 	function newExtendedStatsAgg () {
-		return new aggrega("ExtendedStats", "", [], false, builtExtendedStatsAgg);
+		return new aggrega("ExtendedStats", "", [], false, builtNoParamAgg, ejs.ExtendedStatsAggregation);
 	}
 
 	function newHistogramAgg () {
@@ -276,7 +203,7 @@ Curiosity.provider("agg", function() {
 	}
 
 	function newMaxAgg () {
-		return new aggrega("Max", "", [], false, builtMaxAgg);
+		return new aggrega("Max", "", [], false, builtNoParamAgg, ejs.MaxAggregation);
 	}
 
 	this.$get = function() {

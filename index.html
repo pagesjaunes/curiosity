@@ -30,6 +30,7 @@
 		<!-- Project specique files !-->
 			<!-- Conf file !-->
 		<script type="text/javascript" src="conf.js"></script>
+		<script type="text/javascript" src="txt.js"></script>		
 			<!-- Service and stuff !-->
 		<script type="text/javascript" src="js/app.js"></script>
 		<script type="text/javascript" src="js/utils/interpret.js"></script>
@@ -48,6 +49,7 @@
 		<script type="text/javascript" src="js/controller/mappingCtrl.js"></script>
 		<script type="text/javascript" src="js/controller/aggregationCtrl.js"></script>
 		<script type="text/javascript" src="js/controller/resultCtrl.js"></script>
+		<script type="text/javascript" src="js/controller/bugReportCtrl.js"></script>
 	</head>
 	<body>
 		<div ng-controller="curiosityCtrl">
@@ -78,6 +80,9 @@
 					<!-- Template Panel !-->
 					<div ng-show="info.tab == 5" class="tab" ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl">
 					</div>
+
+					<div ng-show="info.tab == 6" class="tab" ng-include="'template/bug_report_tab/bug_report_tab.html'" ng-controller="bugReportCtrl">
+					</div>				
 				</div>
 			</div>
 		</div>
