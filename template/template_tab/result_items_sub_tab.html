@@ -1,16 +1,22 @@
 <div class="col-sm-6">
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.template.result_items_sub_tab.Template }}</span>
-		<select ng-model="template.selected" ui-select2 class="form-control" ng-change="changeTemplate()">
-			<option ng-repeat="template in template.list" value="{{$index}}" >{{ template.name }}</option>  
+		<select ng-model="template.selected" ui-select2 class="form-control" ng-change="changeTemplate('template', template,'currentTemplate', template.selected)">
+			<option ng-repeat="template in data.template" value="{{$index}}" >{{ template.name }}</option>  
 		</select>
 	</div>
 </div>
 <div class="spacer"></div>
 <div class="btn-group col-sm-2 btn-keyword">
-	<button ng-click="new()" class="btn btn-default">{{ info.txt.template.result_items_sub_tab.New }}</button>
-	<button ng-click="save()" class="btn btn-default">{{ info.txt.template.result_items_sub_tab.Save }}</button>
-	<button ng-click="delete()" class="btn btn-default" >{{ info.txt.template.result_items_sub_tab.Delete }}</button>	
+	<button ng-click="new('template', template, 'currentTemplate')" class="btn btn-default">
+		{{ info.txt.template.result_items_sub_tab.New }}
+	</button>
+	<button ng-click="save('template')" class="btn btn-default">
+		{{ info.txt.template.result_items_sub_tab.Save }}
+	</button>
+	<button ng-click="delete('template',template,'currentTemplate',template.selected)" class="btn btn-default" >
+		{{ info.txt.template.result_items_sub_tab.Delete }}
+	</button>	
 </div>
 <div class="spacer"></div>
 <div class="col-sm-6 btn-keyword">
@@ -33,7 +39,7 @@
 		</div>
 		<div class="panel-body">
 			<span ng-repeat="field in info.mappings track by $index" class="field col-sm-3" >
-				<a href ="#" ng-click="addField(field.ancestor)" title="{{ field.ancestor  }}">
+				<a href ="#" ng-click="addField(template.currentTemplate,'value', field.ancestor)" title="{{ field.ancestor}}">
 					{{ field.name }}
 				</a>
 			</span>
