@@ -1,7 +1,7 @@
 Curiosity.controller('curiosityCtrl',[ '$scope', '$http', 'elasticClient', 'ejsResource', 'conf',  
 function($scope, $http, elasticClient, ejsResource, conf){	
 	/* INITIALISATION */
-	var client = elasticClient.getClient(globalConf.defaultServer);
+	var confClient = elasticClient.getClient(globalConf.confServer);
 	$scope.info = {};
 	$scope.info.tab = 0;
 	$scope.info.displayNewServer = false;
@@ -19,7 +19,7 @@ function($scope, $http, elasticClient, ejsResource, conf){
 		$scope.info.serverList = conf.getConfDocument("server").servers;
 	});
 	
-	conf.getConf(client, $scope);
+	conf.getConf($scope);
 	/*
 	* selectIndex 
 	* Update the selected Index
@@ -52,7 +52,7 @@ function($scope, $http, elasticClient, ejsResource, conf){
 	};
 	
 	$scope.conf.saveDocument = function(type) {
-		conf.sendConfDocument(client, type);
+		conf.sendConfDocument(type);
 	}
 
 	$scope.tiny = {};	

@@ -1,5 +1,5 @@
 //confUtils.js
-Curiosity.provider("conf", function(){
+Curiosity.factory("conf", function(elasticClient, elasticFunc){
 	
 	/*
 	* Default value for the keyword list conf document
@@ -15,7 +15,7 @@ Curiosity.provider("conf", function(){
 	var serverDefault = 
 	{
 		"type":"server",
-		"servers":[globalConf.confServer]
+		"servers":[globalConf.defaultServer]
 	};
 
 	var templateDefault = 
@@ -38,24 +38,24 @@ Curiosity.provider("conf", function(){
 	};
 
 
+	var confClient = elasticClient.getClient(globalConf.confServer); 
+
 	/*
 	* An array which contains all default conf document
 	*/
 	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate, bugReportDefault];
 	
-
-	this.$get = function (elasticFunc) {
-		return {
+	return {
 
 			/**
 			* initConf 
 			* send all default document to an index 
-			* @param client : an elasticSearch.js client alredy initialised 
+			* @param confClient : an elasticSearch.js confClient alredy initialised 
 			*/
-			"initConf" : function (client) {
+			"initConf" : function () {
 				var i = 0;
 				while (i < defaultConfDocument.length) {
-					elasticFunc.sendNewDocument(client, 
+					elasticFunc.sendNewDocument(confClient, 
 						globalConf.confIndex, 
 						globalConf.defaultConfDocumentType, 
 						defaultConfDocument[i]);
@@ -63,8 +63,8 @@ Curiosity.provider("conf", function(){
 				}
 			},
 
-			"initDocument" : function (client, document) {
-				elasticFunc.sendNewDocument(client, 
+			"initDocument" : function (document) {
+				elasticFunc.sendNewDocument(confClient, 
 					globalConf.confIndex, 
 					globalConf.defaultConfDocumentType, 
 					document);
@@ -73,39 +73,39 @@ Curiosity.provider("conf", function(){
 			/**
 			* getConf 
 			* get all document from the conf index. If the index is missing then it create him and call initConf 
-			* @param client : an elasticSearch.js client alredy initialised 
+			* @param confClient : an elasticSearch.js confClient alredy initialised 
 			*/
-			"getConf" : function (client, scope) {
+			"getConf" : function (scope) {
 				var request = ejs.Request();
 				var confQuery = ejs.MatchAllQuery();
 				var initConfFunc = this.initConf;
 
 				request.query(confQuery);
-				client.search({index:globalConf.confIndex, body:request})
+				confClient.search({index:globalConf.confIndex, body:request})
 				.then(function(data) {
 					gConf = data.hits.hits;
 					scope.$broadcast("ConfLoaded")
 				},
 				function (err) {
-					elasticFunc.createIndex(client, globalConf.confIndex);
-					initConfFunc(client);
+					elasticFunc.createIndex(confClient, globalConf.confIndex);
+					initConfFunc(confClient);
 				});
 			},
 
 			/**
 			* sendConf 
 			* send all curent conf document to the server, if there is no document then send all default document
-			* @param client : an elasticSearch.js client alredy initialised 
+			* @param confClient : an elasticSearch.js confClient alredy initialised 
 			*/
-			"sendConf" : function (client) {
+			"sendConf" : function () {
 				if (!gConf.length) {
-					this.initConf(client);
-					getConf(client);
+					this.initConf(confClient);
+					getConf(confClient);
 					return ;
 				}
 				var i = 0;
 				while (i < gConf.length) {
-					elasticFunc.sendDocument(client, globalConf.confIndex, gConf[i]._type, gConf[i]._source, gConf[i]._id);
+					elasticFunc.sendDocument(confClient, globalConf.confIndex, gConf[i]._type, gConf[i]._source, gConf[i]._id);
 					i++;
 				}
 			},
@@ -113,15 +113,15 @@ Curiosity.provider("conf", function(){
 			/**
 			* sendConfDocument
 			* send a specific conf document
-			* @param client : an elasticSearch.js client alredy initialised   
+			* @param confClient : an elasticSearch.js confClient alredy initialised   
 			* @param type : the conf document type's to send
 			*/
-			"sendConfDocument" : function (client, type) {
+			"sendConfDocument" : function (type) {
 				var i = 0;
 				while (i < gConf.length)
 				{
 					if (gConf[i]._source.type == type) {
-						elasticFunc.sendDocument(client, globalConf.confIndex, gConf[i]._type, gConf[i]._source, gConf[i]._id);
+						elasticFunc.sendDocument(confClient, globalConf.confIndex, gConf[i]._type, gConf[i]._source, gConf[i]._id);
 						return ;	
 					}
 					i++;
@@ -141,35 +141,34 @@ Curiosity.provider("conf", function(){
 						&& gConf[i]._source.type == type) {
 						return (gConf[i]._source);
 					}
-					i++;
-				}
-				return ([]);
-			},
-
-			"getConfDocumentIndice" : function (type) {
-				var i = 0;
-				while (i < gConf.length){
-					if (typeof(gConf[i]._source.type) !== "undefined" 
-						&& gConf[i]._source.type == type) {
-						return (i);
-					}
-					i++;
-				}
-				return (-1);
-			},
-
-			"addServerToConf"  : function (client, url) {
-				var serverList = getConfDocument("server");
-				var i = 0;
-				while (i < serverList.servers.length) {
-					if (serverList.servers[i] == url) {
-						return ;
-					}
-					i++;
-				}
-				serverList.servers.push(url);
-				elasticFunc.sendConfDocument(client, "server");
+				i++;
 			}
-		};
+			return ([]);
+		},
+
+		"getConfDocumentIndice" : function (type) {
+			var i = 0;
+			while (i < gConf.length){
+				if (typeof(gConf[i]._source.type) !== "undefined" 
+					&& gConf[i]._source.type == type) {
+					return (i);
+			}
+			i++;
+		}
+		return (-1);
+	},
+
+	"addServerToConf"  : function (url) {
+		var serverList = getConfDocument("server");
+		var i = 0;
+		while (i < serverList.servers.length) {
+			if (serverList.servers[i] == url) {
+				return ;
+			}
+			i++;
+		}
+		serverList.servers.push(url);
+		elasticFunc.sendConfDocument(confClient, "server");
 	}
+}
 })

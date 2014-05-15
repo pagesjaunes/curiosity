@@ -209,24 +209,27 @@ Curiosity.provider("agg", function() {
 	this.$get = function() {
 		return {
 			"cloneAgg" : function (aggs) {
-				var result =  new Array ();
-				var i = 0;
-				while (i < aggs.length) {
-					var tmp = {	
-						type:aggs[i].obj.type, 
-						name:aggs[i].obj.name,
-						template:aggs[i].obj.template,
-						field:aggs[i].obj.field, 
-						params:aggs[i].obj.params,
-						nbResult:aggs[i].obj.nbResult,
-						predicate:aggs[i].obj.predicate,
-						nested:aggs[i].obj.nested,
-						nestedAgg:this.cloneAgg(aggs[i].obj.nestedAgg)
-					} 
-					result.push(tmp);
-					i++;
+				if (typeof(aggs) !== "undefined"){
+					var result =  new Array ();
+					var i = 0;
+					while (i < aggs.length) {
+						var tmp = {	
+							type:aggs[i].obj.type, 
+							name:aggs[i].obj.name,
+							template:aggs[i].obj.template,
+							field:aggs[i].obj.field, 
+							params:aggs[i].obj.params,
+							nbResult:aggs[i].obj.nbResult,
+							predicate:aggs[i].obj.predicate,
+							nested:aggs[i].obj.nested,
+							nestedAgg:this.cloneAgg(aggs[i].obj.nestedAgg)
+						} 
+						result.push(tmp);
+						i++;
+					}
+					return (result);
 				}
-				return (result);
+			return ([]);
 			},
 
 			"builtAggregation" : builtAggregationRec,

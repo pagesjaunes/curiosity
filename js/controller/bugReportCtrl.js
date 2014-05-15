@@ -1,7 +1,5 @@
 // bugReportCtrl.js
 
-
-
 Curiosity.controller('bugReportCtrl', ['$scope','conf', function($scope, conf, elasticClient){
 	$scope.bugReport = {};
 	$scope.bugReport.contact = "";
