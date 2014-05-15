@@ -24,19 +24,21 @@
 <!-- Aggregations tab 
 <div ng-show="query.resultTab == 2" ng-include="'template/result_tab/aggregation_result_sub_tab.html'">
 </div>!-->
-
-<div id="aggregation-result" ng-include="'template/result_tab/aggregation_result_sub_tab.html'">
+<div> {{ query.lng }}</div>
+<div id="aggregation-result" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"
+    ng-class="{'aggregation-mini':!query.lng,
+      'aggregation-split':query.lng }">
 </div>
 
-<div id="sidebar-resizer"
-        resizer="vertical" 
+<div id=" œsidebar-resizer"
+        resizer="vertical"
         resizer-width="4" 
         resizer-left="#aggregation-result" 
-        resizer-right="#query-result"
-        resizer-max="400">
+        resizer-right="#query-result">
 </div>
 
-<div id="query-result" ng-include="'template/result_tab/request_result_sub_tab.html'">
+<div id="query-result" ng-include="'template/result_tab/request_result_sub_tab.html'"
+  ng-class="{'result-full':!query.lng,'result-split':query.lng}">
 </div>
 
 <div class="spacer"></div>
