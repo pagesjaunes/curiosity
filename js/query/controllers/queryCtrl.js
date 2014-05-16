@@ -1,10 +1,11 @@
 // queryCtrl.js
 
-Curiosity.controller('queryCtrl', ['$scope', 'query',
-    function($scope, query) {
+Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
+    function($scope, query, mapping) {
 	    
 	    /* INITIALISATIONS */
     	$scope.data = query.info;
+    	$scope.mappingData = mapping.info;
     	// TODO : Clean initialisation
 	    $scope.query = {};
 	    $scope.query.mappings = $scope.info.mappings;

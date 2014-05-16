@@ -47,7 +47,7 @@
 	  			</h3>
 	  		</div>
 	  		<div class="panel-body">
-	    		<span ng-repeat="keyWord in data.keywordToShow track by $index" class="field col-sm-3" ><a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a></span>
+	    		<span ng-repeat="keyWord in data.keywordToShow track by $index" class="field col-sm-4" ><a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a></span>
 				<div class="spacer"></div>
 	  		</div>
 		</div>
@@ -61,7 +61,7 @@
 	  			</h3>
 	  		</div>
 	  		<div class="panel-body">
-	  			<div ng-repeat="field in query.mappings track by $index" class="field col-sm-3 dropdown" >
+	  			<div ng-repeat="field in mappingData.fields track by $index" class="field col-sm-4 dropdown" >
 	  				<a href ="#" ng-click="addKeyWord(field.ancestor)" title="{{ field.ancestor  }}">{{ field.name }}</a>
 	  			</div>
 				<div class="spacer"></div>

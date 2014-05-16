@@ -39,5 +39,34 @@ Curiosity.factory('keyword', function(conf){
 		}
 	}
 
-	return keywordObj;
+
+	keywordObj.getKeywordListFromIndex = function (index) {
+		var curentKeyword = findIndexByName(index);	
+		if (curentKeyword < 0){
+			return ([]);
+		}
+		return(keywordArray[curentKeyword].keywords);
+	}
+
+
+	/**
+	* getKeywordListFromIndexFilter
+	* Find all keywords that begin  by "word" in a specified index
+	* @param index : the index to browse
+	* @param word : the word to find
+	* @result: an array which contains all keyword found.
+	*/
+	keywordObj.getKeywordListFromIndexFilter = function (index, word) {
+		var result = new Array ;
+		var i = 0;
+		var re = new RegExp("^" + word + ".*");
+		var curentKeyword = keywordObj.getKeywordListFromIndex(index);
+		while (i < curentKeyword.length){
+			if (re.test(curentKeyword[i].label))
+				result.push(curentKeyword[i])
+			i++;
+		}
+		return (result);
+	}
+	return (keywordObj);
 })

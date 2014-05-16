@@ -1,3 +1,5 @@
+// queryFactory.js
+
 Curiosity.factory('query', function(elasticClient, ejsResource, keyword, agg){
 	var queryObj = {};
 	queryObj.info = {};
@@ -18,7 +20,7 @@ Curiosity.factory('query', function(elasticClient, ejsResource, keyword, agg){
 	var currentKeyword = [];
 	var currentIndex = "";
 	var queryString = ejs.QueryStringQuery();
-
+	
 	function builtRequest(query) {
 		request = ejs.Request();
 		queryString.query(agg.addAggregationFilterToQuery(query, []));
@@ -132,4 +134,4 @@ Curiosity.factory('query', function(elasticClient, ejsResource, keyword, agg){
 		}
 	}
 	return queryObj;
-})
+});
