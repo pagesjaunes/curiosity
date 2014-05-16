@@ -47,7 +47,7 @@
 	  			</h3>
 	  		</div>
 	  		<div class="panel-body">
-	    		<span ng-repeat="keyWord in query.keyWordsDisplay track by $index" class="field col-sm-3" ><a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a></span>
+	    		<span ng-repeat="keyWord in data.keywordToShow track by $index" class="field col-sm-3" ><a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a></span>
 				<div class="spacer"></div>
 	  		</div>
 		</div>

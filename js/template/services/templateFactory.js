@@ -40,8 +40,6 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 	}
 
 	templateObj.updateAggAssoc = function (type, value) {
-		console.log(type);
-		console.log(value);
 		var i = 0; 
 		var find = false;
 		while (i < templateObj.info.aggregationsAssociation.length){
@@ -57,7 +55,16 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 		}
 		conf.getConfDocument('aggregationsTemplates').defaultValue = templateObj.info.aggregationsAssociation;
 		conf.sendConfDocument('aggregationsTemplates');	
-	} 
+	}
+
+	templateObj.addTemplateToCache = function (type, id) {
+		tpl = templateObj.info[type][id];
+		if (typeof(tpl) !== "undefined") {
+			$templateCache.put(tpl.name, tpl.value);
+			return (tpl.name);
+		}
+		return ("");
+	}
 
 	function updateAggTemplate () {
 		$http.get('template/aggregation/default.html', {cache:$templateCache}).then(function() {

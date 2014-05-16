@@ -42,7 +42,7 @@
 		</form>							
 		<form class="navbar-form navbar-left" role="search">
         	<div class="form-group">
-				<input ng-change="updateQuery()" ng-model="query.queryTerm" type="text" ng-trim="false" class="form-control" placeholder="Query"></input>
+				<input ng-change="updateQuery()" ng-model="data.simplifiedRequest" type="text" ng-trim="false" class="form-control" placeholder="Query"></input>
 			</div>
 			<button ng-click="search()" class="btn btn-default" >
 				<span class="glyphicon glyphicon-search"></span> 
@@ -57,7 +57,7 @@
 			<span class="glyphicon glyphicon-info-sign"></span>
 		</a>
 		<a href="#" class="navbar-brand navbar-right">
-			<span class="label label-primary">{{ info.txt.header.Hits }}{{query.hits}} </span>	
+			<span class="label label-primary">{{ info.txt.header.Hits }}{{ data.hits }} </span>	
     	</a>
     	<a href="#" class="navbar-brand navbar-right" ng-show="info.loading">
 			<span><img src="resources/ajax-loader.gif" id="loading-image"></img></span>

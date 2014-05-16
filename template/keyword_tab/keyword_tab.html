@@ -2,7 +2,7 @@
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.keyword.Index }}</span>
 		<select ng-model="keyword.selectedIndex" ng-change="selectIndex()" ui-select2 class="form-control">
-			<option ng-repeat="index in data." value ="{{ index }}"> {{ index }}</option>
+			<option ng-repeat="index in info.indexList" value ="{{ index }}"> {{ index }}</option>
 		</select>
 	</div>
 </div>
