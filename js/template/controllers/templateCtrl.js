@@ -1,8 +1,12 @@
-Curiosity.controller('templateCtrl', ['$scope', 'template',
-function($scope, template){
+Curiosity.controller('templateCtrl', ['$scope', 'template','mapping',
+function($scope, template, mapping){
 	// INITIALISATION
 	
+
 	$scope.data = template.info;
+	$scope.mappingData = mapping.info;
+	
+	$scope.template = {};
 	$scope.template.tab = 0;
 	$scope.template.selected = -1;
 	$scope.template.aggregation = {};
@@ -11,6 +15,7 @@ function($scope, template){
 	$scope.template.currentTemplate = {};
 	$scope.template.aggregation.currentTemplate = {};
 	// EVENT
+	
 	$scope.$on("ConfLoaded", function() {
 		template.update();
 	});

@@ -19,7 +19,7 @@ Curiosity.factory('keyword', function(conf){
 
 	keywordObj.getIndex = function (index) {
 		var result = findIndexByName(index);
-		if (result < 0){
+		if (result < 0 || typeof(keywordArray[result]) === "undefined"){
 			return ([]);
 		}
 		return (keywordArray[result]);

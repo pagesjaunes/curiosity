@@ -62,12 +62,17 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc){
 					i++;
 				}
 			},
+			"reInitConf" : function () {
+				elasticFunc.deleteIndex(confClient, globalConf.confIndex);
+				this.initConf();
+			},
 
 			"initDocument" : function (document) {
 				elasticFunc.sendNewDocument(confClient, 
 					globalConf.confIndex, 
 					globalConf.defaultConfDocumentType, 
 					document);
+
 			},
 
 			/**
@@ -159,7 +164,7 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc){
 	},
 
 	"addServerToConf"  : function (url) {
-		var serverList = getConfDocument("server");
+		var serverList = this.getConfDocument("server");
 		var i = 0;
 		while (i < serverList.servers.length) {
 			if (serverList.servers[i] == url) {
@@ -168,7 +173,7 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc){
 			i++;
 		}
 		serverList.servers.push(url);
-		elasticFunc.sendConfDocument(confClient, "server");
+		this.sendConfDocument("server");
 	}
 }
 })

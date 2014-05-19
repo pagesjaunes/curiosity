@@ -38,7 +38,7 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<span ng-repeat="field in info.mappings track by $index" class="field col-sm-3" >
+			<span ng-repeat="field in mappingData.fields track by $index" class="field col-sm-3" >
 				<a href ="#" ng-click="addField(template.currentTemplate,'value', field.ancestor)" title="{{ field.ancestor}}">
 					{{ field.name }}
 				</a>

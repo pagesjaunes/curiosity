@@ -2,6 +2,7 @@ var global_text = {
 	header : {
 		Server : "Serveur",
 		New : "Nouveau",
+		Hide : "Cacher",
 		AddServer : "Ajouter un nouveau serveur",
 		Connect : "Connexion",
 		Index : "Index",
@@ -15,7 +16,8 @@ var global_text = {
 			Results : "Résultas",
 			Mapping : "Mapping",
 			Keywords : "Mots Clés",
-			Templates : "Templates"
+			Templates : "Templates", 
+			BugReport : "Rapport de bug / suggestions"
 		}
 	},
 	aggregation : {
@@ -45,10 +47,10 @@ var global_text = {
 	result : {
 		request_sub_tab : {
 			Template : "Template",
-			First: "Première",
-			Prev: "Précédente",
-			Next: "Suivante",
-			Last: "Dernière",
+			First: "Début",
+			Prev: "Précédent",
+			Next: "Suivant",
+			Last: "Fin",
 			Page: "Page",
 			Go : "Aller à",
 			AggregationFilter : "Filtres d'aggrégation",
@@ -58,7 +60,7 @@ var global_text = {
 		}
 	},
 	template : {
-		ResultItems : "Objets Resultas",
+		ResultItems : "Objets Resultats",
 		Aggregations : "Aggrégations",
 		aggregation_sub_tab :{
 			Association : "Association",
@@ -80,5 +82,10 @@ var global_text = {
 			TemplateName : "Nom	du Template",
 			Fields : "Champs"
 		}
+	},
+	bugReport : {
+		Contact:"Contact",
+		Title:"Titre",
+		Send:"Envoyer"
 	}
 }

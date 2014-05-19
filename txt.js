@@ -1,91 +1,91 @@
 var global_text = {
 	header : {
-		Server : "Server",
-		New : "New",
-		AddServer : "Add a new server",
-		Connect : "Connect",
+		Server : "Serveur",
+		New : "Nouveau",
+		Hide : "Cacher",
+		AddServer : "Ajouter un nouveau serveur",
+		Connect : "Connexion",
 		Index : "Index",
-		Search : "Search",
-		AutoRefresh : "AutoRefresh",
-		Hits : "Hits : ",
-		Error : "Error",
+		Search : "Rechercher",
+		AutoRefresh : "Raffraichissement auto.",
+		Hits : "Résultats : ",
+		Error : "Erreur",
 		navBar : {
-			Request : "Request",
-			Aggregations : "Aggregations",
-			Results : "Results",
+			Request : "Requête",
+			Aggregations : "Aggrégations",
+			Results : "Résultas",
 			Mapping : "Mapping",
-			Keywords : "Keywords",
-			Templates : "Templates",
-			BugReport : "Bug report / suggestions"
+			Keywords : "Mots Clés",
+			Templates : "Templates", 
+			BugReport : "Rapport de bug / suggestions"
 		}
 	},
 	aggregation : {
-		Fields : "Fields",
+		Fields : "Champs",
 		aggregation_renderer : {
 			Type : "Type",
-			Field : "Field"
+			Field : "Champ"
 		}
 	},
 	keyword : {
 		Index : "Index",
-		Save : "Save", 
-		Add : "Add"
+		Save : "Sauvegarder", 
+		Add : "Ajouter"
 	},
 	mapping : {
-		DocumentT : "Document Type"
+		DocumentT : "Type de document"
 	},
 	request : {
-		SimplifiedRequest:"Simplified Request",
-		ComplexeRequest:"Complexe Request",
-		ResultPerPage:"Result per page",
-		Search:"Search",
-		JsonQuery: "Json Query",
-		Keywords: "Keywords",
-		Fields:"Fields"
+		SimplifiedRequest:"Requête simplifiée",
+		ComplexeRequest:"Requête compléte",
+		ResultPerPage:"Resultas par page",
+		Search:"Rechercher",
+		JsonQuery: "Requête Json",
+		Keywords: "Mots Clés",
+		Fields:"Champs"
 	},
 	result : {
 		request_sub_tab : {
 			Template : "Template",
-			First: "First",
-			Prev: "Prev",
-			Next: "Next",
-			Last: "Last",
+			First: "Début",
+			Prev: "Précédent",
+			Next: "Suivant",
+			Last: "Fin",
 			Page: "Page",
-			Go : "Go",
-			AggregationFilter : "Aggregation Filter",
-			Or:"Or",
-			And:"And",
-			Not:"Not", 
+			Go : "Aller à",
+			AggregationFilter : "Filtres d'aggrégation",
+			Or:"Ou",
+			And:"Et",
+			Not:"Non", 
 		}
 	},
 	template : {
-		ResultItems : "Result Items",
-		Aggregations : "Aggregations",
+		ResultItems : "Objets Resultats",
+		Aggregations : "Aggrégations",
 		aggregation_sub_tab :{
 			Association : "Association",
-			AggregationType : "Aggregation Type",
+			AggregationType : "Type d'aggrégation",
 			Template : "Template",
-			Default : "Default",
-			Update : "Update",
-			Edit: "Edit",
-			New: "New",
-			Save: "Save",
-			Delete: "Delete",
-			TemplateName : "Template's name"
+			Default : "Defaut",
+			Update : "Mettre à jour",
+			Edit: "Edition",
+			New: "Nouveau",
+			Save: "Sauvegarder",
+			Delete: "Supprimer",
+			TemplateName : "Nom du Template"
 		},
 		result_items_sub_tab :{
 			Template : "Template",
-			New: "New",
-			Save: "Save",
-			Delete: "Delete",
-			TemplateName : "Template's name",
-			Fields : "Field"
+			New: "Nouveau",
+			Save: "Sauvegarder",
+			Delete: "Supprimer",
+			TemplateName : "Nom	du Template",
+			Fields : "Champs"
 		}
 	},
 	bugReport : {
 		Contact:"Contact",
-		Title:"Title",
-		Send:"Send"
+		Title:"Titre",
+		Send:"Envoyer"
 	}
-
 }

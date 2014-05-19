@@ -2,6 +2,7 @@ var global_text = {
 	header : {
 		Server : "Server",
 		New : "New",
+		Hide, "Hide",
 		AddServer : "Add a new server",
 		Connect : "Connect",
 		Index : "Index",
@@ -87,5 +88,4 @@ var global_text = {
 		Title:"Title",
 		Send:"Send"
 	}
-
 }

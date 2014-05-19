@@ -25,7 +25,13 @@ Curiosity.factory("elasticFunc", function(){
 		"createIndex" : function (client, indexName, func) {
 			if (typeof(func) ==='undefined') 
 				func = this.elasticsearchError;
-			client.indices.create({index:indexName}, this.elasticsearchError)
+			client.indices.create({index:indexName}, this.elasticsearchError);
+		},
+
+		"deleteIndex" : function(client, indexName, func) {
+			if (typeof(func) ==='undefined') 
+				func = this.elasticsearchError;
+			client.indices.delete({index:indexName}, this.elasticsearchError);
 		},
 
 		/**

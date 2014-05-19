@@ -7,22 +7,10 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
     	$scope.data = query.info;
     	$scope.mappingData = mapping.info;
     	// TODO : Clean initialisation
-	    $scope.query = {};
-	    $scope.query.mappings = $scope.info.mappings;
-	    $scope.query.useTemplate = false;
-	    $scope.query.template = {};
-	    $scope.query.aggregation = {};
-	    $scope.query.autoRefresh = false;
-	    $scope.query.showAggregationFilter = true;
-	    $scope.query.aggregationArray = [];
-		$scope.query.aggregationFilter = [];
-	    $scope.query.prevAgg = [];
-	    $scope.query.aggregation.aggs = {};
-	    $scope.template = {};
 
 	    /* EVENTS */
 		$scope.$on('IndexChange',function (){
-			query.updateIndex($scope.info.selectedIndex);
+			query.updateIndex();
 		});
 
 		$scope.$on('ServerChange', function() {
@@ -30,7 +18,7 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
 		});
 
 		$scope.search = function(noReset) {
-			query.search(noReset);
+			query.search(noReset); 
 		}
 
 		$scope.addKeyWord = function (keyword) {
@@ -42,11 +30,11 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
 		}
 
 		// TODO : MOVE TO AGGCONTROLLER
-		$scope.quickAgg = function (field) {
+		/*$scope.quickAgg = function (field) {
 			var aggreg = agg.quickAgg(field);
 			aggreg.parent = $scope.query.aggregation.aggs; 
 			$scope.query.aggregation.aggs.push(aggreg);
-		}
+		}*/
 	}
 ]);
 

@@ -156,16 +156,27 @@
 }
 
 #aggregation-result {
-    width: 20%;
     overflow: auto;
     border-top: 1px solid #CCCCCC;
 }
+  .aggregation-mini {
+    width:0%;
+  }
+  .aggregation-split {
+    width:20%;
+  }
 
 #query-result {
-    overflow: hidden;
-    width : 79%;
+    overflow: auto;
     border-top: 1px solid #CCCCCC;
 }
+  .result-full {
+   width : 99%;
+  }
+
+  .result-split {
+    width : 79%;
+  }
 
 #sidebar-resizer {
     background-color: #D9EDF7;

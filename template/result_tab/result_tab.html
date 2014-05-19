@@ -1,31 +1,4 @@
-<!--<div id="result-bar">
-	<ul class="nav nav-pills">
-  		<li ng-class="{'active':query.resultTab==0}">
-  			<a href="#" ng-click="query.resultTab=0">Answer</a>
-  		</li>
-  		<li ng-class="{'active':query.resultTab==2}">
-  			<a href="#" ng-click="query.resultTab=2">Aggregation</a>
-  					</li>
-  		<li ng-class="{'active':query.resultTab==1}">
-  			<a href="#" ng-click="query.resultTab=1">Full Answer</a>
-  		</li>
-	</ul>		
-</div>
-<!-- Answer tab 
-<div ng-show="query.resultTab == 0" ng-include="'template/result_tab/request_result_sub_tab.html'">
-	
-</div>
-
-<!-- Full Answer tab 
-<div ng-show="query.resultTab == 1">
-	{{ query.queryResults }}
-</div>
-
-<!-- Aggregations tab 
-<div ng-show="query.resultTab == 2" ng-include="'template/result_tab/aggregation_result_sub_tab.html'">
-</div>!-->
-<div> {{ query.lng }}</div>
-<div id="aggregation-result" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"
+<!--<div id="aggregation-result" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"
     ng-class="{'aggregation-mini':!query.lng,
       'aggregation-split':query.lng }">
 </div>
@@ -35,7 +8,7 @@
         resizer-width="4" 
         resizer-left="#aggregation-result" 
         resizer-right="#query-result">
-</div>
+</div>-->
 
 <div id="query-result" ng-include="'template/result_tab/request_result_sub_tab.html'"
   ng-class="{'result-full':!query.lng,'result-split':query.lng}">

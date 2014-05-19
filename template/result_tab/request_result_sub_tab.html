@@ -11,8 +11,12 @@
 		</div>
 	</div>
 
-	<div class="col-sm-3">
-		<input ng-model="searchText" type="text" class="form-control" placeholder="Search">
+	<div class="col-sm-2">
+		<div class="input-group">
+			<label class="input-group-addon">{{ info.txt.request.ResultPerPage }}</label>
+			<input class="form-control" ng-model="queryData.nbResult"></input>
+		</div>
+		<!--<input ng-model="searchText" type="text" class="form-control" placeholder="Search">!-->
 	</div>
 
 	<div class="col-sm-3">
@@ -45,7 +49,7 @@
 	</div>
 	<div class="spacer"></div>
 </div>
-<div id="aggregation-filter-bar">
+<!--<div id="aggregation-filter-bar">
 	<h4 ng-click="query.showAggregationFilter = !query.showAggregationFilter">
 		{{ info.txt.result.request_sub_tab.AggregationFilter }}
 		<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!query.showAggregationFilter,'glyphicon-chevron-up':query.showAggregationFilter}">	
@@ -87,7 +91,7 @@
 		</div>
 	</div>
 	<div class="spacer"></div>
-</div>	
+</div>!-->
 
 <div ng-if="!data.useTemplate">
 	<table class="table table-striped col-sm-12">

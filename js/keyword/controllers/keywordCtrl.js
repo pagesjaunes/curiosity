@@ -1,23 +1,13 @@
 // keyWordCtrl.js
 
-Curiosity.controller('keyWordCtrl', ['$scope', 'elasticClient', 'ejsResource', 'conf', 'keyword',
-	function($scope, elasticClient, ejsResource, conf, keyword){
-		/* INITIALISATION */
-		$scope.keyword = {};
-		$scope.currentKeywords = [];
-		$scope.keyword.selectedIndex = "";
-		var removeTemplate = '<button type="button" class="close" ng-click="removeRow($index)" aria-hidden="true">&times;</button>';
-		$scope.gridOptions = { 
-			data: 'currentKeywords',
-			enableCellSelection: true,
-			enableRowSelection: false,
-			enableCellEditOnFocus: true,
-			columnDefs: [	{field: 'label', displayName:'Label', enableCellEdit: true}, 
-			{field:'value', displayName:'Value', enableCellEdit: true},
-			{field:'desc', displayName:'Description', enableCellEdit: true},
-			{field: 'remove', displayName:'Remove', cellTemplate: removeTemplate, enableCellEdit: false}
-			]
-		};
+Curiosity.controller('keyWordCtrl', ['$scope','keyword', 'curiosity',
+function($scope, keyword, curiosity){
+	/* INITIALISATION */
+	$scope.curiosityData = curiosity.info;
+	$scope.keyword = {};
+	$scope.currentKeywords = [];
+	$scope.keyword.selectedIndex = "";
+
 
 	/* EVENTS */
 	$scope.$on("ConfLoaded", function () {
@@ -30,6 +20,8 @@ Curiosity.controller('keyWordCtrl', ['$scope', 'elasticClient', 'ejsResource', '
 	*/
 	$scope.selectIndex = function () {
 		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
+		if (typeof ($scope.currentKeywords) === "undefined")
+			$scope.currentKeywords = [];
 	}
 	/**
 	* saveKeyWords 
@@ -60,5 +52,17 @@ Curiosity.controller('keyWordCtrl', ['$scope', 'elasticClient', 'ejsResource', '
 	};
 
 	// Grid initialisation	
+	var removeTemplate = '<button type="button" class="close" ng-click="removeRow($index)" aria-hidden="true">&times;</button>';
+	$scope.gridOptions = { 
+			data: 'currentKeywords',
+			enableCellSelection: true,
+			enableRowSelection: false,
+			enableCellEditOnFocus: true,
+			columnDefs: [	{field: 'label', displayName:'Label', enableCellEdit: true}, 
+			{field:'value', displayName:'Value', enableCellEdit: true},
+			{field:'desc', displayName:'Description', enableCellEdit: true},
+			{field: 'remove', displayName:'Remove', cellTemplate: removeTemplate, enableCellEdit: false}
+			]
+		};
 }]);
 
