@@ -15,7 +15,7 @@ Curiosity.controller('bugReportCtrl', ['$scope','conf', function($scope, conf, e
 											'content':$scope.bugReport.content})
 			
 		}
-		$scope.conf.saveDocument('bugreport');
+		conf.saveConfDocument('bugreport');
 		$scope.bugReport.sent = true;
 	}
 }])
