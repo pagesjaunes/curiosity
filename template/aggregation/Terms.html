@@ -10,7 +10,7 @@
 				<div class="col-sm-5"><input placeholder="Search" ng-model="agg.agg.searchText" class="form-control input-sm" type="text" /></div>
 				<div class="col-sm-7 input-group input-group-sm">
 					<span class="input-group-btn">
-						<button ng-click="switchPredicate(agg.agg, 'key', 'doc_count')" class="btn btn-default">
+						<button ng-click="switchAggregationValue(agg.agg, 'predicate', ['key', 'doc_count'])" class="btn btn-default">
 							{{ agg.agg.predicate }}
 						</button>
 					</span>
@@ -26,15 +26,15 @@
 			</div>
 			<div ng-repeat="bucket in agg.buckets | filter:agg.agg.searchText | orderBy:agg.agg.predicate:!agg.agg.reverse | limitTo:agg.agg.nbResult">
 				<span class="col-sm-10"> 
-					<label><a href="#" ng-click="addTermsAggregationFilter(agg, bucket)">{{bucket.key}} :</a></label> 
+					<label><a href="#" ng-click="addAggregationFilter('Terms' , agg, bucket)">{{bucket.key}} :</a></label> 
 					{{bucket.doc_count}} 
 				</span> 
-				<span class="col-sm-2 glyphicon" ng-class="{'glyphicon-plus': !bucket.showNested, 'glyphicon-minus':bucket.showNested}" ng-click="bucket.showNested =!bucket.showNested" ng-if="hasNestedAgg(bucket)"></span>
+				<span class="col-sm-2 glyphicon" ng-class="{'glyphicon-plus': !bucket.showNested, 'glyphicon-minus':bucket.showNested}" ng-click="bucket.showNested =!bucket.showNested" ng-if="callAggregationFunc('hasNestedAgg', bucket)"></span>
 				<div class="spacer"></div>
 				<div ng-show="bucket.showNested">
 					<ul>
 						<li ng-repeat="(key, agg) in bucket">
-							<div ng-if="isAgg(key)" ng-include="agg.agg.template"></div>
+							<div ng-if="callAggregationFunc('isAgg', key)" ng-include="agg.agg.template"></div>
 						</li>
 					</ul>
 				</div>

@@ -1,7 +1,11 @@
 // agregationCtrl.js
 
-Curiosity.controller('aggregationCtrl', function($scope, aggregation){
+Curiosity.controller('aggregationCtrl', function($scope, aggregation, mapping){
 	$scope.data = aggregation.info;
+	$scope.mappingData = mapping.info;
+	$scope.aggregation = {};
+	$scope.aggregation.focused = {};
+
 	$scope.addAggregation = function(array){
 		aggregation.addAggregation(array);
 	}
@@ -11,11 +15,11 @@ Curiosity.controller('aggregationCtrl', function($scope, aggregation){
 	}
 
 	$scope.deleteAgg = function(aggre, idx) {
-		aggregation.deleteAgg(aggre,1);
+		aggregation.deleteAgg(aggre,idx);
 	}
 
 	$scope.validateAgg = function()
 	{
-		$scope.query.aggregationArray = agg.builtAggregationArray($scope.query.aggregation.aggs);
+		aggregation.validateAgg();
 	}
 });

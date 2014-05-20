@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keyword, agg){
+Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keyword, aggregation){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -24,10 +24,9 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 	
 	function builtRequest(query) {
 		request = ejs.Request();
-		queryString.query(agg.addAggregationFilterToQuery(query, []));
-		// TODO Add field selection		
-		// agg.addAggregation(request);
-		if (typeof(query) === "undefined" ||  !query.length){
+		queryString.query(aggregation.addAggregationFilterToQuery(query));
+		aggregation.addAggregationToRequest(request);
+		if ((typeof(query) === "undefined" || !query.length) && aggregation.isAggregationFilterEmpty()){
 			request.query(ejs.MatchAllQuery())
 		}
 		else {
@@ -75,7 +74,7 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 				queryObj.info.result = resp;
 				queryObj.info.hits = resp.hits.total;
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
-				
+				aggregation.updateResult(resp.aggregations);
 				// TODO : Update other services !!!  
 			},
 			function err(err) {
@@ -134,5 +133,11 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 			queryObj.search("no");
 		}
 	}
+		
+	// Circular depencies
+	queryObj.getAggregationObj = function() {
+		return (aggregation);
+	}
+
 	return queryObj;
 });

@@ -4,8 +4,12 @@ Curiosity.controller('resultCtrl', function($scope , agg){
 		$scope.query.prevAgg = agg.cloneAgg($scope.query.aggregation.aggs);
 		$scope.query.resultAgg = $scope.query.queryResults.aggregations;
 		agg.builtAggregation($scope.query.prevAgg, $scope.query.resultAgg);
+		// TODO REMOVE 
+		if ($scope.query.resultAgg !== "undefined")
+			$scope.query.lng = true;
+		else 
+			$scope.query.lng = false;
 	});
-
 	/**
 	* isAgg
 	* check a string is an aggrgation name

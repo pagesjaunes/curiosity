@@ -22,12 +22,12 @@
 		</div>
 	</div>
 	<button class="btn btn-default col-sm-1" ng-click="updateAggAssoc(template.aggregation.aggSelected, template.aggregation.tplSelected)">
-		{{ info.txt.template.aggregation_sub_tab.Update}}
+		{{ info.txt.template.aggregation_sub_tab.Update }}
 	</button>
 	<div class="spacer"></div>
 </div>
 
-<h3>{{ info.txt.template.aggregation_sub_tab.Edit }}</h3>	
+<h3> {{ info.txt.template.aggregation_sub_tab.Edit }} </h3>	
 <div class="col-sm-6">
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.Template }}</span>
@@ -40,13 +40,13 @@
 </div>
 <div class="spacer"></div>
 <div class="btn-group col-sm-2 btn-keyword">
-	<button ng-click="new('aggregationTemplates',template.aggregation, 'currentTemplate')" class="btn btn-default">
+	<button ng-click="new('aggregationsTemplates',template.aggregation, 'currentTemplate')" class="btn btn-default">
 		{{ info.txt.template.aggregation_sub_tab.New }}
 	</button>
-	<button ng-click="save('aggregationTemplates')" class="btn btn-default">
+	<button ng-click="save('aggregationsTemplates')" class="btn btn-default">
 		{{ info.txt.template.aggregation_sub_tab.Save }}
 	</button>
-	<button ng-click="delete('aggregationTemplates',template.aggregation, 'currentTemplate', template.aggregation.selected)" class="btn btn-default" >
+	<button ng-click="delete('aggregationsTemplates',template.aggregation, 'currentTemplate', template.aggregation.selected)" class="btn btn-default" >
 		{{ info.txt.template.aggregation_sub_tab.Delete }}
 	</button>	
 </div>

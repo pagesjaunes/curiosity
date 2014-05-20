@@ -1,6 +1,6 @@
 <div>
 	<div class="btn-group margin-left">
-		<button class="btn btn-default" ng-click="addAggregation(query.aggregation.aggs)">
+		<button class="btn btn-default" ng-click="addAggregation(data.currentAgg)">
 			<span class="glyphicon glyphicon-plus"></span>
 		</button>
 		<button class="btn btn-success" ng-click="validateAgg()">
@@ -11,7 +11,7 @@
 <div class="col-sm-8">
 	<div class="aggregations-list">
 		<ul>
-			<li ng-repeat="(key,agg) in query.aggregation.aggs" ng-include="'template/aggregation_tab/aggregation_renderer.html'">
+			<li ng-repeat="(key, agg) in data.currentAgg" ng-include="'template/aggregation_tab/aggregation_renderer.html'">
 			</li>
 		</ul>
 	</div>
@@ -24,7 +24,7 @@
 			</h3>
 		</div>
 		<div class="panel-body">
-			<span ng-repeat="field in info.mappings track by $index" class="field col-sm-3" >
+			<span ng-repeat="field in mappingData.fields track by $index" class="field col-sm-3" >
 				<a href ="#" ng-click="aggregation.focused.obj.field = field.ancestor" title="{{ field.ancestor  }}">
 					{{ field.name }} ({{ field.type }})
 				</a>

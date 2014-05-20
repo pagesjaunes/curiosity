@@ -83,6 +83,7 @@ Curiosity.provider("agg", function() {
 			}
 			i++;
 		}
+	console.log(query);
 	return (query);
 	}
 

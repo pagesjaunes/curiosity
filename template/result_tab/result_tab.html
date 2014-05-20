@@ -1,17 +1,20 @@
-<!--<div id="aggregation-result" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"
-    ng-class="{'aggregation-mini':!query.lng,
-      'aggregation-split':query.lng }">
+<!-- Aggregation result !-->
+<div id="aggregation-result" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"
+    ng-class="{'aggregation-mini':!aggregationData.showAgg,
+      'aggregation-split':aggregationData.showAgg }">
 </div>
 
+<!-- Resizer Bar !-->
 <div id="sidebar-resizer"
         resizer="vertical"
         resizer-width="4" 
         resizer-left="#aggregation-result" 
         resizer-right="#query-result">
-</div>-->
+</div>
 
+<!-- Query Result !-->
 <div id="query-result" ng-include="'template/result_tab/request_result_sub_tab.html'"
-  ng-class="{'result-full':!query.lng,'result-split':query.lng}">
+  ng-class="{'result-full':!aggregationData.showAgg,'result-split':aggregationData.showAgg}">
 </div>
 
 <div class="spacer"></div>

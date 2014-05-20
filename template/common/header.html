@@ -54,20 +54,20 @@
 				{{ info.txt.header.Search }}
 			</button>
 		</form>
-		<!--<span class="navbar-brand navbar-left">
+		<span class="navbar-brand navbar-left">
 			{{ info.txt.header.AutoRefresh }}			
 			<input type="checkbox" ng-model="queryData.autoRefresh">
-		</span>!-->
+		</span>
 		<a href="#" class="navbar-brand navbar-right" title="">
 			<span class="glyphicon glyphicon-info-sign"></span>
 		</a>
 		<a href="#" class="navbar-brand navbar-right">
 			<span class="label label-primary">{{ info.txt.header.Hits }} {{ queryData.hits }} </span>	
     	</a>
-    	<a href="#" class="navbar-brand navbar-right" ng-show="info.loading">
+    	<a href="#" class="navbar-brand navbar-right" ng-show="data.loading">
 			<span><img src="resources/ajax-loader.gif" id="loading-image"></img></span>
 		</a>
-		<a ng-show="info.err" class="navbar-brand navbar-right">
+		<a ng-show="data.err" class="navbar-brand navbar-right">
 			<span class="label label-danger">{{ info.txt.header.Error }}</span>
 		</a>
 	</nav>
