@@ -192,3 +192,8 @@
 #query-result h4 {
   padding-left : 15px;
 }
+
+#modal-csv-body {
+  height: 60%;
+  overflow: auto;
+}

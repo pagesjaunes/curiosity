@@ -47,7 +47,7 @@ Curiosity.factory('aggregation', function(agg){
 		aggregationObj.info.prevAgg = agg.cloneAgg(aggregationObj.info.currentAgg);
 		aggregationObj.info.resultAgg = aggregations;
 		agg.builtAggregation(aggregationObj.info.prevAgg, aggregationObj.info.resultAgg);
-		if (typeof(aggregationObj.info.resultAgg) !== "undefinded") {
+		if (typeof(aggregationObj.info.resultAgg) !== "undefined") {
 			aggregationObj.info.showAgg = true;
 		}
 		else {

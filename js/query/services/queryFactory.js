@@ -64,7 +64,7 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 	queryObj.search = function (noReset) {
 		curiosity.load(true)
 		if (typeof(noReset) === "undefined") {
-					queryObj.info.page = 0;
+			queryObj.info.page = 0;
 		}
 		client.search({index:currentIndex,body:builtRequest(queryObj.info.complexRequest)}).then(
 			function (resp) {
@@ -138,6 +138,19 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 	queryObj.getAggregationObj = function() {
 		return (aggregation);
 	}
+
+	queryObj.simpleSearch = function(request, index, callback) {
+		client.search({index:index,body:request})
+			.then(function (resp) {
+				callback(resp);
+			}, 
+			function (err) {
+				console.log(err);
+			}
+		);
+	} 
+
+
 
 	return queryObj;
 });

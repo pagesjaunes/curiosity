@@ -28,13 +28,6 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
 		$scope.updateQuery = function () {
 			query.updateQuery();
 		}
-
-		// TODO : MOVE TO AGGCONTROLLER
-		/*$scope.quickAgg = function (field) {
-			var aggreg = agg.quickAgg(field);
-			aggreg.parent = $scope.query.aggregation.aggs; 
-			$scope.query.aggregation.aggs.push(aggreg);
-		}*/
 	}
 ]);
 

@@ -1,0 +1,80 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">Export CSV</h3>	
+		<div id="modal-csv-option">
+			<div class="col-sm-3">
+				<div class="input-group">
+					<label class="input-group-addon">Sep :</label>
+					<input type="text" class="form-control" ng-model="data.sep"></input>
+				</div>
+			</div>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<label class="input-group-addon">TabSep :</label>
+					<input class="form-control" type="text" ng-model="data.tabSep"></input>
+				</div>
+			</div>
+			<div class="spacer"></div>
+		</div>
+	</div>
+
+	<!-- Building Display !-->
+	<div ng-if="!data.loading">
+		<div class="modal-body" id="modal-csv-body">
+			<div>
+				<label class="col-sm-4">
+					Name
+				</label>
+				<div class="col-sm-5">
+					<label>Alias</label>
+				</div>
+				<div class="spacer"></div>		
+			</div>
+			<div ng-repeat="field in data.fields">
+				<label class="col-sm-4">
+					<a title="{{ field.ancestor }}">{{ field.name }}</a> 
+				</label>
+				<div class="col-sm-5">
+					<input type="text" class="form-control" ng-model="field.alias">
+				</div>		
+				<button class="btn col-sm-2" ng-class="{'btn-danger':field.hide, 'btn-success':!field.hide}" ng-click="hideField($index)">
+					<span ng-if="field.hide">Show</span>
+					<span ng-if="!field.hide">Hide</span>
+				</button>
+				<div class="spacer"></div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<div class="col-sm-3">
+				<button ng-click="builtCsv()" class="btn btn-default">Current Result</button>
+			</div>
+			<div class="col-sm-5">
+				<div class="input-group">
+					<span class="input-group-btn">
+						<button class="btn btn-default" ng-click="builtSplitCsv()" type="button">Some Result</button>
+					</span>
+					<input type="text" class="form-control" ng-model="data.nbResult">
+				</div>
+			</div>
+			<div class="col-sm-3">
+				<button ng-click="builtFullCsv()" class="btn btn-default">Full Result</button>	
+			</div>
+		</div>
+	</div>
+	
+	<!-- Loading Display !-->
+	<div class="modal-body" ng-if="data.loading">
+		<div class="progress">
+			<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{data.loadingPercent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{data.loadingPercent}}%">
+				<span class="sr-only"></span>
+			</div>
+		</div>
+		<div class="progress">
+			<div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{data.buildingPercent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{data.buildingPercent}}%">
+				<span class="sr-only"></span>
+			</div>
+		</div>
+		<div>{{ data.state }}</div>
+	</div>
+
+</div>
