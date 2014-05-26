@@ -40,9 +40,12 @@ Curiosity.controller('resultCtrl', function($scope,$modal,result, query, templat
 		}
 	}
 
-	$scope.callAggregationFunc = function(func, params) {
-		aggregation[func](params);
+	$scope.isAgg = function (key) {
+		aggregation.isAgg(key);
+	}
 
+	$scope.callAggregationFunc = function(func, params) {
+		return (aggregation[func](params));
 	}
 
 	$scope.setAggregationValue = function(agg, field, value)

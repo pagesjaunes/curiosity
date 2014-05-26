@@ -25,7 +25,7 @@
 				<div class="spacer"></div>
 			</div>
 			<div ng-repeat="bucket in agg.buckets | filter:agg.agg.searchText | orderBy:agg.agg.predicate:!agg.agg.reverse | limitTo:agg.agg.nbResult">
-				<span class="col-sm-10"> 
+				<span class="aggregation-items"> 
 					<label><a href="#" ng-click="addAggregationFilter('Terms' , agg, bucket)">{{bucket.key}} :</a></label> 
 					{{bucket.doc_count}} 
 				</span> 

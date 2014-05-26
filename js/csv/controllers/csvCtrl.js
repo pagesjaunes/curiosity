@@ -1,13 +1,12 @@
-var csvCtrl = function($scope, csv, query){
+var csvCtrl = function($scope, $modalInstance, csv, query){
 	$scope.data = csv.info;
 	$scope.queryData = query.info
 
 	$scope.$on("CsvDone", function (){
-		var blob = new Blob([$scope.data.result], {type: "text/csv"});
-		saveAs(blob, 'result.csv');	
+		$modalInstance.close();
 	}) 
 
-
+	
 	$scope.builtCsv = function(){
 		csv.builtCsvFromResult($scope.queryData.result.hits.hits)
 	}

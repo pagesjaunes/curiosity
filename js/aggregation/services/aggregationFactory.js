@@ -35,11 +35,13 @@ Curiosity.factory('aggregation', function(agg){
 	}
 
 	aggregationObj.addAggregationFilterToQuery = function (query)  {
-		return (agg.addAggregationFilterToQuery(query, aggregationObj.info.aggregationFilter));
+		if (!this.isAggregationFilterEmpty()) {
+			return (agg.addAggregationFilterToQuery(query, aggregationObj.info.aggregationFilter));
+		}
+		return (query);
 	}
 
 	aggregationObj.isAggregationFilterEmpty =  function () {
-		console.log(aggregationObj.info.aggregationFilter);
 		return (agg.aggregationFilterEmpty(aggregationObj.info.aggregationFilter));		
 	}
 
@@ -81,7 +83,6 @@ Curiosity.factory('aggregation', function(agg){
 	
 	aggregationObj.addTermsAggregationFilter = function (aggr, bucket) {
 		agg.addAggregationFilter(aggregationObj.info.aggregationFilter, "Terms", aggr.agg.field, bucket.key)
-	
 	}
 
 	aggregationObj.removeAggFilter = function(tab, index)

@@ -1,56 +1,101 @@
 <div id="result-bar">
-	<div class="col-sm-4">
-		<div class="input-group">
-			<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Template }}</span>
-			<select ng-model="data.templateSelected" ui-select2 ng-change="selectTemplate('template',data.templateSelected)" class="form-control">
-				<option ng-repeat="template in templateData.template" value="{{$index}}" >{{ template.name }}</option>  
-			</select>
-			<span class="input-group-addon">
-				<input type="checkbox" ng-model="data.useTemplate">
-			</span>
-		</div>
+	<!-- Search bar !-->
+    <div class="input-group" id="search-bar">
+		<input ng-change="updateQuery()" ng-model="queryData.simplifiedRequest" type="text" ng-trim="false" class="form-control" placeholder="Query">
+		<span class="input-group-btn">
+			<button ng-click="search()" class="btn btn-default" >
+				<span class="glyphicon glyphicon-search"></span> 
+					{{ info.txt.header.Search }}
+			</button>
+		</span>
 	</div>
 
-	<div class="col-sm-2">
-		<div class="input-group">
-			<label class="input-group-addon">{{ info.txt.request.ResultPerPage }}</label>
-			<input class="form-control" ng-model="queryData.nbResult"></input>
+	<!-- Option Bar !-->
+	<div class="margin-top" id="option-bar">
+		<div class="col-sm-4">
+			<div class="input-group">
+				<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Template }}</span>
+				<select ng-model="data.templateSelected" ui-select2 ng-change="selectTemplate('template',data.templateSelected)" class="form-control">
+					<option ng-repeat="template in templateData.template" value="{{$index}}" >{{ template.name }}</option>  
+				</select>
+				<span class="input-group-addon">
+					<input type="checkbox" ng-model="data.useTemplate">
+				</span>
+			</div>
 		</div>
-		<!--<input ng-model="searchText" type="text" class="form-control" placeholder="Search">!-->
+		<button class="btn btn-default" ng-click="openModalCsv('lg')">Export csv</button>
+		<button class="btn btn-default" ng-click="showAdvancedQuery=!showAdvancedQuery">
+			Requéte Avancé 
+			<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!showAdvancedQuery,'glyphicon-chevron-up': showAdvancedQuery}"></span>
+		</button>
+		<button class="btn btn-default" ng-click="showJsonResult = !showJsonResult">
+			<span ng-if='showJsonResult'>  Liste résultats </span> 
+			<span ng-if='!showJsonResult'> Résultats Json </span>
+		</button>
+		<button ng-click="queryData.autoRefresh = !queryData.autoRefresh" class="btn btn-default">
+			{{ info.txt.header.AutoRefresh }}
+			<span class="glyphicon" ng-class="{'glyphicon glyphicon-ok':queryData.autoRefresh,'':!queryData.autoRefresh}"></span>
+		</button>
+		<div class="spacer"></div>
 	</div>
 
-	<div class="col-sm-3">
-		<ul class="pager pagination-result">
-			<li ng-class="{'disabled':queryData.page==0}">
-				<a href="#" ng-click="firstPage()">&larr; {{ info.txt.result.request_sub_tab.First }}</a>
-			</li>
-			<li ng-class="{'disabled':queryData.page==0}">
-				<a href="#" ng-click="prevPage()">{{ info.txt.result.request_sub_tab.Prev }}</a>
-			</li>
-			<li class="disabled">
-				<a href="#" >{{ queryData.page + 1 }} / {{ queryData.maxPage + 1}}</a></li>
-			<li ng-class="{'disabled':queryData.page==queryData.maxPage}">
-					<a href="#" ng-click="nextPage()">{{ info.txt.result.request_sub_tab.Next }}</a>
-			</li>
-			<li  ng-class="{'disabled':queryData.page==queryData.maxPage}">
-				<a href="#" ng-click="lastPage()">{{ info.txt.result.request_sub_tab.Last }} &rarr;</a>
-			</li>
-		</ul>
+	<!-- Advanced Query !-->
+	<div class="margin-top" ng-controller="queryCtrl">
+		<div ng-include="'template/request_tab/request_tab.html'" ng-if="showAdvancedQuery" id="advanced-query"></div>
 	</div>
-		
-	<div class="col-sm-2">
-		<div class="input-group">
-			<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Page }} </span>
-			<input type="number" ng-model="queryData.page" min="0" max="{{queryData.maxPage}}"class="form-control">
-			<span class="input-group-btn">
-				<button class="btn btn-default" ng-click="goTo(queryData.page)">{{ info.txt.result.request_sub_tab.Go }}</button>
-			</span>
-		</div>			
+	
+	<!-- Pagination !-->
+	<div class="margin-top" id="pagination-bar">
+		<div class="col-sm-3">
+			<div class="input-group">
+				<label class="input-group-addon">{{ info.txt.request.ResultPerPage }}</label>
+				<input class="form-control" ng-model="queryData.nbResult"></input>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<ul class="pager pagination-result">
+				<li ng-class="{'disabled':queryData.page==0}">
+					<a href="#" ng-click="firstPage()" title="{{ info.txt.result.request_sub_tab.First }}">
+						<span class="glyphicon glyphicon-fast-backward">
+						</span> 
+					</a>
+				</li>
+				<li ng-class="{'disabled':queryData.page==0}">
+					<a href="#" ng-click="prevPage()" title="{{ info.txt.result.request_sub_tab.Prev }}">
+						<span class="glyphicon glyphicon-chevron-left">
+						</span>
+					</a>
+				</li>
+				<li class="disabled">
+					<a href="#" >{{ queryData.page  }} / {{ queryData.maxPage }}</a>
+				</li>
+				<li ng-class="{'disabled':queryData.page==queryData.maxPage}">
+					<a href="#" ng-click="nextPage()" title="{{ info.txt.result.request_sub_tab.Next }}">
+						<span class="glyphicon glyphicon-chevron-right">
+						</span>
+					</a>
+				</li>
+				<li  ng-class="{'disabled':queryData.page==queryData.maxPage}">
+					<a href="#" ng-click="lastPage()" title="{{ info.txt.result.request_sub_tab.Last }}"> 
+						<span class="glyphicon glyphicon-fast-forward">
+						</span>
+					</a>
+				</li>
+			</ul>
+		</div>		
+		<div class="col-sm-3">
+			<div class="input-group">
+				<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Page }} </span>
+				<input type="number" ng-model="queryData.page" min="0" max="{{queryData.maxPage}}"class="form-control">
+				<span class="input-group-btn">
+					<button class="btn btn-default" ng-click="goTo(queryData.page)">{{ info.txt.result.request_sub_tab.Go }}</button>
+				</span>
+			</div>			
+		</div>
+		<div class="spacer"></div>
 	</div>
-	<div class="spacer"></div>
-	<button class="btn btn-default" ng-click="openModalCsv('lg')">Export csv</button>
 </div>
-
+<!-- Aggregation filter !-->
 <div id="aggregation-filter-bar">
 	<h4 ng-click="showAggregationFilter = !showAggregationFilter">
 		{{ info.txt.result.request_sub_tab.AggregationFilter }}
@@ -94,15 +139,21 @@
 	</div>
 	<div class="spacer"></div>
 </div>
-
-<div ng-if="!data.useTemplate">
-	<table class="table table-striped col-sm-12">
-		<tr ng-repeat="doc in queryData.result.hits.hits | filter:searchText">
-			<td>{{ doc }}</td>
-		</tr>
-	</table>
-	<div class="spacer"></div>
+<div id="json-answer" ng-if="showJsonResult">
+	{{queryData.result}}
 </div>
-<div ng-if="data.useTemplate">
-	<div ng-repeat="item in queryData.result.hits.hits | filter:searchText" ng-include="data.currentTemplate"></div>
+<div ng-if="!showJsonResult" class="result-list">
+	<div class="flipped">
+		<div ng-if="!data.useTemplate">
+			<table class="table table-striped col-sm-12">
+				<tr ng-repeat="doc in queryData.result.hits.hits | filter:searchText">
+					<td>{{ doc }}</td>
+				</tr>
+			</table>
+			<div class="spacer"></div>
+		</div>
+		<div ng-if="data.useTemplate">
+			<div ng-repeat="item in queryData.result.hits.hits | filter:searchText" ng-include="data.currentTemplate"></div>
+		</div>
+	</div>
 </div>

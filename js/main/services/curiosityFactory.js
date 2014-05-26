@@ -4,7 +4,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 
 	// General informations
 	curiosityObj.info.version = globalConf.version;
-	curiosityObj.info.tab = 0;
+	curiosityObj.info.tab = 1;
 	curiosityObj.info.loading = false;
 	curiosityObj.info.err = false;
 	curiosityObj.info.errList = [];

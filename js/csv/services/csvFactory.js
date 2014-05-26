@@ -30,6 +30,8 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 		csvObj.info.result = csvHeader + "\n";
 		csvObj.info.result += builtCsv(objList,fields,csvObj.info.sep);
 		csvObj.info.buildingPercent = 0;
+		var blob = new Blob([csvObj.info.result], {type: "text/csv"});
+		saveAs(blob, 'result.csv');
 		$rootScope.$broadcast("CsvDone");
 	}
 

@@ -1,72 +1,81 @@
-<div class="col-sm-7">
-	
-	<div class="input-group request-input"> 
-		<span class="input-group-addon">{{ info.txt.request.SimplifiedRequest }}</span>
-		<input ng-change="updateQuery()" ng-model="data.simplifiedRequest" type="text" ng-trim="false" class="form-control"></input>
-	</div>
-
-	<div class="input-group request-input"> 
-		<span class="input-group-addon">{{ info.txt.request.ComplexeRequest }}</span>
-		<input class="form-control" ng-model="data.complexRequest" type="text"></input>
-	</div>
-	
-	
-	<!--<div class="col-sm-3" id="result-per-page">
-		<div class="input-group">
-			<label class="input-group-addon">{{ info.txt.request.ResultPerPage }}</label>
-			<input class="form-control" ng-model="data.nbResult"></input>
-		</div>
-	</div>!-->
-	<button ng-click="search() " class="btn btn-default col-sm-2">
-		<span class="glyphicon glyphicon-search"></span> 
-		{{ info.txt.request.Search }}
-	</button>
-	
-	<div class="spacer"></div>
-	
-	<div class="panel panel-default" id="json-panel">
-  		<div class="panel-heading" ng-click="showJson=!showJson">
-  			<h3 class="panel-title">
-  				<a class="col-sm-11" href="#" title="Show the query in json">{{ info.txt.request.JsonQuery }}</a>
-  				<span class="glyphicon col-sm-1" ng-class="{'glyphicon-collapse-down': !showJson, 'glyphicon-collapse-up': showJson}"></span>
-  				<div class="spacer"></div>
-  			</h3>
-  		</div>
-  		<div class="panel-body" ng-show="showJson">
-    		{{ data.jsonRequest }}
-  		</div>
-	</div>
-</div>
-
-<div class="col-sm-5">
-	<div class="col-sm-6">
-		<div class="panel panel-info panel-request">
-	  		<div class="panel-heading">
-	  			<h3 class="panel-title">
-	  				{{ info.txt.request.Keywords }}
-	  			</h3>
-	  		</div>
-	  		<div class="panel-body">
-	    		<span ng-repeat="keyWord in data.keywordToShow track by $index" class="field col-sm-4" ><a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a></span>
-				<div class="spacer"></div>
-	  		</div>
-		</div>
-	</div>
-
-	<div class="col-sm-6">
-		<div class="panel panel-info panel-request">
-	  		<div class="panel-heading">
-	  			<h3 class="panel-title">
-	  				{{ info.txt.request.Fields }}
-	  			</h3>
-	  		</div>
-	  		<div class="panel-body">
-	  			<div ng-repeat="field in mappingData.fields track by $index" class="field col-sm-4 dropdown" >
-	  				<a href ="#" ng-click="addKeyWord(field.ancestor)" title="{{ field.ancestor  }}">{{ field.name }}</a>
-	  			</div>
-				<div class="spacer"></div>
+<div>
+	<div>
+		<div class="col-sm-6">
+			<div class="panel panel-info panel-request">
+				<div class="panel-heading">
+					<h4 class="col-sm-3">
+						{{ info.txt.request.Keywords }}
+					</h4>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" ng-model="keywordFilter">
+					</div>
+					<button class="btn btn-default col-sm-3" ng-click="updateLimiteValueKeyword()" title="Voir/Cacher tous les mots clés" ng-switch on="keywordLimit">
+						<span ng-switch-when="9">Voir Tout</span>
+						<span ng-switch-default>Cacher</span>
+					</button>
+					<div class="spacer"></div>
+				</div>
+				<div class="panel-body">
+					<span ng-repeat="keyWord in data.keywordToShow | filter:keywordFilter | limitTo:keywordLimit track by $index" class="field col-sm-4" ><a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a></span>
+					<div class="spacer"></div>
+				</div>
 			</div>
 		</div>
+
+		<div class="col-sm-6">
+			<div class="panel panel-info panel-request">
+				<div class="panel-heading">
+					<h4 class="col-sm-3">
+						{{ info.txt.request.Fields }}
+					</h4>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" ng-model="fieldFilter">
+					</div>
+					<button class="btn btn-default col-sm-3" ng-click="updateLimiteValueField()" title="Voir/Cacher tous les champs" ng-switch on="fieldLimit">
+						<span ng-switch-when="9">Voir Tout</span>
+						<span ng-switch-default>Cacher</span>
+					</button>
+					<div class="spacer"></div>
+				</div>
+				<div class="panel-body">
+					<div ng-repeat="field in mappingData.fields | filter:fieldFilter | limitTo:fieldLimit track by $index" class="field col-sm-4 dropdown" >
+						<a href ="#" ng-click="addKeyWord(field.ancestor)" title="{{ field.ancestor  }}">{{ field.name }}</a>
+					</div>
+					<div class="spacer"></div>
+				</div>
+			</div>
+		</div>
+		<div class="spacer"></div>
 	</div>
 	<div class="spacer"></div>
+	<div>	
+		<div class="input-group request-input"> 
+			<span class="input-group-addon">{{ info.txt.request.SimplifiedRequest }}</span>
+			<input ng-change="updateQuery()" ng-model="data.simplifiedRequest" type="text" ng-trim="false" class="form-control"></input>
+		</div>
+
+		<div class="input-group request-input"> 
+			<span class="input-group-addon">{{ info.txt.request.ComplexeRequest }}</span>
+			<input class="form-control" ng-model="data.complexRequest" type="text"></input>
+		</div>
+
+		<div class="spacer"></div>
+
+		<div class="panel panel-default" id="json-panel">
+			<div class="panel-heading" ng-click="showJson=!showJson">
+				<h3 class="panel-title">
+					<a class="col-sm-11" href="#" title="Show the query in json">{{ info.txt.request.JsonQuery }}</a>
+					<span class="glyphicon col-sm-1" ng-class="{'glyphicon-collapse-down': !showJson, 'glyphicon-collapse-up': showJson}"></span>
+					<div class="spacer"></div>
+				</h3>
+			</div>
+			<div class="panel-body" ng-show="showJson">
+				{{ data.jsonRequest }}
+			</div>
+		</div>
+		<button ng-click="search() " class="btn btn-default">
+			<span class="glyphicon glyphicon-search"></span> 
+			{{ info.txt.request.Search }}
+		</button>
+	</div>
 </div>

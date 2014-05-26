@@ -10,6 +10,8 @@ var global_text = {
 		AutoRefresh : "Raffraichissement auto.",
 		Hits : "Résultats : ",
 		Error : "Erreur",
+		Status : "Status",
+		NoError : "OK",
 		navBar : {
 			Request : "Requête",
 			Aggregations : "Aggrégations",

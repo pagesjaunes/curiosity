@@ -10,12 +10,15 @@
 		<link href="css/select2.css" rel="stylesheet">
 		<link href="css/select2-bootstrap.css" rel="stylesheet">
 		<link href="css/curiosity.css" rel="stylesheet">
+		<link rel="shortcut icon" href="resources/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="resources/favicon.ico" type="image/x-icon">
 
 		<!-- Dependency  Libs !--> 
 			<!-- Latest compiled and minified JavaScript -->
 		<script type="text/javascript" src="vendor/jquery/jquery-2.1.0.min.js"></script>
-		<script type="text/javascript" src="vendor/angular/angular.js"></script>
+		<script type="text/javascript" src="vendor/angular/angular.min.js"></script>
 		<script type="text/javascript" src="vendor/angular/angular-sanitize.js"></script>
+		<script type="text/javascript" src="vendor/angular/angular-animate.min.js"></script>
 		<script type="text/javascript" src="vendor/angular/ng-grid-2.0.7.min.js"></script>
 		<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
 		<script type="text/javascript" src="vendor/angular-ui-select2/select2.js"></script>
@@ -70,45 +73,65 @@
 	</head>
 	<body>
 		<div ng-controller="curiosityCtrl">
-			<div>
+			<div id="loading-image" ng-show="data.loading">
+				<span><img src="resources/ajax-loader.gif" id="loading-image"></img></span>
+			</div>
 				<div id="header" ng-include="'template/common/header.html'">
-				</div>
-				<div id="content"> 	
-					<!-- Query Panel !-->
-					<div ng-show="data.tab == 0" class="tab">
-						<div ng-include="'template/request_tab/request_tab.html'" ng-controller="queryCtrl"></div> 
-					</div>
-					
-					<!-- Result Panel !-->
-					<div ng-show="data.tab == 1" class="tab">
-						<div ng-include="'template/result_tab/result_tab.html'" ng-controller="resultCtrl"></div>
-					</div>
-
-					<!-- Mapping Pannel !-->
-					<div ng-show="data.tab == 2" class="tab">
-						<div ng-include="'template/mapping_tab/mapping_tab.html'" ng-controller="mappingCtrl"></div>
-					</div>
-					
-					<!-- KeyWord Panel !-->
-					<div ng-show="data.tab == 3" class="tab">
-						<div ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl"></div>
-					</div>
-					
-					<!-- Aggregation Panel !-->   
-					<div ng-show="data.tab == 4" class="tab">
-						<div ng-include="'template/aggregation_tab/aggregation_tab.html'" ng-controller="aggregationCtrl"></div>
-					</div>
-
-					<!-- Template Panel !-->
-					<div ng-show="data.tab == 5" class="tab">
-						<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
-					</div>
-
-					<div ng-show="data.tab == 6" class="tab">
-						<div ng-include="'template/bug_report_tab/bug_report_tab.html'" ng-controller="bugReportCtrl"></div>
-					</div>				
+			</div>
+			
+			<div id="content-left" class="col-sm-2">
+				<!--<div ng-include="'template/common/navBar.html'"></div>!-->
+				<!-- Aggregation result !-->
+				<div ng-if="data.tab == 1">
+					<h3>Aggrégations</h3>
+					<div ng-controller="resultCtrl" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"></div>
 				</div>
 			</div>
+			
+			<div id="content" class="col-sm-8"> 	
+				<!-- Result Panel !-->
+				<div ng-show="data.tab == 1" class="tab">
+					<div ng-include="'template/result_tab/result_tab.html'" ng-controller="resultCtrl"></div>
+				</div>
+				<!-- Mapping Pannel !-->
+				<div ng-show="data.tab == 2" class="tab">
+					<div ng-include="'template/mapping_tab/mapping_tab.html'" ng-controller="mappingCtrl"></div>
+				</div>
+				<!-- KeyWord Panel !-->
+				<div ng-show="data.tab == 3" class="tab">
+					<div ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl"></div>
+				</div>
+				<!-- Aggregation Panel !-->   
+				<div ng-show="data.tab == 4" class="tab">
+					<div ng-include="'template/aggregation_tab/aggregation_tab.html'" ng-controller="aggregationCtrl"></div>
+				</div>
+				<!-- Template Panel !-->
+				<div ng-show="data.tab == 5" class="tab">
+					<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
+				</div>
+				<!-- BugReport Panel !-->
+				<div ng-show="data.tab == 6" class="tab">
+					<div ng-include="'template/bug_report_tab/bug_report_tab.html'" ng-controller="bugReportCtrl"></div>
+				</div>				
+			</div>
+			
+			<div id="content-right" class="col-sm-2">
+				<div >
+					<h4> {{ info.txt.header.Hits }} <span class="label label-primary"> {{ queryData.hits }} </span> </h4>
+				</div>
+				<hr />
+				<div >
+					<h4>{{ info.txt.header.Status }} : 
+						<span class="label label-danger" ng-if="data.err">{{ info.txt.header.Error }}</span>
+						<span class="label label-success" ng-if="!data.err">{{ info.txt.header.NoError }}</span>
+					</h4>
+				</div>
+				<hr />
+				<div id="logConsole">
+				</div> 
+			</div>
+			
+			<div class="spacer"></div>
 		</div>
 	</body>
 </html>

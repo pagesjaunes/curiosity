@@ -21,6 +21,7 @@ Curiosity.provider("agg", function() {
 			this.name = this.field.split('.');
 			this.name = this.name[this.name.length - 1];
 			this.name = "agg_" + this.name + "_" + this.type;
+			console.log(this.name);
 		}
 	}
 
@@ -61,8 +62,11 @@ Curiosity.provider("agg", function() {
 	* @param filter : filter to apply   
 	*/
 	function addAggregationFilterToQuery(query, filter) {
-		if (typeof(query) === "undefined")
+		if (typeof(query) !== "undefined" && query != "")
+			query += " AND "
+		else 
 			query = "";
+		query +=  "("
 		var i = 0;
 		first = false;
 		while (i < filter.length) {
@@ -83,14 +87,14 @@ Curiosity.provider("agg", function() {
 			}
 			i++;
 		}
-	console.log(query);
+	query += ')';
 	return (query);
 	}
 
 	// TODO : MORE REFACTORING !!!!!!!!!!!!!!!!!!!
 	function builtRangeAgg(obj) {
 		obj.autoSetName();
-		var result = ejs.RangeAggregation(name);
+		var result = ejs.RangeAggregation(obj.name);
 		result.field(obj.field);
 		result.range(obj.params[0].value, obj.params[1].value);
 		return (result);
