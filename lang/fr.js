@@ -10,6 +10,11 @@ var global_text = {
 		AutoRefresh : "Raffraichissement auto.",
 		Hits : "Résultats : ",
 		Error : "Erreur",
+		Status : "Status",
+		NoError : "OK",
+		Customization : "Personalisation",
+		NewServerTitle : "Cacher / Montrer le formulaire d'ajout d'un nouveau serveur",
+		ConnectTitle : "Etablir la connexion avec le nouveau serveur",
 		navBar : {
 			Request : "Requête",
 			Aggregations : "Aggrégations",
@@ -36,18 +41,26 @@ var global_text = {
 		DocumentT : "Type de document"
 	},
 	request : {
+		ShowAll : "Voir tout",
+		Hide : "Cacher", 
 		SimplifiedRequest:"Requête simplifiée",
 		ComplexeRequest:"Requête compléte",
 		ResultPerPage:"Resultas par page",
 		Search:"Rechercher",
 		JsonQuery: "Requête Json",
 		Keywords: "Mots Clés",
-		Fields:"Champs"
+		Fields:"Champs",
+		ShowAllFieldTitle : "Montrer / Cacher tout les champs",
+		ShowAllKeywordTitle : "Montrer / Cacher tout les mots clés",
 	},
 	result : {
 		request_sub_tab : {
 			Template : "Template",
+			AdvancedRequest : "Requête avancée",
+			ResultList : "List Résultats",
+			JsonResult : "Résultats Json",
 			First: "Début",
+			Csv: "Export CSV",
 			Prev: "Précédent",
 			Next: "Suivant",
 			Last: "Fin",
@@ -87,5 +100,20 @@ var global_text = {
 		Contact:"Contact",
 		Title:"Titre",
 		Send:"Envoyer"
-	}
+	},
+	csvModal : {
+		CsvExport : "Export CSV",
+		Sep : "Sep",
+		TabSep : "TabSep",
+		Name : "Nom",
+		Alias : "Alias",
+		Show :  "Voir",
+		Hide : "Cacher",
+		CurrentResult : "Resultats Actuels",
+		CurrentResultTitle : "Exporter les résultas actuels dans au format csv",
+		SomeResult : "Nombre de Résultas",
+		SomeResultTitle : "Exporter une partie de tous les résultats au format csv",
+		FullResultTitle : "Exporter tout les résultats au format csv !!! Attention l'export d'un grand nombre de résultat peut durer longtemps et avoir un impact sur les perfomances du serveur !!!",
+		FullResult : "Tout les Résultas",
+	},
 }

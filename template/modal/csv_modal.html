@@ -1,16 +1,16 @@
 <div>
 	<div class="modal-header">
-		<h3 class="modal-title">Export CSV</h3>	
+		<h3 class="modal-title">{{ info.txt.csvModal.CsvExport }}</h3>	
 		<div id="modal-csv-option">
 			<div class="col-sm-3">
 				<div class="input-group">
-					<label class="input-group-addon">Sep :</label>
+					<label class="input-group-addon">{{ info.txt.csvModal.Sep }} :</label>
 					<input type="text" class="form-control" ng-model="data.sep"></input>
 				</div>
 			</div>
 			<div class="col-sm-4">
 				<div class="input-group">
-					<label class="input-group-addon">TabSep :</label>
+					<label class="input-group-addon">{{ info.txt.csvModal.TabSep }} :</label>
 					<input class="form-control" type="text" ng-model="data.tabSep"></input>
 				</div>
 			</div>
@@ -23,10 +23,10 @@
 		<div class="modal-body" id="modal-csv-body">
 			<div>
 				<label class="col-sm-4">
-					Name
+					{{ info.txt.csvModal.Name }}
 				</label>
 				<div class="col-sm-5">
-					<label>Alias</label>
+					<label>{{ info.txt.csvModal.Alias }}</label>
 				</div>
 				<div class="spacer"></div>		
 			</div>
@@ -38,26 +38,30 @@
 					<input type="text" class="form-control" ng-model="field.alias">
 				</div>		
 				<button class="btn col-sm-2" ng-class="{'btn-danger':field.hide, 'btn-success':!field.hide}" ng-click="hideField($index)">
-					<span ng-if="field.hide">Show</span>
-					<span ng-if="!field.hide">Hide</span>
+					<span ng-if="field.hide">{{ info.txt.csvModal.Show }}</span>
+					<span ng-if="!field.hide">{{ info.txt.csvModal.Hide }}</span>
 				</button>
 				<div class="spacer"></div>
 			</div>
 		</div>
 		<div class="modal-footer">
 			<div class="col-sm-3">
-				<button ng-click="builtCsv()" class="btn btn-default">Current Result</button>
+				<button ng-click="builtCsv()" class="btn btn-default" title="{{ info.txt.csvModal.CurrentResultTitle }}">{{ info.txt.csvModal.CurrentResult }}</button>
 			</div>
 			<div class="col-sm-5">
 				<div class="input-group">
 					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="builtSplitCsv()" type="button">Some Result</button>
+						<button class="btn btn-default" ng-click="builtSplitCsv()" type="button" title="{{ info.txt.csvModal.SomeResultTitle }}">
+							{{ info.txt.csvModal.SomeResult }}
+						</button>
 					</span>
 					<input type="text" class="form-control" ng-model="data.nbResult">
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<button ng-click="builtFullCsv()" class="btn btn-default">Full Result</button>	
+				<button ng-click="builtFullCsv()" class="btn btn-default" title="{{ info.txt.csvModal.FullResultTitle }}">
+					{{ info.txt.csvModal.FullResult }}
+				</button>	
 			</div>
 		</div>
 	</div>

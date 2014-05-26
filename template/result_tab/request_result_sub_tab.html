@@ -23,14 +23,14 @@
 				</span>
 			</div>
 		</div>
-		<button class="btn btn-default" ng-click="openModalCsv('lg')">Export csv</button>
+		<button class="btn btn-default" ng-click="openModalCsv('lg')">{{ info.txt.result.request_sub_tab.Csv }}</button>
 		<button class="btn btn-default" ng-click="showAdvancedQuery=!showAdvancedQuery">
-			Requéte Avancé 
+			{{ info.txt.result.request_sub_tab.AdvancedRequest }} 
 			<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!showAdvancedQuery,'glyphicon-chevron-up': showAdvancedQuery}"></span>
 		</button>
 		<button class="btn btn-default" ng-click="showJsonResult = !showJsonResult">
-			<span ng-if='showJsonResult'>  Liste résultats </span> 
-			<span ng-if='!showJsonResult'> Résultats Json </span>
+			<span ng-if='showJsonResult'>{{ info.txt.result.request_sub_tab.ResultList }}</span> 
+			<span ng-if='!showJsonResult'>{{ info.txt.result.request_sub_tab.JsonResult }}</span>
 		</button>
 		<button ng-click="queryData.autoRefresh = !queryData.autoRefresh" class="btn btn-default">
 			{{ info.txt.header.AutoRefresh }}

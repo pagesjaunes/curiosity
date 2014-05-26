@@ -1,93 +1,119 @@
 var global_text = {
 	header : {
-		Server : "Serveur",
-		New : "Nouveau",
-		Hide : "Cacher",
-		AddServer : "Ajouter un nouveau serveur",
-		Connect : "Connexion",
+		Status : "Status", 
+		Server : "Server",
+		New : "New",
+		Hide: "Hide",
+		AddServer : "Add a new server",
+		Connect : "Connect",
 		Index : "Index",
-		Search : "Rechercher",
-		AutoRefresh : "Raffraichissement auto.",
-		Hits : "Résultats : ",
-		Error : "Erreur",
-		Status : "Status",
-		NoError : "OK",
+		Search : "Search",
+		AutoRefresh : "AutoRefresh",
+		Hits : "Hits : ",
+		Error : "Error",
+		NoError : "Ok",
+		Customization : "Customization",
+		NewServerTitle : "Hide / Show new server form",
+		ConnectTitle : "Establish the connection with the server",
 		navBar : {
-			Request : "Requête",
-			Aggregations : "Aggrégations",
-			Results : "Résultas",
+			Request : "Request",
+			Aggregations : "Aggregations",
+			Results : "Results",
 			Mapping : "Mapping",
-			Keywords : "Mots Clés",
-			Templates : "Templates", 
-			BugReport : "Rapport de bug / suggestions"
+			Keywords : "Keywords",
+			Templates : "Templates",
+			BugReport : "Bug report / suggestions"
 		}
 	},
 	aggregation : {
-		Fields : "Champs",
+		Fields : "Fields",
 		aggregation_renderer : {
 			Type : "Type",
-			Field : "Champ"
+			Field : "Field"
 		}
 	},
 	keyword : {
 		Index : "Index",
-		Save : "Sauvegarder", 
-		Add : "Ajouter"
+		Save : "Save", 
+		Add : "Add"
 	},
 	mapping : {
-		DocumentT : "Type de document"
+		DocumentT : "Document Type"
 	},
 	request : {
-		SimplifiedRequest:"Requête simplifiée",
-		ComplexeRequest:"Requête compléte",
-		ResultPerPage:"Resultas par page",
-		Search:"Rechercher",
-		JsonQuery: "Requête Json",
-		Keywords: "Mots Clés",
-		Fields:"Champs"
+		ShowAll : "Show All",
+		Hide : "Hide", 
+		SimplifiedRequest:"Simplified Request",
+		ComplexeRequest:"Complexe Request",
+		ResultPerPage:"Result per page",
+		Search:"Search",
+		JsonQuery: "Json Query",
+		Keywords: "Keywords",
+		Fields:"Fields",
+		ShowAllFieldTitle : "Show / Hide all fields",
+		ShowAllKeywordTitle : "Show / Hide all keywords",
 	},
 	result : {
 		request_sub_tab : {
 			Template : "Template",
-			First: "Début",
-			Prev: "Précédent",
-			Next: "Suivant",
-			Last: "Fin",
+			AdvancedRequest : "Advanced Request",
+			ResultList : "Results list",
+			JsonResult : "JsonResult",
+			First: "First",
+			Csv: "To CSV",
+			Prev: "Prev",
+			Next: "Next",
+			Last: "Last",
 			Page: "Page",
-			Go : "Aller à",
-			AggregationFilter : "Filtres d'aggrégation",
-			Or:"Ou",
-			And:"Et",
-			Not:"Non", 
+			Go : "Go",
+			AggregationFilter : "Aggregation Filter",
+			Or:"Or",
+			And:"And",
+			Not:"Not", 
 		}
 	},
 	template : {
-		ResultItems : "Objets Resultats",
-		Aggregations : "Aggrégations",
+		ResultItems : "Result Items",
+		Aggregations : "Aggregations",
 		aggregation_sub_tab :{
 			Association : "Association",
-			AggregationType : "Type d'aggrégation",
+			AggregationType : "Aggregation Type",
 			Template : "Template",
-			Default : "Defaut",
-			Update : "Mettre à jour",
-			Edit: "Edition",
-			New: "Nouveau",
-			Save: "Sauvegarder",
-			Delete: "Supprimer",
-			TemplateName : "Nom du Template"
+			Default : "Default",
+			Update : "Update",
+			Edit: "Edit",
+			New: "New",
+			Save: "Save",
+			Delete: "Delete",
+			TemplateName : "Template's name"
 		},
 		result_items_sub_tab :{
 			Template : "Template",
-			New: "Nouveau",
-			Save: "Sauvegarder",
-			Delete: "Supprimer",
-			TemplateName : "Nom	du Template",
-			Fields : "Champs"
+			New: "New",
+			Save: "Save",
+			Delete: "Delete",
+			TemplateName : "Template's name",
+			Fields : "Field"
 		}
 	},
 	bugReport : {
 		Contact:"Contact",
-		Title:"Titre",
-		Send:"Envoyer"
+		Title:"Title",
+		Send:"Send"
+	},
+	csvModal : {
+		CsvExport : "CSV Export",
+		Sep : "Sep",
+		TabSep : "TabSep",
+		Name : "Name",
+		Alias : "Alias",
+		Show :  "Show",
+		Hide : "Hide",
+		CurrentResult : "CurrentResult",
+		CurrentResultTitle : "Export current result to csv file",
+		SomeResult : "Some Result",
+		SomeResultTitle : "Export some of the result (nb) to csv file",
+		FullResultTitle : "Export all result to csv File !!! Warning : can take a large ammount of time and ressource if there is a lot of results",
+		FullResult : "Full Result",
 	}
 }

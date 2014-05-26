@@ -1,8 +1,9 @@
 var global_text = {
 	header : {
+		Status : "Status", 
 		Server : "Server",
 		New : "New",
-		Hide, "Hide",
+		Hide: "Hide",
 		AddServer : "Add a new server",
 		Connect : "Connect",
 		Index : "Index",
@@ -10,6 +11,10 @@ var global_text = {
 		AutoRefresh : "AutoRefresh",
 		Hits : "Hits : ",
 		Error : "Error",
+		NoError : "Ok",
+		Customization : "Customization",
+		NewServerTitle : "Hide / Show new server form",
+		ConnectTitle : "Establish the connection with the server",
 		navBar : {
 			Request : "Request",
 			Aggregations : "Aggregations",
@@ -36,18 +41,26 @@ var global_text = {
 		DocumentT : "Document Type"
 	},
 	request : {
+		ShowAll : "Show All",
+		Hide : "Hide", 
 		SimplifiedRequest:"Simplified Request",
 		ComplexeRequest:"Complexe Request",
 		ResultPerPage:"Result per page",
 		Search:"Search",
 		JsonQuery: "Json Query",
 		Keywords: "Keywords",
-		Fields:"Fields"
+		Fields:"Fields",
+		ShowAllFieldTitle : "Show / Hide all fields",
+		ShowAllKeywordTitle : "Show / Hide all keywords",
 	},
 	result : {
 		request_sub_tab : {
 			Template : "Template",
+			AdvancedRequest : "Advanced Request",
+			ResultList : "Results list",
+			JsonResult : "JsonResult",
 			First: "First",
+			Csv: "To CSV",
 			Prev: "Prev",
 			Next: "Next",
 			Last: "Last",
@@ -87,5 +100,20 @@ var global_text = {
 		Contact:"Contact",
 		Title:"Title",
 		Send:"Send"
+	},
+	csvModal : {
+		CsvExport : "CSV Export",
+		Sep : "Sep",
+		TabSep : "TabSep",
+		Name : "Name",
+		Alias : "Alias",
+		Show :  "Show",
+		Hide : "Hide",
+		CurrentResult : "CurrentResult",
+		CurrentResultTitle : "Export current result to csv file",
+		SomeResult : "Some Result",
+		SomeResultTitle : "Export some of the result (nb) to csv file",
+		FullResultTitle : "Export all result to csv File !!! Warning : can take a large ammount of time and ressource if there is a lot of results",
+		FullResult : "Full Result",
 	}
 }

@@ -1,7 +1,7 @@
 <div>
 	<div>
 		<div class="col-sm-6">
-			<div class="panel panel-info panel-request">
+			<div class="panel panel-primary panel-request">
 				<div class="panel-heading">
 					<h4 class="col-sm-3">
 						{{ info.txt.request.Keywords }}
@@ -9,9 +9,9 @@
 					<div class="col-sm-6">
 						<input type="text" class="form-control" ng-model="keywordFilter">
 					</div>
-					<button class="btn btn-default col-sm-3" ng-click="updateLimiteValueKeyword()" title="Voir/Cacher tous les mots clés" ng-switch on="keywordLimit">
-						<span ng-switch-when="9">Voir Tout</span>
-						<span ng-switch-default>Cacher</span>
+					<button class="btn btn-default col-sm-3" ng-click="updateLimiteValueKeyword" ng-switch on="keywordLimit" title="{{ info.txt.request.ShowAllkeywordTitle }}">
+						<span ng-switch-when="9">{{ info.txt.request.ShowAll }}</span>
+						<span ng-switch-default>{{ info.txt.request.Hide }}</span>
 					</button>
 					<div class="spacer"></div>
 				</div>
@@ -23,7 +23,7 @@
 		</div>
 
 		<div class="col-sm-6">
-			<div class="panel panel-info panel-request">
+			<div class="panel panel-primary panel-request">
 				<div class="panel-heading">
 					<h4 class="col-sm-3">
 						{{ info.txt.request.Fields }}
@@ -31,9 +31,9 @@
 					<div class="col-sm-6">
 						<input type="text" class="form-control" ng-model="fieldFilter">
 					</div>
-					<button class="btn btn-default col-sm-3" ng-click="updateLimiteValueField()" title="Voir/Cacher tous les champs" ng-switch on="fieldLimit">
-						<span ng-switch-when="9">Voir Tout</span>
-						<span ng-switch-default>Cacher</span>
+					<button class="btn btn-default col-sm-3" ng-click="updateLimiteValueField()"  ng-switch on="fieldLimit" title="{{ info.txt.request.ShowAllFieldTitle }}">
+						<span ng-switch-when="9">{{ info.txt.request.ShowAll }}</span>
+						<span ng-switch-default>{{ info.txt.request.Hide }}</span>
 					</button>
 					<div class="spacer"></div>
 				</div>
