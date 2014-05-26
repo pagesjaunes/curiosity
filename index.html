@@ -29,7 +29,7 @@
 		<script type="text/javascript" src="vendor/elastic/elastic2.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elastic-angular-client.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elasticsearch.angular.min.js"></script>
-		<script type="text/javascript" src="vendor/FileSaver.js"></script>
+		<script type="text/javascript" src="vendor/FileSaver/FileSaver.js"></script>
 		<!-- Project specique files !-->
 			<!-- Conf file !-->
 		<script type="text/javascript" src="conf.js"></script>
@@ -84,7 +84,7 @@
 				<!--<div ng-include="'template/common/navBar.html'"></div>!-->
 				<!-- Aggregation result !-->
 				<div ng-if="data.tab == 1">
-					<h3>Aggrégations</h3>
+					<h3>{{ info.txt.header.navBar.Aggregations }}</h3>
 					<div ng-controller="resultCtrl" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"></div>
 				</div>
 			</div>
