@@ -21,7 +21,6 @@ Curiosity.provider("agg", function() {
 			this.name = this.field.split('.');
 			this.name = this.name[this.name.length - 1];
 			this.name = "agg_" + this.name + "_" + this.type;
-			console.log(this.name);
 		}
 	}
 
