@@ -40,7 +40,9 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	* Get all result about our current query from es server then built a csv
 	*/
 	csvObj.getFullResult = function () {
-		initLoading(query.info.hits);
+		if (typeof (query.info.jsonRequest.request) !== "undefined") {
+			initLoading(query.info.hits);
+		}
 	} 
 
 	/**
@@ -48,7 +50,9 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	* Get a number of result defined by csvObj.info.nbResult result about our current query from es server then built a csv
 	*/
 	csvObj.getSomeResult = function () {
-		initLoading(csvObj.info.nbResult);	
+		if (typeof (query.info.jsonRequest.request) !== "undefined") {
+			initLoading(csvObj.info.nbResult);
+		}	
 	}
 
 	/**
