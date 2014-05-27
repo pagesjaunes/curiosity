@@ -1,0 +1,20 @@
+Curiosity v2 Changelog :
+version 0.2.2
+
+-------------------------------------------------------------------------------------------------------------------
+EN COURS
+
+Liste des modifications depuis le 27/05/2014 (0.2.2 to 0.2.3) :
+
+	-Fonctionalitées :
+		-Ajout du support des alias sur les indexs
+		-Ajout d'un bouton permettant de créer un mots clé rapidement depuis la requête et l'index courant
+
+	-Interface Utilisateur :
+		-Aggrandissement des champs de selection d'un serveur et d'un index
+
+	-Corection de bug :
+
+	-Divers :
+		-Suppression du dossier js/controller
+-------------------------------------------------------------------------------------------------------------------
