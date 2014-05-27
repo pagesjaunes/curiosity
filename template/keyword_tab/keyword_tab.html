@@ -1,4 +1,4 @@
-<div class="col-sm-6">
+<div >
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.keyword.Index }}</span>
 		<select ng-model="keyword.selectedIndex" ng-change="selectIndex()" ui-select2 class="form-control">
@@ -7,12 +7,12 @@
 	</div>
 </div>
 <div class="spacer"></div>
-<div class="btn-group col-sm-2 btn-keyword">
+<div class="btn-group btn-keyword">
 	<button ng-click="saveKeyWords()" class="btn btn-default">{{ info.txt.keyword.Save }}</button>
 	<button ng-click="addKeyWord()" class="btn btn-default">{{ info.txt.keyword.Add }}</button>
 </div>
 <div class="spacer"></div>
-<div class="col-sm-6">
+<div>
 	<div class="gridStyle" ng-grid="gridOptions"></div>
 </div>
 <div class="spacer"></div>

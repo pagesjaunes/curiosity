@@ -1,6 +1,8 @@
 var csvCtrl = function($scope, $modalInstance, csv, query){
 	$scope.data = csv.info;
 	$scope.queryData = query.info
+	$scope.info = {}
+	$scope.info.txt = global_text;
 
 	$scope.$on("CsvDone", function (){
 		$modalInstance.close();

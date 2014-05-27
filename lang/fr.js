@@ -19,7 +19,6 @@ var global_text = {
 			Request : "Requête",
 			Aggregations : "Aggrégations",
 			Results : "Résultas",
-			Mapping : "Mapping",
 			Keywords : "Mots Clés",
 			Templates : "Templates", 
 			BugReport : "Rapport de bug / suggestions"
@@ -27,6 +26,11 @@ var global_text = {
 	},
 	aggregation : {
 		Fields : "Champs",
+		Aggregations : "Aggregations",
+		Hide :  "Cacher",
+		Ok : "Valider",
+		AddAgg : "Ajouter Aggregation",
+		ShowAll : "Voir tout",
 		aggregation_renderer : {
 			Type : "Type",
 			Field : "Champ"
@@ -55,6 +59,7 @@ var global_text = {
 	},
 	result : {
 		request_sub_tab : {
+			Aggregation :"Aggregation",
 			Template : "Template",
 			AdvancedRequest : "Requête avancée",
 			ResultList : "List Résultats",

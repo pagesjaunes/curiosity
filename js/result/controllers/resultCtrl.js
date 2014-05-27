@@ -73,17 +73,34 @@ Curiosity.controller('resultCtrl', function($scope,$modal,result, query, templat
 
 	$scope.openModalCsv = function (size) {
 		var modalInstance = $modal.open({
-      		templateUrl: 'template/modal/csv_modal.html',
-      		controller: csvCtrl,
-      		size: size,
-      		resolve: {
-        	items: function () {
-          		return $scope.items;
-        	}}
-    	});
-    modalInstance.result.then(function (selectedItem) {
-      $scope.selected = selectedItem;
-    }, function () {
-    });	
+			templateUrl: 'template/modal/csv_modal.html',
+			controller: csvCtrl,
+			size: size,
+			resolve: {
+				items: function () {
+					return $scope.items;
+				}}
+			});
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+		});
 	}
+
+	$scope.openModalAgg = function (size) {
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/aggregation_modal.html',
+			controller: aggregationCtrl,
+			size: size,
+			resolve: {
+				items: function () {
+					return $scope.items;
+				}}
+			});
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+		});
+	}
+
 })

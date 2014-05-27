@@ -52,6 +52,12 @@ function($scope, template, mapping){
 		index = 0;
 	}
 
+	/**
+	* $scope.addField : quickly add a field to a string
+	* @param obj : an object which contains the string to fill 
+	* @param attr : the object's attribute to fill
+	* @param field : the field to add
+	*/
 	$scope.addField = function (obj,attr,field) {
 		obj[attr] += ("{{ item._source." + field + " }}")
 	}

@@ -1,0 +1,46 @@
+<div class="modal-header">
+	<h3 class="modal-title">{{ info.txt.aggregation.Aggregations }}</h3>
+	<div class="btn-group margin-left">
+		<button class="btn btn-default" ng-click="addAggregation(data.currentAgg)">
+			{{ info.txt.aggregation.AddAgg }} <span class="glyphicon glyphicon-plus"></span>
+		</button>
+	</div>
+</div>
+<div class="modal-body modal-scroll">
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h4 class="col-sm-3">
+				{{ info.txt.aggregation.Fields }}	
+			</h4>
+			<div class="col-sm-6">
+				<input type="text" class="form-control" ng-model="fieldFilter">
+			</div>
+			<button class="btn btn-default col-sm-3" ng-click="updateLimiteField()" ng-switch on="fieldLimit" title="{{ info.txt.request.ShowAllkeywordTitle }}">
+				<span ng-switch-when="9">{{ info.txt.aggregation.ShowAll }}</span>
+				<span ng-switch-default>Hide</span>
+			</button>
+			<div class="spacer"></div>		</div>
+			<div class="panel-body">
+				<span ng-repeat="field in mappingData.fields | filter:fieldFilter | limitTo:fieldLimit track by $index" class="field col-sm-3" >
+					<a href ="#" ng-click="aggregation.focused.obj.field = field.ancestor" title="{{ field.ancestor  }}">
+						{{ field.name }} ({{ field.type }})
+					</a>
+				</span>
+				<div class="spacer"></div>
+			</div>
+		</div>
+		<div>
+			<div class="aggregations-list">
+				<ul>
+					<li ng-repeat="(key, agg) in data.currentAgg" ng-include="'template/aggregation_tab/aggregation_renderer.html'">
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button class="btn btn-success" ng-click="validateAgg()">
+			{{ info.txt.aggregation.Ok }} <span class="glyphicon glyphicon-ok"></span>
+		</button>
+	</div>

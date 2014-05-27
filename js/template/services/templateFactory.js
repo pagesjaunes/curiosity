@@ -8,6 +8,11 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 	templateObj.info.aggregationsAssociation = [];
 	templateObj.info.possibleAggregation = agg.possibleAggregation;
 
+	
+	/**
+	* templateObj.update
+	* Update service's data from conf document. 
+	*/
 	templateObj.update = function () {
 		templateObj.info.template = conf.getConfDocument("template").templates;
 		if (typeof(templateObj.info.template) === "undefined") {
@@ -24,21 +29,50 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 		updateAggTemplate();
 	}
 
+	/* 
+	* The next function work with a type. 
+	* By convention the type is equal to the conf document type.
+	* This way we can add as many template type as we want and use the same functions
+	*/
+
+	/**
+	* templateObj.new
+	* Add a new template 
+	* @param type : template's type
+	* @param tpl : templae to add
+	*/
 	templateObj.new = function (type, tpl) {
 		templateObj.info[type].push(tpl);
 	}
 
+	/**
+	* templateObj.save
+	* Save a list of template 
+	* @param type : template list's type
+	*/
 	templateObj.save = function (type) {
 		conf.getConfDocument(type).templates = templateObj.info[type];
 		conf.sendConfDocument(type);
 	}
 
+	/**
+	* templateObj.delete
+	* delete a template in a template list 
+	* @param type : template list's type
+	* @param index : template's index in the list
+	*/
 	templateObj.delete = function (type, index) {
 		if (index >= 0){
 			templateObj.info[type].splice(index, 1);
 		}
 	}
 
+	/**
+	* templateObj.updateAggAssoc
+	* Update the associaction between a template and and aggregation type  
+	* @param type : aggregation's type
+	* @param value : template's name
+	*/
 	templateObj.updateAggAssoc = function (type, value) {
 		var i = 0; 
 		var find = false;
@@ -57,6 +91,13 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 		conf.sendConfDocument('aggregationsTemplates');	
 	}
 
+
+	/**
+	* templateObj.addTemplateToCache
+	* Add a template in $templateCache
+	* @param type : template's type
+	* @param value : template index
+	*/
 	templateObj.addTemplateToCache = function (type, id) {
 		tpl = templateObj.info[type][id];
 		if (typeof(tpl) !== "undefined") {
@@ -66,6 +107,9 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 		return ("");
 	}
 
+	/**
+	*
+	*/
 	function updateAggTemplate () {
 		$http.get('template/aggregation/default.html', {cache:$templateCache}).then(function() {
 			var defaultTemplate = $templateCache.get('template/aggregation/default.html')[1];

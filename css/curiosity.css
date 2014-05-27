@@ -2,6 +2,9 @@
 
 /* Global */
 
+body { padding-top: 70px; }
+
+
 .spacer {
   clear: both;
   width : 0;
@@ -14,11 +17,6 @@
 
 .btn-with-image {
   padding : 4px 2px;
-}
-
-#content {
-  position :relative;
-  height : 100%;
 }
 
 .tab {
@@ -100,7 +98,7 @@
 .gridStyle {
   border: 1px solid rgba(0, 0, 0, 0);
   margin-top : 10px;
-  width : 500px;
+  width : 100%;
   height : 500px;
   border-color: #E7E7E7;
   border-radius: 4px;
@@ -125,7 +123,7 @@
 
 .aggregations-list li {
   list-style-type: none;
-  width : 300px;
+  width : 290px;
   margin-top: 10px;
 }
 
@@ -166,9 +164,8 @@
     width:20%;
   }
 
-#query-result {
+#result-items {
     overflow: auto;
-    border-top: 1px solid #CCCCCC;
 }
   .result-full {
    width : 99%;
@@ -193,7 +190,74 @@
   padding-left : 15px;
 }
 
-#modal-csv-body {
+.modal-scroll {
   height: 60%;
   overflow: auto;
+}
+.float-right {
+  float: right;
+}
+
+#advanced-query  {
+   -webkit-transition: 0.5s linear;
+  -moz-transition: 0.5s linear;
+  -ms-transition: 0.5s linear;
+  -o-transition: 0.5s linear;
+  transition: 0.5s linear;
+  overflow: hidden;
+}
+
+#advanced-query.ng-enter {
+  opacity: 0;
+  max-height: 0;
+}
+
+#advanced-query.ng-enter-active {
+  opacity: 1;
+  max-height: 250px; 
+}
+
+#advanced-query.ng-leave {
+  opacity: 1;
+  max-height: 250px; 
+}
+
+#advanced-query.ng-leave-active {
+  opacity: 1;
+  max-height: 0; 
+}
+
+#content-left {
+  z-index : 100;
+}
+
+#content-left .panel-body {
+  padding : 5px;
+}
+
+.aggregation-items {
+  padding : 5px;
+}
+
+#content {
+  z-index: 99;
+}
+
+.result-list {
+  overflow: auto;
+  height: 80%;
+}
+#content-right {
+  z-index : 101;
+}
+
+#loading-image {
+  position : absolute;
+  z-index  : 10000;
+  top :49%;
+  left :49%;
+}
+ 
+ #header .select-header {
+  width : 200px;
 }

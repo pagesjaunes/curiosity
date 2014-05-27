@@ -242,7 +242,7 @@ Curiosity.provider("agg", function() {
 				{type:"Stats", func:newStatsAgg},
 				{type:"Sum", func:newSumAgg},
 				{type:"ValueCount", func:newValueCountAgg},
-				{type:"Missing", func:newMissingAgg}
+				{type:"Missing", func:newMissingAgg},
 				],
 			"quickAgg" : function (field) {
 				var result =  newTermAgg();
