@@ -18,12 +18,41 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 	// Index Informations
 	curiosityObj.info.selectedIndex = "";
 	curiosityObj.info.indexList = [];
+	curiosityObj.info.aliases = [];
+
+	function  addAlias(obj) {
+		if (typeof(obj.aliases) !== "undefined") {
+			for (key in obj.aliases) {
+				var i = 0;
+				var add = true
+				while (i < curiosityObj.info.aliases.length) {
+					if (curiosityObj.info.aliases[i] == key) {
+						add = false;
+						break;
+					}
+					i++;
+				}
+				if (add) {
+					curiosityObj.info.aliases.push(key);
+				}
+			}
+		}
+	}
+
+	function getAlias(data) {
+		var i = 0;
+		for (key in data) {
+			addAlias(data[key]);
+			i++;
+		} 
+	}
 
 	/** 
 	* connectToServer : Etablish connection to an elasticSearch server 
 	* @param  url : string, server's url
 	* @param  addServer : boolean, if true the url will be added to server list and save in conf index
-	*/	
+	*/
+
 	curiosityObj.connectToServer = function(url, addServer) {
 		if (typeof(url) === "undefinded" ||  url == "")
 			return ;
@@ -39,11 +68,19 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 			}
 			curiosityObj.info.currentServer = url;
 			globalConf.curentServer = url;
-			$rootScope.$broadcast("ServerChange");		
+			getAlias(data);
+			$rootScope.$broadcast("ServerChange");
+			curiosityObj.info.err = false;
 		}). error(function() {
 			curiosityObj.info.loading = false;
 			curiosityObj.info.connected = false;
+			curiosityObj.info.err = true;
+			curiosityObj.log("error", "Unable to contact the server : " + url); 
 		});
+	}
+
+	curiosityObj.log = function (type, message) {
+		curiosityObj.info.log.push({"type":type, "message":message});
 	}
 
 	//curiosityObj.connectToServer(curiosityObj.info.currentServer, false);

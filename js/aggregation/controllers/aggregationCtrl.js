@@ -11,6 +11,7 @@ var aggregationCtrl = function($scope, aggregation, mapping){
 	$scope.addAggregation = function(array){
 		aggregation.addAggregation(array);
 		$scope.aggregation.focused = array[array.length-1];
+		console.log($scope.aggregation.focused);
 	}
 
 	$scope.modifieAgg = function(aggre) {

@@ -10,7 +10,7 @@ Curiosity.factory('keyword', function(conf){
 			}
 			i++;
 		}
-		return (-1);
+		return (-2)
 	}
 
 	keywordObj.update = function (){
@@ -39,15 +39,18 @@ Curiosity.factory('keyword', function(conf){
 		}
 	}
 
-
 	keywordObj.getKeywordListFromIndex = function (index) {
-		var curentKeyword = findIndexByName(index);	
-		if (curentKeyword < 0){
-			return ([]);
+		var curentKeyword = findIndexByName(index);
+		var result = [];
+		if (curentKeyword >= 0){
+			result = keywordArray[curentKeyword].keywords;
 		}
-		return(keywordArray[curentKeyword].keywords);
+		curentKeyword = findIndexByName("global");
+		if (curentKeyword >= 0){
+			result = result.concat(keywordArray[curentKeyword].keywords);
+		}
+		return(result);
 	}
-
 
 	/**
 	* getKeywordListFromIndexFilter
@@ -67,6 +70,17 @@ Curiosity.factory('keyword', function(conf){
 			i++;
 		}
 		return (result);
+	}
+
+	keywordObj.addKeywordInIndex = function(keyword, index) {
+		var indice = findIndexByName(index);
+		if (indice >= 0) {
+			keywordArray[indice].keywords.push(keyword);	
+		}
+		else {
+			keywordArray.push({"index":index, "keywords":[keyword]})
+		}
+		conf.sendConfDocument("keyword");
 	}
 	return (keywordObj);
 })

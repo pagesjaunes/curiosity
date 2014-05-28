@@ -150,7 +150,10 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 		);
 	} 
 
-
+	queryObj.addKeywordFromQuery = function (name, value, desc) {
+		var nKeyword = {'label':name, 'value':value, 'desc':desc};
+		keyword.addKeywordInIndex(nKeyword, currentIndex);
+	}
 
 	return queryObj;
 });

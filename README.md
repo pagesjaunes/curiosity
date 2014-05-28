@@ -15,10 +15,10 @@ Le fonctionnalitées principales de curiosity sont :
 * Premier pas 
   * Connexion à un server elasticsearch
   * Première requette
-  * Utilisation des mots clés
+  * Recherche avancée
 
 * Utilisation avancés 
-
+  * Mots clés
 
 ## Instalation 
 
@@ -53,7 +53,7 @@ Ensuite sélectioner votre index dans la première liste déroulante.
 
 Curiosity utilise la syntaxe [query string query](http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-dsl-query-string-query "Documentation query string") de elasticsearch pour éffectuer des recherches. Pour rendre la création de recherche plus intuitives nous avons cacher la complexité de la syntaxe en rajoutant des mots clés. 
 Ainsi en tapant dans la barre de recherche "description" vous rechercherez dans tous les champs d'un documents la précence du mot description. Si vous enlevez les guillemets vous rechercherez si le champs description exists dans un document. Les opérateurs booléèn de base sont présent ainsi en écrivant :
-      "description" et description vous rechercher la présence du champs descrition et de la chaines de carractère descrption dans les documents de l'index.
+      "description" et description : vous rechercher la présence du champs descrition et de la chaines de carractère descrption dans les documents de l'index.
 
 ### Utilisation des mots clés
 
@@ -61,3 +61,11 @@ Pour utiliser des fonctionnalités de recherches plus poussez clicquez sur le bo
 En dessous ce trouve deux champs de texte. Le premier correspond à la requette simplifié rentrez par l'utilisateur. Le second correspond à l'équivalent de la requètte simplifié formaté selon le format query string. La modification du premier champs entraine la modification du deuxième mais pas l'inverse. Ainsi si vous souhaitez éffectuer une requette plus complexe vous pouvez directement écrire dans le deuxième champs. Le bouton mot clé depuis requette vous permet de créer un mot clé qui sera ajouter à la liste des mots clés présent dans l'encadré bleu depuis la requette.
 
 
+## Utilisation avancée
+
+### Mots clées 
+
+Les mots clés sont des racourcis vous permettant de nommer des requêttes, pour pouvoir les réutiliser ensuite dans la recherche. Ces mots clés sont compatibles avec les opérateurs boolééns (et, ou) ainsi il devient aisée de les enchainer les uns avec les autres pour obtenir une requêtte complexe en peu de temps. 
+Il y a deux moyens de créer un mot clés :
+* En créant un mot clés à partir d'une requête, dans le panneau requête avancée, le boutton "mots clés depuis requête" ouvre un menu qui vous permettra d'ajouter un nom et une descrption. Le mot clés ainsi créer rejoindra la liste des mots clés liés à l'index.
+* En allant dans l'onglet personalisation/Mots clés. Dans cette onglets vous pouvez rajouter des mots clés en choissisant l'index (ajouter un mots clé dans l'index global le rends disponible pour tout les index) depuis la liste déroulante. Appuyer sur le boutton "ajouter" pour ajouter un mots clés dans la liste, ensuite il suffit de renseigner les différents champs dans la liste des mots clés en clicquant directement sur le champs à modifier, puis sauvegarder.  

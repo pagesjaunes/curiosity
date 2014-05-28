@@ -48,8 +48,7 @@ Curiosity.controller('resultCtrl', function($scope,$modal,result, query, templat
 		return (aggregation[func](params));
 	}
 
-	$scope.setAggregationValue = function(agg, field, value)
-	{
+	$scope.setAggregationValue = function(agg, field, value) {
 		var prev = agg[field];
 		agg[field] = value;
 		if (value != prev && $scope.queryData.autoRefresh){

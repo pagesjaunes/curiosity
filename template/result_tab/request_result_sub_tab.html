@@ -98,12 +98,13 @@
 </div>
 <!-- Aggregation filter !-->
 <div id="aggregation-filter-bar">
-	<h4 ng-click="showAggregationFilter = !showAggregationFilter">
-		{{ info.txt.result.request_sub_tab.AggregationFilter }}
-		<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!showAggregationFilter,'glyphicon-chevron-up':showAggregationFilter}">	
-		</span>
-	</h3>
-	<div class="col-sm-3" ng-repeat="field in aggregationData.aggregationFilter" ng-show="showAggregationFilter">
+		<button ng-click="showAggregationFilter = !showAggregationFilter" class="btn btn-default">
+			{{ info.txt.result.request_sub_tab.AggregationFilter }}
+			<span class="glyphicon" ng-class="{'glyphicon-chevron-down':!showAggregationFilter,'glyphicon-chevron-up':showAggregationFilter}">	
+			</span>
+		</button>
+	</div>
+	<div class="col-sm-3 margin-top" ng-repeat="field in aggregationData.aggregationFilter" ng-show="showAggregationFilter">
 		<div class="panel panel-default" >
 			<div class="panel-heading">
 			{{field.field}}
@@ -140,6 +141,10 @@
 	</div>
 	<div class="spacer"></div>
 </div>
+<p class="text-muted result-info">
+	{{queryData.hits}} Results.
+</p>
+<hr/>
 <div id="json-answer" ng-if="showJsonResult">
 	{{queryData.result}}
 </div>
@@ -154,7 +159,7 @@
 			<div class="spacer"></div>
 		</div>
 		<div ng-if="data.useTemplate">
-			<div ng-repeat="item in queryData.result.hits.hits | filter:searchText" ng-include="data.currentTemplate"></div>
+			<div ng-include="data.currentTemplate"></div>
 		</div>
 	</div>
 </div>
