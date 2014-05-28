@@ -1,40 +1,40 @@
-# Curiosity 
+# Documentation 
 
-## Overview
+## Présentation 
 
-Curiosity is a tool used to discover data in elasticsearch's index. 
-User can :
-	  -Search data in an elasticsearch index 
-	  -Add keyword wich represents a query or a part of a query
-	  -Built and use template for the result list
-	  -Make and use aggregations
-	  -Export your result  
+Curiosity est outil dévelloppé par Pages Jaunes dont le but est de découvrir et rechercher dans des indexs elasticSearch de manière simple et intuitive.
+Le fonctionnalitées principales de curiosity sont :
+* Des mots clés permettant de sauvegarder une requette complète ou seulement une partie de celle-ci
+* Le templating de liste des résultats
+* L'utilisation d'aggrégations pour filtrer la liste résultat
+* L'export des résultat au format csv
 
-## Summary 
-   * Installation procedure
-   * Basic functionallity
-     * First Steps
-     * Simple search
-     * Keywords
-     * Template
+## Sommaire
 
-## Installation procedure 
+* Instalation
+* Premier pas 
+  * Connexion à un server elasticsearch
+  * Première requette
+  * Utilisation des mots clés
 
-   You just need a recent browser to run curiosity. The application is able to work alone without any service.
-If you want to use full curiosity's possibilities (templating, keyword) you have to specify an elasticsearch server where all data will be store.
-To do that open the file conf.js located in the root folder.
-There is few line that you can modifie :        
-      * "defaultServer" :  The server that you will connect automaticly every time you launch the application
-      * "confServer" : The server where all curiosity's data will be strore.
-      * "confIndex" : The index  the confServer where curiosity data's will be store. If i doesn't exist then it will be automaticly create and initialized.
-You should not modifie the other value, unexpected behaviour could result.
-After that open index.html, if it's the first time that you launch the application wait 10 sec till conf documents were initialize on the server then reload the page.
-Now you are ready to use Curiosity.
+* Utilisation avancés 
 
-## Basic Functionality
-    
-### First Steps
-    
-    The first thing you have to do when you launch curisosity is to select the server and the index you want to work on. On the top of your screen there is two field that you can fill. The field server is the right one. You can select a server alredy saved or add a new server. To do that hit the button "New server" then add the url of your elasticsearh server. Try to connect. If it works button's color will be green if it don't it will be red. If connection is etablish between you and the server, curiosity will load server's index list. After that you can choose your index in the second field.
 
-### Simple Search 
+## Instalation 
+
+Curiosity ne possede aucune dépendance extérieur, la seul containte est l'utilisation d'un navigateur internet récent. 
+Pour installer Curiosity télécharger l'archive du projet, et décompressez la dans le dossier de votre choix.
+Ensuite ouvrer le fichier conf.js situé à la racine du dossier décompressé. Vous pouvez avoir à modifier certaines valeurs :
+
+* "defaultServer" : correspond à l'adresse du serveur elasticsearch par défault utilisé par curiosity.
+* "confServer" : correspond à l'adresse du serveur elasticsearch dans lequel curiosity stockera ses données de personalisation. Dans la majorité des cas "defaultServer" sera égale à "confServer"
+* "confIndex" : correspond au nom de l'index dans lequel curiosity stockera ses données.
+
+Une fois vos préfèrence modifier. Ouvrer la page index.html situer à la racine du dossier. Lors du premier lancement attentez quelque seconde le temps que curiosity initialise ses données puis raffraichisser la page. 
+Curiosity est prèt à être utiliser.
+
+## Premiers pas
+
+### Connexion à un serveur elasticsearch 
+
+La première chose à faire quand vous lancez curiosity est de choisir un serveur et un index. Il y a deux listes déroulantes situé en haut de la page internet. La première correspond à la liste des indexs présent sur le serveur courant. La seconde liste correspond à la liste des serveurs elasticsearch connu par curiosity. Vous pouvez rajouter un serveur en clicquant sur nouveau puis en renseignant l'adresse du serveur dans le champs qui apparait. Si curiosity établi la connexion le bouton connect deviendra vert, dans le cas contraire il sera rouge.
