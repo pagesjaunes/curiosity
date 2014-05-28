@@ -1,20 +1,34 @@
-Curiosity v2 Changelog :
-version 0.2.2
+version 0.2.2b
 
 -------------------------------------------------------------------------------------------------------------------
-EN COURS
 
-Liste des modifications depuis le 27/05/2014 (0.2.2 to 0.2.3) :
+Liste des modifications depuis le 27/05/2014 (0.2.2 to 0.2.2b) :
 
 	-Fonctionalitées :
 		-Ajout du support des alias sur les indexs
 		-Ajout d'un bouton permettant de créer un mots clé rapidement depuis la requête et l'index courant
+		-Ajout d'un bouton permettant de cacher ou d'afficher tous les champs lors de l'export csv
+		-Modification du fonctionement du templating de résultat : templating de la liste de résultat plutot que chaque résultats
+		-Ajout des mots clés globaux communs à tous les indexs et serveurs
+		-Ajout des mots clés sur les alias
 
 	-Interface Utilisateur :
 		-Aggrandissement des champs de selection d'un serveur et d'un index
+		-Ajout de de l'attrubut tilte sur les champs index et serveur
+		-Ajout du nombre de résultat au milieu de la page
+		-Onglet Agrégations caché
+		-Ajout d'une erreur lorsque la connxion au serveur à échouée
 
-	-Corection de bug :
+	-Correction de bug :
+		-Envoie de document onglet bugReport fonctionnel
+		-Blocage de la création d'un csv lorsque qu'il n'y a pas eu de recherche auparavant
+		-Correction de l'affichage des boutons ajouter/supprimer/sauvegarder onglet Template
+		-Correction de l'ajout automatique des champs lors de la creation des agrégations
+		-Ajout d'une taille fixe au tableau des keyword en attente d'une solution fonctionnelle
 
 	-Divers :
+		-Début de documentation en français (traduction ultérieur une fois la base écrite)
 		-Suppression du dossier js/controller
+		-Ajout de commentaire
+
 -------------------------------------------------------------------------------------------------------------------

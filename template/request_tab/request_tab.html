@@ -61,6 +61,28 @@
 			<input class="form-control" ng-model="data.complexRequest" type="text"></input>
 		</div>
 
+		<div>
+			<button class="btn btn-default" ng-click="showKeywordQuery = !showKeywordQuery">
+				Keyword from query
+			</button>
+			<div ng-show="showKeywordQuery" class="margin-top">
+				<div class="col-sm-5">
+					<div class="input-group">
+						<span class="input-group-addon">Name</span>
+						<input type="text" ng-model="keywordName" class="form-control">
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<div class="input-group">
+						<span class="input-group-addon">Desc</span>
+						<input type="text" ng-model="keywordDesc" class="form-control">
+					</div>
+				</div>
+				<button ng-click="addKeywordFromQuery(keywordName, keywordDesc)" class="btn btn-default col-sm-2">Save</button>
+				<div class="spacer"></div>
+			</div>
+		</div>
+
 		<div class="spacer"></div>
 
 		<div class="panel panel-default" id="json-panel">

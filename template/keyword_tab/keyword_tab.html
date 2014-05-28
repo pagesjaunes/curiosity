@@ -1,8 +1,18 @@
 <div >
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.keyword.Index }}</span>
-		<select ng-model="keyword.selectedIndex" ng-change="selectIndex()" ui-select2 class="form-control">
-			<option ng-repeat="index in curiosityData.indexList" value ="{{ index }}"> {{ index }}</option>
+		<select ng-model="keyword.selectedIndex" ng-change="selectIndex()" ui-select2 class="form-control" tabindex="-1">
+			<option value="global" >global</option>
+			<optgroup label="Alias">
+	          	<option ng-repeat="alias in curiosityData.aliases" value="{{ alias }}">
+	          			{{ alias }}
+	          	</option>
+          	</optgroup>
+          	<optgroup label="Index">
+	          	<option ng-repeat="index in curiosityData.indexList" value ="{{ index }}"> 
+					{{ index }}
+				</option>
+			</optgroup>
 		</select>
 	</div>
 </div>

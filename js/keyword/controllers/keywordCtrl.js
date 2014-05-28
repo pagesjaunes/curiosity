@@ -6,12 +6,12 @@ function($scope, keyword, curiosity){
 	$scope.curiosityData = curiosity.info;
 	$scope.keyword = {};
 	$scope.currentKeywords = [];
-	$scope.keyword.selectedIndex = "";
-
+	$scope.keyword.selectedIndex = "global";
 
 	/* EVENTS */
 	$scope.$on("ConfLoaded", function () {
-		keyword.update(); 
+		keyword.update();
+		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords
 	});
 
 	/**
@@ -58,10 +58,11 @@ function($scope, keyword, curiosity){
 			enableCellSelection: true,
 			enableRowSelection: false,
 			enableCellEditOnFocus: true,
-			columnDefs: [	{field: 'label', displayName:'Label', enableCellEdit: true}, 
-			{field:'value', displayName:'Value', enableCellEdit: true},
-			{field:'desc', displayName:'Description', enableCellEdit: true},
-			{field: 'remove', displayName:'Remove', cellTemplate: removeTemplate, enableCellEdit: false}
+			columnDefs: [	
+			{field: 'label', displayName:'Label', enableCellEdit: true, }, 
+			{field:'value', displayName:'Value', enableCellEdit: true, },
+			{field:'desc', displayName:'Description', enableCellEdit: true,},
+			{field: 'remove', displayName:'Remove', cellTemplate: removeTemplate, enableCellEdit: false, width:"5%"}
 			]
 		};
 }]);

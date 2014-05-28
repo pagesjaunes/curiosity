@@ -1,11 +1,13 @@
 Todo : 
-     -M.a.j jour des fichiers de langue .// ENCOURS
-     -Ajouter des informations d'utilisation      
-     -M.a.j du template d'affichae des aggrégations.
-     -M.a.j template d'affichage panneau subsidiaire // DONE
-     -Ajout de template
-     -Ajout de comenttaire 
-     -Test
+     -Ajouter des informations d'utilisation // Encours
+     -Ajout de mots clés sur alias 
+     -Ajout de mots clés globaux 
+     -Ajout de template 
+     -Ajout de comentaire // ENCOURS
 
--Evolution :
+Bug connus : 
+    -Lors de la première sélection de l'index, si l'index sélectioner est le premier dans la liste, la valeur n'est pas mis à jour et aucun évènement n'est envoyer.
+
+Evolution :
      -Configuration personalisé exportable
+     -Module de graphique

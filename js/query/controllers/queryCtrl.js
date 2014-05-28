@@ -55,6 +55,10 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
 				limitOnField = true
 			}
 		}
+
+		$scope.addKeywordFromQuery = function (name, desc) {
+			query.addKeywordFromQuery(name, $scope.data.complexRequest, desc);
+		}
 	}
 ]);
 
