@@ -58,6 +58,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 			return ;
 		var serverUrl = url + '/_aliases';
 		curiosityObj.info.loading = true;
+		curiosityObj.info.aliases = [];
 		$http({method: 'GET', url: serverUrl}).
 		success(function(data) {
 			curiosityObj.info.loading = false;
