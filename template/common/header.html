@@ -24,6 +24,7 @@
 			<form class="navbar-form navbar-left" title="{{ data.selectedIndex }}">
         		<div class="form-group">
 					<select ng-model="data.selectedIndex" class="form-control select-header" ng-change="selectIndex()" ui-select2 >	
+						<option value="">{{ info.txt.header.AllIndex }}</option>
 						<optgroup label="Alias">
 	          				<option ng-repeat="alias in data.aliases" value="{{ alias }}">
 	          					{{ alias }}

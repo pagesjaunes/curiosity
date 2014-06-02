@@ -7,6 +7,7 @@ var global_text = {
 		AddServer : "Add a new server",
 		Connect : "Connect",
 		Index : "Index",
+		AllIndex : "All Index",
 		Search : "Search",
 		AutoRefresh : "AutoRefresh",
 		Hits : "Hits : ",
@@ -59,6 +60,7 @@ var global_text = {
 	},
 	result : {
 		request_sub_tab : {
+			Results : "Results",
 			Aggregation :"Aggregation",
 			Template : "Template",
 			AdvancedRequest : "Advanced Request",

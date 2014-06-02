@@ -6,6 +6,7 @@ var global_text = {
 		AddServer : "Ajouter un nouveau serveur",
 		Connect : "Connexion",
 		Index : "Index",
+		AllIndex : "Tous les Index",
 		Search : "Rechercher",
 		AutoRefresh : "Raffraichissement auto.",
 		Hits : "Résultats : ",
@@ -59,6 +60,7 @@ var global_text = {
 	},
 	result : {
 		request_sub_tab : {
+			Results : "Résultats",
 			Aggregation :"Agrégation",
 			Template : "Template",
 			AdvancedRequest : "Requête avancée",
@@ -119,6 +121,6 @@ var global_text = {
 		SomeResult : "Nombre de Résultats",
 		SomeResultTitle : "Exporter une partie de tous les résultats au format csv",
 		FullResultTitle : "Exporter tous les résultats au format csv !!! Attention l'export d'un grand nombre de résultats peut durer longtemps et avoir un impact sur les perfomances du serveur !!!",
-		FullResult : "Tous les Résultas",
+		FullResult : "Tous les Résultats",
 	},
 }
