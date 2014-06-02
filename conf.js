@@ -6,5 +6,5 @@ var globalConf = {
     gMappings : {},
     aggregationArray : [],
     gRequestResult : {},
-    version : "v0.0.2b"
+    version : "v0.1.0"
 }

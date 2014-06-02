@@ -1,8 +1,8 @@
-version 0.2.2b
+version 0.1.0
 
 -------------------------------------------------------------------------------------------------------------------
 
-Liste des modifications depuis le 27/05/2014 (0.2.2 to 0.2.2b) :
+Liste des modifications depuis le 27/05/2014 (0.0.2 à 0.1.0) :
 
 	-Fonctionalitées :
 		-Ajout du support des alias sur les indexs
@@ -11,7 +11,8 @@ Liste des modifications depuis le 27/05/2014 (0.2.2 to 0.2.2b) :
 		-Modification du fonctionement du templating de résultat : templating de la liste de résultat plutot que chaque résultats
 		-Ajout des mots clés globaux communs à tous les indexs et serveurs
 		-Ajout des mots clés sur les alias
-
+		-Ajout d'une option pour sélectioné tous les indexs 
+	
 	-Interface Utilisateur :
 		-Aggrandissement des champs de selection d'un serveur et d'un index
 		-Ajout de de l'attrubut tilte sur les champs index et serveur
