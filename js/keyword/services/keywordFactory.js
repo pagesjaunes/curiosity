@@ -73,6 +73,9 @@ Curiosity.factory('keyword', function(conf){
 	}
 
 	keywordObj.addKeywordInIndex = function(keyword, index) {
+		if (index == "") {
+			index = "global";
+		}
 		var indice = findIndexByName(index);
 		if (indice >= 0) {
 			keywordArray[indice].keywords.push(keyword);	

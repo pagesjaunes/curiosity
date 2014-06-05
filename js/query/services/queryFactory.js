@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keyword, aggregation){
+Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keyword, aggregation, $rootScope){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -75,7 +75,7 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 				queryObj.info.hits = resp.hits.total;
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
 				aggregation.updateResult(resp.aggregations);
-				// TODO : Update other services !!!  
+				$rootScope.$broadcast("QueryLaunched");
 			},
 			function err(err) {
 				curiosity.load(false);

@@ -6,6 +6,9 @@ body {
     padding-top: 70px; 
 }
 
+.pointer {
+  cursor: pointer;
+}
 
 .spacer {
   clear: both;
@@ -292,3 +295,13 @@ body {
 .x.axis path {
   display: none;
 }*/
+
+.departement {
+  stroke : #777777;
+  stroke-width: 1px;
+  cursor: pointer;
+}
+
+.departement:hover {
+  fill : #777777;
+}

@@ -15,5 +15,10 @@ Curiosity.factory('result', function(query, template){
 			resultObj.info.useTemplate = true;
 		}
 	}
+
+	resultObj.switchDisplayMode = function (type, templateId) {
+		resultObj.info.currentTemplate = template.addTemplateToCache(type, templateId);
+	}
+
 	return (resultObj);
 });

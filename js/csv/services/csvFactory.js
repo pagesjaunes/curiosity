@@ -1,4 +1,4 @@
-Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
+Curiosity.factory('csv', function($rootScope, mapping, curiosity, query, aggregation){
 	var csvObj = {};
 	
 	csvObj.info = {}; // Shared data with controller
@@ -7,7 +7,7 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	csvObj.info.buildingPercent = 0; // Percent of data compiled
 	csvObj.info.sep = ','; // Columm separator
 	csvObj.info.tabSep = ';'; // Multi value colum sep
-	csvObj.info.nbResult = 1000; // Result to fecth 
+	csvObj.info.nbResult = 1000; // Result to fetch 
 	csvObj.info.state = ""; // Curent State of the factory
 
 	var csvHeader = [];
@@ -22,17 +22,22 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	}
 
 	/**
-	* builtCsvFromResult
-	* Built a csv file from an object list
+	* setField
 	*/
-	csvObj.builtCsvFromResult = function(objList) {
-		var fields = builtAttributeArrayFromField(mapping.info.fields);
+	csvObj.setField = function (fields) {
+		csvObj.info.fields = fields;
+	} 
+
+	/**
+	* builtCsvFromResult
+	* Built a csv file from an result list
+	*/
+	csvObj.builtCsvFromResult = function(objList, attr, fields) {
+		fields = builtAttributeArrayFromField(mapping.info.fields);
 		csvObj.info.result = csvHeader + "\n";
-		csvObj.info.result += builtCsv(objList,fields,csvObj.info.sep);
+		csvObj.info.result += builtCsv(objList, fields, csvObj.info.sep, "_source");
 		csvObj.info.buildingPercent = 0;
-		var blob = new Blob([csvObj.info.result], {type: "text/csv"});
-		saveAs(blob, 'result.csv');
-		$rootScope.$broadcast("CsvDone");
+		exportCsvFile('result.csv',[csvObj.info.result]);
 	}
 
 	/**
@@ -40,7 +45,7 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	* Get all result about our current query from es server then built a csv
 	*/
 	csvObj.getFullResult = function () {
-		if (typeof (query.info.jsonRequest.request) !== "undefined") {
+		if (query.info.hits != 0) {
 			initLoading(query.info.hits);
 		}
 	} 
@@ -50,10 +55,118 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	* Get a number of result defined by csvObj.info.nbResult result about our current query from es server then built a csv
 	*/
 	csvObj.getSomeResult = function () {
-		if (typeof (query.info.jsonRequest.request) !== "undefined") {
+		if (query.info.hits != 0) {
 			initLoading(csvObj.info.nbResult);
-		}	
+		}
 	}
+
+	/** 
+	* builtCsvFromAgg
+	* Built a csv file from an aggregation
+	*/
+	csvObj.builtCsvFromAgg = function(agg, fields) {
+		if (agg.agg.nested) {
+			builtCsvFromBucketAgg(agg, fields);
+		}
+		else {
+			builtCsvFromMetricAgg(agg, fields)	
+		}
+	}
+
+	function exportCsvFile(fileName, content) {
+		var blob = new Blob(content, {type: "text/csv"});
+		saveAs(blob, fileName);
+		$rootScope.$broadcast("CsvDone");		
+	}
+
+	/**
+	* builtCsvFromMetricAgg
+	* built a csv file from a metric aggregation (avg, stats, ...)
+	*/
+ 	function builtCsvFromMetricAgg(agg, fields)  {
+		tmpFields = builtAttributeArrayFromField(fields);
+		csvObj.info.result = csvHeader + "\n";
+		csvObj.info.result += builtCsv([agg], tmpFields, csvObj.info.sep);
+		csvObj.info.buildingPercent = 0;
+		exportCsvFile('export_' + agg.agg.name + '.csv', [csvObj.info.result]);
+	}
+
+	/**
+	* builtCsvFromBucketAgg
+	* built a csv file from a metric aggregation (avg, stats, ...)
+	*/
+	function builtCsvFromBucketAgg(agg, fields) {
+		var tmpFields = builtAttributeArrayFromField(fields);
+		var tmp = builtCsvFromBucketAgg2(agg, tmpFields, csvObj.info.sep);
+		tmpFields = tmpFields.concat(tmp.subFields);
+		var  i = 0;
+		while (i < tmpFields.length) {
+			tmpFields[i] = tmpFields[i].join('.');
+			i++;
+		}
+		tmpFields = tmpFields.join(csvObj.info.sep) + '\n';
+		csvObj.info.result = tmpFields;
+		csvObj.info.result += tmp.subResult.join('\n');
+		csvObj.info.buildingPercent = 0;
+		exportCsvFile('export_' + agg.agg.name + '.csv', [csvObj.info.result]);
+	}
+
+	/* Old func : could be usefull
+	function builtCsvFromBucketAgg (agg, fields) {
+		tmpFields = builtAttributeArrayFromField(fields);
+		csvObj.info.result = csvHeader + "\n";
+		csvObj.info.result += builtCsv(agg.buckets, tmpFields, csvObj.info.sep);
+		csvObj.info.buildingPercent = 0;
+		var blob = new Blob([csvObj.info.result], {type: "text/csv"});
+		saveAs(blob, 'export_' + agg.agg.name + '.csv');
+		$rootScope.$broadcast("CsvDone");
+	}*/
+
+	function builtSubCsvAgg(agg, line, sep, size) {
+		var subFields = aggregation.builtAggregationField(agg);	
+		subFields = builtAttributeArrayFromField(subFields);
+		var subResult = builtCsvFromBucketAgg2(agg, subFields, sep);	
+		subFields = subFields.concat(subResult.subFields);
+		subResult = subResult.subResult;
+		var emptyField  = "";
+		var i = 0;
+		while( i  < size) {
+			emptyField += sep;
+			i++;
+		}
+		i = 0;
+		while (i < subResult.length) {
+			subResult[i] = line + emptyField + sep + subResult[i]; 
+			i++;
+		}
+		return ({"subFields":subFields,"subResult":subResult});
+	}
+
+	function builtCsvFromBucketAgg2 (agg, fields, sep) {
+		var result = [];
+		var subFields = [];
+		if (agg.agg.nested) {
+			var i = 0;
+			var end = true;
+			while (i < agg.buckets.length) {
+				var line = builtLine(agg.buckets[i], fields, sep, false);
+				subFields = [];
+				for (key in agg.buckets[i]) {
+					if (aggregation.isBucketAgg(key, agg.buckets[i][key])) {
+						var subResult = builtSubCsvAgg(agg.buckets[i][key], line, sep, subFields.length);
+						result = result.concat(subResult.subResult);
+						subFields = subFields.concat(subResult.subFields);
+						end = false;
+					}
+				}
+				if (end) {
+					result.push(line);
+				}
+				i++;
+			}
+		}
+		return ({"subResult":result, "subFields":subFields});
+	} 
 
 	/**
 	* builtAttributeArrayFromField
@@ -76,7 +189,6 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 				}
 			}
 			i++;
-				
 		}
 		return (result);
 	}
@@ -119,18 +231,23 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	* @param fields : the array representation of the object
 	* @param sep : the separator between each colums 
 	*/	
-	function builtLine(obj, fields, sep) {
+	function builtLine(obj, fields, sep, lineRet, attr) {
 		var result = "";
 		var i = 0;
-		tmpObj = obj._source;
+		tmpObj = obj;
+		if (typeof(attr) !== "undefined") {
+			tmpObj = obj[attr];
+		}
 		while (i < fields.length) {
 			if (i > 0) {
 				result += sep;
-			}
-			result+= "\"" + getValue(tmpObj, fields[i], 0) + "\""
-			i++;
 		}
-		result += "\n"
+		result+= "\"" + getValue(tmpObj, fields[i], 0) + "\""
+		i++;
+		}
+		if (lineRet){
+			result += "\n"
+		}
 		return (result);
 	}	
 
@@ -141,11 +258,11 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 	* @param fields : the array representation of objects
 	* @param sep : the separator between each colums 
 	*/
-	function builtCsv(objList, fields, sep) {
+	function builtCsv(objList, fields, sep, attr) {
 		var result = "";
 		var i = 0;
 		while (i < objList.length){
-			result += builtLine(objList[i], fields, sep); 
+			result += builtLine(objList[i], fields, sep, true, attr); 
 			csvObj.info.buildingPercent = Math.floor(i / objList.length * 100);
 			i++;
 		}
@@ -204,6 +321,6 @@ Curiosity.factory('csv', function($rootScope,mapping, curiosity, query){
 			}
 		}
 	}
-	
+
 	return (csvObj)
 })

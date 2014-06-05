@@ -88,7 +88,8 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 			templateObj.info.aggregationsAssociation.push({'type':type,'tpl':value});
 		}
 		conf.getConfDocument('aggregationsTemplates').defaultValue = templateObj.info.aggregationsAssociation;
-		conf.sendConfDocument('aggregationsTemplates');	
+		conf.sendConfDocument('aggregationsTemplates');
+		updateAggTemplate();
 	}
 
 

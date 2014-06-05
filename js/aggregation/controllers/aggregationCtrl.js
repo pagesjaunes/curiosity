@@ -1,5 +1,5 @@
 // agregationCtrl.js
-var aggregationCtrl = function($scope, aggregation, mapping){
+var aggregationCtrl = function($scope, $modalInstance, aggregation, mapping){
 	$scope.data = aggregation.info;
 	$scope.mappingData = mapping.info;
 	$scope.aggregation = {};
@@ -11,7 +11,6 @@ var aggregationCtrl = function($scope, aggregation, mapping){
 	$scope.addAggregation = function(array){
 		aggregation.addAggregation(array);
 		$scope.aggregation.focused = array[array.length-1];
-		console.log($scope.aggregation.focused);
 	}
 
 	$scope.modifieAgg = function(aggre) {
@@ -22,9 +21,10 @@ var aggregationCtrl = function($scope, aggregation, mapping){
 		aggregation.deleteAgg(aggre,idx);
 	}
 
-	$scope.validateAgg = function()
+	$scope.validateAgg = function(close)
 	{
 		aggregation.validateAgg();
+		$modalInstance.close();	
 	}
 
 	$scope.updateLimiteField = function () {

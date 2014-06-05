@@ -21,8 +21,7 @@ Curiosity.factory('aggregation', function(agg){
 		aggregation.parent.splice(idx,1);
 	}
 
-	aggregationObj.validateAgg = function()
-	{
+	aggregationObj.validateAgg = function() {
 		aggregationObj.info.validatedAgg = agg.builtAggregationArray(aggregationObj.info.currentAgg);
 	}
 	
@@ -68,6 +67,10 @@ Curiosity.factory('aggregation', function(agg){
 		return (re.test(key));
 	}
 
+	aggregationObj.isBucketAgg = function (key, obj) {
+		return (aggregationObj.isAgg(key) && obj.agg.nested);
+	}
+
 	/**
 	* hasNestedAgg 
 	* check if a aggregation's bucket have nested aggregation
@@ -85,9 +88,60 @@ Curiosity.factory('aggregation', function(agg){
 		agg.addAggregationFilter(aggregationObj.info.aggregationFilter, "Terms", aggr.agg.field, bucket.key)
 	}
 
-	aggregationObj.removeAggFilter = function(tab, index)
-	{
+	aggregationObj.removeAggFilter = function(tab, index) {
 		tab.splice(index, 1);
+	}
+
+	aggregationObj.builtAggregationField = function (agg) {
+		if (typeof(agg.agg) !== "undefined" && agg.agg.nested) {
+			if (typeof (agg.buckets) !== "undefined") {
+				return (builtAggregationFieldBucket(agg.buckets));
+			}
+		}
+		return (builtAggregationFieldRec(agg, ""));
+	}
+
+	function builtAggregationFieldRec (agg, root) {
+		var result = [];
+		for (key in agg) {
+			// Ignore agg and $$hashKey attribute
+			if (key != "agg" && key != "$$hashKey" && key != "showNested" && !aggregationObj.isBucketAgg(key, agg[key])) { // Angular add $$hashKey attribute during ng-repeat rendering  
+				if (agg[key] instanceof Array) {
+					if (root != "") { // Manage point add at first child 
+						result = result.concat(builtAggregationFieldRec(agg[key][0], root + "." + key));
+					}
+					else {
+						result = result.concat(builtAggregationFieldRec(agg[key][0], key));					
+					}
+				}
+				else if (typeof (agg[key]) === "object" && agg[key] != null) {
+					if (root != ""){ // Manage point add at first child
+						result = result.concat(builtAggregationFieldRec(agg[key], root + "." + key));
+					}
+					else {
+						result = result.concat(builtAggregationFieldRec(agg[key], key)); 
+					}
+				}
+				else { // Manage point add at first child 
+					if  (root != "") {
+						result.push({"ancestor":root+ "." + key, "name":key});
+					}
+					else {
+						result.push({"ancestor":key, "name":key});
+					}
+				}
+			}
+		}
+		return (result);
+	}
+
+	function builtAggregationFieldBucket(buckets) {
+		var result = [];
+		var i = 0;
+	 	if (buckets[i] != "undefined") {
+	 		result = builtAggregationFieldRec(buckets[i], "");
+	 	}
+	 	return (result);
 	}
 
 	return (aggregationObj);

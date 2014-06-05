@@ -1,4 +1,4 @@
-Curiosity.controller('resultCtrl', function($scope,$modal,result, query, template, aggregation){
+Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, aggregation, csv){
 	$scope.queryData = query.info;
 	$scope.templateData = template.info
 	$scope.aggregationData = aggregation.info;
@@ -25,6 +25,10 @@ Curiosity.controller('resultCtrl', function($scope,$modal,result, query, templat
 		result.changeCurrentTemplate(type, id);
 	}
 
+	$scope.switchDisplayMode = function (type, id) {
+		result.switchDisplayMode(type, id);
+	}
+
 	$scope.addAggregationFilter = function(type ,aggr, bucket) {
 		$scope.showAggregationFilter = true;
 		aggregation["add"+type+"AggregationFilter"](aggr, bucket);
@@ -39,7 +43,7 @@ Curiosity.controller('resultCtrl', function($scope,$modal,result, query, templat
 			$scope.search();
 		}
 	}
-
+	
 	$scope.isAgg = function (key) {
 		aggregation.isAgg(key);
 	}
@@ -55,7 +59,7 @@ Curiosity.controller('resultCtrl', function($scope,$modal,result, query, templat
 			query.search();
 		}
 	}
-	
+
 	$scope.switchAggregationValue = function (agg, field, values) {
 		var i = 0;
 		while (i < values.length) {
@@ -90,6 +94,24 @@ Curiosity.controller('resultCtrl', function($scope,$modal,result, query, templat
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/aggregation_modal.html',
 			controller: aggregationCtrl,
+			size: size,
+			resolve: {
+				items: function () {
+					return $scope.items;
+				}}
+			});
+		modalInstance.result.then(function (selectedItem) {
+			$scope.selected = selectedItem;
+		}, function () {
+		});
+	}
+
+	$scope.aggToCsv = function (size,agg) {
+		csv.setField(aggregation.builtAggregationField(agg));
+		csv.info.agg = agg;
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/csv_agg_modal.html',
+			controller: csvAggCtrl,
 			size: size,
 			resolve: {
 				items: function () {

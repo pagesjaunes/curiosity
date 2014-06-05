@@ -73,9 +73,10 @@
 			<!-- CSV !-->
 		<script type="text/javascript" src="js/csv/services/csvFactory.js"></script>
 		<script type="text/javascript" src="js/csv/controllers/csvCtrl.js"></script>
+		<script type="text/javascript" src="js/csv/controllers/csvAggCtrl.js"></script>
 			<!-- Charts !-->
-		<!--script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script!-->
-
+		<!--<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script>
+		<script type="text/javascript" src="js/d3/directives/geoPointDirective.js"></script>!-->
 	</head>
 	<body>
 		<div ng-controller="curiosityCtrl">
@@ -95,6 +96,7 @@
 			</div>
 			
 			<div id="content" class="col-sm-8"> 	
+				
 				<!-- Result Panel !-->
 				<div ng-show="data.tab == 1" class="tab">
 					<div ng-include="'template/result_tab/result_tab.html'" ng-controller="resultCtrl"></div>
@@ -108,9 +110,9 @@
 					<div ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl"></div>
 				</div>
 				<!-- Aggregation Panel !-->   
-				<div ng-show="data.tab == 4" class="tab">
+				<!--<div ng-show="data.tab == 4" class="tab">
 					<div ng-include="'template/aggregation_tab/aggregation_tab.html'" ng-controller="aggregationCtrl"></div>
-				</div>
+				</div>!-->
 				<!-- Template Panel !-->
 				<div ng-show="data.tab == 5" class="tab">
 					<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
