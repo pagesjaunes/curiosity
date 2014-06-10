@@ -19,6 +19,7 @@ Curiosity.factory('mapping', function(elasticClient, elasticFunc){
 	mappingObj.updateClient = function(server) {
 		client = elasticClient.getClient(server);
 		mappingObj.info.currentIndex = "";
+		mappingObj.info.selectedMapping = "";
 	}
 
 	/**

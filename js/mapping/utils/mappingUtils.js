@@ -37,6 +37,12 @@ function setAncestor(ancestor, data, ancestorSep, func)
 						ancestorSep, 
 						func)
 	}
+	if (typeof(data.fields) !== 'undefined') {
+		setAncestorDuo(ancestor, 
+					   	data.fields, 
+						ancestorSep, 
+						func)
+	}
 	data.ancestor = ancestor;
 	if (applyFunc) {
 		func(data);
@@ -82,6 +88,7 @@ function builtFieldArray(jObject)
 
 function builtFullFieldArray(jObject)
 {
+	console.log(jObject);
 	var result = new Array();
 
 	if (typeof (jObject.properties) !== "undefined"){
@@ -93,6 +100,16 @@ function builtFullFieldArray(jObject)
 			}
 			result = result.concat(builtFullFieldArray(jObject.properties[field]));
 		}
+	}
+	if (typeof (jObject.fields) !== "undefined") {
+		for (field in jObject.fields){
+			if (typeof (jObject.fields[field].properties) === "undefined"){
+				result.push({"name":field,"ancestor":
+					jObject.fields[field].ancestor.split(".").slice(1).join(".")
+					,"type":jObject.fields[field].type});
+			}
+			result = result.concat(builtFullFieldArray(jObject.fields[field]));
+		}			
 	}
 	return (result);	
 }
