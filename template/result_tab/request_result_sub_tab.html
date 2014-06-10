@@ -1,15 +1,16 @@
 <div id="result-bar">
 	<!-- Search bar !-->
-    <div class="input-group" id="search-bar">
-		<input ng-change="updateQuery()" ng-model="queryData.simplifiedRequest" type="text" ng-trim="false" class="form-control" placeholder="Query">
-		<span class="input-group-btn">
-			<button ng-click="search()" class="btn btn-default" >
-				<span class="glyphicon glyphicon-search"></span> 
+	<form>
+		<div class="input-group" id="search-bar">
+			<input ng-change="updateQuery()" ng-model="queryData.simplifiedRequest" type="text" ng-trim="false" class="form-control" placeholder="Query">
+			<span class="input-group-btn">
+				<button ng-click="search()" class="btn btn-default" type="submit">
+					<span class="glyphicon glyphicon-search"></span> 
 					{{ info.txt.header.Search }}
-			</button>
-		</span>
-	</div>
-
+				</button>
+			</span>
+		</div>
+	</form>
 	<!-- Option Bar !-->
 	<div class="margin-top" id="option-bar">
 		<div class="col-sm-4">
@@ -19,7 +20,7 @@
 					<option ng-repeat="template in templateData.template" value="{{$index}}" >{{ template.name }}</option>  
 				</select>
 				<span class="input-group-addon">
-					<input type="checkbox" ng-model="data.useTemplate">
+					<input type="checkbox" ng-model="data.useTemplate" ng-change="switchDisplayMode('template',data.templateSelected)">
 				</span>
 			</div>
 		</div>

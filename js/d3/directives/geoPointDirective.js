@@ -1,10 +1,32 @@
 Curiosity.directive('geopoint', function () {
 	return  {
 		restrict : 'A',
+		scope : {
+			dataset: '=dataset' 
+		},
 		link : function ($scope, element, attrs) {
-			var dataset = JSON.parse(attrs.dataset);
+			var dataset = $scope.dataset;
 			var width = 1000;
 			var height = 600;
+			var	color = "#000000";
+			var latWay = attrs.latway.split('.');
+			var longWay = attrs.longway.split('.');
+
+			if (typeof(attrs.width) !== "undefined")
+				width = attrs.width;
+			if (typeof(attrs.height) !== "undefined")
+				height = attrs.height;
+			if (typeof(attrs.color) !== "undefined") 
+				color = attrs.color;
+
+			function getValue(obj, path){
+				var i = 0;
+				while (i < path.length) {
+					obj = obj[path[i]];
+					i++;
+				}
+				return (obj);
+			}
 
 			var path = d3.geo.path();
 			var projection = d3.geo.conicConformal() // Lambert-93
@@ -25,14 +47,12 @@ Curiosity.directive('geopoint', function () {
 
 			function updateMap() {
 				var i = 0;
-				/*var circles = svg.selectAll("circle");
-				circle.remove();*/
-				dataset = JSON.parse(attrs.dataset);
 				while (i < dataset.length) {
-					var coor = projection([dataset[i]._source.geo.long, dataset[i]._source.geo.lat]);
+					var coor = projection([getValue(dataset[i], longWay), getValue(dataset[i], latWay)]);
 					deps.append('svg:circle')
         			.attr('cx', coor[0])
         			.attr('cy', coor[1])
+        			.attr('fill', color)
         			.attr('r', 2)
         			.append("svg:title")
         			.text(dataset[i]._source.denomination)

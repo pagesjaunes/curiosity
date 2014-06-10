@@ -9,8 +9,8 @@ var csvAggCtrl = function($scope, $modalInstance, csv, query){
 		$modalInstance.close();
 	}) 
 	
-	$scope.builtCsv = function(){
-	 	csv.builtCsvFromAgg(csv.info.agg, csv.info.fields);			
+	$scope.builtCsv = function(){	
+		csv.exportAggregatiton();
 	}
 
 	$scope.hideField = function (index) {
@@ -30,6 +30,7 @@ var csvAggCtrl = function($scope, $modalInstance, csv, query){
 			i++;
 		}
 	}
+	csv.builtCsvFromAgg(csv.info.agg, csv.info.fields);	
 }
 
 Curiosity.controller('csvAggCtrl', csvAggCtrl);

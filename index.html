@@ -20,6 +20,7 @@
 		<script type="text/javascript" src="vendor/angular/angular.min.js"></script>
 		<script type="text/javascript" src="vendor/angular/angular-sanitize.js"></script>
 		<script type="text/javascript" src="vendor/angular/angular-animate.min.js"></script>
+		<script type="text/javascript" src="vendor/angular/angular-cookies.min.js"></script>
 		<script type="text/javascript" src="vendor/angular/ng-grid-2.0.7.min.js"></script>
 		<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
 		<script type="text/javascript" src="vendor/angular-ui-select2/select2.js"></script>
@@ -31,10 +32,13 @@
 		<script type="text/javascript" src="vendor/elastic/elastic-angular-client.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elasticsearch.angular.min.js"></script>
 		<script type="text/javascript" src="vendor/FileSaver/FileSaver.js"></script>
-		<!--<script type="text/javascript" src="vendor/d3js/d3.min.js"></script>!-->
+		<!--
+		<script type="text/javascript" src="vendor/d3js/d3.min.js"></script>
+		!-->
 		<!-- Project specique files !-->
 			<!-- Conf file !-->
 		<script type="text/javascript" src="conf.js"></script>
+		<script type="text/javascript" src=".version.js"></script>
 		<script type="text/javascript" src="txt.js"></script>		
 			<!-- Service and stuff !-->
 		<script type="text/javascript" src="js/app.js"></script>
@@ -70,13 +74,18 @@
 		<script type="text/javascript" src="js/aggregation/services/aggregationProvider.js"></script>
 		<script type="text/javascript" src="js/aggregation/services/aggregationFactory.js"></script>
 		<script type="text/javascript" src="js/aggregation/controllers/aggregationCtrl.js"></script>
+			<!-- Context 
+		<script type="text/javascript" src="js/context/services/contextFactory.js"></script>
+		<script type="text/javascript" src="js/context/controllers/contextCtrl.js"></script>!-->
 			<!-- CSV !-->
 		<script type="text/javascript" src="js/csv/services/csvFactory.js"></script>
 		<script type="text/javascript" src="js/csv/controllers/csvCtrl.js"></script>
 		<script type="text/javascript" src="js/csv/controllers/csvAggCtrl.js"></script>
 			<!-- Charts !-->
-		<!--<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script>
-		<script type="text/javascript" src="js/d3/directives/geoPointDirective.js"></script>!-->
+		<!-- 
+		<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script> 
+		<script type="text/javascript" src="js/d3/directives/geoPointDirective.js"></script>
+		!-->
 	</head>
 	<body>
 		<div ng-controller="curiosityCtrl">
@@ -87,7 +96,6 @@
 			</div>
 			
 			<div id="content-left" class="col-sm-2">
-				<!--<div ng-include="'template/common/navBar.html'"></div>!-->
 				<!-- Aggregation result !-->
 				<div ng-if="data.tab == 1">
 					<h3>{{ info.txt.header.navBar.Aggregations }}</h3>
@@ -95,8 +103,7 @@
 				</div>
 			</div>
 			
-			<div id="content" class="col-sm-8"> 	
-				
+			<div id="content" class="col-sm-8"> 
 				<!-- Result Panel !-->
 				<div ng-show="data.tab == 1" class="tab">
 					<div ng-include="'template/result_tab/result_tab.html'" ng-controller="resultCtrl"></div>
@@ -109,10 +116,6 @@
 				<div ng-show="data.tab == 3" class="tab">
 					<div ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl"></div>
 				</div>
-				<!-- Aggregation Panel !-->   
-				<!--<div ng-show="data.tab == 4" class="tab">
-					<div ng-include="'template/aggregation_tab/aggregation_tab.html'" ng-controller="aggregationCtrl"></div>
-				</div>!-->
 				<!-- Template Panel !-->
 				<div ng-show="data.tab == 5" class="tab">
 					<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
@@ -125,20 +128,25 @@
 			
 			<div id="content-right" class="col-sm-2">
 				<div >
-					<h4> {{ info.txt.header.Hits }} <span class="label label-primary"> {{ queryData.hits }} </span> </h4>
-				</div>
-				<hr />
-				<div >
-					<h4>{{ info.txt.header.Status }} : 
-						<span class="label label-danger" ng-if="data.err">{{ info.txt.header.Error }}</span>
-						<span class="label label-success" ng-if="!data.err">{{ info.txt.header.NoError }}</span>
+					<h4> {{ info.txt.header.Hits }} 
+						<span class="label label-primary"> {{ queryData.hits }}</span> 
 					</h4>
 				</div>
-				<hr />
-				<div id="logConsole">
-				</div> 
+				<hr/>
+				<div >
+					<h4>{{ info.txt.header.Status }} : 
+						<span class="label label-danger" ng-if="data.err">
+							{{ info.txt.header.Error }}
+						</span>
+						<span class="label label-success" ng-if="!data.err">
+							{{ info.txt.header.NoError }}
+						</span>
+					</h4>
+				</div>
+				<hr/>
+				<!--<div ng-include="'template/context/context_selector.html'" ></div>!-->
+				
 			</div>
-			
 			<div class="spacer"></div>
 		</div>
 	</body>

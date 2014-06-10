@@ -1,4 +1,24 @@
-version 0.1.0
+version 0.1.1
+-------------------------------------------------------------------------------------------------------------------
+
+Liste des modifications depuis le 02/06/2014 (0.1.0 à 0.1.1)
+	-Fonctionalitées :
+
+	-Interface Utilisateur :
+		-Recherche quand la touche entrez est pressé
+		-Fermeture de la modal Aggregation lors de validation
+		-Mise a jour des template plus instinctive (a voir si c'est sufisant)
+		-Ajout de la détections des champs du première indexs d'un alias
+		-Simplification du parsing de la requête
+
+	-Correction de bug :
+		-Correction d'un bug lors de l'ajout d'un mot clés quand tout les indexs sont sélectionner.
+		-Correction d'un bug lors du changement des carractère séparateurs dans le header csv des résultats.
+
+	-Feature beta :
+		-Debut des graphiques
+		-Ajout de l'export csv des aggrégations
+		-Ajout des context (cacher pour le moment)
 
 -------------------------------------------------------------------------------------------------------------------
 
@@ -11,8 +31,8 @@ Liste des modifications depuis le 27/05/2014 (0.0.2 à 0.1.0) :
 		-Modification du fonctionement du templating de résultat : templating de la liste de résultat plutot que chaque résultats
 		-Ajout des mots clés globaux communs à tous les indexs et serveurs
 		-Ajout des mots clés sur les alias
-		-Ajout d'une option pour sélectioné tous les indexs 
-	
+		-Ajout d'une option pour sélectioné tous les indexs
+
 	-Interface Utilisateur :
 		-Aggrandissement des champs de selection d'un serveur et d'un index
 		-Ajout de de l'attrubut tilte sur les champs index et serveur

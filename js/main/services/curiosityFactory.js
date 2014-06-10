@@ -3,13 +3,12 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 	curiosityObj.info = {};
 
 	// General informations
-	curiosityObj.info.version = globalConf.version;
+	curiosityObj.info.version = version;
 	curiosityObj.info.tab = 1;
 	curiosityObj.info.loading = false;
 	curiosityObj.info.err = false;
 	curiosityObj.info.errList = [];
 	curiosityObj.info.log = [];
-	curiosityObj.info.txt = global_text;
 	
 	// Server Informations 
 	curiosityObj.info.currentServer = globalConf.defaultServer;
@@ -19,6 +18,17 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 	curiosityObj.info.selectedIndex = "";
 	curiosityObj.info.indexList = [];
 	curiosityObj.info.aliases = [];
+
+
+	/*
+	$rootScope.$on("ContextLoaded", function () {
+		context.setModuleInformation("curiosity", curiosityObj.info);
+	}) 
+
+	$rootScope.$on("UpdateContext", function () {
+		context.setContextInformation("curiosity", curiosityObj.info);
+	})
+	*/
 
 	function  addAlias(obj) {
 		if (typeof(obj.aliases) !== "undefined") {

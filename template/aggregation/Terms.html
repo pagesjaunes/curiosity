@@ -1,9 +1,11 @@
 <div>
 	<div class="panel panel-primary panel-request">
 		<div class="panel-heading">
-		<h3 class="panel-title col-sm-10">{{ agg.agg.type }} on {{agg.agg.field}}</h3>
-			<span class="col-sm-2 glyphicon " ng-class="{'glyphicon-plus': !agg.showAgg, 'glyphicon-minus':agg.showAgg}" ng-click="agg.showAgg =!agg.showAgg"></span>
-			<div class="spacer"></div>
+		<h3 class="panel-title col-sm-8">{{ agg.agg.type }} on {{agg.agg.field}}</h3>
+		<span class="col-sm-2 glyphicon pointer" ng-class="{'glyphicon-plus': agg.showAgg, 'glyphicon-minus':!agg.showAgg}" ng-click="agg.showAgg =!agg.showAgg"></span>
+		<span title="Export csv" ng-click="aggToCsv('lg', agg)"class="glyphicon glyphicon glyphicon-download-alt col-sm-2 pointer">
+		</span>	
+		<div class="spacer"></div>
 		</div>
 		<div class="panel-body" ng-show="!agg.showAgg">
 			<div>

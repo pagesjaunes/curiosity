@@ -1,4 +1,4 @@
-Curiosity.factory('aggregation', function(agg){
+Curiosity.factory('aggregation', function($rootScope, agg){
 	aggregationObj = {};
 	aggregationObj.info = {};
 	aggregationObj.info.prevAgg = {};
@@ -8,6 +8,15 @@ Curiosity.factory('aggregation', function(agg){
 	aggregationObj.info.aggregationFilter = [];
 	aggregationObj.info.possibleAgg = agg.possibleAggregation;
 	aggregationObj.info.showAgg = false;
+
+	/*
+	$rootScope.$on("ContextLoaded", function () {
+		context.setModuleInformation("aggregation", aggregationObj.info);
+	}) 
+
+	$rootScope.$on("UpdateContext", function () {
+	})
+	*/
 
 	aggregationObj.addAggregation = function (array) {
 		array.push({obj:{},parent:array});

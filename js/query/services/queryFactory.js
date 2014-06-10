@@ -22,6 +22,16 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 	var currentIndex = "";
 	var queryString = ejs.QueryStringQuery();
 	
+	/*
+	$rootScope.$on("ContextLoaded", function () {
+		context.setModuleInformation("query", queryObj.info);
+	}) 
+
+	$rootScope.$on("UpdateContext", function () {
+		context.setContextInformation("query", queryObj.info);
+	})
+	*/
+
 	function builtRequest(query) {
 		request = ejs.Request();
 		queryString.query(aggregation.addAggregationFilterToQuery(query));

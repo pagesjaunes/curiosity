@@ -83,9 +83,10 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc){
 			"getConf" : function (scope) {
 				var request = ejs.Request();
 				var confQuery = ejs.MatchAllQuery();
+				var filter = ejs.TypeFilter(globalConf.defaultConfDocumentType);
 				var initConfFunc = this.initConf;
 
-				request.query(confQuery);
+				request.query(confQuery).filter(filter);
 				confClient.search({index:globalConf.confIndex, body:request})
 				.then(function(data) {
 					gConf = data.hits.hits;
@@ -146,34 +147,34 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc){
 						&& gConf[i]._source.type == type) {
 						return (gConf[i]._source);
 					}
-				i++;
-			}
-			return ([]);
-		},
+					i++;
+				}
+				return ([]);
+			},
 
-		"getConfDocumentIndice" : function (type) {
-			var i = 0;
-			while (i < gConf.length){
-				if (typeof(gConf[i]._source.type) !== "undefined" 
-					&& gConf[i]._source.type == type) {
-					return (i);
-			}
-			i++;
-		}
-		return (-1);
-	},
+			"getConfDocumentIndice" : function (type) {
+				var i = 0;
+				while (i < gConf.length){
+					if (typeof(gConf[i]._source.type) !== "undefined" 
+						&& gConf[i]._source.type == type) {
+						return (i);
+					}
+					i++;
+				}
+				return (-1);
+			},
 
-	"addServerToConf"  : function (url) {
-		var serverList = this.getConfDocument("server");
-		var i = 0;
-		while (i < serverList.servers.length) {
-			if (serverList.servers[i] == url) {
-				return ;
+			"addServerToConf"  : function (url) {
+				var serverList = this.getConfDocument("server");
+				var i = 0;
+				while (i < serverList.servers.length) {
+					if (serverList.servers[i] == url) {
+						return ;
+					}
+					i++;
+				}
+				serverList.servers.push(url);
+				this.sendConfDocument("server");
 			}
-			i++;
 		}
-		serverList.servers.push(url);
-		this.sendConfDocument("server");
-	}
-}
 })
