@@ -33,8 +33,8 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query, aggrega
 	* Built a csv file from an result list
 	*/
 	csvObj.builtCsvFromResult = function(objList, attr, fields) {
-		fields = builtAttributeArrayFromField(mapping.info.fields);
-		csvObj.info.result = csvHeader + "\n";
+		fields = builtAttributeArrayFromField(csvObj.info.fields);
+		csvObj.info.result = csvHeader.join(csvObj.info.sep) + "\n";
 		csvObj.info.result += builtCsv(objList, fields, csvObj.info.sep, "_source");
 		csvObj.info.buildingPercent = 0;
 		exportCsvFile('result.csv',[csvObj.info.result]);

@@ -1,5 +1,6 @@
-var csvCtrl = function($scope, $modalInstance, csv, query){
+var csvCtrl = function($scope, $modalInstance, csv, query, mapping){
 	$scope.data = csv.info;
+	$scope.mappingData = mapping.info;
 	$scope.queryData = query.info
 	$scope.info = {}
 	$scope.info.txt = global_text;
@@ -21,7 +22,12 @@ var csvCtrl = function($scope, $modalInstance, csv, query){
 
 	$scope.builtSplitCsv = function () {
 		csv.getSomeResult();
-	} 
+	}
+
+	$scope.updateMapping = function () {
+		mapping.selectMapping($scope.mappingData.selectedMapping);
+		csv.updateField();
+	}
 
 	$scope.hideField = function (index) {
 		if (typeof($scope.data.fields[index].hide) === "undefined"){

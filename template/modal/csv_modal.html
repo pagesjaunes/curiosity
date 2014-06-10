@@ -10,11 +10,20 @@
 				<label class="input-group-addon">{{ info.txt.csvModal.TabSep }} :</label>
 				<input class="form-control" type="text" ng-model="data.tabSep"></input>
 			</div>
+			<div class="margin-top input-group">
+				<label class="input-group-addon"> Mappings :</label>
+				<select ng-model="mappingData.selectedMapping" class="form-control" ng-change="updateMapping()" ui-select2>
+					<option ng-repeat="(key, value) in mappingData.mappingsList" value="{{ key }}">
+						{{ key }}
+					</option>
+				</select>
+			</div>
 		</div>
 	</div>
 
 	<!-- Building Display !-->
 	<div ng-if="!data.loading">
+		
 		<div class="modal-body modal-scroll">
 			<div>
 				<label class="col-sm-4">
@@ -29,7 +38,7 @@
 				</button>
 				<div class="spacer"></div>		
 			</div>
-			<div ng-repeat="field in data.fields">
+			<div ng-repeat="field in data.fields" class="margin-top">
 				<label class="col-sm-4">
 					<a title="{{ field.ancestor }}">{{ field.name }}</a> 
 				</label>
@@ -43,6 +52,7 @@
 				<div class="spacer"></div>
 			</div>
 		</div>
+
 		<div class="modal-footer">
 			<div class="col-sm-3">
 				<button ng-click="builtCsv()" class="btn btn-default" title="{{ info.txt.csvModal.CurrentResultTitle }}">{{ info.txt.csvModal.CurrentResult }}</button>
@@ -63,6 +73,7 @@
 				</button>	
 			</div>
 		</div>
+	
 	</div>
 	
 	<!-- Loading Display !-->
