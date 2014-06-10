@@ -11,7 +11,16 @@ function escapeRegExp(str) {
 
 //interpret.js
 
-var wordToIgnore = ["and", "or", "AND", "OR", ")"];
+var wordToIgnore = ["and", "or", "AND", "OR", "NOT","!",  ")"];
+
+var globalKeywords = [{"label":"et", "value":"AND"}, 
+						{"label":"ET", "value":"AND"},
+						{"label":"and", "value":"AND"},
+						{"label":"ou", "value":"OR"},
+						{"label":"OU", "value":"OR"},
+						{"label":"or", "value":"OR"},
+						{"label":"non", "value":"NOT"},
+						{"label":"not", "value":"NOT"} ]
 
 /**
 * checkWordToIgnore
@@ -93,14 +102,11 @@ function interpret(keyWords, request){
     	if (res != "") {
 			splitedRequest[i] = '(' + res + ')';
 		}
-		else if (splitedRequest[i] == "et") { 
-			splitedRequest[i] = "AND";
-		}
-		else if (splitedRequest[i] == "ou") {
-			splitedRequest[i] = "OR"
-		}
-		else if (splitedRequest[i].search(':') == -1 && !checkWordToIgnore(splitedRequest[i])) { 
-			splitedRequest[i] = "_exists_:" + splitedRequest[i];
+		else {
+			var res = checkKeyWord(globalKeywords, splitedRequest[i]); 
+    		if (res != "") {
+				splitedRequest[i] =  res;
+			}
 		}
 	};
 	return (splitedRequest);
