@@ -1,4 +1,17 @@
 version 0.1.1
+
+-------------------------------------------------------------------------------------------------------------------
+
+Liste des modifications depuis le 11/06/2014 (0.1.1 à 0.1.2)
+	-Fonctionalitées :
+		-Ajout d'un module de prise de note
+		-Affichage et utilisation des contexts
+	
+	-Interface Utilisateurs :
+		-Affichage des différents logs (message et couleurs en fonction du type). (ace69c5ca)
+		-Inversion des positions des listes déroulantes serveur et index
+		-Suppresion de l'affichage du nombre de résultats et du status dans la colonne de droite.
+
 -------------------------------------------------------------------------------------------------------------------
 
 Liste des modifications depuis le 02/06/2014 (0.1.0 à 0.1.1)
@@ -14,6 +27,7 @@ Liste des modifications depuis le 02/06/2014 (0.1.0 à 0.1.1)
 	-Correction de bug :
 		-Correction d'un bug lors de l'ajout d'un mot clés quand tout les indexs sont sélectionner.
 		-Correction d'un bug lors du changement des carractère séparateurs dans le header csv des résultats.
+		-Gestion des champs de type multifield dans le mapping.
 
 	-Feature beta :
 		-Debut des graphiques

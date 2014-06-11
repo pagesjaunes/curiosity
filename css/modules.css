@@ -1,0 +1,31 @@
+/*
+	All Modules
+*/
+	.module {
+
+	}
+
+		.module h4 span{
+			cursor : pointer;
+			margin-left : 10px;
+		}
+/*
+	Log modules
+*/
+	.log-console {
+		height: 200px;
+		overflow-y: auto;
+		padding : 2px;
+		border: #eeeeee 1px solid;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+	}
+
+		.log-console .alert {
+			margin-bottom: 5px;
+			padding : 5px; 
+		}
+
+/*
+*/

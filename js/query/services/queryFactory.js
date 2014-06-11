@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, aggregation, log){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, aggregation, context,log){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -10,27 +10,40 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	queryObj.info.maxPage = 0;
 	queryObj.info.hits = 0;
 	queryObj.info.keywordToShow = [];
-	queryObj.info.currentKeyword = []
+	queryObj.info.currentKeyword = [];
+	queryObj.info.autoRefresh = true;
 	queryObj.info.jsonRequest = {};
 	queryObj.info.loading = false;
 	queryObj.info.error = false;
 	queryObj.info.errorContent = "";
 	queryObj.info.result = {};
 
+	// Infomration to save in context
+	queryObj.queryInfo = {};
+	queryObj.queryInfo.simplifiedRequest = queryObj.info.simplifiedRequest;	 
+	queryObj.queryInfo.complexRequest = queryObj.info.complexRequest;
+ 	queryObj.queryInfo.autoRefresh = queryObj.info.autoRefresh;
+
 	var client = elasticClient.getClient(curiosity.info.currentServer);
 	var currentKeyword = [];
 	var currentIndex = "";
 	var queryString = ejs.QueryStringQuery();
-	
-	/*
+
+	// Context event
+
 	$rootScope.$on("ContextLoaded", function () {
-		context.setModuleInformation("query", queryObj.info);
-	}) 
+		context.setModuleInformation("request", queryObj.queryInfo);
+		queryObj.info.simplifiedRequest = queryObj.queryInfo.simplifiedRequest; 	 
+		queryObj.info.complexRequest = queryObj.queryInfo.complexRequest;
+ 		queryObj.info.autoRefresh = queryObj.queryInfo.autoRefresh;
+	});
 
 	$rootScope.$on("UpdateContext", function () {
-		context.setContextInformation("query", queryObj.info);
-	})
-	*/
+ 		queryObj.queryInfo.autoRefresh = queryObj.info.autoRefresh;
+		queryObj.queryInfo.simplifiedRequest = queryObj.info.simplifiedRequest;	 
+		queryObj.queryInfo.complexRequest = queryObj.info.complexRequest;
+		context.setContextInformation("request", queryObj.queryInfo);
+	});
 
 	function builtRequest(query) {
 		request = ejs.Request();

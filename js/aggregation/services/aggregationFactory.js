@@ -1,4 +1,4 @@
-Curiosity.factory('aggregation', function($rootScope, agg){
+Curiosity.factory('aggregation', function($rootScope, agg, context){
 	aggregationObj = {};
 	aggregationObj.info = {};
 	aggregationObj.info.prevAgg = {};
@@ -9,13 +9,25 @@ Curiosity.factory('aggregation', function($rootScope, agg){
 	aggregationObj.info.possibleAgg = agg.possibleAggregation;
 	aggregationObj.info.showAgg = false;
 
+	// Information to save in context
+	aggregationObj.aggregationInfo = {};
+	aggregationObj.aggregationInfo.aggregationFilter = aggregationObj.info.aggregationFilter; 
+	aggregationObj.aggregationInfo.validateAgg = aggregationObj.info.validateAgg; 
+	
+	// Context Event
 	/*
 	$rootScope.$on("ContextLoaded", function () {
-		context.setModuleInformation("aggregation", aggregationObj.info);
-	}) 
+		context.setModuleInformation("aggregation", aggregationObj.aggregationInfo);
+		aggregationObj.info.aggregationFilter = aggregationObj.aggregationInfo.aggregationFilter;
+		aggregationObj.info.currentAgg = aggregationObj.aggregationInfo.currentAgg;	
+		aggregationObj.validateAgg();	
+	}); 
 
 	$rootScope.$on("UpdateContext", function () {
-	})
+		aggregationObj.aggregationInfo.aggregationFilter = aggregationObj.info.aggregationFilter;
+		aggregationObj.aggregationInfo.currentAgg = agg.exportAgg(aggregationObj.info.currentAgg);
+		context.setContextInformation("aggregation", aggregationObj.aggregationInfo);
+	});
 	*/
 
 	aggregationObj.addAggregation = function (array) {
@@ -37,6 +49,7 @@ Curiosity.factory('aggregation', function($rootScope, agg){
 	aggregationObj.addAggregationToRequest = function (request) {
 		var  i = 0;
 		while (i < aggregationObj.info.validatedAgg.length) {
+			console.log(aggregationObj.info.validatedAgg[i]);
 			request.aggregation(aggregationObj.info.validatedAgg[i]);
 			i++;
 		}

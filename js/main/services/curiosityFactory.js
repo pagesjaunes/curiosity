@@ -1,4 +1,4 @@
-Curiosity.factory('curiosity', function($http, $rootScope, conf, log){
+Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context){
 	var curiosityObj = {};
 	curiosityObj.info = {};
 
@@ -23,56 +23,6 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log){
 	curiosityObj.serverInfo = {};
 	curiosityObj.serverInfo.server = curiosityObj.info.currentServer;
 	curiosityObj.serverInfo.index = curiosityObj.info.selectedIndex;
-	
-	/*
-	$rootScope.$on("ContextLoaded", function () {
-		context.setModuleInformation("curiosity", curiosityObj.serverInfo);
-		if (typeof(curiosityObj.serverInfo.server) !== "undefined" && curiosityObj.serverInfo.server != "" && curiosityObj.info.currentServer != curiosityObj.serverInfo.server) {
-			if (typeof(curiosityObj.serverInfo.index) !== "undefined") {
-				curiosityObj.connectToServer(curiosityObj.serverInfo.server, false, curiosityObj.serverInfo.index)
-			}
-			else {
-				curiosityObj.connectToServer(curiosityObj.serverInfo.server);
-			}
-		}
-		else if (typeof(curiosityObj.serverInfo.index) !== "undefined"){
-			curiosityObj.info.selectedIndex = curiosityObj.serverInfo.index;			
-		}
-	}) 
-
-	$rootScope.$on("UpdateContext", function () {
-		curiosityObj.serverInfo.server = curiosityObj.info.currentServer;
-		curiosityObj.serverInfo.index = curiosityObj.info.selectedIndex;
-		context.setContextInformation("curiosity", curiosityObj.serverInfo);
-	})
-	*/
-
-	function  addAlias(obj) {
-		if (typeof(obj.aliases) !== "undefined") {
-			for (key in obj.aliases) {
-				var i = 0;
-				var add = true
-				while (i < curiosityObj.info.aliases.length) {
-					if (curiosityObj.info.aliases[i] == key) {
-						add = false;
-						break;
-					}
-					i++;
-				}
-				if (add) {
-					curiosityObj.info.aliases.push(key);
-				}
-			}
-		}
-	}
-
-	function getAlias(data) {
-		var i = 0;
-		for (key in data) {
-			addAlias(data[key]);
-			i++;
-		} 
-	}
 
 	/** 
 	* connectToServer : Etablish connection to an elasticSearch server 
@@ -114,7 +64,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log){
 	}
 
 	curiosityObj.init = function () {
-		//context.init();
+		context.init();
 	}
 
 	/** 
@@ -155,6 +105,57 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log){
 	*/
 	curiosityObj.switchTab = function(tab) {
 		curiosityObj.info.tab = tab;
+	}
+
+	// Context event	
+	$rootScope.$on("ContextLoaded", function () {
+		context.setModuleInformation("curiosity", curiosityObj.serverInfo);
+		if (typeof(curiosityObj.serverInfo.server) !== "undefined" && curiosityObj.serverInfo.server != "" && curiosityObj.info.currentServer != curiosityObj.serverInfo.server) {
+			if (typeof(curiosityObj.serverInfo.index) !== "undefined") {
+				curiosityObj.connectToServer(curiosityObj.serverInfo.server, false, curiosityObj.serverInfo.index)
+			}
+			else {
+				curiosityObj.connectToServer(curiosityObj.serverInfo.server);
+			}
+		}
+		else if (typeof(curiosityObj.serverInfo.index) !== "undefined"){
+			curiosityObj.info.selectedIndex = curiosityObj.serverInfo.index;			
+			curiosityObj.selectIndex();
+		}
+	}) 
+
+	$rootScope.$on("UpdateContext", function () {
+		curiosityObj.serverInfo.server = curiosityObj.info.currentServer;
+		curiosityObj.serverInfo.index = curiosityObj.info.selectedIndex;
+		context.setContextInformation("curiosity", curiosityObj.serverInfo);
+	})
+
+	// Index alias func
+	function  addAlias(obj) {
+		if (typeof(obj.aliases) !== "undefined") {
+			for (key in obj.aliases) {
+				var i = 0;
+				var add = true
+				while (i < curiosityObj.info.aliases.length) {
+					if (curiosityObj.info.aliases[i] == key) {
+						add = false;
+						break;
+					}
+					i++;
+				}
+				if (add) {
+					curiosityObj.info.aliases.push(key);
+				}
+			}
+		}
+	}
+
+	function getAlias(data) {
+		var i = 0;
+		for (key in data) {
+			addAlias(data[key]);
+			i++;
+		} 
 	}
 
 	return (curiosityObj);

@@ -1,7 +1,8 @@
-<div ng-controller="logCtrl" class="log-module">
-	<h4>Log 
+<div ng-controller="logCtrl" class="log-module module">
+	<h4>Logs
 		<span class="glyphicon" ng-class="{'glyphicon-minus':!hideConsole,'glyphicon-plus':hideConsole}" ng-click="hideConsole = !hideConsole" title="Cacher/Montrer les logs">	
 		</span>
+		<span class="glyphicon glyphicon-trash" ng-click="clean()"></span>
 	</h4>
 	<div class="log-console" ng-if="!hideConsole">
 		<alert ng-repeat="alert in data.logList" type="alert.type" close="delete($index)">

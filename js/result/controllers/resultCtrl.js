@@ -2,6 +2,7 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 	$scope.queryData = query.info;
 	$scope.templateData = template.info
 	$scope.aggregationData = aggregation.info;
+	$scope.showAggregationFilter = true;
 	$scope.data = result.info;
 
 	/* PAGER : go to queryFactory.js for more informations*/ 

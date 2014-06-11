@@ -1,4 +1,4 @@
-Curiosity.factory('context', function(elasticClient, elasticFunc, $rootScope, $cookies){
+Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elasticFunc, log){
 	var contextObj = {};
 	var contextDocumentType = "context-doc";
 	var cookieName = "CurisoityDefaultContext";
@@ -22,7 +22,7 @@ Curiosity.factory('context', function(elasticClient, elasticFunc, $rootScope, $c
 		.then(function(data) {
 			context = data.hits.hits[0];
 			if (typeof (context) === "undefined")  {
-				console.log("Error : context " + contextName + " not found");
+				log.log("Error : context " + contextName + " not found", "danger");
 			}
 			else {
 				contextObj.info.currentContext = context._source;
@@ -30,7 +30,7 @@ Curiosity.factory('context', function(elasticClient, elasticFunc, $rootScope, $c
 			}
 		}, 
 		function (err) {
-			console.log("Error during context loading");
+			log.log("Error during context loading", "danger");
 		});
 	}
 

@@ -1,6 +1,6 @@
 // elasticSearchJsFunf.js
 
-Curiosity.factory("elasticFunc", function(){
+Curiosity.factory("elasticFunc", function(log){
 	return {
 		/**
 		* elasticsearchError
@@ -9,9 +9,10 @@ Curiosity.factory("elasticFunc", function(){
 		"elasticsearchError" : function (error) {
 			if (error) {
 				console.error(error);
+				log.log("Error :" + error.status, "danger")
 			}
 			else {
-				console.log('All is well');
+				log.log('Opération réussit', "success");
 			}
 		},
 

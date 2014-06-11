@@ -9,7 +9,11 @@ Curiosity.factory('log', function(){
 	}
 
 	logObj.delete = function (index) {
-		logObj.info.logList.splice(index, 1);	
+		logObj.info.logList.splice(index, 1);
+	}
+
+	logObj.clean = function () {
+		logObj.info.logList = [];	
 	}
 
 	return (logObj);	
