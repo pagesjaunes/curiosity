@@ -88,7 +88,6 @@ function builtFieldArray(jObject)
 
 function builtFullFieldArray(jObject)
 {
-	console.log(jObject);
 	var result = new Array();
 
 	if (typeof (jObject.properties) !== "undefined"){

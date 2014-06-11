@@ -8,7 +8,8 @@ function($scope, conf, curiosity, query){
 	$scope.info.txt = global_text;
 	/* EVENTS */
 	$scope.$on("ConfLoaded", function() {
-		$scope.connectServer(globalConf.defaultServer); /* Init the Index list */
+		curiosity.init();
+		$scope.connectServer($scope.data.currentServer); /* Init the Index list */
 		$scope.data.serverList = conf.getConfDocument("server").servers;
 	});
 	

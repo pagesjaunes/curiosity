@@ -14,6 +14,7 @@
 		<link href="css/select2-bootstrap.css" rel="stylesheet">
 			<!-- Project specifique file !-->
 		<link href="css/curiosity.css" rel="stylesheet">
+		<link href="css/log.css" rel="stylesheet">
 		<!-- Dependency  Libs !--> 
 			<!-- Latest compiled and minified JavaScript -->
 		<script type="text/javascript" src="vendor/jquery/jquery-2.1.0.min.js"></script>
@@ -81,6 +82,9 @@
 		<script type="text/javascript" src="js/csv/services/csvFactory.js"></script>
 		<script type="text/javascript" src="js/csv/controllers/csvCtrl.js"></script>
 		<script type="text/javascript" src="js/csv/controllers/csvAggCtrl.js"></script>
+			<!-- LOG !-->
+		<script type="text/javascript" src="js/log/services/logFactory.js"></script>
+		<script type="text/javascript" src="js/log/controllers/logCtrl.js"></script>
 			<!-- Charts !-->
 		<!-- 
 		<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script> 
@@ -144,7 +148,10 @@
 					</h4>
 				</div>
 				<hr/>
-				<!--<div ng-include="'template/context/context_selector.html'" ></div>!-->
+				<div ng-include="'template/log/logConsole.html'"></div>
+				<hr/>
+				<!--<div ng-include="'template/context/context_selector.html'" >
+				</div>!-->
 				
 			</div>
 			<div class="spacer"></div>

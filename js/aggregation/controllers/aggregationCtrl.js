@@ -6,7 +6,7 @@ var aggregationCtrl = function($scope, $modalInstance, aggregation, mapping){
 	$scope.info = {};
 	$scope.info.txt = global_text;
 	$scope.aggregation.focused = {};
-	$scope.fieldLimit = 9;
+	$scope.fieldLimit = 12;
 
 	$scope.addAggregation = function(array){
 		aggregation.addAggregation(array);
@@ -28,11 +28,11 @@ var aggregationCtrl = function($scope, $modalInstance, aggregation, mapping){
 	}
 
 	$scope.updateLimiteField = function () {
-		if ($scope.fieldLimit == 9) {
+		if ($scope.fieldLimit == 12) {
 			$scope.fieldLimit = $scope.mappingData.fields.length;
 		}
 		else {
-			$scope.fieldLimit = 9;
+			$scope.fieldLimit = 12;
 		}
 	}
 };

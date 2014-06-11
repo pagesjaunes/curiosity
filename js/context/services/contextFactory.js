@@ -107,13 +107,12 @@ Curiosity.factory('context', function(elasticClient, elasticFunc, $rootScope, $c
 		}
 	}
 
-	function init() {
+	contextObj.init = function() {
 		contextObj.getContextList();
 		if (typeof ($cookies[cookieName]) !== "undefined") {
 				contextObj.loadContext($cookies[cookieName]);
 		}
 	}
 
-	init();
 	return (contextObj); 
 })

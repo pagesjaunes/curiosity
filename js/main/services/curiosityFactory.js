@@ -1,10 +1,10 @@
-Curiosity.factory('curiosity', function($http, $rootScope, conf){
+Curiosity.factory('curiosity', function($http, $rootScope, conf, log){
 	var curiosityObj = {};
 	curiosityObj.info = {};
 
 	// General informations
 	curiosityObj.info.version = version;
-	curiosityObj.info.tab = 1;
+	curiosityObj.info.tab = 1;	
 	curiosityObj.info.loading = false;
 	curiosityObj.info.err = false;
 	curiosityObj.info.errList = [];
@@ -19,14 +19,31 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 	curiosityObj.info.indexList = [];
 	curiosityObj.info.aliases = [];
 
-
+	// Information to save in context
+	curiosityObj.serverInfo = {};
+	curiosityObj.serverInfo.server = curiosityObj.info.currentServer;
+	curiosityObj.serverInfo.index = curiosityObj.info.selectedIndex;
+	
 	/*
 	$rootScope.$on("ContextLoaded", function () {
-		context.setModuleInformation("curiosity", curiosityObj.info);
+		context.setModuleInformation("curiosity", curiosityObj.serverInfo);
+		if (typeof(curiosityObj.serverInfo.server) !== "undefined" && curiosityObj.serverInfo.server != "" && curiosityObj.info.currentServer != curiosityObj.serverInfo.server) {
+			if (typeof(curiosityObj.serverInfo.index) !== "undefined") {
+				curiosityObj.connectToServer(curiosityObj.serverInfo.server, false, curiosityObj.serverInfo.index)
+			}
+			else {
+				curiosityObj.connectToServer(curiosityObj.serverInfo.server);
+			}
+		}
+		else if (typeof(curiosityObj.serverInfo.index) !== "undefined"){
+			curiosityObj.info.selectedIndex = curiosityObj.serverInfo.index;			
+		}
 	}) 
 
 	$rootScope.$on("UpdateContext", function () {
-		context.setContextInformation("curiosity", curiosityObj.info);
+		curiosityObj.serverInfo.server = curiosityObj.info.currentServer;
+		curiosityObj.serverInfo.index = curiosityObj.info.selectedIndex;
+		context.setContextInformation("curiosity", curiosityObj.serverInfo);
 	})
 	*/
 
@@ -59,11 +76,12 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 
 	/** 
 	* connectToServer : Etablish connection to an elasticSearch server 
-	* @param  url : string, server's url
-	* @param  addServer : boolean, if true the url will be added to server list and save in conf index
+	* @param url : string, server's url
+	* @param addServer : boolean, if true the url will be added to server list and save in conf index
+	* @param index to select rigth after the connection is etablish
 	*/
 
-	curiosityObj.connectToServer = function(url, addServer) {
+	curiosityObj.connectToServer = function(url, addServer, index) {
 		if (typeof(url) === "undefinded" ||  url == "")
 			return ;
 		var serverUrl = url + '/_aliases';
@@ -82,25 +100,29 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf){
 			getAlias(data);
 			$rootScope.$broadcast("ServerChange");
 			curiosityObj.info.err = false;
+			log.log("Connexion au serveur \'" + url + "\' réussie", "success");
+			if (typeof(index) !== "undefined" && index != curiosityObj.info.selectedIndex) {
+				curiosityObj.info.selectedIndex = index;
+				curiosityObj.selectIndex();
+			}
 		}). error(function() {
 			curiosityObj.info.loading = false;
 			curiosityObj.info.connected = false;
 			curiosityObj.info.err = true;
-			curiosityObj.log("error", "Unable to contact the server : " + url); 
+			log.log("Unable to contact the server : \'" + url + "\'", "danger"); 
 		});
 	}
 
-	curiosityObj.log = function (type, message) {
-		curiosityObj.info.log.push({"type":type, "message":message});
+	curiosityObj.init = function () {
+		//context.init();
 	}
-
-	//curiosityObj.connectToServer(curiosityObj.info.currentServer, false);
 
 	/** 
 	* selectIndex : Function call every time an index is selected. Broadcast an event "IndexChange"  
 	*/
 	curiosityObj.selectIndex = function() {
 		$rootScope.$broadcast("IndexChange");
+		log.log("Sélection de l'index \'" + curiosityObj.info.selectedIndex+ "\'", "info");
 	}
 
 	/**

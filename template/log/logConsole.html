@@ -1,0 +1,11 @@
+<div ng-controller="logCtrl" class="log-module">
+	<h4>Log 
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!hideConsole,'glyphicon-plus':hideConsole}" ng-click="hideConsole = !hideConsole" title="Cacher/Montrer les logs">	
+		</span>
+	</h4>
+	<div class="log-console" ng-if="!hideConsole">
+		<alert ng-repeat="alert in data.logList" type="alert.type" close="delete($index)">
+			<b>{{ alert.date.getHours() }} : {{ alert.date.getMinutes() }}</b> : {{ alert.value }}
+		</alert>
+	</div>	
+</div>

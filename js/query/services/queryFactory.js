@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keyword, aggregation, $rootScope){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, aggregation, log){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -86,10 +86,15 @@ Curiosity.factory('query', function(elasticClient, ejsResource, curiosity, keywo
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
 				aggregation.updateResult(resp.aggregations);
 				$rootScope.$broadcast("QueryLaunched");
+				log.log("Requête : ok", "success");
 			},
 			function err(err) {
 				curiosity.load(false);
+				queryObj.info.result = {};
+				queryObj.info.hits = 0;
+				queryObj.info.maxPage = 0;
 				curiosity.addError(err);
+				log.log("Requête : ko, Code : " + err.status, "danger");
 			}
 		)
 
