@@ -8,7 +8,7 @@ var global_text = {
 		Index : "Index",
 		AllIndex : "Tous les Index",
 		Search : "Rechercher",
-		AutoRefresh : "Raffraichissement auto.",
+		AutoRefresh : "Rafraichissement auto.",
 		Hits : "Résultats : ",
 		Error : "Erreur",
 		Status : "Status",

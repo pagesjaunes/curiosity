@@ -19,17 +19,17 @@ Curiosity.factory('aggregation', function($rootScope, agg, context){
 	$rootScope.$on("ContextLoaded", function () {
 		context.setModuleInformation("aggregation", aggregationObj.aggregationInfo);
 		aggregationObj.info.aggregationFilter = aggregationObj.aggregationInfo.aggregationFilter;
-		aggregationObj.info.currentAgg = aggregationObj.aggregationInfo.currentAgg;	
+		console.log(aggregationObj.aggregationInfo.currentAgg);	
 		aggregationObj.validateAgg();	
 	}); 
 
 	$rootScope.$on("UpdateContext", function () {
 		aggregationObj.aggregationInfo.aggregationFilter = aggregationObj.info.aggregationFilter;
-		aggregationObj.aggregationInfo.currentAgg = agg.exportAgg(aggregationObj.info.currentAgg);
+		aggregationObj.aggregationInfo.currentAgg = aggregationObj.info.currentAgg;
+		console.log(aggregationObj.aggregationInfo.currentAgg);
 		context.setContextInformation("aggregation", aggregationObj.aggregationInfo);
 	});
 	*/
-
 	aggregationObj.addAggregation = function (array) {
 		array.push({obj:{},parent:array});
 	}
@@ -49,7 +49,6 @@ Curiosity.factory('aggregation', function($rootScope, agg, context){
 	aggregationObj.addAggregationToRequest = function (request) {
 		var  i = 0;
 		while (i < aggregationObj.info.validatedAgg.length) {
-			console.log(aggregationObj.info.validatedAgg[i]);
 			request.aggregation(aggregationObj.info.validatedAgg[i]);
 			i++;
 		}

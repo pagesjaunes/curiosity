@@ -1,9 +1,9 @@
 Overview 
 ========
 
-Curiosity is tool developed by ["Pages Jaunes"](http://www.pagesjaunes.fr/) which is used to browse elasticSearch's data in a simple an intuivive way.
+Curiosity is tool developed by ["Pages Jaunes"](http://www.pagesjaunes.fr/) which is used to browse elasticSearch's data in a simple an intuitive way.
 
-Main curiosity's functionality are : 
+Main curiosity's functionalities are : 
 
 * Keywords system
 
@@ -14,6 +14,12 @@ Main curiosity's functionality are :
 * Result Export
 
 * Research Context
+
+Information
+=========== 
+
+Curiosity is actually in developement, there is many features that aren't implemented yet like graphical visualizations or interface personalization. I'm sorry about the poor documentation and my english skills. We released this versions to have few feedback about current tool's possibility and interface. 
+If you have some advice about writting a good documentation, remarks or idea feel free to contact me (arthur.babey@epitech.eu) 
 
 Summary
 =======
@@ -41,8 +47,12 @@ After that, open index.html. Wait a moment (about 5 or 10 seconde) untill curios
 First step
 ==========
 
+Incoming
+
 Advanced user 
 =============
+
+Incoming
 
 Copyright and License
 =====================

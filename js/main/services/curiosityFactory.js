@@ -30,7 +30,6 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context){
 	* @param addServer : boolean, if true the url will be added to server list and save in conf index
 	* @param index to select rigth after the connection is etablish
 	*/
-
 	curiosityObj.connectToServer = function(url, addServer, index) {
 		if (typeof(url) === "undefinded" ||  url == "")
 			return ;
@@ -50,7 +49,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context){
 			getAlias(data);
 			$rootScope.$broadcast("ServerChange");
 			curiosityObj.info.err = false;
-			log.log("Connexion au serveur \'" + url + "\' réussie", "success");
+			log.log("Connection to \'" + url + "\' success", "success");
 			if (typeof(index) !== "undefined" && index != curiosityObj.info.selectedIndex) {
 				curiosityObj.info.selectedIndex = index;
 				curiosityObj.selectIndex();
@@ -72,7 +71,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context){
 	*/
 	curiosityObj.selectIndex = function() {
 		$rootScope.$broadcast("IndexChange");
-		log.log("Sélection de l'index \'" + curiosityObj.info.selectedIndex+ "\'", "info");
+		log.log("Index \'" + curiosityObj.info.selectedIndex+ "\' selected", "info");
 	}
 
 	/**
