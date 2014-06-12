@@ -31,7 +31,7 @@ function($scope, template, mapping){
 	* Add a new template in the template list
 	*/
 	$scope.new = function (type, obj, attr) {
-		var tmp = {name:"New Template",value:""}
+		var tmp = {name:"New Template",value:"<div ng-repeat='item in queryData.result.hits.hits'></div>"}
 		obj[attr] = tmp;
 		template.new(type, tmp);
 	}
