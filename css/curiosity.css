@@ -32,21 +32,15 @@ body {
 }
 
 /* header */
-#header {
-	position : relative;
+
+.light {
+
 }
 
-#bar {
-  margin : 10px;
-}
-
-#search-nav {
-	width : 200px;
-}
-
-.info-header {
-	padding-top : 7px;
-}
+  .light img {
+      width: 20px;
+      height: 20px;
+  }
 
 .version {
   font-style: italic;

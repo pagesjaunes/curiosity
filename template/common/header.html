@@ -62,6 +62,10 @@
 					</select>
         		</div>
       		</form>
+      		<p class="navbar-text navbar-left light">
+      			<img ng-if="data.err" src="resources/red_light.png">
+      			<img ng-if="!data.err" src="resources/green_light.png">
+      		</p>
 		</div>
 	</div>
 </div>
