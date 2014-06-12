@@ -91,7 +91,7 @@ There is many possibility like range, fuziness ect. Refer the elasticSearch docu
 Advanced user 
 =============
 
-## Result's Template
+## Result's Template
 
 One of the main features of curiosity is the ability to template the result list the way that you want. There is a WYSIWYG editor that allow you to built the template that you want. But if you want more you can directly edit the html code and add AngularJS function in your result list. There is no limit onli your imagination.
 
@@ -116,6 +116,7 @@ We are working on few angular directives that will allow you for example to disp
 Aggregation's template work like Result template but are a way harder to create. Go to the template tab then click on the aggregation template button. In this tab you can create, edit and delete template and define association between an aggreation type and a template.
 
 Here is a complex example of a terms aggregation template. This template allow you to filter your query with bucket value: 
+
 ```
 <div>
     <div class="panel panel-primary panel-request">
@@ -164,6 +165,7 @@ Here is a complex example of a terms aggregation template. This template allow y
     </div>
 </div>
 ```
+
 NB : This template will be included by default in incoming version of curiosity.
 
 Copyright and License
