@@ -191,10 +191,11 @@ NB : This template will be included by default in incoming version of curiosity.
 
 ## Context
 
-Informations 
-============ 
+Informations
+============
 
 Cursiosity use many librairies and plugins, thanks to all of their contributors. We highly encourage you to visit and stars their github.
+
 Here is the list :
 
 * [elasticsearch](https://github.com/elasticsearch/elasticsearch)
