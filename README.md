@@ -193,21 +193,20 @@ NB : This template will be included by default in incoming version of curiosity.
 
 # Informations
 
-
 Cursiosity use many librairies and plugins, thanks to all of their contributors. We highly encourage you to visit and stars their github.
 
 Here is the list :
 
 * [elasticsearch](https://github.com/elasticsearch/elasticsearch)
-    
+
 * [AngularJS](https://github.com/angular/angular.js)
-    
+
 * [bootsrap](https://github.com/twbs/bootstrap)
-    
+
 * [elastic.js](https://github.com/fullscale/elastic.js)
-    
+
 * [AngularUI](http://angular-ui.github.io/)
-    
+
 * [FileSaver](https://github.com/eligrey/FileSaver.js/)
-    
+
 * [TyniMce](http://www.tinymce.com/)
