@@ -27,10 +27,18 @@ Summary
     * First query 
 
 * Advanced user
+    
+    * Keywords
 
+    * Aggregations 
+    
     * Results Template
 
     * Aggregations Template
+
+    * Context
+
+* Informations 
 
 Instalation 
 ===========
@@ -90,6 +98,20 @@ There is many possibility like range, fuziness ect. Refer the elasticSearch docu
 
 Advanced user 
 =============
+
+## Keywords 
+
+Curiosity use a keyword system to simplifi complex request creation. You can attribute to a word a query and a description. Then when you will built a request, you can add a keyword in the query by clicking on him in the keywords panel (complex request), its value will be automaticly added. 
+There is two way to create a keyword :
+
+* You can create a new keyword from the current query by clicking on the button "keyword from query" (complex request). Then you will have to give him a name and a description. If all index are selected, the new keyword will be save as global keyword so it will be available on all.
+
+* You can create new keywords trought the keyword tab (customization/keywords). On this tab you have to select an index, then you can add as many keyword as you want. When it's done click on save to synchronize your local keyword with the server.
+
+## Aggregations 
+
+Curiosity come with an aggrgation creation tool. On the main page you can click on the button "aggregation", it will open a modal. In this modal you can create many aggregation and nested aggregation whenever it's possible (depending of the aggragtrion's type). The rigth panel lister every fields of the current index. By clicking on them, their path will be automaticly added to last aggregation created or focused. 
+
 
 ## Result's Template
 
@@ -165,24 +187,25 @@ Here is a complex example of a terms aggregation template. This template allow y
     </div>
 </div>
 ```
-
 NB : This template will be included by default in incoming version of curiosity.
 
-Copyright and License
-=====================
+## Context
 
-    Curiosity - BigData Explorer
-    Copyright (C) 2013  Fabrice Depaulis for PagesJaunes
+Informations 
+============ 
+Cursiosity use many librairies and plugins, thanks to all of their contributors. We highly encourage you to visit and stars their github.
+Here is the list :
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+* [elasticsearch](https://github.com/elasticsearch/elasticsearch)
+    
+* [AngularJS](https://github.com/angular/angular.js)
+    
+* [bootsrap](https://github.com/twbs/bootstrap)
+    
+* [elastic.js](https://github.com/fullscale/elastic.js)
+    
+* [AngularUI](http://angular-ui.github.io/)
+    
+* [FileSaver](https://github.com/eligrey/FileSaver.js/)
+    
+* [TyniMce](http://www.tinymce.com/)

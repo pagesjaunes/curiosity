@@ -4,7 +4,8 @@ Todo :
      -Ajout de comentaire // ENCOURS
      -Modifier l'export csv des aggrégation pour obtenir un résultat convenable // Presque ok
      -Remettre en forme curiosity.css
-
+     -Vider la liste des résultat en cas d'erreur
+     -Afficher des messages d'erreur explicite
      -!!! Depot privée github !!!
 
 Bug connus : 
