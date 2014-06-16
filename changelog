@@ -1,17 +1,25 @@
-version 0.1.1
+version 0.1.2
 
 -------------------------------------------------------------------------------------------------------------------
 
 Liste des modifications depuis le 11/06/2014 (0.1.1 à 0.1.2)
 	-Fonctionalitées :
 		-Ajout d'un module de prise de note
-		-Affichage et utilisation des contexts
+		-Context utilisable (mémorisation du serveur, index, requêtte, notes, ...)
+		-Base du système de context
 
-	-Interface Utilisateurs :
+	-Interface Utilisateur :
 		-Affichage des différents logs (message et couleurs en fonction du type). (ace69c5ca)
 		-Inversion des positions des listes déroulantes serveur et index
 		-Suppresion de l'affichage du nombre de résultats et du status dans la colonne de droite.
-		-Ajout d'un "voyant" de couleur representant le status dans la barre de navigatio
+		-Ajout d'un "voyant" de couleur representant le status dans la barre de navigation
+
+	-Correction de bug :
+		-Correction de bug mineur
+
+	-Divers :
+		-Mise a jour des fichiers de langue
+		-Documentation en anglais
 
 -------------------------------------------------------------------------------------------------------------------
 

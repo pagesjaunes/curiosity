@@ -122,5 +122,19 @@ var global_text = {
 		SomeResultTitle : "Export some of the result (nb) to csv file",
 		FullResultTitle : "Export all result to csv File !!! Warning : can take a large ammount of time and ressource if there is a lot of results",
 		FullResult : "Full Result",
+	},
+	context : {
+		Context : "Context",
+		UpdateContext : "Update current context",
+		SaveContext :  "Save current context",
+		NewContext : "New context",
+		SetAsDefaultContext : "Set as default context",
+		ContextName : "Context's Name",
+		Valider : "Validate"
+	},
+	log : {
+		Logs : "Logs",
+		Hide : "Hide/Show Logs",
+		Empty : "Empty Logs"
 	}
 }

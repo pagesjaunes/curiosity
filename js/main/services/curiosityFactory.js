@@ -1,4 +1,4 @@
-Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context){
+Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context, moduleManager){
 	var curiosityObj = {};
 	curiosityObj.info = {};
 
@@ -24,6 +24,11 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context){
 	curiosityObj.serverInfo.server = curiosityObj.info.currentServer;
 	curiosityObj.serverInfo.index = curiosityObj.info.selectedIndex;
 
+	moduleManager.registerModuleBlock("rigth-column");
+	moduleManager.registerModule("context", "template/context/context_selector.html", "rigth-column");
+	moduleManager.registerModule("logs", "template/log/logConsole.html", "rigth-column");
+	moduleManager.registerModule("diary", "template/diary/diary.html", "rigth-column");
+	
 	/** 
 	* connectToServer : Etablish connection to an elasticSearch server 
 	* @param url : string, server's url

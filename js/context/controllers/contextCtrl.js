@@ -1,15 +1,14 @@
 Curiosity.controller('contextCtrl', function($scope, context){	
 	$scope.data = context.info;	
 	$scope.data.contextIdx = -1;
+	$scope.info.newContextName = "";
 	
-	$scope.newContextName =  "";
-
 	$scope.sendContext = function() {
 		context.sendContext();
 	}
 
 	$scope.saveNewContext = function () {
-		context.newContext($scope.newContextName); 
+		context.newContext($scope.info.newContextName); 
 		context.sendContext();
 	}
 

@@ -90,7 +90,7 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 				confClient.search({index:globalConf.confIndex, body:request})
 				.then(function(data) {
 					gConf = data.hits.hits;
-					log.log("Configuration chargée", "info");
+					log.log("Configuration loaded", "info");
 					scope.$broadcast("ConfLoaded");
 				},
 				function (err) {

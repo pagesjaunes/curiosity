@@ -1,6 +1,6 @@
 <div ng-controller="contextCtrl" class="context-module module">
-
-	<h4> Context
+	
+	<h4> {{ info.txt.context.Context }}
 		<span ng-click="data.hide = !data.hide" 
 			class="glyphicon" ng-class="{'glyphicon-plus':data.hide, 'glyphicon-minus':!data.hide}">
 		</span>
@@ -8,7 +8,7 @@
 
 	<div ng-if="!data.hide">
 		<div class="input-group">
-			<span class="input-group-addon">Context</span>
+			<span class="input-group-addon">{{ info.txt.context.Context }}</span>
 			<select ng-model="data.contextIdx" ui-select2 class="form-control" ng-change="selectContext()">
 				<option ng-repeat="context in data.contextList" value ="{{ $index }}" >
 					{{ context.fields.contextName[0] }}
@@ -17,35 +17,37 @@
 		</div>
 
 		<div class="margin-top">
-			<button class="btn btn-default" ng-click="updateContext()" title="Mettre a jour le context">
+			<button class="btn btn-default" ng-click="updateContext()" title="{{ info.txt.context.UpdateContext }}">
 				<span class="glyphicon glyphicon-refresh"></span>
 			</button>
 
-			<button class="btn btn-default" ng-click="sendContext()" title="Sauvergarder le context">
+			<button class="btn btn-default" ng-click="sendContext()" title="{{ info.txt.context.SaveContext }}">
 				<span class="glyphicon glyphicon-floppy-disk"></span>
 			</button>	
 
-			<button class="btn btn-default" ng-click="showNewContext = !showNewContext">
-				<span ng-if="!showNewContext" class="glyphicon glyphicon-plus-sign" title="Nouveau context">
+			<button class="btn btn-default" ng-click="showNewContext = !showNewContext" title="{{ info.txt.context.NewContext }}">
+				<span ng-if="!showNewContext" class="glyphicon glyphicon-plus-sign">
 				</span>
-				<span ng-if="showNewContext" class="glyphicon glyphicon-ban-circle" title="close">
+				<span ng-if="showNewContext" class="glyphicon glyphicon-ban-circle">
 				</span>
 			</button>
 
-			<button class="btn btn-default" ng-click="setDefaultContext()" title="Etablir comme context par défaut">
+			<button class="btn btn-default" ng-click="setDefaultContext()" title="{{ info.txt.context.SetAsDefaultContext }}">
 				<span class="glyphicon glyphicon-star"></span>
 			</button>	
 		</div>
 
 		<div class="margin-top" ng-show="showNewContext">
 			<div class="input-group">
-				<span class="input-group-addon">Context's name</span>
-				<input type="text" ng-model="newContextName" class="form-control">
+				<span class="input-group-addon">{{ info.txt.context.ContextName }}</span>
+				<input type="text" ng-model="info.newContextName" class="form-control">
 			</div>
-			<button class="btn btn-default margin-top" ng-click="saveNewContext()" title="Valider">
+			<button class="btn btn-default margin-top" ng-click="saveNewContext()" title="{{ info.txt.context.Validate }}">
 				<span class="glyphicon glyphicon-ok"></span>
 			</button>
+
 		</div>
+
 	</div>
+
 </div>
-<hr/>

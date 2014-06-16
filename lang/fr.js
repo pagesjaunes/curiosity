@@ -123,4 +123,18 @@ var global_text = {
 		FullResultTitle : "Exporter tous les résultats au format csv !!! Attention l'export d'un grand nombre de résultats peut durer longtemps et avoir un impact sur les perfomances du serveur !!!",
 		FullResult : "Tous les Résultats",
 	},
+	context : {
+		Context : "Context",
+		UpdateContext : "Mettre a jour le template courant",
+		SaveContext :  "Sauvegarder le template courant",
+		NewContext : "Nouveau context",
+		SetAsDefaultContext : "Etablir comme context par défaut",
+		ContextName : "Nom",
+		Valider : "Valider"
+	},
+	log : {
+		Logs : "Logs",
+		Hide : "Cacher/Montrer les logs",
+		Empty : "Vider les logs"
+	}
 }

@@ -93,6 +93,9 @@
 		<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script> 
 		<script type="text/javascript" src="js/d3/directives/geoPointDirective.js"></script>
 		!-->
+		<!-- ModuleManager !-->
+		<script type="text/javascript" src="js/moduleManager/services/moduleManagerFactory.js"></script>
+		<script type="text/javascript" src="js/moduleManager/directives/moduleBlockDirective.js"></script>	
 	</head>
 	<body>
 		<div ng-controller="curiosityCtrl">
@@ -134,28 +137,8 @@
 			</div>
 			
 			<div id="content-right" class="col-sm-2">
-				<!--<div >
-					<h4> {{ info.txt.header.Hits }} 
-						<span class="label label-primary"> {{ queryData.hits }}</span> 
-					</h4>
+				<div moduleblock name="rigth-column">
 				</div>
-				<hr/>
-				<div >
-					<h4>{{ info.txt.header.Status }} : 
-						<span class="label label-danger" ng-if="data.err">
-							{{ info.txt.header.Error }}
-						</span>
-						<span class="label label-success" ng-if="!data.err">
-							{{ info.txt.header.NoError }}
-						</span>
-					</h4>
-				</div>
-				<hr/>!-->
-				<div ng-include="'template/log/logConsole.html'"></div>
-				<hr/>
-				<div ng-include="'template/diary/diary.html'" ></div>
-				<hr/>
-				<div ng-include="'template/context/context_selector.html'"></div>				
 			</div>
 			<div class="spacer"></div>
 		</div>

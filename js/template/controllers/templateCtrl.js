@@ -1,5 +1,5 @@
-Curiosity.controller('templateCtrl', ['$scope', 'template','mapping',
-function($scope, template, mapping){
+Curiosity.controller('templateCtrl', ['$scope', 'template','mapping', '$http',
+function($scope, template, mapping, $http){
 	// INITIALISATION
 	
 
@@ -71,5 +71,4 @@ function($scope, template, mapping){
 	$scope.updateAggAssoc = function(type, value) {
 		template.updateAggAssoc(type, value);
 	}
-
 }]);
