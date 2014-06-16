@@ -11,7 +11,7 @@
 			<span class="input-group-addon">{{ info.txt.context.Context }}</span>
 			<select ng-model="data.contextIdx" ui-select2 class="form-control" ng-change="selectContext()">
 				<option ng-repeat="context in data.contextList" value ="{{ $index }}" >
-					{{ context.fields.contextName[0] }}
+					{{ context.fields.contextName }}
 				</option>  
 			</select>
 		</div>
