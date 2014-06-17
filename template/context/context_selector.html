@@ -10,7 +10,7 @@
 		<div class="input-group">
 			<span class="input-group-addon">{{ info.txt.context.Context }}</span>
 			<select ng-model="data.contextIdx" ui-select2 class="form-control" ng-change="selectContext()">
-				<option ng-repeat="context in data.contextList" value ="{{ $index }}" >
+				<option ng-repeat="context in data.contextList" value="{{ $index }}" >
 					{{ context.fields.contextName }}
 				</option>  
 			</select>
@@ -34,7 +34,8 @@
 
 			<button class="btn btn-default" ng-click="setDefaultContext()" title="{{ info.txt.context.SetAsDefaultContext }}">
 				<span class="glyphicon glyphicon-star"></span>
-			</button>	
+			</button>
+			<button class="btn btn-default" ng-click="deleteContext()">delete</button>
 		</div>
 
 		<div class="margin-top" ng-show="showNewContext">
@@ -45,9 +46,6 @@
 			<button class="btn btn-default margin-top" ng-click="saveNewContext()" title="{{ info.txt.context.Validate }}">
 				<span class="glyphicon glyphicon-ok"></span>
 			</button>
-
 		</div>
-
 	</div>
-
 </div>

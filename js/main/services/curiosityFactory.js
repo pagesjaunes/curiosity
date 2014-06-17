@@ -25,10 +25,14 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context, m
 	curiosityObj.serverInfo.index = curiosityObj.info.selectedIndex;
 
 	moduleManager.registerModuleBlock("rigth-column");
+	moduleManager.registerModuleBlock("left-column");
+	moduleManager.registerModuleBlock("content");
 	moduleManager.registerModule("context", "template/context/context_selector.html", "rigth-column");
 	moduleManager.registerModule("logs", "template/log/logConsole.html", "rigth-column");
 	moduleManager.registerModule("diary", "template/diary/diary.html", "rigth-column");
-	
+	moduleManager.registerModule("aggResult", "template/aggregation_tab/aggregation_result_sub_tab.html", "left-column")
+	moduleManager.registerModule("request", "template/request_module/request_module.html", "content");
+
 	/** 
 	* connectToServer : Etablish connection to an elasticSearch server 
 	* @param url : string, server's url

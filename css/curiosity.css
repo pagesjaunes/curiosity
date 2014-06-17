@@ -1,5 +1,9 @@
 /* curiosity.css */ 
 
+.module-block {
+    padding: 10px 0;
+}
+
 /* Global */
 
 body { 
@@ -137,7 +141,7 @@ body {
 /* Result Tab */
 
 .aggregations-list  > ul {
-  padding-left : 10px;
+  padding-left : 0;
 }
 
 #query-result, #aggregation-result, #sidebar-resizer {
@@ -244,7 +248,7 @@ body {
 
 .result-list {
   overflow: auto;
-  height: 80%;
+  max-height: 80%;
 }
 #content-right {
   z-index : 101;

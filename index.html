@@ -106,18 +106,12 @@
 			</div>
 			
 			<div id="content-left" class="col-sm-2">
-				<!-- Aggregation result !-->
-				<div ng-if="data.tab == 1">
-					<h3>{{ info.txt.header.navBar.Aggregations }}</h3>
-					<div ng-controller="resultCtrl" ng-include="'template/result_tab/aggregation_result_sub_tab.html'"></div>
-				</div>
+				<div moduleblock name="left-column" type="column"></div>
 			</div>
 			
 			<div id="content" class="col-sm-8"> 
-				<!-- Result Panel !-->
-				<div ng-show="data.tab == 1" class="tab">
-					<div ng-include="'template/result_tab/result_tab.html'" ng-controller="resultCtrl"></div>
-				</div>
+				<div class="tab" ng-show="data.tab == 1" moduleblock name="content" type="content"></div>
+
 				<!-- Mapping Pannel !-->
 				<div ng-show="data.tab == 2" class="tab">
 					<div ng-include="'template/mapping_tab/mapping_tab.html'" ng-controller="mappingCtrl"></div>
@@ -130,14 +124,10 @@
 				<div ng-show="data.tab == 5" class="tab">
 					<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
 				</div>
-				<!-- BugReport Panel !-->
-				<div ng-show="data.tab == 6" class="tab">
-					<div ng-include="'template/bug_report_tab/bug_report_tab.html'" ng-controller="bugReportCtrl"></div>
-				</div>				
 			</div>
 			
 			<div id="content-right" class="col-sm-2">
-				<div moduleblock name="rigth-column">
+				<div moduleblock name="rigth-column" type="column">
 				</div>
 			</div>
 			<div class="spacer"></div>

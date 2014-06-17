@@ -56,6 +56,18 @@ Curiosity.factory("elasticFunc", function(log){
 			}, func)
 		},
 
+		"deleteDocument" : function (client, indexName, type, id, func) {
+			if (typeof(func) ==='undefined') {
+				func = this.elasticsearchError;				
+			} 
+			client.delete({
+				index:indexName,
+				type:type,
+				id:id
+			}, func)
+
+		},
+
 		/**
 		* sendNewDocument
 		* send a new document to an elasticsearch server (id auto)
