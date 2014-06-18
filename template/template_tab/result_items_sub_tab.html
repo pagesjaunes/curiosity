@@ -7,28 +7,27 @@
 	</div>
 </div>
 <div class="spacer"></div>
-<div class="btn-group col-sm-6 btn-keyword">
+<div class="btn-group col-sm-6 margin-top">
 	<button ng-click="new('template', template, 'currentTemplate')" class="btn btn-default">
 		{{ info.txt.template.result_items_sub_tab.New }}
 	</button>
 	<button ng-click="save('template')" class="btn btn-default">
 		{{ info.txt.template.result_items_sub_tab.Save }}
-		{{ info.txt.template.result_items_sub_tab.Delete }}
-	</button>	
+	</button>
 </div>
 <div class="spacer"></div>
-<div class="col-sm-6 btn-keyword">
+<div class="col-sm-6 margin-top">
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.template.result_items_sub_tab.TemplateName }}</span>
 		<input type="text" ng-model="template.currentTemplate.name" class="form-control"></input>
 	</div>
 </div>
 <div class="spacer"></div>
-<div class="col-sm-8 btn-keyword">
+<div class="margin-top">
 	<textarea ui-tinymce="tiny.tinymceOptions" ng-model="template.currentTemplate.value">
 	</textarea>
 </div>
-<div class="col-sm-4">
+<div class="margin-top">
 	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h3 class="panel-title">

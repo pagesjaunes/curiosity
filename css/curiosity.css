@@ -99,10 +99,10 @@ body {
 }
 
 .gridStyle {
-  border: 1px solid rgba(0, 0, 0, 0);
+  border: 1px solid;
   margin-top : 10px;
-  width : 500px;
   height : 500px;
+  width: 500px;
   border-color: #E7E7E7;
   border-radius: 4px;
 }
@@ -193,10 +193,33 @@ body {
   padding-left : 15px;
 }
 
+/* CSV Modal */
+
 .modal-scroll {
   height: 60%;
   overflow: auto;
 }
+
+.modal-body {
+  padding: 15px;
+}
+
+  .ok  {
+    color: green;
+  }
+
+  .ko {
+    color: red;
+  }
+
+  .hide-button {
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    padding : 6px 0 0 0;  
+  }
+
+
 .float-right {
   float: right;
 }
@@ -303,3 +326,4 @@ body {
 .departement:hover {
   fill : #777777;
 }
+

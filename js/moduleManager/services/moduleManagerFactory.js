@@ -1,6 +1,7 @@
 Curiosity.factory('moduleManager', function($rootScope, context){
 	var moduleManagerObj = {}; 
 	moduleManagerObj.info = {};
+	moduleManagerObj.info.lock = true;
 	var id = 0;
 
 	moduleManagerObj.info.moduleBlocks = {}; 	 

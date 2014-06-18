@@ -1,7 +1,7 @@
 // keyWordCtrl.js
 
 Curiosity.controller('keyWordCtrl', ['$scope','keyword', 'curiosity',
-function($scope, keyword, curiosity){
+function($scope, keyword, curiosity, mapping){
 	/* INITIALISATION */
 	$scope.curiosityData = curiosity.info;
 	$scope.keyword = {};
@@ -11,8 +11,16 @@ function($scope, keyword, curiosity){
 	/* EVENTS */
 	$scope.$on("ConfLoaded", function () {
 		keyword.update();
-		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords
+		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
 	});
+
+	$scope.$on("IndexChange", function () {
+		$scope.keyword.selectedIndex = curiosity.info.selectedIndex;
+		if ($scope.keyword.selectedIndex == "") {
+			$scope.keyword.selectedIndex = "global";
+		}
+		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
+	})
 
 	/**
 	* selectIndex
@@ -43,7 +51,7 @@ function($scope, keyword, curiosity){
 
 	/**
 	* removeRow
-	* remove a row in th grid and the attached keyword in th sametime.
+	* remove a row in the grid and the attached keyword in the sametime.
 	*/
 	$scope.removeRow = function() {
 		var index = this.row.rowIndex;
@@ -56,13 +64,14 @@ function($scope, keyword, curiosity){
 	$scope.gridOptions = { 
 			data: 'currentKeywords',
 			enableCellSelection: true,
+			enableColumnResize: true,
 			enableRowSelection: false,
 			enableCellEditOnFocus: true,
 			columnDefs: [	
-			{field: 'label', displayName:'Label', enableCellEdit: true, }, 
-			{field:'value', displayName:'Value', enableCellEdit: true, },
-			{field:'desc', displayName:'Description', enableCellEdit: true,},
-			{field: 'remove', displayName:'Remove', cellTemplate: removeTemplate, enableCellEdit: false, width:"5%"}
+			{field: 'label', displayName:'Label', width:"25%", enableCellEdit: true,}, 
+			{field:'value', displayName:'Value', width:"40%", enableCellEdit: true, },
+			{field:'desc', displayName:'Description', width:"25%",enableCellEdit: true,},
+			{field: 'remove', displayName:'Remove',width:"10%", cellTemplate: removeTemplate, enableCellEdit: false}
 			]
 		};
 }]);

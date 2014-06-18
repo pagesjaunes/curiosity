@@ -7,6 +7,7 @@ Curiosity.directive('moduleblock', function(moduleManager){
 		link: function($scope, Elm, Attrs) {
 			$scope.info = {};
 			$scope.info.txt = global_text;
+			$scope.data = moduleManager.info;
 			if (typeof(Attrs["name"]) !== "undefined") {
 				$scope.moduleBlock = moduleManager.getModuleBlock(Attrs["name"]);
 			}

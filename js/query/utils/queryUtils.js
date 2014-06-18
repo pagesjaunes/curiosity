@@ -72,15 +72,7 @@ function splitRequest(keywords , string)
 			result.push("\"" + stringSplitComa[i] + "\"");
 		}
 		else {
-			var stringSplitSpace = stringSplitComa[i].split("(");
-			var j = 0;
-			while (j < stringSplitSpace.length){
-				if (j % 2) {
-					result = result.concat(['(']);
-				}
-				result = result.concat(interpret(keywords, stringSplitSpace[j]));	
-				j++;
-			}
+			result = result.concat(interpret(keywords, stringSplitComa[i]));
 		}
 		i++;
 	} 

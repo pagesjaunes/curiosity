@@ -2,7 +2,7 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 	var contextObj = {};
 	var contextDocumentType = "context-doc";
 	var cookieName = "CurisoityDefaultContext";
-	var prevIdx = 0;
+	var prevIdx = -2;
 	var client = elasticClient.getClient(globalConf.confServer);
 
 	var context = {}
@@ -48,6 +48,7 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 	}
 
 	contextObj.newContext = function(name) {
+		context = {};
 		contextObj.info.currentContext = {};
 		contextObj.info.currentContext.contextName = name;
 	}

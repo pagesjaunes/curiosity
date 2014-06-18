@@ -14,13 +14,6 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
     	var limitOnKeywords = true;
  
 	    /* EVENTS */
-		$scope.$on('IndexChange',function (){
-			query.updateIndex();
-		});
-
-		$scope.$on('ServerChange', function() {
-	    	query.updateClient();
-		});
 
 		$scope.search = function(noReset) {
 			query.search(noReset); 

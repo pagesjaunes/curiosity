@@ -30,8 +30,14 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context, m
 	moduleManager.registerModule("context", "template/context/context_selector.html", "rigth-column");
 	moduleManager.registerModule("logs", "template/log/logConsole.html", "rigth-column");
 	moduleManager.registerModule("diary", "template/diary/diary.html", "rigth-column");
+	moduleManager.registerModule("moduleManager", "template/moduleManager/module_moduleManager.html", "rigth-column");
 	moduleManager.registerModule("aggResult", "template/aggregation_tab/aggregation_result_sub_tab.html", "left-column")
-	moduleManager.registerModule("request", "template/request_module/request_module.html", "content");
+	moduleManager.registerModule("requestForm", "template/request_module/partials/request_form.html", "content");
+	moduleManager.registerModule("requestOption", "template/request_module/partials/request_option_bar.html", "content");
+	moduleManager.registerModule("requestAQ", "template/request_module/partials/request_advanced_query.html", "content");
+	moduleManager.registerModule("requestQF", "template/request_module/partials/request_query_filter.html", "content");
+	moduleManager.registerModule("requestPagination", "template/request_module/partials/request_pagination.html", "content");
+	moduleManager.registerModule("requestResult", "template/request_module/partials/request_result_display.html", "content");
 
 	/** 
 	* connectToServer : Etablish connection to an elasticSearch server 

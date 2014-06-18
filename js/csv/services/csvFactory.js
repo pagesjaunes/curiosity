@@ -206,7 +206,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query, aggrega
 		idx++;
 		if (idx == field.length)
 			return (objTmp);
-		else if (typeof(objTmp) === "undefined") {
+		else if (typeof(objTmp) === "undefined" || objTmp === null) {
 			return ("");
 		}
 		else if (objTmp instanceof Array){

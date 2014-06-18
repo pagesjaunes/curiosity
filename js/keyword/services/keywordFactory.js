@@ -1,4 +1,4 @@
-Curiosity.factory('keyword', function(conf){
+Curiosity.factory('keyword', function($rootScope, conf){
 	var keywordObj = {};
 	var keywordArray  = [];
 
@@ -26,6 +26,12 @@ Curiosity.factory('keyword', function(conf){
 	}
 
 	keywordObj.saveIndex = function (index, data) {
+		// delete space 
+		var i = 0; 
+		while  (i < data.length) {
+			data[i].label = data[i].label.replace(/ /g, "");
+			i++;
+		}
 		var confIndice = conf.getConfDocumentIndice("keyword");
 		if (confIndice >= 0) {
 			var curIndex = findIndexByName(index);
@@ -36,6 +42,7 @@ Curiosity.factory('keyword', function(conf){
 				gConf[confIndice]._source.keywords.push({"index":index, "keywords":data});
 			}
 			conf.sendConfDocument("keyword");
+			$rootScope.$broadcast("KeywordUpdate");
 		}
 	}
 
@@ -62,7 +69,8 @@ Curiosity.factory('keyword', function(conf){
 	keywordObj.getKeywordListFromIndexFilter = function (index, word) {
 		var result = new Array ;
 		var i = 0;
-		var re = new RegExp("^" + word + ".*");
+		var tmp = escapeRegExp(word)
+		var re = new RegExp("^" + tmp + ".*");
 		var curentKeyword = keywordObj.getKeywordListFromIndex(index);
 		while (i < curentKeyword.length){
 			if (re.test(curentKeyword[i].label))
@@ -84,6 +92,8 @@ Curiosity.factory('keyword', function(conf){
 			keywordArray.push({"index":index, "keywords":[keyword]})
 		}
 		conf.sendConfDocument("keyword");
+		$rootScope.$broadcast("KeywordUpdate");
 	}
+
 	return (keywordObj);
 })

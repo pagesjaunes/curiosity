@@ -1,4 +1,5 @@
 <div>
+	
 	<div class="modal-header">
 		<h3 class="modal-title">{{ info.txt.csvModal.CsvExport }}</h3>	
 		<div id="modal-csv-option">
@@ -25,30 +26,35 @@
 	<div ng-if="!data.loading">
 		
 		<div class="modal-body modal-scroll">
-			<div>
+			<div class="input-group">
+				<label class="input-group-addon"> Search </label>
+				<input type="text" class="form-control" ng-model="keywordFilter">
+			</div>
+			<div class="margin-top">
 				<label class="col-sm-4">
 					{{ info.txt.csvModal.Name }}
 				</label>
 				<div class="col-sm-5">
 					<label>{{ info.txt.csvModal.Alias }}</label>
 				</div>
-				<button class="btn btn-default col-sm-2" ng-click="hideAllField()">
-					<span ng-if="hideAll">{{ info.txt.csvModal.Show }}</span>
-					<span ng-if="!hideAll">{{ info.txt.csvModal.Hide }}</span>
-				</button>
+				<span title="{{ info.txt.csvModal.Hide }}" ng-if="!hideAll" class="col-sm-2 glyphicon glyphicon-ok ok hide-button" ng-click="hideAllField()">
+				</span>
+				<span ng-if="hideAll" class="col-sm-2 glyphicon glyphicon-remove ko hide-button" ng-click="hideAllField()" title="{{ info.txt.csvModal.Show }}">
+				</span>
 				<div class="spacer"></div>		
 			</div>
-			<div ng-repeat="field in data.fields" class="margin-top">
+			
+			<div ng-repeat="field in data.fields | filter:keywordFilter" class="margin-top">
 				<label class="col-sm-4">
 					<a title="{{ field.ancestor }}">{{ field.name }}</a> 
 				</label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" ng-model="field.alias">
 				</div>		
-				<button class="btn col-sm-2" ng-class="{'btn-danger':field.hide, 'btn-success':!field.hide}" ng-click="hideField($index)">
-					<span ng-if="field.hide">{{ info.txt.csvModal.Show }}</span>
-					<span ng-if="!field.hide">{{ info.txt.csvModal.Hide }}</span>
-				</button>
+				<span title="{{ info.txt.csvModal.Hide }}" ng-if="!field.hide" class="col-sm-2 glyphicon glyphicon-ok ok hide-button" ng-click="hideField($index)">
+				</span>
+				<span ng-if="field.hide" class="col-sm-2 glyphicon glyphicon-remove ko hide-button" ng-click="hideField($index)" title="{{ info.txt.csvModal.Show }}">
+				</span>
 				<div class="spacer"></div>
 			</div>
 		</div>

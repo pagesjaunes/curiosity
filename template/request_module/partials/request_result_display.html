@@ -1,0 +1,24 @@
+<div ng-controller="resultCtrl">
+	<p class="text-muted result-info">
+		{{queryData.hits}} {{ info.txt.result.request_sub_tab.Results}}
+	</p>
+	<hr/>
+	<div id="json-answer" ng-if="showJsonResult">
+		{{queryData.result}}
+	</div>
+	<div ng-if="!showJsonResult" class="result-list">
+		<div class="flipped">
+			<div ng-if="!data.useTemplate">
+				<table class="table table-striped col-sm-12">
+					<tr ng-repeat="doc in queryData.result.hits.hits | filter:searchText">
+						<td>{{ doc }}</td>
+					</tr>
+				</table>
+				<div class="spacer"></div>
+			</div>
+			<div ng-if="data.useTemplate">
+				<div ng-include="data.currentTemplate"></div>
+			</div>
+		</div>
+	</div>
+</div>

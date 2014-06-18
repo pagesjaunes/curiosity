@@ -34,14 +34,14 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		$scope.showAggregationFilter = true;
 		aggregation["add"+type+"AggregationFilter"](aggr, bucket);
 		if ($scope.queryData.autoRefresh){
-			$scope.search();
+			query.search();
 		}
 	}
 
 	$scope.removeAggFilter = function(tab, index) {
 		aggregation.removeAggFilter(tab, index);
 		if ($scope.queryData.autoRefresh){
-			$scope.search();
+			query.search();
 		}
 	}
 	
