@@ -17,7 +17,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	queryObj.info.error = false;
 	queryObj.info.errorContent = "";
 	queryObj.info.result = {};
-
+	
 	// Infomration to save in context
 	queryObj.queryInfo = {};
 	queryObj.queryInfo.simplifiedRequest = queryObj.info.simplifiedRequest;	 

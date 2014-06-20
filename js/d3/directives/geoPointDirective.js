@@ -1,4 +1,4 @@
-Curiosity.directive('geopoint', function () {
+Curiosity.directive('geopoint', function (query) {
 	return  {
 		restrict : 'A',
 		scope : {
@@ -6,8 +6,12 @@ Curiosity.directive('geopoint', function () {
 		},
 		link : function ($scope, element, attrs) {
 			var dataset = $scope.dataset;
-			var width = 1000;
-			var height = 600;
+			if (typeof(dataset) === "undefined") {
+				dataset = query.info.result;
+			}
+
+			var width = 200;
+			var height = 300;
 			var	color = "#000000";
 			var latWay = attrs.latway.split('.');
 			var longWay = attrs.longway.split('.');
@@ -31,7 +35,7 @@ Curiosity.directive('geopoint', function () {
 			var path = d3.geo.path();
 			var projection = d3.geo.conicConformal() // Lambert-93
 			.center([2.454071, 47.279229]) // On centre la carte sur la France
-			.scale(2000)
+			.scale(1500)
 			.translate([width / 2, height / 2]);
 
 			path.projection(projection); // On assigne la projection au path
@@ -47,17 +51,25 @@ Curiosity.directive('geopoint', function () {
 
 			function updateMap() {
 				var i = 0;
-				while (i < dataset.length) {
-					var coor = projection([getValue(dataset[i], longWay), getValue(dataset[i], latWay)]);
-					deps.append('svg:circle')
-        			.attr('cx', coor[0])
-        			.attr('cy', coor[1])
-        			.attr('fill', color)
-        			.attr('r', 2)
-        			.append("svg:title")
-        			.text(dataset[i]._source.denomination)
-        			;
-					i++;
+				var tmp = query.info.result.hits;
+				if (typeof(tmp) === "undefined") {
+					return 
+				}
+				
+				tmp	= tmp.hits;
+				if (typeof(tmp) !== "undefined") {
+					while (i < tmp.length) {
+						var coor = projection([getValue(tmp[i], longWay), getValue(tmp[i], latWay)]);
+						deps.append('svg:circle')
+	        			.attr('cx', coor[0])
+	        			.attr('cy', coor[1])
+	        			.attr('fill', color)
+	        			.attr('r', 2)
+	        			.attr("ng-click","select("+i+")")
+	        			.append("svg:title")
+	        			.text(tmp[i]._source.denomination);
+						i++;
+					}
 				}
 			}
 

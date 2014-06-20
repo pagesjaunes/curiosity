@@ -33,9 +33,7 @@
 		<script type="text/javascript" src="vendor/elastic/elastic-angular-client.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elasticsearch.angular.min.js"></script>
 		<script type="text/javascript" src="vendor/FileSaver/FileSaver.js"></script>
-		<!--
 		<script type="text/javascript" src="vendor/d3js/d3.min.js"></script>
-		!-->
 		<!-- Project specique files !-->
 			<!-- Conf file !-->
 		<script type="text/javascript" src="conf.js"></script>
@@ -67,6 +65,7 @@
 			<!-- Result !-->
 		<script type="text/javascript" src="js/result/services/resultFactory.js"></script>
 		<script type="text/javascript" src="js/result/controllers/resultCtrl.js"></script>
+		<script type="text/javascript" src="js/result/controllers/resultAutoCtrl.js"></script>
 			<!-- Mapping !-->
 		<script type="text/javascript" src="js/mapping/utils/mappingUtils.js"></script>
 		<script type="text/javascript" src="js/mapping/services/mappingFactory.js"></script>
@@ -90,16 +89,15 @@
 		<script type="text/javascript" src="js/diary/controllers/diaryCtrl.js"></script>
 			<!-- Charts !-->
 		<!-- 
-		<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script> 
+		<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script>!--> 
 		<script type="text/javascript" src="js/d3/directives/geoPointDirective.js"></script>
-		!-->
 		<!-- ModuleManager !-->
 		<script type="text/javascript" src="js/moduleManager/services/moduleManagerFactory.js"></script>
 		<script type="text/javascript" src="js/moduleManager/controllers/moduleManagerCtrl.js"></script>
 		<script type="text/javascript" src="js/moduleManager/directives/moduleBlockDirective.js"></script>	
 	</head>
 	<body>
-		<div ng-controller="curiosityCtrl">
+		<div ng-controller="curiosityCtrl" ng-class="{'unlock':!moduleManagerData.lock}">
 			<div id="loading-image" ng-show="data.loading">
 				<span><img src="resources/ajax-loader.gif" id="loading-image"></img></span>
 			</div>

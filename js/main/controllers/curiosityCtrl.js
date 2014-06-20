@@ -1,9 +1,9 @@
-Curiosity.controller('curiosityCtrl',
-function($scope, conf, curiosity, query){	
+Curiosity.controller('curiosityCtrl', function($scope, conf, curiosity, query, moduleManager){	
 	/* INITIALISATION */
 	$scope.data = curiosity.info;
 	$scope.queryData = query.info;
-
+	$scope.moduleManagerData = moduleManager.info;
+	
 	$scope.info = {};
 	$scope.info.txt = global_text;
 	/* EVENTS */

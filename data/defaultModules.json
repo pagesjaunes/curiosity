@@ -1,0 +1,17 @@
+{
+"defaultModule":
+[
+	{"name":"context","template": "template/context/context_selector.html", "moduleBlocks":"rigth-column"},
+	{"name":"logs", "template":"template/log/logConsole.html", "moduleBlocks":"rigth-column"},
+	{"name":"diary", "template":"template/diary/diary.html", "moduleBlocks":"rigth-column"},
+	{"name":"moduleManager", "template":"template/moduleManager/module_moduleManager.html", "moduleBlocks":"rigth-column"},
+	{"name":"trash", "template":"template/moduleManager/trash.html", "moduleBlocks":"rigth-column"},
+	{"name":"aggResult", "template":"template/aggregation_tab/aggregation_result_sub_tab.html", "moduleBlocks":"left-column"},
+	{"name":"requestForm", "template":"template/request_module/partials/request_form.html", "moduleBlocks":"content"},
+	{"name":"requestOption", "template":"template/request_module/partials/request_option_bar.html", "moduleBlocks":"content"},
+	{"name":"requestAQ", "template":"template/request_module/partials/request_advanced_query.html", "moduleBlocks":"content"},
+	{"name":"requestQF", "template":"template/request_module/partials/request_query_filter.html", "moduleBlocks":"content"},
+	{"name":"requestPagination", "template":"template/request_module/partials/request_pagination.html", "moduleBlocks":"content"},
+	{"name":"requestResult", "template":"template/request_module/partials/request_result_display.html", "moduleBlocks":"content"}
+]
+}

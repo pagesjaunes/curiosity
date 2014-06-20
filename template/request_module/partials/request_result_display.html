@@ -3,10 +3,10 @@
 		{{queryData.hits}} {{ info.txt.result.request_sub_tab.Results}}
 	</p>
 	<hr/>
-	<div id="json-answer" ng-if="showJsonResult">
+	<div id="json-answer" ng-if="data.showJsonResult">
 		{{queryData.result}}
 	</div>
-	<div ng-if="!showJsonResult" class="result-list">
+	<div ng-if="!data.showJsonResult" class="result-list">
 		<div class="flipped">
 			<div ng-if="!data.useTemplate">
 				<table class="table table-striped col-sm-12">

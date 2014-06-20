@@ -9,6 +9,34 @@
 			cursor : pointer;
 			margin-left : 10px;
 		}
+
+
+[draggable=true]{
+    cursor: move;
+}
+
+[draggable=true]:hover{
+    border: dashed 2px #428bca; /* CSS3 */
+}
+
+[type="trash"] {
+	background-image:url("../resources/trash.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 20px;
+}
+
+.unlock [type="trash"] [dropzone] {
+	box-shadow: none;
+}
+
+.unlock [dropzone]{
+	box-shadow:0 0 5px #DDDDDD;
+    transition:
+        box-shadow linear 0.2s,
+        background-color linear 0.2s;
+}
+
 /*
 	Log modules
 */
