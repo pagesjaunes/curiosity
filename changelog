@@ -7,6 +7,7 @@ Liste des modifications depuis le 16/06/2014 (0.1.2 à 0.1.3)
 		-D&D de modules.
 		-Mémorisation de la position des modules dans les contexts.
 		-Recherche automatique lors d'un changement d'index (si autorefresh activé).
+		-Ajout des tris dans le module requêtte avancée.
 
 	-Interface Utilisateur :
 		-CSV :

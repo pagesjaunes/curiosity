@@ -78,7 +78,8 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 			request.query(queryString);
 		}
 		request.size(queryObj.info.nbResult);
-		request.from(queryObj.info.page * queryObj.info.nbResult); 
+		request.from(queryObj.info.page * queryObj.info.nbResult);
+		addSortToRequest(request,queryObj.info.sort);
 		queryObj.info.jsonRequest = request;
 		return (request);
 	}
@@ -137,7 +138,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				log.log("Requête : ko, Code : " + err.status, "danger");
 			}
 		)
-
 	}
 
 	queryObj.addValueInQuery = function(keyword) {
@@ -208,6 +208,56 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	queryObj.addKeywordFromQuery = function (name, value, desc) {
 		var nKeyword = {'label':name, 'value':value, 'desc':desc};
 		keyword.addKeywordInIndex(nKeyword, currentIndex);
+	}
+
+	// SORT FUNCTION
+	// Initialisation
+	queryObj.info.sort = [];
+
+	queryObj.addSort = function () {
+		console.log("tetst");
+		queryObj.info.sort.push({"field":"",type:true});
+	}
+
+	queryObj.removeSort = function (index) {
+		queryObj.info.sort.splice(index, 1);	
+	}
+
+	queryObj.cleanSort = function () {
+		queryObj.info.sort = [];	
+	}
+
+	queryObj.sortUp = function(index) {
+		if (index > 0) {
+			var tmp1 = queryObj.info.sort[index];
+			var tmp2 = queryObj.info.sort[index - 1];
+			queryObj.info.sort[index] = tmp2;
+			queryObj.info.sort[index - 1] = tmp1;
+		}
+	}
+
+	queryObj.sortDown =  function (index)  {
+		if (index < queryObj.info.sort.length - 1) {
+			var tmp1 = queryObj.info.sort[index];
+			var tmp2 = queryObj.info.sort[index + 1];
+			queryObj.info.sort[index] = tmp2;
+			queryObj.info.sort[index + 1] = tmp1;	
+		}
+ 	}
+
+	function addSortToRequest(request, sort) {
+		var i = 0;
+		while (i < sort.length) {
+			var sortTmp =  ejs.Sort(sort[i].field);
+			if (sort[i].type) {
+				sortTmp.asc();
+			}
+			else {
+				sortTmp.desc();	
+			}
+			request.sort(sortTmp);
+			i++;
+		}
 	}
 
 	return queryObj;

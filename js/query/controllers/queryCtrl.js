@@ -52,6 +52,25 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
 		$scope.addKeywordFromQuery = function (name, desc) {
 			query.addKeywordFromQuery(name, $scope.data.complexRequest, desc);
 		}
+
+		$scope.addSort = function () {
+			query.addSort();
+		}
+
+		$scope.removeSort = function (index) {
+			query.removeSort(index)	
+		}
+
+		$scope.cleanSort = function () {
+			query.cleanSort();	
+		}
+
+		$scope.move =  function (index, up) {
+			if (up)
+				query.sortUp(index);
+			else 
+				query.sortDown(index);
+		}
 	}
 ]);
 

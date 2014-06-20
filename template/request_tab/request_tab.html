@@ -84,6 +84,41 @@
 				</div>
 			</div>
 
+			<div>
+				<h4> Sort by </h4>
+				<div ng-repeat="sort in data.sort" class="margin-top">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<span class="input-group-addon">Field</span>
+							<input class="form-control"  ng-model="sort.field">  
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<button class="btn btn-primary " ng-click="sort.type = !sort.type" title="ASC/DESC">
+							<span class="glyphicon" ng-class="{'glyphicon-arrow-up':sort.type, 'glyphicon-arrow-down': !sort.type}">
+							</span>
+						</button>
+						
+						<button class="btn btn-danger " ng-click="removeSort($index)" title="Remove">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+						
+						<button class="btn btn-info" title="Reorder up" ng-click="move($index, true)">
+							<span class="glyphicon glyphicon-circle-arrow-up"></span>
+						</button>
+						
+						<button class="btn btn-info" title="Reorder down" ng-click="move($index, false)">
+							<span class="glyphicon glyphicon-circle-arrow-down"></span>
+						</button>
+					</div>
+					<div class="spacer"></div>
+				</div>
+				
+				<div class="margin-top">
+					<button ng-click="addSort()" class="btn btn-success">Add Sort</button>
+				</div>
+			</div>
+
 			<div class="spacer"></div>
 
 			<div class="panel panel-default" id="json-panel">
@@ -98,10 +133,11 @@
 					{{ data.jsonRequest }}
 				</div>
 			</div>
+
 			<button type="submit" ng-click="search() " class="btn btn-default">
 				<span class="glyphicon glyphicon-search"></span> 
 				{{ info.txt.request.Search }}
-		</button>
+			</button>
 		</form>
 	</div>
 	
