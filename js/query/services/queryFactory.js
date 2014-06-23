@@ -137,7 +137,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				curiosity.addError(err);
 				log.log("Requête : ko, Code : " + err.status, "danger");
 			}
-		)
+		)	
 	}
 
 	queryObj.addValueInQuery = function(keyword) {

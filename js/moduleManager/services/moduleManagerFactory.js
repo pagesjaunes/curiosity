@@ -129,6 +129,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		$http({method: 'GET', url:"data/defaultModules.json"}).
 			success(function(data) {
 				moduleManagerObj.info.defaultModule = data.defaultModule;
+				console.log(data.defaultModule);
 				if (typeof(callback) !== "undefined") {
 					callback();
 				}
@@ -202,5 +203,6 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 	})
 
 	getModuleList();
+	getDefaultModule();
 	return (moduleManagerObj);
 })
