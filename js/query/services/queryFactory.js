@@ -41,10 +41,12 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		if (queryObj.info.complexRequest = queryObj.queryInfo.complexRequest) {
 			flag = true;
 		}
-		queryObj.info.complexRequest = queryObj.queryInfo.complexRequest;
- 		 
+		queryObj.info.complexRequest = queryObj.queryInfo.complexRequest; 
  		queryObj.info.autoRefresh = queryObj.queryInfo.autoRefresh;
 		queryObj.info.nbResult = queryObj.queryInfo.nbResult;
+		if (typeof(queryObj.info.nbResult) === "undefined") {
+			queryObj.info.nbResult = 10;
+		}
 		if (flag && queryObj.info.autoRefresh) {
 			queryObj.search();
 		}
@@ -124,6 +126,8 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				curiosity.stopError();
 				queryObj.info.result = resp;
 				queryObj.info.hits = resp.hits.total;
+				if (typeof(queryObj.info.nbResult) === "undefined")
+					 queryObj.info.nbResult = 10;
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
 				aggregation.updateResult(resp.aggregations);
 				$rootScope.$broadcast("QueryLaunched");
@@ -215,7 +219,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	queryObj.info.sort = [];
 
 	queryObj.addSort = function () {
-		console.log("tetst");
 		queryObj.info.sort.push({"field":"",type:true});
 	}
 

@@ -108,9 +108,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 
 	moduleManagerObj.cleanModule = function () {
 		for (key in  moduleManagerObj.info.moduleBlocks) {
-			console.log(moduleManagerObj.info.moduleBlocks[key].modules);
 			moduleManagerObj.info.moduleBlocks[key].modules = [];	
-			console.log(moduleManagerObj.info.moduleBlocks[key].modules);
 		}	
 	}
 
@@ -129,7 +127,6 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		$http({method: 'GET', url:"data/defaultModules.json"}).
 			success(function(data) {
 				moduleManagerObj.info.defaultModule = data.defaultModule;
-				console.log(data.defaultModule);
 				if (typeof(callback) !== "undefined") {
 					callback();
 				}
@@ -174,7 +171,13 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 	$rootScope.$on("ContextLoaded", function () {
 		var tmp = {};
 		context.setModuleInformation("moduleManager", tmp);
-		if (tmp) {
+		var i = 0;	
+		for (key in tmp){
+			i++;
+			break;
+		}
+
+		if (i) {
 			for (key in  tmp) {
 				if (typeof(moduleManagerObj.info.moduleBlocks[key]) !== "undefined") {
 					for (key2 in tmp[key]) {
