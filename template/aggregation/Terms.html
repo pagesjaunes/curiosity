@@ -1,44 +1,30 @@
 <div>
 	<div class="panel panel-primary panel-request">
-		<div class="panel-heading">
-		<h3 class="panel-title col-sm-8">{{ agg.agg.type }} on {{agg.agg.field}}</h3>
-		<span class="col-sm-2 glyphicon pointer" ng-class="{'glyphicon-plus': agg.showAgg, 'glyphicon-minus':!agg.showAgg}" ng-click="agg.showAgg =!agg.showAgg"></span>
-		<span title="Export csv" ng-click="aggToCsv('lg', agg)"class="glyphicon glyphicon glyphicon-download-alt col-sm-2 pointer">
-		</span>	
-		<div class="spacer"></div>
-		</div>
-		<div class="panel-body" ng-show="!agg.showAgg">
-			<div>
-				<div class="col-sm-5"><input placeholder="Search" ng-model="agg.agg.searchText" class="form-control input-sm" type="text" /></div>
-				<div class="col-sm-7 input-group input-group-sm">
-					<span class="input-group-btn">
-						<button ng-click="switchAggregationValue(agg.agg, 'predicate', ['key', 'doc_count'])" class="btn btn-default">
-							{{ agg.agg.predicate }}
-						</button>
-					</span>
-					<input ng-model="agg.agg.nbResult" class="form-control" type="number" />
-					<span class="input-group-btn">
-						<button class="btn btn-default btn-with-image" ng-click="agg.agg.reverse = !agg.agg.reverse"> 
-							<span class="glyphicon" ng-class="{'glyphicon-arrow-up':!agg.agg.reverse,'glyphicon-arrow-down':agg.agg.reverse}">
-							</span>
-						</button>
-					</span>
-				</div>
-				<div class="spacer"></div>
-			</div>
-			<div ng-repeat="bucket in agg.buckets | filter:agg.agg.searchText | orderBy:agg.agg.predicate:!agg.agg.reverse | limitTo:agg.agg.nbResult">
+		<div class="panel-body">
+			<div ng-repeat="bucket in agg.buckets">
 				<span class="aggregation-items"> 
-					<label><a href="#" ng-click="addAggregationFilter('Terms' , agg, bucket)">{{bucket.key}} :</a></label> 
-					{{bucket.doc_count}} 
-				</span> 
-				<span class="col-sm-2 glyphicon" ng-class="{'glyphicon-plus': !bucket.showNested, 'glyphicon-minus':bucket.showNested}" ng-click="bucket.showNested =!bucket.showNested" ng-if="callAggregationFunc('hasNestedAgg', bucket)"></span>
-				<div class="spacer"></div>
-				<div ng-show="bucket.showNested">
-					<ul>
-						<li ng-repeat="(key, agg) in bucket">
-							<div ng-if="callAggregationFunc('isAgg', key)" ng-include="agg.agg.template"></div>
-						</li>
-					</ul>
+					<label>
+						<a href="#">
+							{{bucket.key}} :
+						</a>
+					</label> 
+					{{bucket.doc_count}}
+				</span>
+				<div ng-repeat="(key, agg) in bucket">
+					<div ng-if="isAgg(key)">
+						<div ng-switch="agg.__ref__.tpl">
+							<!-- Default Tpl !-->
+							<div ng-switch-when="default">
+								<div ng-include="agg.__ref__.type + '_template'">	
+								</div>
+							</div>
+							<!-- Specifique Tpl !-->
+							<div ng-switch-default>
+								<div ng-include="agg.__ref__.tpl">
+								</div>							
+							</div>
+						</div>							
+					</div>
 				</div>
 			</div>
 		</div>

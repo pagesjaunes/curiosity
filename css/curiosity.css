@@ -327,3 +327,6 @@ body {
   fill : #777777;
 }
 
+.agg_option ul li{
+  list-style: none;
+}

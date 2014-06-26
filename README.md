@@ -208,5 +208,3 @@ Here is the list :
 * [AngularUI](http://angular-ui.github.io/)
 
 * [FileSaver](https://github.com/eligrey/FileSaver.js/)
-
-* [TyniMce](http://www.tinymce.com/)

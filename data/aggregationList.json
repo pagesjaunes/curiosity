@@ -1,0 +1,8 @@
+{
+"list":
+[
+	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html"},
+	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html"},
+	{"type":"Avg", "template":"template/aggregation_module/settings_partials/avg.html"}
+]	
+}

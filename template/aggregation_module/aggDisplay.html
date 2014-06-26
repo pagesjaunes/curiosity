@@ -1,0 +1,31 @@
+<div ng-controller="aggCtrl" class="module" ng-init="init(module.name)">
+	
+	<h4> {{ curAgg.displayName }}
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ info.txt.log.Hide }}">	
+		</span>
+		
+		<span class="glyphicon" ng-class="{'glyphicon-cog':curAgg.displayResult, 'glyphicon-list-alt':!curAgg.displayResult}" ng-click="curAgg.displayResult = !curAgg.displayResult">
+		</span>
+
+		<span class="glyphicon glyphicon-remove" ng-click="removeMainAgg(curAgg, module.id)"> </span>
+		
+		<span ng-if="curAgg.validate" class="glyphicon glyphicon-ok">
+		</span>
+	</h4>
+
+	<div ng-if="!curAgg.hideCurAgg">
+		<div ng-if="!curAgg.displayResult">
+			<select class="form-control" ui-select2 ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg,curAgg.aggregationTypeIdx)">
+				<option ng-repeat="item in data.aggList"  value="{{ $index }}">
+					{{ item.type }}
+				</option>
+			</select>
+			<div ng-if="curAgg.aggTypeSelected" ng-include="curAgg.displayTemplate" class="margin-top">
+			</div>
+		</div>
+
+		<div ng-if="curAgg.displayResult">
+			<div agg-result agg="curAgg.result"></div>
+		</div>
+	</div>
+</div>

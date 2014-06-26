@@ -157,6 +157,19 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		return ("");
 	}
 
+	function findMaxId() {
+		result = 0
+		for (key in moduleManagerObj.info.moduleBlocks) {
+			var i = 0;				
+			while (i < moduleManagerObj.info.moduleBlocks[key].modules.length) {
+				if (moduleManagerObj.info.moduleBlocks[key].modules[i].id > 0)
+					result = moduleManagerObj.info.moduleBlocks[key].modules[i].id; 
+				i++;
+			}
+		}
+		return (result + 1);
+	}
+
 	moduleManagerObj.initModule = function() {
 		moduleManagerObj.cleanModule();
 		var i = 0;
@@ -171,13 +184,14 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 	$rootScope.$on("ContextLoaded", function () {
 		var tmp = {};
 		context.setModuleInformation("moduleManager", tmp);
-		var i = 0;	
+		var i = 0;
 		for (key in tmp){
 			i++;
 			break;
 		}
 
 		if (i) {
+			id = findMaxId();
 			for (key in  tmp) {
 				if (typeof(moduleManagerObj.info.moduleBlocks[key]) !== "undefined") {
 					for (key2 in tmp[key]) {

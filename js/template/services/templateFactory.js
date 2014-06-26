@@ -108,6 +108,17 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 		return ("");
 	}
 
+	templateObj.addTemplateToCacheFromName = function (type, name) {
+		var i = 0;
+		while (i < templateObj.info[type].length) {
+			if (templateObj.info[type][i].name == name) {
+				$templateCache.put(templateObj.info[type][i].name, templateObj.info[type][i].value);
+				break ;
+			}
+			i++;
+		}
+	}
+
 	/**
 	*
 	*/

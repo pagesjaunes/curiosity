@@ -13,6 +13,7 @@
 	{"type" :"requestQF", "url":"template/request_module/partials/request_query_filter.html"}, 
 	{"type" :"requestPagination", "url":"template/request_module/partials/request_pagination.html"},
 	{"type" :"requestResult", "url":"template/request_module/partials/request_result_display.html"},
-	{"type" :"Result Autonome", "url":"template/Test/resultAuto.html"}
+	{"type" :"Result Autonome", "url":"template/Test/resultAuto.html"},
+	{"type" :"AggregationBlock", "url":"template/aggregation_module/aggModuleBlock.html"}
 ]
 }

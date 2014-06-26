@@ -1,4 +1,4 @@
-Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context, moduleManager){
+Curiosity.factory('curiosity', function($http, $rootScope, aggFactory, conf, log, context){
 	var curiosityObj = {};
 	curiosityObj.info = {};
 
@@ -37,7 +37,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, conf, log, context, m
 		curiosityObj.info.loading = true;
 		curiosityObj.info.aliases = [];
 		$http({method: 'GET', url: serverUrl}).
-		success(function(data) {
+		success(function(data) {	
 			curiosityObj.info.loading = false;
 			curiosityObj.info.connected = true;
 			curiosityObj.info.indexList = Object.keys(data);
