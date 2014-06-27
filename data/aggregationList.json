@@ -3,6 +3,12 @@
 [
 	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html"},
 	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html"},
-	{"type":"Avg", "template":"template/aggregation_module/settings_partials/avg.html"}
+	{"type":"Avg", "template":"template/aggregation_module/settings_partials/simple.html"},
+	{"type":"Stats", "template":"template/aggregation_module/settings_partials/simple.html"},
+	{"type":"Min", "template":"template/aggregation_module/settings_partials/simple.html"},
+	{"type":"Sum", "template":"template/aggregation_module/settings_partials/simple.html"},
+	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html"},
+	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html"},
+	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html"}
 ]	
 }

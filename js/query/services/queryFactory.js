@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, aggregation, context,log , aggFactory){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context,log , aggFactory){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -71,9 +71,9 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 
 	function builtRequest(query) {
 		request = ejs.Request();
-		queryString.query(aggregation.addAggregationFilterToQuery(query));
+		queryString.query(query);
 		aggFactory.addAggregationToRequest(request);
-		if ((typeof(query) === "undefined" || !query.length) && aggregation.isAggregationFilterEmpty()){
+		if (typeof(query) === "undefined" || !query.length){
 			request.query(ejs.MatchAllQuery())
 		}
 		else {
@@ -130,8 +130,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				if (typeof(queryObj.info.nbResult) === "undefined")
 					 queryObj.info.nbResult = 10;
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
-				aggregation.updateResult(resp.aggregations);
-				$rootScope.$broadcast("QueryLaunched");
+				$rootScope.$broadcast("QueryœLaunched");
 				log.log("Requête : ok", "success");
 			},
 			function err(err) {
@@ -192,11 +191,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 			queryObj.page = page;
 			queryObj.search("no");
 		}
-	}
-		
-	// Circular depencies
-	queryObj.getAggregationObj = function() {
-		return (aggregation);
 	}
 
 	queryObj.simpleSearch = function(request, index, callback) {

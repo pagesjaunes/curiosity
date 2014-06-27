@@ -24,7 +24,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 			agg.name = name;	
 		}
 		agg.nested = {};
-		agg.tpl = "default"; 
+		agg.tpl = "default";
 		agg.aggregationTypeIdx = -1;
 		agg.displayName = "New Aggregation";
 		if (!nested)
@@ -103,8 +103,6 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 	aggObj.removeMainAgg = function (agg, id) {
 		var  i = 0; 
 		while (i < aggObj.info.currentAggregation.length) {
-			console.log(aggObj.info.currentAggregation[i].name);
-			console.log(agg.name);
 			if (aggObj.info.currentAggregation[i].name == agg.name)
 				break;
 			i++;
@@ -133,7 +131,6 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 			console.log("Unable to fecth aggregation's list");
 		});
 	}
-
 
 	loadAggList(); 
 	

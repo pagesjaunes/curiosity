@@ -6,7 +6,6 @@
 	{"type" :"diary", "url":"template/diary/diary.html"}, 
 	{"type" :"moduleManager", "url":"template/moduleManager/module_moduleManager.html"}, 
 	{"type" :"trash", "url":"template/moduleManager/trash.html"}, 
-	{"type" :"aggResult", "url":"template/aggregation_tab/aggregation_result_sub_tab.html"}, 
 	{"type" :"requestForm", "url":"template/request_module/partials/request_form.html"}, 
 	{"type" :"requestOption", "url":"template/request_module/partials/request_option_bar.html"}, 
 	{"type" :"requestAQ", "url":"template/request_module/partials/request_advanced_query.html"}, 

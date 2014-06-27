@@ -1,14 +1,13 @@
 // templateFactory.js
 
-Curiosity.factory('template', function($http, $templateCache, conf, agg){
+Curiosity.factory('template', function($http, $templateCache, conf, aggFactory){
 	var templateObj = {};
 	templateObj.info = {};
 	templateObj.info.template = [];
 	templateObj.info.aggregationsTemplates = [];
 	templateObj.info.aggregationsAssociation = [];
-	templateObj.info.possibleAggregation = agg.possibleAggregation;
+	templateObj.info.possibleAggregation = aggFactory.info.aggList;
 
-	
 	/**
 	* templateObj.update
 	* Update service's data from conf document. 
@@ -126,14 +125,16 @@ Curiosity.factory('template', function($http, $templateCache, conf, agg){
 		$http.get('template/aggregation/default.html', {cache:$templateCache}).then(function() {
 			var defaultTemplate = $templateCache.get('template/aggregation/default.html')[1];
 			var i = 0;
+			templateObj.info.possibleAggregation = aggFactory.info.aggList;
 			while (i < templateObj.info.possibleAggregation.length) {
+				console.log("123123");
 				$templateCache.put(templateObj.info.possibleAggregation[i].type + "_template", defaultTemplate);
 				i++;
 			}
 			i = 0;
 			if (typeof (templateObj.info.aggregationsAssociation) !== "undefined") {
 				while (i < templateObj.info.aggregationsAssociation.length){
-					var j = 0;					
+					var j = 0;
 					while (j < templateObj.info.aggregationsTemplates.length){
 						if (templateObj.info.aggregationsTemplates[j].name == templateObj.info.aggregationsAssociation[i].tpl) {
 							$templateCache.put(templateObj.info.aggregationsAssociation[i].type + "_template", templateObj.info.aggregationsTemplates[j].value);

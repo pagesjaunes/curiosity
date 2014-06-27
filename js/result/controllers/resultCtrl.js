@@ -1,7 +1,6 @@
-Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, aggregation, csv){
+Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, csv){
 	$scope.queryData = query.info;
 	$scope.templateData = template.info
-	$scope.aggregationData = aggregation.info;
 	$scope.showAggregationFilter = true;
 	$scope.data = result.info;
 
@@ -38,43 +37,6 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		}
 	}
 
-	$scope.removeAggFilter = function(tab, index) {
-		aggregation.removeAggFilter(tab, index);
-		if ($scope.queryData.autoRefresh){
-			query.search();
-		}
-	}
-	
-	$scope.isAgg = function (key) {
-		aggregation.isAgg(key);
-	}
-
-	$scope.callAggregationFunc = function(func, params) {
-		return (aggregation[func](params));
-	}
-
-	$scope.setAggregationValue = function(agg, field, value) {
-		var prev = agg[field];
-		agg[field] = value;
-		if (value != prev && $scope.queryData.autoRefresh){
-			query.search();
-		}
-	}
-
-	$scope.switchAggregationValue = function (agg, field, values) {
-		var i = 0;
-		while (i < values.length) {
-			if (agg[field] == values[i]) {
-				if (i + 1 < values.length) {
-					agg[field] = values[i+1];
-					return ;
-				}
-			}
-			i++;
-		}
-		agg[field] = values[0];
-	}
-
 	$scope.openModalCsv = function (size) {
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/csv_modal.html',
@@ -106,23 +68,4 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		}, function () {
 		});
 	}
-
-	$scope.aggToCsv = function (size,agg) {
-		csv.setField(aggregation.builtAggregationField(agg));
-		csv.info.agg = agg;
-		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/csv_agg_modal.html',
-			controller: csvAggCtrl,
-			size: size,
-			resolve: {
-				items: function () {
-					return $scope.items;
-				}}
-			});
-		modalInstance.result.then(function (selectedItem) {
-			$scope.selected = selectedItem;
-		}, function () {
-		});
-	}
-
 })

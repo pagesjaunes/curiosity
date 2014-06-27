@@ -54,12 +54,42 @@ Curiosity.factory('aggConstructor', function(){
 		}
 		return (result);
 	}
-	obj.Avg = function (agg) {
-		var result = ejs.AvgAggregation(agg.name);
+	
+	function simple(agg, constructor) {
+		var result = constructor(agg.name);
 		result.field(agg.field); 
 		if (typeof (agg.script) !== "undefined" && agg.script != "") 
 			result.script(agg.script);
 		return (result);
 	}
+
+	obj.Avg = function (agg) {
+		return (simple(agg, ejs.AvgAggregation));	
+	}
+
+	obj.Stats = function (agg) {
+		return (simple(agg, ejs.StatsAggregation));
+	}
+
+	obj.Max = function (agg) {
+		return (simple(agg, ejs.MaxAggregation));
+	}
+
+	obj.Min = function (agg) {
+		return (simple(agg, ejs.MinAggregation));
+	}
+
+	obj.ExtendedStats = function (agg) {
+		return (simple(agg,ejs.ExtendedStatsAggregation));
+	}
+
+	obj.ValueCount = function (agg) {
+		return (simple(agg, ejs.ValueCountAggregation));	
+	}
+
+	obj.Sum = function (agg) {
+		return (simple(agg, ejs.SumAggregation));
+	}
+
 	return obj;
 });

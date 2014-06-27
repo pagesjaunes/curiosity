@@ -10,8 +10,9 @@
 			</span>
 		</div>
 	</div>
-	<button class="btn btn-default" ng-click="openModalCsv('lg')">{{ info.txt.result.request_sub_tab.Csv }}</button>
-	<button class="btn btn-default" ng-click="openModalAgg('lg')">{{ info.txt.result.request_sub_tab.Aggregation }}</button>
+	<button class="btn btn-default" ng-click="openModalCsv('lg')">
+		{{ info.txt.result.request_sub_tab.Csv }}
+	</button>
 	<button class="btn btn-default" ng-click="showJsonResult = !showJsonResult">
 		<span ng-if='showJsonResult'>{{ info.txt.result.request_sub_tab.ResultList }}</span> 
 		<span ng-if='!showJsonResult'>{{ info.txt.result.request_sub_tab.JsonResult }}</span>

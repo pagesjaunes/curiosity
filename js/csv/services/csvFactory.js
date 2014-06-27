@@ -1,4 +1,4 @@
-Curiosity.factory('csv', function($rootScope, mapping, curiosity, query, aggregation){
+Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	var csvObj = {};
 	
 	csvObj.info = {}; // Shared data with controller

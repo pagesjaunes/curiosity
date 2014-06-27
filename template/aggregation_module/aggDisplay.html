@@ -15,11 +15,17 @@
 
 	<div ng-if="!curAgg.hideCurAgg">
 		<div ng-if="!curAgg.displayResult">
-			<select class="form-control" ui-select2 ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg,curAgg.aggregationTypeIdx)">
-				<option ng-repeat="item in data.aggList"  value="{{ $index }}">
-					{{ item.type }}
-				</option>
-			</select>
+			<div class="input-group">
+				<span class="input-group-addon">Name</span>
+				<input type="text" class="form-control" ng-model="curAgg.displayName">
+			</div>
+			<div class="margin-top">
+				<select class="form-control" ui-select2 ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg,curAgg.aggregationTypeIdx)">
+					<option ng-repeat="item in data.aggList"  value="{{ $index }}">
+						{{ item.type }}
+					</option>
+				</select>
+			</div>
 			<div ng-if="curAgg.aggTypeSelected" ng-include="curAgg.displayTemplate" class="margin-top">
 			</div>
 		</div>
