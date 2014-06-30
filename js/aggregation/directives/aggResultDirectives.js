@@ -8,7 +8,9 @@ Curiosity.directive('aggResult', function(aggFactory){
 			$scope.isAgg = function (key) {
 				return (aggFactory.isAgg(key));
 			}
-		
+			
+			$scope.callFuncWithData = function (func) 
+				func($scope.agg);
 		}
 	}
 });
