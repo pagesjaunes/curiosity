@@ -1,6 +1,6 @@
 var globalConf = {
     defaultServer : 'http://bigdatasearchvg.pi1g.local:10200', 
-    confServer : 'http://ioda01t.bbo1t.local:8090',
+    confServer : 'http://ioda01t.bbo1t.local:10200',
     confIndex : "curiosity-config",
     defaultConfDocumentType : "conf-doc",
     gMappings : {},
