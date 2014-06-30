@@ -1,20 +1,10 @@
 <div>
 	<div class="panel panel-primary panel-request">
 		<div class="panel-body">
-			<div ng-repeat="bucket in curAgg.result.buckets">
-				<span class="aggregation-items"> 
-					<label>
-						<a href="#">
-							{{bucket.key}} :
-						</a>
-					</label> 
-					{{bucket.doc_count}}
-				</span>
-				<div ng-repeat="(key, curAgg) in bucket">
-					{{ key }}{{ curAgg }}
-					<div ng-if="isAgg(key)">
-						<!--div ng-include="curAgg.__ref__.template"></div!-->
-					</div>
+			<div ng-repeat="(key, value) in agg">
+				<div ng-if="key !='__ref__' ">
+					<label>{{ key }} :</label>
+					{{ value }}
 				</div>
 			</div>
 		</div>

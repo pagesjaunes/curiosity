@@ -1,13 +1,13 @@
 Curiosity.controller('moduleManagerCtrl', function($scope, moduleManager){
 	$scope.data = moduleManager.info;
 	
-
 	$scope.addModule = function (moduleIdx, moduleBlock) {
 		if (typeof(moduleIdx) !== "undefined" && moduleIdx >= 0 
 			&& typeof($scope.data.moduleList[moduleIdx]) !== "undefined"
 			&& typeof (moduleBlock) !== "undefined" && moduleBlock != "") {
-			console.log("New Module");
-			moduleManager.registerModule("test", $scope.data.moduleList[moduleIdx].url,moduleBlock);
+			// Create random name for the new module to avoid conflict
+			var name = "module" + Math.floor((Math.random() * 1000000) + 1);
+			moduleManager.registerModule(name, $scope.data.moduleList[moduleIdx].url,moduleBlock);
 		}
 	}
 

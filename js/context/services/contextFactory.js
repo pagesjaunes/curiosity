@@ -23,6 +23,7 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 			.then(function(data) {
 				context = data.hits.hits[0];
 				if (typeof (context) === "undefined")  {
+					$rootScope.$broadcast("NoContext");
 					log.log("Error : context " + contextName + " not found", "danger");
 				}
 				else {
@@ -47,10 +48,16 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 		}
 	}
 
+	// Todo : check if the context name is alredy present in the context list
 	contextObj.newContext = function(name) {
-		context = {};
-		contextObj.info.currentContext = {};
-		contextObj.info.currentContext.contextName = name;
+		if (name != "") {
+			context = {};
+			contextObj.info.currentContext = {};
+			contextObj.info.currentContext.contextName = name;
+		}
+		else {
+			contextObj.info.error = true;
+		}
 	}
 
 	contextObj.getModuleInformation = function(moduleName) {
@@ -63,6 +70,11 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 
 	contextObj.deleteContext = function () {
 		elasticFunc.deleteDocument(client, globalConf.confIndex, contextDocumentType, context._id);
+		if ($cookies.CurisoityDefaultContext == contextObj.info.currentContext.contextName) {
+			$cookies.CurisoityDefaultContext = "";
+		}
+		contextObj.info.currentContext = {};
+		context = {};
 	}
 
 	contextObj.getContextList = function() {

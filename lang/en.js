@@ -18,32 +18,18 @@ var global_text = {
 		ConnectTitle : "Establish the connection with the server",
 		navBar : {
 			Request : "Request",
-			Aggregations : "Aggregations",
-			Results : "Results",
 			Keywords : "Keywords",
 			Templates : "Templates",
-			BugReport : "Bug report / suggestions"
 		}
 	},
 	aggregation : {
-		Fields : "Fields",
 		Aggregations : "Aggregations",
-		Hide :  "Hide",
-		Ok : "Ok",
-		AddAgg : "Add Aggregation",
-		ShowAll : "Show All",
-		aggregation_renderer : {
-			Type : "Type",
-			Field : "Field"
-		}
+		NewAggregation : "New Aggregations"
 	},
 	keyword : {
 		Index : "Index",
 		Save : "Save", 
 		Add : "Add"
-	},
-	mapping : {
-		DocumentT : "Document Type"
 	},
 	request : {
 		ShowAll : "Show All",
@@ -57,6 +43,13 @@ var global_text = {
 		Fields:"Fields",
 		ShowAllFieldTitle : "Show / Hide all fields",
 		ShowAllKeywordTitle : "Show / Hide all keywords",
+		KeywordFromQuery : "Keyword from query",
+		Name : "Name",
+		Desc : "Desc",
+		Save : "Save",
+		SortBy : "Order by",
+		Field : "Field",
+		AddSort : "Add sort"
 	},
 	result : {
 		request_sub_tab : {
@@ -100,13 +93,8 @@ var global_text = {
 			Save: "Save",
 			Delete: "Delete",
 			TemplateName : "Template's name",
-			Fields : "Field"
+			Fields : "Fields"
 		}
-	},
-	bugReport : {
-		Contact:"Contact",
-		Title:"Title",
-		Send:"Send"
 	},
 	csvModal : {
 		CsvExport : "CSV Export",
@@ -130,11 +118,18 @@ var global_text = {
 		NewContext : "New context",
 		SetAsDefaultContext : "Set as default context",
 		ContextName : "Context's Name",
-		Valider : "Validate"
+		Valider : "Validate",
+		Remove : "Remove current context"
 	},
 	log : {
 		Logs : "Logs",
-		Hide : "Hide/Show Logs",
+		Hide : "Hide/Show",
 		Empty : "Empty Logs"
+	},
+	moduleManager : {
+		ModulesManager : "Modules Manager",
+		Add : "Add",
+		RestartInterface : "Restart interface",
+		Lock : "Lock/Unlock interface"
 	}
 }

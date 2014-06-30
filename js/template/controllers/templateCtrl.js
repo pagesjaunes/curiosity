@@ -20,6 +20,8 @@ function($scope, template, mapping, $http){
 		template.update();
 	});
 
+	$scope.fieldLimit = 12;
+
 	$scope.changeTemplate = function (type, obj, attr, index) {
 		if (index !== "undefined" && index >= 0) {
 			obj[attr] = $scope.data[type][index];
@@ -71,4 +73,13 @@ function($scope, template, mapping, $http){
 	$scope.updateAggAssoc = function(type, value) {
 		template.updateAggAssoc(type, value);
 	}
+
+	$scope.updateLimiteValueField = function() {
+		if ($scope.fieldLimit == 12) {
+			$scope.fieldLimit = $scope.mappingData.fields.length;
+		}
+		else {
+			$scope.fieldLimit = 12;
+		}
+	} 
 }]);

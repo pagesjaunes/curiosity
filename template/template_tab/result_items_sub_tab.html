@@ -24,18 +24,26 @@
 </div>
 <div class="spacer"></div>
 <div class="margin-top">
-	<textarea ng-model="template.currentTemplate.value">
+	<textarea ng-model="template.currentTemplate.value" class="form-control" rows="15">
 	</textarea>
 </div>
 <div class="margin-top">
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h3 class="panel-title">
+			<h3 class="panel-title col-sm-6">
 				{{ info.txt.template.result_items_sub_tab.Fields }}
 			</h3>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" ng-model="fieldFilter">
+			</div>
+			<button class="btn btn-default col-sm-1" ng-click="updateLimiteValueField()" ng-switch on="fieldLimit" title="{{ info.txt.request.ShowAllFieldTitle }}">
+				<span ng-switch-when="12">{{ info.txt.request.ShowAll }}</span>
+				<span ng-switch-default>{{ info.txt.request.Hide }}</span>
+			</button>
+			<div class="spacer"></div>
 		</div>
 		<div class="panel-body">
-			<span ng-repeat="field in mappingData.fields track by $index" class="field col-sm-3" >
+			<span ng-repeat="field in mappingData.fields | filter:fieldFilter | limitTo:fieldLimit track by $index" class="field col-sm-3" >
 				<a href ="#" ng-click="addField(template.currentTemplate,'value', field.ancestor)" title="{{ field.ancestor}}">
 					{{ field.name }}
 				</a>

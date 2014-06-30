@@ -35,7 +35,9 @@
 			<button class="btn btn-default" ng-click="setDefaultContext()" title="{{ info.txt.context.SetAsDefaultContext }}">
 				<span class="glyphicon glyphicon-star"></span>
 			</button>
-			<button class="btn btn-default" ng-click="deleteContext()">delete</button>
+			<button class="btn btn-default" ng-click="deleteContext()" title="{{ info.txt.context.Remove }}">
+				<span class="glyphicon glyphicon-trash"></span>
+			</button>
 		</div>
 
 		<div class="margin-top" ng-show="showNewContext">

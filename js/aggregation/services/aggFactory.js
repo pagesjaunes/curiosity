@@ -6,7 +6,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 
 	aggObj.newAggregation = function (obj, type, fields, params, size, template) {
 		var agg = {};
-		agg.name = "agg" +  Math.floor((Math.random() * 1000000) + 1);   
+		agg.name = "agg" +  Math.floor((Math.random() * 1000000) + 1);
 		agg.displayName = type + "Agg on " + fields;
 		agg.size = size;
 		agg.nestedAgg = [];

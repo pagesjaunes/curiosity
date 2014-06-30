@@ -1,5 +1,15 @@
-version 0.1.3
+version 0.1.4
+Liste des modifications depuis le 23/06/2014
+	-Fonctionalitées :
+		-Mise a jour des aggrégation pour fonctionner avec le module manager
 
+	-Correction de bug :
+		-Correction de bug sur les context par défault
+
+	-Divers :
+		-Suppression de fichier inutile
+		-Mise a jour des fichiers de langue
+		-Suppression de la fonctionnalité de rapport de bug
 -------------------------------------------------------------------------------------------------------------------
 
 Liste des modifications depuis le 16/06/2014 (0.1.2 à 0.1.3)

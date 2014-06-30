@@ -127,7 +127,6 @@ Curiosity.factory('template', function($http, $templateCache, conf, aggFactory){
 			var i = 0;
 			templateObj.info.possibleAggregation = aggFactory.info.aggList;
 			while (i < templateObj.info.possibleAggregation.length) {
-				console.log("123123");
 				$templateCache.put(templateObj.info.possibleAggregation[i].type + "_template", defaultTemplate);
 				i++;
 			}

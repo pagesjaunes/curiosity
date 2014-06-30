@@ -121,7 +121,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		}
 		client.search({index:currentIndex,body:builtRequest(queryObj.info.complexRequest)}).then(
 			function (resp) {
-				curiosity.switchTab(1);
 				curiosity.load(false);
 				curiosity.stopError();
 				queryObj.info.result = resp;

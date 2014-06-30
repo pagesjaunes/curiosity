@@ -18,33 +18,19 @@ var global_text = {
 		ConnectTitle : "Etablir la connexion avec le nouveau serveur",
 		navBar : {
 			Request : "Requête",
-			Aggregations : "Agrégations",
-			Results : "Résultats",
 			Keywords : "Mots Clés",
 			Templates : "Templates", 
-			BugReport : "Rapport de bug / suggestions"
 		}
 	},
 	aggregation : {
-		Fields : "Champs",
-		Aggregations : "Agrégations",
-		Hide :  "Cacher",
-		Ok : "Valider",
-		AddAgg : "Ajouter Agrégation",
-		ShowAll : "Voir tout",
-		aggregation_renderer : {
-			Type : "Type",
-			Field : "Champ"
-		}
+		Aggregations : "Agregations",
+		NewAggregation : "Nouvelle Agregations"
 	},
 	keyword : {
 		Index : "Index",
 		Save : "Sauvegarder", 
 		Add : "Ajouter"
-	},
-	mapping : {
-		DocumentT : "Type de document"
-	},
+	},+
 	request : {
 		ShowAll : "Voir tout",
 		Hide : "Cacher", 
@@ -57,6 +43,13 @@ var global_text = {
 		Fields:"Champs",
 		ShowAllFieldTitle : "Montrer / Cacher tous les champs",
 		ShowAllKeywordTitle : "Montrer / Cacher tout les mots clés",
+		KeywordFromQuery : "Mot clé depuis requête",
+		Name : "Nom",
+		Desc : "Desc",
+		Save : "Sauvegarder",
+		SortBy : "Trier par",
+		Field : "Champ",
+		AddSort : "Ajouter un tri"
 	},
 	result : {
 		request_sub_tab : {
@@ -103,11 +96,6 @@ var global_text = {
 			Fields : "Champs"
 		}
 	},
-	bugReport : {
-		Contact:"Contact",
-		Title:"Titre",
-		Send:"Envoyer"
-	},
 	csvModal : {
 		CsvExport : "Export CSV",
 		Sep : "Séparateur de champs",
@@ -130,11 +118,18 @@ var global_text = {
 		NewContext : "Nouveau context",
 		SetAsDefaultContext : "Etablir comme context par défaut",
 		ContextName : "Nom",
-		Valider : "Valider"
+		Valider : "Valider",
+		Remove : "Supprimer le context courant"
 	},
 	log : {
 		Logs : "Logs",
-		Hide : "Cacher/Montrer les logs",
+		Hide : "Cacher/Montrer",
 		Empty : "Vider les logs"
+	},
+	moduleManager : {
+		ModulesManager : "Modules Manager",
+		Add : "Ajouer",
+		RestartInterface : "Réinitialiser l'interface",
+		Lock : "Vérrouiller/Dévérouiller l'interface"
 	}
 }
