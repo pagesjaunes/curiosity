@@ -1,0 +1,11 @@
+<div ng-controller="mainAggCtrl">
+	<h4>Aggregations
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!hideAgg,'glyphicon-plus':hideAgg}" ng-click="hideAgg = !hideAgg" title="{{ info.txt.log.Hide }}">	
+		</span>
+	</h4>
+	<button class="btn btn-default" ng-click="newAggregation()">New Aggregation</button>
+	<div>
+		<div moduleblock name="Aggregation">
+		</div>
+	</div>
+</div>

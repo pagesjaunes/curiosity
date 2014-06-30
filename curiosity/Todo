@@ -1,0 +1,51 @@
+Todo : 
+     -Ajouter des informations d'utilisation // Encours
+     -Ajout de template 
+     -Ajout de comentaire // ENCOURS
+     -Modifier l'export csv des aggrégation pour obtenir un résultat convenable // Presque ok
+     -Remettre en forme curiosity.css
+     -Vider la liste des résultat en cas d'erreur
+     -Afficher des messages d'erreur explicite
+     -!!! Depot privée github !!!
+
+Bug connus : 
+
+Evolution :
+     -Configuration personalisé exportable
+     -Module de graphique
+
+
+Retour Hélène 18/06
+
+Affichage :
+-Problème avec la navbar sur petit écran // TODO : page option
+-Déplacer le choix du serveur // TODO : page option 
+-Mettre le serveur de prod en serveur par défaut (modifier la conf)
+-Recherche automatique lors de la sélection de l'index // done
+
+Requêtte
+-Modifier la requêtte simplifié en même temps que la requêtte complexe // Pas possible 
+
+Aggrégation : 
+-Choisir le nombre de résultats // Refactoring aggrgation inc 
+
+Export csv : 
+-Mettre des boutons plus clair // done
+-Barre de recherche pour les champs // done 
+-Regarder pourquoi il est impossible de télécharger le csv // ok
+
+Keyword : 
+-Sélectionner l'index courant automatiquement // done 
+-Liste des champs de l'index  // Pas possible avec nggrid 
+-Aggrandir la taille du tableau // done 
+-Raffraichir la liste des mots clé automatiquement // done  
+-Bloquer les espaces dans les mots clés. // done 
+-Focus dans la collones du nouveau mots clés. // Pas possible pour le moment plugin caca :(
+
+Template
+Liste des champs sous le template // ok
+Associer template a index // TODO : Evolution
+Template avec tableau pas facile //  
+En tête de colonne possible mais pas facile
+
+

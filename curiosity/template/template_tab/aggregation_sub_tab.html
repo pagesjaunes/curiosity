@@ -1,0 +1,64 @@
+<h3>{{ info.txt.template.aggregation_sub_tab.Association }}</h3>	
+<div>
+	<div class="col-sm-5">
+		<div class="input-group">
+			<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.AggregationType }}</span>
+			<select ng-model="template.aggregation.aggSelected" ui-select2 class="form-control" ng-change="changeTemplate()">
+				<option ng-repeat="agg in data.possibleAggregation" value="{{agg.type}}">
+					{{ agg.type }}
+				</option>  
+			</select>
+		</div>
+	</div>
+	<div class="col-sm-5">
+		<div class="input-group">
+			<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.Template }}</span>
+			<select ng-model="template.aggregation.tplSelected" ui-select2 class="form-control">
+				<option value="default">{{ info.txt.template.aggregation_sub_tab.Default }}</option>
+				<option ng-repeat="tpl in data.aggregationsTemplates" value="{{tpl.name}}">
+					{{ tpl.name }}
+				</option>  
+			</select>
+		</div>
+	</div>
+	<button class="btn btn-default col-sm-1" ng-click="updateAggAssoc(template.aggregation.aggSelected, template.aggregation.tplSelected)">
+		{{ info.txt.template.aggregation_sub_tab.Update }}
+	</button>
+	<div class="spacer"></div>
+</div>
+
+<h3> {{ info.txt.template.aggregation_sub_tab.Edit }} </h3>	
+<div class="col-sm-6">
+	<div class="input-group">
+		<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.Template }}</span>
+		<select ng-model="template.aggregation.selected" ui-select2 class="form-control" ng-change="changeTemplate('aggregationsTemplates',template.aggregation,'currentTemplate',template.aggregation.selected)">
+			<option ng-repeat="template in data.aggregationsTemplates" value="{{$index}}" >
+				{{ template.name }}
+			</option>  
+		</select>
+	</div>
+</div>
+<div class="spacer"></div>
+<div class="btn-group col-sm-6 margin-top">
+	<button ng-click="new('aggregationsTemplates',template.aggregation, 'currentTemplate')" class="btn btn-default">
+		{{ info.txt.template.aggregation_sub_tab.New }}
+	</button>
+	<button ng-click="save('aggregationsTemplates')" class="btn btn-default">
+		{{ info.txt.template.aggregation_sub_tab.Save }}
+	</button>
+	<button ng-click="delete('aggregationsTemplates',template.aggregation, 'currentTemplate', template.aggregation.selected)" class="btn btn-default" >
+		{{ info.txt.template.aggregation_sub_tab.Delete }}
+	</button>	
+</div>
+<div class="spacer"></div>
+<div class="col-sm-6 margin-top">
+	<div class="input-group">
+		<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.TemplateName }}</span>
+		<input type="text" ng-model="template.aggregation.currentTemplate.name" class="form-control"></input>
+	</div>
+</div>
+<div class="spacer"></div>
+<div class="margin-top">
+	<textarea ng-model="template.aggregation.currentTemplate.value" class="form-control" rows="20">
+	</textarea>
+</div>

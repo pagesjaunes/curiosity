@@ -1,0 +1,41 @@
+<div class="margin-top" id="option-bar" ng-controller="resultCtrl">
+	<h4> Options
+
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!hideOptions,'glyphicon-plus':hideOptions}" ng-click="hideOptions = !hideOptions" title="{{ info.txt.log.Hide }}">	
+		</span>
+
+	</h4>
+
+	<div class="margin-top" ng-show="!hideOptions">
+		
+		<div class="input-group">
+
+			<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Template }}</span>
+			<select ng-model="data.templateSelected" ui-select2 ng-change="selectTemplate('template',data.templateSelected)" class="form-control">
+				<option ng-repeat="template in templateData.template" value="{{$index}}" >{{ template.name }}</option>  
+			</select>
+			<span class="input-group-addon">
+				<input type="checkbox" ng-model="data.useTemplate" ng-change="switchDisplayMode('template',data.templateSelected)">
+			</span>
+	
+		</div>
+	
+		<div class="margin-top">
+			<button class="btn btn-default" ng-click="openModalCsv('lg')">
+				{{ info.txt.result.request_sub_tab.Csv }}
+			</button>
+		</div>
+		
+		<div class="margin-top">
+			<button class="btn btn-default" ng-click="data.showJsonResult = !data.showJsonResult">
+				<span ng-if='data.showJsonResult'>{{ info.txt.result.request_sub_tab.ResultList }}</span> 
+				<span ng-if='!data.showJsonResult'>{{ info.txt.result.request_sub_tab.JsonResult }}</span>
+			</button>
+
+			<button ng-click="queryData.autoRefresh = !queryData.autoRefresh" class="btn btn-default">
+				{{ info.txt.header.AutoRefresh }}
+				<span class="glyphicon" ng-class="{'glyphicon glyphicon-ok':queryData.autoRefresh,'':!queryData.autoRefresh}"></span>
+			</button>		
+		</div>
+	</div>
+</div>

@@ -1,0 +1,42 @@
+<div ng-controller="resultCtrl">
+	<h4> {{ info.txt.result.request_sub_tab.AggregationFilter }}
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!hideFilter,'glyphicon-plus':hideFilter}" ng-click="hideFilter = !hideFilter" title="{{ info.txt.log.Hide }}">	
+		</span>
+	</h4>
+	<div class="margin-top" ng-repeat="field in aggregationData.aggregationFilter" ng-show="!hideFilter">
+		<div class="panel panel-default" >
+			<div class="panel-heading">
+				{{field.field}}
+				<span class="glyphicon glyphicon-remove" ng-click="removeAggFilter(aggregationData.aggregationFilter, $index)"></span>
+			</div>
+			<div class="panel-body"> 
+				<div class="btn-group" ng-repeat="agg in field.agg"> 					
+					<button class="btn btn-xs glyph-btn-xs" ng-click="removeAggFilter(field.agg, $index)" ng-class="{'btn-warning':agg.opBool == 'AND','btn-danger':agg.opBool == 'NOT', 'btn-success':agg.opBool == 'OR'  }">
+						<span class="glyphicon glyphicon glyphicon-remove"></span> 				
+					</button>
+					<button class="btn btn-xs dropdown-toggle" data-toggle="dropdown" ng-class="{'btn-warning':agg.opBool == 'AND','btn-danger':agg.opBool == 'NOT', 'btn-success':agg.opBool == 'OR'  }">
+						{{ agg.key }} <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#" ng-click="setAggregationValue(agg, 'opBool','OR')">
+								{{ info.txt.result.request_sub_tab.Or }}
+							</a>
+						</li>
+						<li>
+							<a href="#" ng-click="setAggregationValue(agg, 'opBool','AND')">
+								{{ info.txt.result.request_sub_tab.And }}
+							</a>
+						</li>
+						<li>
+							<a href="#" ng-click="setAggregationValue(agg,'opBool','NOT')">
+								{{ info.txt.result.request_sub_tab.Not }}
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="spacer"></div>
+</div>

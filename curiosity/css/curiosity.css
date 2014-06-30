@@ -1,0 +1,332 @@
+/* curiosity.css */ 
+
+.module-block {
+    padding: 10px 0;
+}
+
+/* Global */
+
+body { 
+    padding-top: 70px; 
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.spacer {
+  clear: both;
+  width : 0;
+  height :  0;
+}
+
+#loading-image {
+  margin-top : -5px;
+}
+
+.btn-with-image {
+  padding : 4px 2px;
+}
+
+.tab {
+}
+
+.margin-top {
+  margin-top: 10px;
+}
+
+/* header */
+
+.light {
+
+}
+
+  .light img {
+      width: 20px;
+      height: 20px;
+  }
+
+.version {
+  font-style: italic;
+  font-size: 14px;
+}
+
+/* query Tab */ 
+
+.request-input {
+  margin-bottom: 10px;
+}
+
+.panel-request {
+  padding : 0;
+}
+
+#json-panel {
+  margin-top: 10px;
+}
+
+#field-selector span {
+	overflow: hidden;
+}
+
+#jsonQuerry {
+	margin: 0 0 8px 0 ;
+}
+
+#result-per-page {
+  padding-left: 0px;
+}
+
+.field {
+  overflow: hidden;
+}
+
+/* Result Tab */
+
+
+#result-bar {
+  margin :10px 0;
+}
+
+.pagination-result {
+  margin :0;
+}
+
+/* Keywords tab */
+
+.btn-keyword {
+  margin-top :10px;
+}
+
+.gridStyle {
+  border: 1px solid;
+  margin-top : 10px;
+  height : 500px;
+  width: 500px;
+  border-color: #E7E7E7;
+  border-radius: 4px;
+}
+
+/* Mapping Tabs */
+
+.ta-editor {
+    min-height: 300px;
+    height: auto;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 100%;
+    margin:20px 0;
+}
+
+/* AggregationTab */ 
+
+.margin-left {
+  margin-left: 10px;
+}
+
+.aggregations-list li {
+  list-style-type: none;
+  width : 290px;
+  margin-top: 10px;
+}
+
+.aggregations-list li .panel-body .input-group {
+  margin-top: 5px;
+}
+
+.aggregations-list li .btn-group {
+  margin-top : 10px;
+}
+
+/* Result Tab */
+
+.aggregations-list  > ul {
+  padding-left : 0;
+}
+
+#query-result, #aggregation-result, #sidebar-resizer {
+  float: left;
+}
+
+.caret-btn-xs {
+  padding: 7px 5px 8px 5px;
+}
+
+.glyph-btn-xs {
+  padding : 4px 5px;
+}
+
+#aggregation-result {
+    overflow: auto;
+    border-top: 1px solid #CCCCCC;
+}
+  .aggregation-mini {
+    width:0%;
+  }
+  .aggregation-split {
+    width:20%;
+  }
+
+#result-items {
+    overflow: auto;
+}
+  .result-full {
+   width : 99%;
+  }
+
+  .result-split {
+    width : 79%;
+  }
+
+#sidebar-resizer {
+    background-color: #D9EDF7;
+    height : 100%;
+    width: 6px;
+    cursor: e-resize; 
+}
+
+#sidebar-resizer:hover {
+    background-color: #31708F;
+}
+
+#query-result h4 {
+  padding-left : 15px;
+}
+
+/* CSV Modal */
+
+.modal-scroll {
+  height: 60%;
+  overflow: auto;
+}
+
+.modal-body {
+  padding: 15px;
+}
+
+  .ok  {
+    color: green;
+  }
+
+  .ko {
+    color: red;
+  }
+
+  .hide-button {
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    padding : 6px 0 0 0;  
+  }
+
+
+.float-right {
+  float: right;
+}
+
+#advanced-query  {
+   -webkit-transition: 0.5s linear;
+  -moz-transition: 0.5s linear;
+  -ms-transition: 0.5s linear;
+  -o-transition: 0.5s linear;
+  transition: 0.5s linear;
+  overflow: hidden;
+}
+
+#advanced-query.ng-enter {
+  opacity: 0;
+  max-height: 0;
+}
+
+#advanced-query.ng-enter-active {
+  opacity: 1;
+  max-height: 250px; 
+}
+
+#advanced-query.ng-leave {
+  opacity: 1;
+  max-height: 250px; 
+}
+
+#advanced-query.ng-leave-active {
+  opacity: 1;
+  max-height: 0; 
+}
+
+#content-left {
+  z-index : 100;
+}
+
+#content-left .panel-body {
+  padding : 5px;
+}
+
+.aggregation-items {
+  padding : 5px;
+}
+
+#content {
+  z-index: 99;
+}
+
+.result-list {
+  overflow: auto;
+  max-height: 80%;
+}
+#content-right {
+  z-index : 101;
+}
+
+#loading-image {
+  position : absolute;
+  z-index  : 10000;
+  top :49%;
+  left :49%;
+}
+ 
+ #header .select-header {
+  width : 300px;
+}
+
+.result-info {
+  margin-top : 20px;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis {
+  font: 10px sans-serif;
+  color: #000000;
+}
+
+
+/*.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}*/
+
+.departement {
+  stroke : #777777;
+  stroke-width: 1px;
+  cursor: pointer;
+}
+
+.departement:hover {
+  fill : #777777;
+}
+
+.agg_option ul li{
+  list-style: none;
+}
