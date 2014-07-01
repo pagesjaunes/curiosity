@@ -38,6 +38,9 @@
 			<button class="btn btn-default" ng-click="deleteContext()" title="{{ info.txt.context.Remove }}">
 				<span class="glyphicon glyphicon-trash"></span>
 			</button>
+			<button ng-click="reloadContextList()" title="Reload context list" class="btn btn-default">
+				<span  class="glyphicon glyphicon-share-alt"> </span>	
+			</button>
 		</div>
 
 		<div class="margin-top" ng-show="showNewContext">
@@ -45,7 +48,9 @@
 				<span class="input-group-addon">{{ info.txt.context.ContextName }}</span>
 				<input type="text" ng-model="info.newContextName" class="form-control">
 			</div>
-			<button class="btn btn-default margin-top" ng-click="saveNewContext()" title="{{ info.txt.context.Validate }}">
+			
+			<button class="btn margin-top" ng-click="saveNewContext()" ng-class="{'btn-danger':data.error,'btn-default':!data.error}"
+			 title="{{ info.txt.context.Validate }}">
 				<span class="glyphicon glyphicon-ok"></span>
 			</button>
 		</div>

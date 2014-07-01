@@ -8,7 +8,6 @@ Curiosity.controller('contextCtrl', function($scope, context){
 
 	$scope.saveNewContext = function () {
 		context.newContext($scope.info.newContextName); 
-		context.sendContext();
 	}
 
 	$scope.setDefaultContext = function () {
@@ -21,7 +20,7 @@ Curiosity.controller('contextCtrl', function($scope, context){
 
 	$scope.selectContext = function () {
 		if ($scope.data.contextIdx != null && $scope.data.contextIdx >= 0) {
-			context.loadContext($scope.data.contextList[$scope.data.contextIdx].fields.contextName);
+			context.loadContext($scope.data.contextList[$scope.data.contextIdx]._id);
 		}
 		else {
 			context.setContextIdx();
@@ -30,5 +29,9 @@ Curiosity.controller('contextCtrl', function($scope, context){
 
 	$scope.deleteContext = function () {
 		context.deleteContext();
+	}
+
+	$scope.reloadContextList = function () {
+		context.getContextList();
 	}
 });

@@ -7,10 +7,11 @@
 		<span class="glyphicon" ng-class="{'glyphicon-cog':curAgg.displayResult, 'glyphicon-list-alt':!curAgg.displayResult}" ng-click="curAgg.displayResult = !curAgg.displayResult">
 		</span>
 
-		<span class="glyphicon glyphicon-remove" ng-click="removeMainAgg(curAgg, module.id)"> </span>
+		<span class="glyphicon glyphicon-remove" ng-click="removeMainAgg(curAgg, module.id)" title="Remove Aggregation"> </span>
 		
-		<span ng-if="curAgg.validate" class="glyphicon glyphicon-ok">
+		<span ng-if="curAgg.validate" class="glyphicon glyphicon-ok module-info-ok" title="Aggregation activated">
 		</span>
+		<span ng-if="!curAgg.validate" class="glyphicon glyphicon-ban-circle module-info-ko" title="Aggregation desactivated"></span>
 	</h4>
 
 	<div ng-if="!curAgg.hideCurAgg">

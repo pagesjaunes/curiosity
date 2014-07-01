@@ -10,6 +10,15 @@
 			margin-left : 10px;
 		}
 
+		.module h4 span.module-info-ok {
+			cursor: default;
+			color: #5cb85c;
+		}
+
+		.module h4 span.module-info-ko {
+			cursor: default;
+			color: #d9534f;
+		}
 
 [draggable=true]{
     cursor: move;

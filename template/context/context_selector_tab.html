@@ -1,0 +1,30 @@
+<div ng-controller="context-ctrl">
+<h2>
+	Choose Your context
+</h2>	
+
+<a>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			New Context
+		</div>
+		<div class="panel-body">
+			
+		</div>
+	</div>
+</a>
+
+<a ng-repeat="context in data.contextList | limit[9] " ng-click="selectContextById(context._id)" 
+	class="col-sm-4">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			{{ context.fields.contextName }}
+		</div>
+
+		<div class="panel-body">
+		</div>
+	</div>
+</a>
+
+
+</div>

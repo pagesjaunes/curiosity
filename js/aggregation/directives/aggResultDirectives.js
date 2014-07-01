@@ -9,8 +9,25 @@ Curiosity.directive('aggResult', function(aggFactory){
 				return (aggFactory.isAgg(key));
 			}
 			
-			$scope.callFuncWithData = function (func) 
-				func($scope.agg);
+			$scope.callFuncWithData = function (func) {
+				window[func]($scope.agg);
+			}
+
+			$scope.includeExternalScript = function (url, callback) {
+				var scripts = document.getElementsByTagName('script');
+    			var i = 0;
+    			while (i < scripts.length) {
+    				if (scripts[i].src == url) {
+        				return ;        				
+    				}
+					i++;
+				}
+				var script = document.createElement("script");
+				script.type = "text/javascript";
+				document.body.appendChild(script);
+				script.src = url;
+				script.onload = callback;
+			}
 		}
 	}
 });

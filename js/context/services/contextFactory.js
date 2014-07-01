@@ -1,4 +1,4 @@
-Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elasticFunc, log){
+Curiosity.factory('context', function($rootScope, $cookies, $location, elasticClient, elasticFunc, log){
 	var contextObj = {};
 	var contextDocumentType = "context-doc";
 	var cookieName = "CurisoityDefaultContext";
@@ -12,10 +12,10 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 	contextObj.info.contextList = [];
 	contextObj.info.contextIdx = -1;
 
-	contextObj.loadContext = function(contextName) {
-		if (prevIdx != contextObj.info.contextIdx) {
+	contextObj.loadContext = function(contextId) {
+		if (prevIdx != contextObj.info.contextIdx && typeof(contextId) !== "undefined" && contextId != "") {
 			var request = ejs.Request();
-			var query = ejs.QueryStringQuery("contextName:\"" + contextName + "\"");
+			var query = ejs.QueryStringQuery("_id:\"" + contextId + "\"");
 			var filter = ejs.TypeFilter(contextDocumentType);		
 			
 			request.query(query).filter(filter);
@@ -24,18 +24,22 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 				context = data.hits.hits[0];
 				if (typeof (context) === "undefined")  {
 					$rootScope.$broadcast("NoContext");
-					log.log("Error : context " + contextName + " not found", "danger");
+					log.log("Context : Error : context " + contextId + " not found", "danger");
 				}
 				else {
 					contextObj.info.currentContext = context._source;
 					contextObj.setContextIdx();
+					$location.search("context", contextId);
 					prevIdx = contextObj.info.contextIdx;
 					$rootScope.$broadcast("ContextLoaded");
 				}
 			}, 
 			function (err) {
-				log.log("Error during context loading", "danger");
+				log.log("Context : Error during context loading", "danger");
 			});
+		}
+		else {
+			$rootScope.$broadcast("NoContext");
 		}
 	}
 
@@ -54,9 +58,21 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 			context = {};
 			contextObj.info.currentContext = {};
 			contextObj.info.currentContext.contextName = name;
+			var i = 0;
+			while (i < contextObj.info.contextList.length) {
+				if (contextObj.info.contextList[i].fields.contextName == name) {
+					log.log("Context : Context " + name + " already exists !!","danger");		
+					contextObj.info.error = true;
+					return;
+				}
+				i++;
+			}
+			contextObj.info.error = false;
+			log.log("Context : Context created locally", "success");
 		}
 		else {
 			contextObj.info.error = true;
+			log.log("Context : You have to name your new context", "danger");
 		}
 	}
 
@@ -70,7 +86,7 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 
 	contextObj.deleteContext = function () {
 		elasticFunc.deleteDocument(client, globalConf.confIndex, contextDocumentType, context._id);
-		if ($cookies.CurisoityDefaultContext == contextObj.info.currentContext.contextName) {
+		if ($cookies.CurisoityDefaultContext == context._id) {
 			$cookies.CurisoityDefaultContext = "";
 		}
 		contextObj.info.currentContext = {};
@@ -82,6 +98,7 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 		var query = ejs.MatchAllQuery();
 		var filter = ejs.TypeFilter(contextDocumentType);	 
 		request.fields("contextName");
+		request.size(100);
 		request.query(query).filter(filter);
 		client.search({index:globalConf.confIndex, body:request})
 		.then(function(data) {
@@ -96,16 +113,17 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 			}
 		}, 
 		function (error) {
-			console.log("Unable to load context list");
+			log.log("Context : Unable to load context list", "danger");
 		})
 	}
 
 	contextObj.setDefaultContext = function() {
-		if (typeof (contextObj.info.currentContext.contextName) !== "undefined") {
-			$cookies.CurisoityDefaultContext = contextObj.info.currentContext.contextName;
+		console.log(contextObj.info.currentContext);
+		if (typeof (context._id) !== "undefined") {
+			$cookies.CurisoityDefaultContext = context._id;
 		}
 		else {
-			console.log("No context Selected yet");
+			log.log("Context : No context Selected yet", "warning");
 		}
 	}
 
@@ -138,13 +156,18 @@ Curiosity.factory('context', function($rootScope, $cookies, elasticClient, elast
 
 	contextObj.init = function() {
 		contextObj.getContextList();
-		if (typeof ($cookies[cookieName]) !== "undefined") {
-			contextObj.loadContext($cookies[cookieName]);
+		var params = $location.search();
+		if (typeof(params) != "undefined" && params.context) {
+			contextObj.loadContext(params.context);
 		}
 		else {
-			$rootScope.$broadcast("NoContext");
+			if (typeof ($cookies[cookieName]) !== "undefined") {
+				contextObj.loadContext($cookies[cookieName]);
+			}
+			else {
+				$rootScope.$broadcast("NoContext");
+			}
 		}
 	}
-
 	return (contextObj); 
 })
