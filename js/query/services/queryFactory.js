@@ -130,7 +130,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				if (typeof(queryObj.info.nbResult) === "undefined")
 					 queryObj.info.nbResult = 10;
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
-				$rootScope.$broadcast("QueryœLaunched");
+				$rootScope.$broadcast("QueryLaunched");
 				log.log("Requête : ok", "success");
 			},
 			function err(err) {
@@ -148,8 +148,14 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		if (queryObj.info.simplifiedRequest.length) {
 			if (queryObj.info.simplifiedRequest.charAt(queryObj.info.simplifiedRequest.length-1) != " ") {
 				var tmp = queryObj.info.simplifiedRequest.split(" ");
-				tmp[tmp.length-1] = keyword + " ";
-				queryObj.info.simplifiedRequest = tmp.join(" "); 
+				var re = new RegExp("^" + tmp[[tmp.length-1]] + ".*");
+				if (re.test(keyword)) {
+					tmp[tmp.length-1] = keyword + " ";
+					queryObj.info.simplifiedRequest = tmp.join(" "); 		
+				}
+				else {
+					queryObj.info.simplifiedRequest += " " + keyword + " ";
+				}
 			}
 			else {
 				queryObj.info.simplifiedRequest += keyword + " ";
