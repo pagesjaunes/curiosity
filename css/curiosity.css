@@ -271,8 +271,8 @@ body {
 
 .result-list {
   overflow: auto;
-  max-height: 80%;
 }
+
 #content-right {
   z-index : 101;
 }

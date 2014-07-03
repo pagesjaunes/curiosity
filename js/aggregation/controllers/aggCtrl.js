@@ -1,4 +1,4 @@
-Curiosity.controller('aggCtrl', function($scope, aggFactory, template){
+Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	$scope.aggTypeSelected = false;
 	$scope.data = aggFactory.info;
 	$scope.tplData = template.info;   
@@ -57,6 +57,23 @@ Curiosity.controller('aggCtrl', function($scope, aggFactory, template){
 			agg.intervals.splice(index, 1);
 		}
 	}
+
+	$scope.openModalFields = function (size) {
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/fieldsModal.html',
+			controller: mappingModalCtrl,
+			size: size,
+			resolve: {
+				items: function () {
+					return $scope.items;
+				}}
+			});
+		modalInstance.result.then(function (value) {
+			$scope.curAgg.field = value;
+		}, function () {
+		})
+	};
+
 
 	function initTemplate(agg) {
 		$scope.loadTpl(agg.tpl);
