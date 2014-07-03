@@ -1,18 +1,35 @@
+/** 
+* @desc directives used to aggregation result display 
+*/
 Curiosity.directive('aggResult', function(aggFactory){
 	return {	
 		scope: {
 			agg : '='
 		},	
 		templateUrl : "template/aggregation_module/aggResult.html",	
-		controller : function ($scope) {
+		controller : function ($scope) {	
+			
+			/**
+			* @desc check if a string is an aggregation name or not
+			* @param string key the string to test
+			*/
 			$scope.isAgg = function (key) {
 				return (aggFactory.isAgg(key));
 			}
 			
+			/**
+			* @desc call an external function and pass the agg data into parameters
+			* @param string func function'name 
+			*/
 			$scope.callFuncWithData = function (func) {
 				window[func]($scope.agg);
 			}
 
+			/** 
+			* @desc include external script if it's not alredy present and call a function just after
+			* @param string url the script url to load
+			* @param string callback callback function name 
+			*/
 			$scope.includeExternalScript = function (url, callback) {
 				var scripts = document.getElementsByTagName('script');
     			var i = 0;
