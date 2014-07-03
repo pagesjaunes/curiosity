@@ -11,6 +11,7 @@ Curiosity.controller('aggCtrl', function($scope, aggFactory, template){
 		}
 		else {
 			$scope.curAgg = aggFactory.getAggregation(name);
+			initTemplate($scope.curAgg);
 		}
 	}
 	
@@ -56,4 +57,16 @@ Curiosity.controller('aggCtrl', function($scope, aggFactory, template){
 			agg.intervals.splice(index, 1);
 		}
 	}
+
+	function initTemplate(agg) {
+		$scope.loadTpl(agg.tpl);
+		if (typeof(agg.nestedAgg) !== "undefined") {
+			var i = 0;
+			while (i < agg.nestedAgg.length) {
+				initTempalte(agg.nestedAgg[i]);
+				i++;
+			}
+		}
+	}
+
 });

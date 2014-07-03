@@ -29,10 +29,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	var currentIndex = "";
 	var queryString = ejs.QueryStringQuery();
 
-	$rootScope.$on("KeywordUpdate", function () {
-		queryObj.info.keywordToShow = keyword.getKeywordListFromIndexFilter(currentIndex, getLastWord(queryObj.info.simplifiedRequest));		
-	});
-
 	// Context event
 	$rootScope.$on("ContextLoaded", function () {
 		var flag = false;
@@ -53,6 +49,14 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		currentKeyword = keyword.getKeywordListFromIndex(currentIndex);
 	});
 
+	$rootScope.$on("UpdateContext", function () {
+ 		queryObj.queryInfo.autoRefresh = queryObj.info.autoRefresh;
+		queryObj.queryInfo.simplifiedRequest = queryObj.info.simplifiedRequest;	 
+		queryObj.queryInfo.complexRequest = queryObj.info.complexRequest;
+		queryObj.queryInfo.nbResult = queryObj.info.nbResult;
+		context.setContextInformation("request", queryObj.queryInfo);
+	});
+
 	$rootScope.$on('IndexChange',function (){
 		queryObj.updateIndex();
 	});
@@ -61,12 +65,9 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	    queryObj.updateClient();
 	});
 
-	$rootScope.$on("UpdateContext", function () {
- 		queryObj.queryInfo.autoRefresh = queryObj.info.autoRefresh;
-		queryObj.queryInfo.simplifiedRequest = queryObj.info.simplifiedRequest;	 
-		queryObj.queryInfo.complexRequest = queryObj.info.complexRequest;
-		queryObj.queryInfo.nbResult = queryObj.info.nbResult;
-		context.setContextInformation("request", queryObj.queryInfo);
+	$rootScope.$on("KeywordUpdate", function () {
+		currentKeyword = keyword.getKeywordListFromIndex(currentIndex);
+		queryObj.updateQuery();
 	});
 
 	function builtRequest(query) {
@@ -256,5 +257,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 			i++;
 		}
 	}
+
 	return queryObj;
 });

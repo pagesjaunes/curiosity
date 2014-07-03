@@ -5,7 +5,7 @@ Curiosity.service('elasticClient', function(esFactory) {
 		return { 
 			getClient: function(server) {	
           	  return esFactory({
-            	    host: server 
+            	    host: server,
             	});
         	}
    		}

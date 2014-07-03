@@ -1,0 +1,97 @@
+<div ng-repeat="item in queryData.result.hits.hits">
+	<h2>{{ item._source.epj.denom }}</h2>
+	<div class="col-sm-6">
+		<div class="panel panel-warning">
+
+			<div class="panel-heading">
+				Donnés CSP 
+				<span class="glyphicon" ng-class="{'glyphicon-plus':item.hideCsp, 'glyphicon-minus':!item.hideCsp}" ng-click="item.hideCsp =!item.hideCsp"></span> 
+			</div>
+
+			<div class="panel-body" ng-show="!item.hideCsp">
+				<div class="col-sm-6"><label>Type</label></div>
+				<div class="col-sm-6"><label>Valeur</label></div>
+
+				<div class="spacer"></div>
+
+				<div ng-repeat="data in item._source.data.terme">
+					<div class="col-sm-6">{{ data.normale.type }}</div>
+					<div class="col-sm-6">{{ data.normale.fn }}</div>
+					<div class="spacer"></div>
+					<hr>
+				</div>
+
+			</div>
+		</div>
+	</div>						
+
+	<div class="col-sm-6">
+		<div class="panel panel-info">
+
+			<div class="panel-heading">
+				Donnés Issues des Avis 
+				<span class="glyphicon" ng-class="{'glyphicon-plus':item.hideAvis, 'glyphicon-minus':!item.hideAvis}" ng-click="item.hideAvis =!item.hideAvis"></span>
+			</div>
+
+			<div class="panel-body" ng-show="!item.hideAvis">
+				<div class="col-sm-6"><label>Type</label></div>
+				<div class="col-sm-6"><label>Valeur</label></div>
+
+				<div class="spacer"></div>
+
+				<div ng-repeat="data in item._source.avis">
+					<div ng-if="!data.showAvis" class="col-sm-10">
+						<div class="col-sm-6">
+							<div> 
+								<div ng-repeat="value in data.terme">{{ value.normale.type }}</div>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div> 
+								<div ng-repeat="value in data.terme">{{ value.normale.fn }}</div>
+							</div>
+						</div>
+						<div class="spacer"></div>
+					</div>
+					
+					<div ng-if="data.showAvis" class="col-sm-10">
+							{{ data.contenu }}
+						
+					</div>
+					<div class="col-sm-2">
+						<button ng-click="data.showAvis=!data.showAvis" class="btn btn-default" >
+							<span ng-if="!data.showAvis">Voir avis</span>
+							<span ng-if="data.showAvis">Voir terms</span>
+						</button>
+					</div>
+					<div class="spacer"></div>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="spacer"></div>						
+
+	<div class="container">
+		<div class="panel panel-success">
+			<div class="panel-heading">
+				Delta des donnés 
+				<span class="glyphicon" ng-class="{'glyphicon-plus':item.hideRes, 'glyphicon-minus':!item.hideRes}" ng-click="item.hideRes =!item.hideRes"></span>
+			</div>
+
+			<div class="panel-body" ng-show="!item.hideRes">
+				<div class="col-sm-6"><label>Type</label></div>
+				<div class="col-sm-6"><label>Valeur</label></div>
+
+				<div class="spacer"></div>
+
+				<div ng-repeat="data in item._source.gain_contrib">
+					<div class="col-sm-6">{{ data.normale.type }}</div>
+					<div class="col-sm-6">{{ data.normale.fn }}</div>
+					<div class="spacer"></div>
+					<hr>
+				</div>
+			</div>
+		</div>
+	</div>
+<div>

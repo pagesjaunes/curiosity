@@ -1,0 +1,11 @@
+<div ng-controller="docCtrl">
+	<div class="input-group">
+		<span class="input-group-addon">id</span>
+		<input ng-model="id" class="form-control">
+	</div>
+	<div class="input-group">
+		<span class="input-group-addon">type</span>
+		<input ng-model="type">
+	</div>
+	<button ng-click="deleteDocument(id, type)" class="btn btn-default">Ok</button>
+</div>

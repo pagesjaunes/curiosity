@@ -1,7 +1,6 @@
 Curiosity.factory('context', function($rootScope, $cookies, $location, elasticClient, elasticFunc, log){
 	var contextObj = {};
 	var contextDocumentType = "context-doc";
-	var cookieName = "CurisoityDefaultContext";
 	var prevIdx = -2;
 	var client = elasticClient.getClient(globalConf.confServer);
 
@@ -117,16 +116,6 @@ Curiosity.factory('context', function($rootScope, $cookies, $location, elasticCl
 		})
 	}
 
-	contextObj.setDefaultContext = function() {
-		console.log(contextObj.info.currentContext);
-		if (typeof (context._id) !== "undefined") {
-			$cookies.CurisoityDefaultContext = context._id;
-		}
-		else {
-			log.log("Context : No context Selected yet", "warning");
-		}
-	}
-
 	contextObj.setContextIdx = function () {
 		if (typeof (contextObj.info.currentContext.contextName) !== "undefined") {
 			var i = 0;
@@ -161,12 +150,7 @@ Curiosity.factory('context', function($rootScope, $cookies, $location, elasticCl
 			contextObj.loadContext(params.context);
 		}
 		else {
-			if (typeof ($cookies[cookieName]) !== "undefined") {
-				contextObj.loadContext($cookies[cookieName]);
-			}
-			else {
-				$rootScope.$broadcast("NoContext");
-			}
+			$rootScope.$broadcast("NoContext");
 		}
 	}
 	return (contextObj); 

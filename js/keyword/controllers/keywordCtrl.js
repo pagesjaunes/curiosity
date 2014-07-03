@@ -21,7 +21,7 @@ function($scope, keyword, curiosity, mapping){
 		}
 		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
 	})
-
+	
 	/**
 	* selectIndex
 	* Manage the index selection which impact the keyword list

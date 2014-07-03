@@ -94,20 +94,20 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<button class="btn btn-primary " ng-click="sort.type = !sort.type" title="ASC/DESC">
+						<button class="btn btn-primary " ng-click="sort.type = !sort.type" title="ASC/DESC" type="button">
 							<span class="glyphicon" ng-class="{'glyphicon-arrow-up':sort.type, 'glyphicon-arrow-down': !sort.type}">
 							</span>
 						</button>
 						
-						<button class="btn btn-danger " ng-click="removeSort($index)" title="Remove">
+						<button class="btn btn-danger " ng-click="removeSort($index)" title="Remove" type="button">
 							<span class="glyphicon glyphicon-remove"></span>
 						</button>
 						
-						<button class="btn btn-info" title="Reorder up" ng-click="move($index, true)">
+						<button class="btn btn-info" title="Reorder up" ng-click="move($index, true)" type="button">
 							<span class="glyphicon glyphicon-circle-arrow-up"></span>
 						</button>
 						
-						<button class="btn btn-info" title="Reorder down" ng-click="move($index, false)">
+						<button class="btn btn-info" title="Reorder down" ng-click="move($index, false)" type="button">
 							<span class="glyphicon glyphicon-circle-arrow-down"></span>
 						</button>
 					</div>
@@ -115,8 +115,8 @@
 				</div>
 				
 				<div class="margin-top">
-					<button ng-click="addSort()" class="btn btn-success">
-						{{ info.txt.request.AddSort }}
+					<button ng-click="addSort()" class="btn btn-default" type="button">
+						{{ info.txt.request.AddSort }} <span class="glyphicon glyphicon-plus"></span>
 					</button>
 				</div>
 			</div>
