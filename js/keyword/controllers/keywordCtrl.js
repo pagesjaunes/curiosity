@@ -19,6 +19,8 @@ function($scope, keyword, curiosity, mapping){
 			$scope.keyword.selectedIndex = "global";
 		}
 		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
+		if (typeof ($scope.currentKeywords) === "undefined")
+			$scope.currentKeywords = [];
 	})
 	
 	/**
