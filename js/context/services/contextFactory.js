@@ -1,4 +1,4 @@
-Curiosity.factory('context', function($rootScope, $cookies, $location, elasticClient, elasticFunc, log){
+Curiosity.factory('context', function($rootScope, $location, elasticClient, elasticFunc, log){
 	var contextObj = {};
 	var contextDocumentType = "context-doc";
 	var prevIdx = -2;

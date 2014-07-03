@@ -13,7 +13,6 @@ function($scope, keyword, curiosity, mapping){
 		keyword.update();
 		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
 	});
-
 	$scope.$on("IndexChange", function () {
 		$scope.keyword.selectedIndex = curiosity.info.selectedIndex;
 		if ($scope.keyword.selectedIndex == "") {
@@ -53,26 +52,9 @@ function($scope, keyword, curiosity, mapping){
 	* removeRow
 	* remove a row in the grid and the attached keyword in the sametime.
 	*/
-	$scope.removeRow = function() {
-		var index = this.row.rowIndex;
-		$scope.gridOptions.selectItem(index, false);
+	$scope.removeRow = function(index) {
 		$scope.currentKeywords.splice(index, 1);
 	};
 
-	// Grid initialisation	
-	var removeTemplate = '<button type="button" class="close" ng-click="removeRow($index)" aria-hidden="true">&times;</button>';
-	$scope.gridOptions = { 
-			data: 'currentKeywords',
-			enableCellSelection: true,
-			enableColumnResize: true,
-			enableRowSelection: false,
-			enableCellEditOnFocus: true,
-			columnDefs: [	
-			{field: 'label', displayName:'Label', width:"25%", enableCellEdit: true,}, 
-			{field:'value', displayName:'Value', width:"40%", enableCellEdit: true, },
-			{field:'desc', displayName:'Description', width:"25%",enableCellEdit: true,},
-			{field: 'remove', displayName:'Remove',width:"10%", cellTemplate: removeTemplate, enableCellEdit: false}
-			]
-		};
 }]);
 
