@@ -2,9 +2,9 @@
 
 Curiosity.factory("elasticFunc", function(log){
 	return {
+		
 		/**
-		* elasticsearchError
-		* Function which is used to handle elasticsearch error 
+		* @desc Function which is used to handle elasticsearch error 
 		*/
 		"elasticsearchError" : function (error) {
 			if (error) {
@@ -17,11 +17,10 @@ Curiosity.factory("elasticFunc", function(log){
 		},
 
 		/**
-		* createIndex 
-		* create a new index on elasticsearch server designed by client 
-		* @param client : an elasticSearch.js client alredy initialised
-		* @param indexName : the name of the new index 
-		* @param func : callback function by default elasticearchError 
+		* @desc create a new index on elasticsearch server designed by client 
+		* @param client an elasticSearch.js client alredy initialised
+		* @param indexName the name of the new index 
+		* @param func callback function by default elasticearchError 
 		*/
 		"createIndex" : function (client, indexName, func) {
 			if (typeof(func) ==='undefined') 
@@ -29,6 +28,12 @@ Curiosity.factory("elasticFunc", function(log){
 			client.indices.create({index:indexName}, this.elasticsearchError);
 		},
 
+		/**
+		* @desc delete an index on elasticsearch server designed by client 
+		* @param client an elasticSearch.js client alredy initialised
+		* @param indexName the name of the index to delete 
+		* @param func callback function by default elasticearchError 
+		*/
 		"deleteIndex" : function(client, indexName, func) {
 			if (typeof(func) ==='undefined') 
 				func = this.elasticsearchError;
@@ -36,14 +41,13 @@ Curiosity.factory("elasticFunc", function(log){
 		},
 
 		/**
-		* sendDocument
-		* send document to an elasticsearch server
-		* @param client : elasticsearch js client
-		* @param indexName : the index name where to post the document
-		* @param type : document type
-		* @param doc : the document in json
-		* @param id : id of the document 
-		* @param func : callback function by default elasticearchError 
+		* @desc send document to an elasticsearch server
+		* @param client elasticsearch js client
+		* @param indexName the index name where to post the document
+		* @param type document type
+		* @param doc the document in json
+		* @param id id of the document 
+		* @param func callback function by default elasticearchError 
 		*/
 		"sendDocument" : function (client, indexName, type, doc, id, func) {
 			if (typeof(func) ==='undefined') 
@@ -55,7 +59,15 @@ Curiosity.factory("elasticFunc", function(log){
 				body: doc
 			}, func)
 		},
-
+		
+		/**
+		* @desc delete document on an elasticsearch server
+		* @param client elasticsearch js client
+		* @param indexName the index name where to delete the document
+		* @param type document type
+		* @param id id of the document 
+		* @param func callback function by default elasticearchError 
+		*/
 		"deleteDocument" : function (client, indexName, type, id, func) {
 			if (typeof(func) ==='undefined') {
 				func = this.elasticsearchError;				
@@ -69,13 +81,12 @@ Curiosity.factory("elasticFunc", function(log){
 		},
 
 		/**
-		* sendNewDocument
-		* send a new document to an elasticsearch server (id auto)
-		* @param client : elasticsearch js client
-		* @param indexName : the index name where to post the document
-		* @param type : document type
-		* @param doc : the document in json
-		* @param func : callback function by default elasticearchError 
+		* @desc send a new document to an elasticsearch server (id auto)
+		* @param client elasticsearch js client
+		* @param indexName the index name where to post the document
+		* @param type document type
+		* @param doc the document in json
+		* @param func callback function by default elasticearchError 
 		*/
 		"sendNewDocument" : function (client, indexName, type, doc, func) {
 			if (typeof(func) ==='undefined') 
@@ -89,13 +100,11 @@ Curiosity.factory("elasticFunc", function(log){
 
 
 		/**
-		* getMapping
-		*
-		* Get the mapping of an elasticsearch index
-		* @param client : elasticsearch js client
-		* @param indexName : the index name where to post the document
-		* @param type : document type by default all
-		* @param func : callback function, by default elasticearchError 
+		* @desc Get the mapping of an elasticsearch index
+		* @param client elasticsearch js client
+		* @param indexName the index name where to post the document
+		* @param type document type by default all
+		* @param func callback function, by default elasticearchError 
 		*/
 		"getMapping" : function (client, indexName, func)
 		{
