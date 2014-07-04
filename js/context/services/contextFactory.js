@@ -146,7 +146,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 	/*
 	* @desc set context idx from current context   
 	*/
-	ontextObj.setContextIdx = function () {
+	contextObj.setContextIdx = function () {
 		if (typeof (contextObj.info.currentContext.contextName) !== "undefined") {
 			var i = 0;
 			while (i < contextObj.info.contextList.length) {
