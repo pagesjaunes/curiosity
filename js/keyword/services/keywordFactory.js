@@ -1,7 +1,15 @@
+/**
+* @desc keyword service, manage keyword list, addition, deletion 
+*/
 Curiosity.factory('keyword', function($rootScope, conf){
 	var keywordObj = {};
 	var keywordArray  = [];
 
+	/**
+	* @desc find the index indice on the index list  
+	* @param string name index's name to find	
+	* @return index indice if found, -2 instead
+	*/
 	function findIndexByName(name) {
 		var i = 0;
 		while (i < keywordArray.length) {
@@ -13,10 +21,17 @@ Curiosity.factory('keyword', function($rootScope, conf){
 		return (-2)
 	}
 
+	/**
+	* @desc update from conf document the keyword array  
+	*/
 	keywordObj.update = function (){
 		keywordArray = conf.getConfDocument("keyword").keywords;
 	}
 
+	/**
+	* @desc find's index keywords
+	* @param string index index's name   
+	*/
 	keywordObj.getIndex = function (index) {
 		var result = findIndexByName(index);
 		if (result < 0 || typeof(keywordArray[result]) === "undefined"){
@@ -25,6 +40,11 @@ Curiosity.factory('keyword', function($rootScope, conf){
 		return (keywordArray[result]);
 	}
 
+	/**
+	* @desc modify index specifique keywords array in confdoc and store the document in es 
+	* @param string index index's name   
+	* @param array data new index's data 
+	*/
 	keywordObj.saveIndex = function (index, data) {
 		// delete space 
 		var i = 0; 
@@ -46,6 +66,11 @@ Curiosity.factory('keyword', function($rootScope, conf){
 		}
 	}
 
+	/**
+	* @desc get the index keyword list and add to this array globals keywords 
+	* @param string index index's name   
+	* @return the final keyword array 
+	*/
 	keywordObj.getKeywordListFromIndex = function (index) {
 		var curentKeyword = findIndexByName(index);
 		var result = [];
@@ -60,11 +85,10 @@ Curiosity.factory('keyword', function($rootScope, conf){
 	}
 
 	/**
-	* getKeywordListFromIndexFilter
-	* Find all keywords that begin  by "word" in a specified index
-	* @param index : the index to browse
-	* @param word : the word to find
-	* @result: an array which contains all keyword found.
+	* @desc Find all keywords that begin  by "word" in a specified index
+	* @param index the index to browse
+	* @param word the word to find
+	* @return an array which contains all keyword found.
 	*/
 	keywordObj.getKeywordListFromIndexFilter = function (index, word) {
 		var result = new Array ;
@@ -80,6 +104,11 @@ Curiosity.factory('keyword', function($rootScope, conf){
 		return (result);
 	}
 
+	/**
+	* @desc Add a keyword in an index, then send the document to elasticsearch
+	* @param object keyword keyword to add   
+	* @param string index index's name where to add the keyword
+	*/
 	keywordObj.addKeywordInIndex = function(keyword, index) {
 		if (index == "") {
 			index = "global";
