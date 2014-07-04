@@ -48,9 +48,8 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 	return {
 
 			/**
-			* initConf 
-			* send all default document to an index 
-			* @param confClient : an elasticSearch.js confClient alredy initialised 
+			* @desc send all default document to an index 
+			* @param confClient an elasticSearch.js confClient alredy initialised 
 			*/
 			"initConf" : function () {
 				var i = 0;
@@ -62,23 +61,28 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 					i++;
 				}
 			},
+
+			/**
+			* @desc reinitialize conf value on es server
+			*/
 			"reInitConf" : function () {
 				elasticFunc.deleteIndex(confClient, globalConf.confIndex);
 				this.initConf();
 			},
 
+			/**
+			* @desc send a new conf document on an elasticsearch server
+			*/
 			"initDocument" : function (document) {
 				elasticFunc.sendNewDocument(confClient, 
 					globalConf.confIndex, 
 					globalConf.defaultConfDocumentType, 
 					document);
-
 			},
 
 			/**
-			* getConf 
-			* get all document from the conf index. If the index is missing then it create him and call initConf 
-			* @param confClient : an elasticSearch.js confClient alredy initialised 
+			* @desc get all document from the conf index. If the index is missing then it create him and call initConf 
+			* @param scope scope scope where to broadcast an event when conf is loaded // TODO : Use $rootScope instead
 			*/
 			"getConf" : function (scope) {
 				var request = ejs.Request();
@@ -100,9 +104,7 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 			},
 
 			/**
-			* sendConf 
-			* send all curent conf document to the server, if there is no document then send all default document
-			* @param confClient : an elasticSearch.js confClient alredy initialised 
+			* @desc send all curent conf document to the server, if there is no document then send all default document
 			*/
 			"sendConf" : function () {
 				if (!gConf.length) {
@@ -118,9 +120,7 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 			},
 
 			/**
-			* sendConfDocument
-			* send a specific conf document
-			* @param confClient : an elasticSearch.js confClient alredy initialised   
+			* @desc send a specific conf document
 			* @param type : the conf document type's to send
 			*/
 			"sendConfDocument" : function (type) {
@@ -136,8 +136,7 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 			},
 
 			/**
-			* getConfDocument
-			* find a specific document in the array of conf document alredy fetched from the server
+			* @desc find a specific document in the array of conf document alredy fetched from the server
 			* @param type : the conf document type's to find
 			* @return : a json object which represent the document or an empty object instead
 			*/
@@ -153,6 +152,10 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 				return ([]);
 			},
 
+			/**
+			* @desc get conf document's indice from is type in the confdoc list 
+			* @param string type conf document's type
+			*/
 			"getConfDocumentIndice" : function (type) {
 				var i = 0;
 				while (i < gConf.length){
@@ -165,6 +168,10 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 				return (-1);
 			},
 
+			/**
+			* @desc add a server to the servers conf document
+			* @param string url server's url
+			*/
 			"addServerToConf"  : function (url) {
 				var serverList = this.getConfDocument("server");
 				var i = 0;
