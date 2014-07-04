@@ -1,3 +1,7 @@
+/*
+* @desc service in charge of csv construction 
+* !!! Every function about csv construction from aggregation will be updated Soon because of the new aggregations system
+*/
 Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	var csvObj = {};
 	
@@ -14,23 +18,21 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	var currentDownload = {working:false}; // Object witch contains all data bout the curent download
 
 	/**
-	* updateField
-	* Update working field from mapping service
+	* @desc Update working field from mapping service
 	*/
 	csvObj.updateField = function () {
 		csvObj.info.fields = mapping.info.fields; 
 	}
 
 	/**
-	* setField
+	* @desc setField
 	*/
 	csvObj.setField = function (fields) {
 		csvObj.info.fields = fields;
 	} 
 
 	/**
-	* builtCsvFromResult
-	* Built a csv file from an result list
+	* @desc Built a csv file from an result list
 	*/
 	csvObj.builtCsvFromResult = function(objList, attr, fields) {
 		fields = builtAttributeArrayFromField(csvObj.info.fields);
@@ -41,8 +43,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	}
 
 	/**
-	* getFullResult
-	* Get all result about our current query from es server then built a csv
+	* @desc Get all result about our current query from es server then built a csv
 	*/
 	csvObj.getFullResult = function () {
 		if (query.info.hits != 0) {
@@ -51,8 +52,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	} 
 
 	/**
-	* getSomeResult
-	* Get a number of result defined by csvObj.info.nbResult result about our current query from es server then built a csv
+	* @desc Get a number of result defined by csvObj.info.nbResult result about our current query from es server then built a csv
 	*/
 	csvObj.getSomeResult = function () {
 		if (query.info.hits != 0) {
@@ -73,15 +73,20 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 		}
 	}
 
+	/**
+	* @desc Create the csv dowloadable file 
+	* @param string fileName result file's name
+	* @param string content result file"s content
+	*/
 	function exportCsvFile(fileName, content) {
 		var blob = new Blob(content, {type: "text/csv"});
 		saveAs(blob, fileName);
 		$rootScope.$broadcast("CsvDone");		
 	}
 
-	/**
-	* builtCsvFromMetricAgg
-	* built a csv file from a metric aggregation (avg, stats, ...)
+	/** WILL BE UPDATED SOON
+	* @desc built a csv file from a metric aggregation (avg, stats, ...)
+	* 
 	*/
  	function builtCsvFromMetricAgg(agg, fields)  {
 		tmpFields = builtAttributeArrayFromField(fields);
@@ -91,7 +96,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 		exportCsvFile('export_' + agg.agg.name + '.csv', [csvObj.info.result]);
 	}
 
-	/**
+	/** WILL BE UPDATED SOON
 	* builtCsvFromBucketAgg
 	* built a csv file from a metric aggregation (avg, stats, ...)
 	*/
@@ -111,17 +116,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 		exportCsvFile('export_' + agg.agg.name + '.csv', [csvObj.info.result]);
 	}
 
-	/* Old func : could be usefull
-	function builtCsvFromBucketAgg (agg, fields) {
-		tmpFields = builtAttributeArrayFromField(fields);
-		csvObj.info.result = csvHeader + "\n";
-		csvObj.info.result += builtCsv(agg.buckets, tmpFields, csvObj.info.sep);
-		csvObj.info.buildingPercent = 0;
-		var blob = new Blob([csvObj.info.result], {type: "text/csv"});
-		saveAs(blob, 'export_' + agg.agg.name + '.csv');
-		$rootScope.$broadcast("CsvDone");
-	}*/
-
+	// WILL BE UPDATED SOON
 	function builtSubCsvAgg(agg, line, sep, size) {
 		var subFields = aggregation.builtAggregationField(agg);	
 		subFields = builtAttributeArrayFromField(subFields);
@@ -142,6 +137,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 		return ({"subFields":subFields,"subResult":subResult});
 	}
 
+	// WILL BE UPDATED SOON
 	function builtCsvFromBucketAgg2 (agg, fields, sep) {
 		var result = [];
 		var subFields = [];
@@ -194,8 +190,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	}
 	
 	/**
-	* getValue
-	* Recursive function which get the value of an object attribute.
+	* @desc Recursive function which get the value of an object attribute.
 	* @param obj : the object to browse
 	* @param field : an array which represent the way to the value wanted 
 	* @param idx : the current position in field array
@@ -225,8 +220,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	}
 
 	/**
-	* builtLine
-	* built a csv line by getting all wanted attribute of an object
+	* @desc built a csv line by getting all wanted attribute of an object
 	* @param obj : the object to represent
 	* @param fields : the array representation of the object
 	* @param sep : the separator between each colums 
@@ -252,8 +246,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	}	
 
 	/**
-	* builtCsv
-	* built a csv file by getting all wanted attribute of all object in a list
+	* @desc built a csv file by getting all wanted attribute of all object in a list
 	* @param objList : the list of object
 	* @param fields : the array representation of objects
 	* @param sep : the separator between each colums 
@@ -270,9 +263,8 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	}
 
 	/**
-	* initLoading
-	* Create the dowload object from query and curiosity service data and launch the first query on es
-	* @param size : the number of line wanted
+	* @desc Create the dowload object from query and curiosity service data and launch the first query on es
+	* @param size the number of line wanted
 	*/	
 	function initLoading (size) {
 		if (!currentDownload.working) {
@@ -298,8 +290,7 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	}
 
 	/**
-	* fetchResultRec 
-	* Callback function which will concat all query result in an array and launch query till enough result were feteched from es
+	* @desc Callback function which will concat all query result in an array and launch query till enough result were feteched from es
 	* @param result : an array which contains last query result
 	*/
 	function fetchResultRec (result) {

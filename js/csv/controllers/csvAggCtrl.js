@@ -1,3 +1,5 @@
+// Will be updtated soon 
+
 var csvAggCtrl = function($scope, $modalInstance, csv, query){
 	$scope.data = csv.info;
 	$scope.queryData = query.info
