@@ -4,6 +4,14 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 	aggObj.info.currentAggregation = [];
 	aggObj.info.aggList = {};
 
+	/**
+	* @desc Built a aggregation from params store it in a list and resiter a new module in the module manager
+	* @param object obj aggregation list where store the new aggregation 
+	* @param string type aggregation's type
+	* @param string field aggregation's field
+	* @param int size agg aggregation's size 
+	* @param string template aggregation's template
+	*/
 	aggObj.newAggregation = function (obj, type, fields, params, size, template) {
 		var agg = {};
 		agg.name = "agg" +  Math.floor((Math.random() * 1000000) + 1);
@@ -15,6 +23,12 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		moduleManager.registerModule(name, "template/aggregation_module/aggDisplay.html");
 	}
 
+	/** 
+	* @desc Create a new empty aggregation, if it's not nested then push it in the main aggregation list
+	* @param boolean nested is the aggregation nested or not
+	* @param string name aggregation's name, if undefined it will be attribuate automaticly 
+	* @return the new aggregation
+	*/
 	aggObj.newEmptyAggregation = function(nested, name) {
 		var agg = {};
 		if (typeof(name) === "undefined") {
@@ -32,6 +46,11 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		return (agg);
 	}
 
+	/** 
+	* @desc update aggregation attr
+	* @param object data new aggregation's fields value
+	* @param object agg target aggregation 
+	*/
 	aggObj.updateAgg = function (data, agg) {
 		for (key in data) {
 			var i = 0;
@@ -44,6 +63,11 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		}
 	}
 
+	/**
+	* @desc find an aggregation from its name, if it missed then create and return a new aggregation
+	* @param string name aggregation's name
+	* @return the aggregation found or a new aggregation
+	*/
 	aggObj.getAggregation = function (name) {
 		var i = 0;
 		while (i < aggObj.info.currentAggregation.length) {
@@ -55,6 +79,10 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		return (aggObj.newEmptyAggregation(false,name));
 	}
 
+	/**
+	* @desc update each aggregation with his new data
+	* @param object data agg object from query result 
+	*/
 	aggObj.updateAggResult = function(data) {
 		for (key in data) {			
 			var i = 0;
@@ -69,11 +97,21 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		}
 	}
 
+	/**
+	* @desc add a nested aggregation to an aggregation
+	* @param object agg the aggregation where to add 
+	*/
 	aggObj.addNestedAgg = function (agg) {
 		var tmp = aggObj.newEmptyAggregation(true);
 		agg.nested[tmp.name] = tmp; 
 	}
 
+
+	/**
+	* @desc add reference from aggregation's object to aggregation's result then browse bukett's to add reference recursivly 
+	* @param object agg the reference to the aggregation 
+	* @param object aggResult result aggregation
+	*/	
 	aggObj.setAllReference = function (agg, aggResult) {
 		aggResult.__ref__ = agg;
 		if (typeof(aggResult.buckets !== "undefined")) {
@@ -83,6 +121,11 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		}	
 	}
 	
+	/** 
+	* @desc browse nested aggregation and call setAllreference on each
+	* @param object agg aggregation to browse
+	* @param object bucket object where to add reference
+	*/
 	aggObj.setReference = function(agg, bucket) {
 		for (key in agg.nested) {
 			if (typeof(bucket[key]) !== "undefined") {
@@ -91,6 +134,10 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		}
 	}
 
+	/**
+	* @desc add aggregation to an ejs request 
+	* @param ejs.Request request the request where to add aggregation 
+	*/
 	aggObj.addAggregationToRequest = function (request) {
 		var aggs = builtAggregationArray();
 		var i = 0;
@@ -100,6 +147,11 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		}
 	}
 
+	/**
+	* @desc remove an aggregation from the main aggregation list, and remove its associate module in module manager
+	* @param object agg aggreation to remove
+	* @param string id aggregation id in module manager
+	*/
 	aggObj.removeMainAgg = function (agg, id) {
 		var  i = 0; 
 		while (i < aggObj.info.currentAggregation.length) {
@@ -111,7 +163,10 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		aggObj.info.currentAggregation.splice(i, 1);
 	}
 
-	function builtAggregationArray () {
+	/**
+	* @desc Built the final array that contains each validate aggregation, call ejs constructor of the aggregation   
+ 	*/
+ 	function builtAggregationArray () {
 		var result = [];
 		var i = 0;
 		while (i < aggObj.info.currentAggregation.length) {
@@ -122,6 +177,9 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		return (result);
 	}
 
+	/**
+	* @desc load aggregation list from data, function called when the service is created
+	*/
 	function loadAggList() {
 		$http({method: 'GET', url: 'data/aggregationList.json'}).
 		success(function(data) {
@@ -134,7 +192,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 
 	loadAggList(); 
 	
-	// Context Event 
+	// CONTEXT EVENT 
 	$rootScope.$on("UpdateContext", function () {
  		var list = cloneAggList(aggObj.info.currentAggregation);
  		context.setContextInformation("agg", list);
@@ -146,7 +204,38 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		aggObj.info.currentAggregation = list;
 	});
 
-	// Clone agg func 
+ 
+	// Utils 
+		
+	/**
+	* @desc check if a bucket have nested aggregation
+	* @param object bucket the bucket to check
+	* @return true if there is nested aggregation, false instead
+	*/
+	aggObj.hasNestedAgg = function (bucket) {
+		var re = new RegExp("^" + "agg" + ".*");
+		for (key in bucket) {
+			if (re.test(key))
+				return (true);
+		}
+		return (false);
+	}
+
+	/**
+	* @desc check if a string is an aggregation name
+	* @param string key string to check
+	* @return true if it's an aggregation, false instead
+	*/
+	aggObj.isAgg = function (key){
+		var re = new RegExp("^" + "agg" + ".*");
+		return (re.test(key));
+	}
+	
+	/**
+	* @desc clone aggregation list recursivly without result attr to avoid cyclic object 
+	* @param object array aggList the array to clone
+	* @return cloned array
+	*/
 	function cloneAggList (aggList) {
 		var result = [];
 		var i = 0;
@@ -162,22 +251,6 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		}
 		return (result);
 	}
-
-	// Utils 
-	aggObj.hasNestedAgg = function (bucket) {
-		var re = new RegExp("^" + "agg" + ".*");
-		for (key in bucket) {
-			if (re.test(key))
-				return (true);
-		}
-		return (false);
-	}
-
-	aggObj.isAgg = function (key){
-		var re = new RegExp("^" + "agg" + ".*");
-		return (re.test(key));
-	}
-
 
 	return (aggObj);
 });

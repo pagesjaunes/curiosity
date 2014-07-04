@@ -1,6 +1,14 @@
+/**
+* @desc service that built aggregation object which will be add to the final request launched on es
+*/
+
 Curiosity.factory('aggConstructor', function(){
 	var obj = {};
 
+	/**
+	* @desc Built terms aggregation 
+	* @param object agg contains all aggregation's param
+	*/
 	obj.Terms = function (agg) {
 		var result = ejs.TermsAggregation(agg.name);
 		result.field(agg.field);
@@ -29,6 +37,10 @@ Curiosity.factory('aggConstructor', function(){
 		return (result);
 	}
 
+	/**
+	* @desc Built range aggregation 
+	* @param object agg contains all aggregation's param
+	*/
 	obj.Range = function (agg) {
 		var result = ejs.RangeAggregation(agg.name);
 		result.field(agg.field); 
@@ -55,7 +67,12 @@ Curiosity.factory('aggConstructor', function(){
 		}
 		return (result);
 	}
-	
+
+	/**
+	* @desc generic function used to built simple aggregation with not a lot of params 
+	* @param object agg contains all aggregation's param
+	* @param constructor ejs constructor of the aggregation
+	*/
 	function simple(agg, constructor) {
 		var result = constructor(agg.name);
 		result.field(agg.field); 
@@ -64,30 +81,58 @@ Curiosity.factory('aggConstructor', function(){
 		return (result);
 	}
 
+	/**
+	* @desc Built avg aggregation with throught simple function
+	* @param object agg contains all aggregation's param
+	*/
 	obj.Avg = function (agg) {
 		return (simple(agg, ejs.AvgAggregation));	
 	}
 
+	/**
+	* @desc Built stats aggregation with throught simple function
+	* @param object agg contains all aggregation's param
+	*/
 	obj.Stats = function (agg) {
 		return (simple(agg, ejs.StatsAggregation));
 	}
 
+	/**
+	* @desc Built max aggregation with throught simple function
+	* @param object agg contains all aggregation's param
+	*/
 	obj.Max = function (agg) {
 		return (simple(agg, ejs.MaxAggregation));
 	}
 
+	/**
+	* @desc Built min aggregation with throught simple function
+	* @param object agg contains all aggregation's param
+	*/
 	obj.Min = function (agg) {
 		return (simple(agg, ejs.MinAggregation));
 	}
 
+	/**
+	* @desc Built Extendedstats aggregation with throught simple function
+	* @param object agg contains all aggregation's param
+	*/
 	obj.ExtendedStats = function (agg) {
 		return (simple(agg,ejs.ExtendedStatsAggregation));
 	}
 
+	/**
+	* @desc Built ValueCount aggregation with throught simple function
+	* @param object agg contains all aggregation's param
+	*/
 	obj.ValueCount = function (agg) {
 		return (simple(agg, ejs.ValueCountAggregation));	
 	}
 
+	/**
+	* @desc Built sum aggregation with throught simple function
+	* @param object agg contains all aggregation's param
+	*/
 	obj.Sum = function (agg) {
 		return (simple(agg, ejs.SumAggregation));
 	}
