@@ -98,26 +98,6 @@ body {
   margin-top :10px;
 }
 
-.gridStyle {
-  border: 1px solid;
-  margin-top : 10px;
-  height : 500px;
-  width: 500px;
-  border-color: #E7E7E7;
-  border-radius: 4px;
-}
-
-/* Mapping Tabs */
-
-.ta-editor {
-    min-height: 300px;
-    height: auto;
-    overflow: auto;
-    font-family: inherit;
-    font-size: 100%;
-    margin:20px 0;
-}
-
 /* AggregationTab */ 
 
 .margin-left {
@@ -285,7 +265,7 @@ body {
 }
  
  #header .select-header {
-  width : 300px;
+  width : 200px;
 }
 
 .result-info {
