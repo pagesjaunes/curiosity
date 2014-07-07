@@ -1,6 +1,6 @@
-var mappingModalCtrl = function($scope, $modalInstance, mapping){
+var mappingModalCtrl = function($scope, $modalInstance, mapping, item){
 	$scope.data = mapping.info;
-
+	var itemloc = item;
 	$scope.fieldLimit = 9;
 	$scope.selected = {};
 	$scope.fieldFilter = "";
@@ -15,10 +15,10 @@ var mappingModalCtrl = function($scope, $modalInstance, mapping){
 	}
 
 	$scope.ok = function () {
-		var value = "";
+		var res = {"value":"", item:itemloc};
 		if (typeof ($scope.selected.ancestor) !== "undefined")
-			value = $scope.selected.ancestor;
-		$modalInstance.close(value);
+			res.value = $scope.selected.ancestor;
+		$modalInstance.close(res);
 	}
 
 	$scope.cancel = function () {

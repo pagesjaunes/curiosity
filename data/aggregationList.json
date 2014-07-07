@@ -9,6 +9,7 @@
 	{"type":"Sum", "template":"template/aggregation_module/settings_partials/simple.html"},
 	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html"},
 	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html"}
+	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html"},
+	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html"}
 ]	
 }

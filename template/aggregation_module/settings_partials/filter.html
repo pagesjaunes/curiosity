@@ -5,40 +5,9 @@
 	</select>
 	
 	<div class="input-group margin-top">
-		<span class="input-group-addon">Field :</span>
-		<input class="form-control" type="text" ng-model="curAgg.field">
-		<div class="input-group-btn">
-			<button title="Display Fields" type="button" class="btn btn-default" ng-click="openModalFields('sm', curAgg)">
-				<span class="glyphicon glyphicon-align-justify"></span>
-			</button>
-		</div>
+		<span class="input-group-addon">Query :</span>
+		<input class="form-control" type="text" ng-model="curAgg.query">
 	</div>
-	
-	<div class="input-group margin-top">
-		<span class="input-group-addon">Script :</span>
-		<input class="form-control" type="text" ng-model="curAgg.script">
-	</div>
-	
-	<div ng-repeat="interval in curAgg.intervals" class="margin-top">
-		
-		<div class="col-sm-5"> 
-			<input placeholder="from" class="form-control" ng-model="interval.from" type="number"> 
-		</div>
-
-		<div class="col-sm-5"> 
-			<input placeholder="to" class="form-control" ng-model="interval.to" type="number"> 
-		</div>
-
-		<button class="col-sm-2 btn btn-danger" ng-click="removeInterval(curAgg,$index)">
-			<span class="glyphicon glyphicon-remove"></span>
-		</button>
-
-		<div class="spacer"></div>
-	
-	</div>
-
-	<button class="btn btn-default margin-top" ng-click="addInterval(curAgg)">Add interval</button>
-
 
 	<div class="margin-top">
 		<button class="btn btn-default" ng-click="validateAgg(curAgg)">
@@ -47,7 +16,6 @@
 		</button>
 		<button class="btn btn-default" ng-click="addNestedAgg(curAgg)">Add Nested Agg</button>
 	</div>
-	
 	<ul>
 		<li ng-repeat="curAgg in curAgg.nested" class="margin-top">
 			<h4>
@@ -65,7 +33,6 @@
 				</select>
 				<div ng-if="curAgg.aggTypeSelected" ng-include="curAgg.displayTemplate" class="margin-top">
 			</div>
-		</li>		
+		</li>
 	</ul>
 </form>
-

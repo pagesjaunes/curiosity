@@ -81,6 +81,23 @@ Curiosity.factory('aggConstructor', function(){
 		return (result);
 	}
 
+
+	/**
+	* @desc Built range aggregation 
+	* @param object agg contains all aggregation's param
+	*/
+	obj.Filter = function (agg) {
+		var result = ejs.FilterAggregation(agg.name);
+		var tmp = ejs.QueryStringQuery(agg.query);
+		result.filter(ejs.QueryFilter(tmp));
+		for (key in agg.nested) {
+			if (agg.nested[key].validate)
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+		}
+		return (result);
+	}
+
+
 	/**
 	* @desc Built avg aggregation with throught simple function
 	* @param object agg contains all aggregation's param
