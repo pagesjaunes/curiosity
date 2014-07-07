@@ -23,7 +23,7 @@ Then you have to modify few values in conf.js located at the folder root.
 
 * "defaultServer" : The default server where curiosity will work
 
-* "confServer" : The server where curiosity will store his data (keywords, context, template, ...)
+* "confServer" : The server where curiosity will store its data (keywords, context, template, ...)
 
 * "confIndex" : The index in confServer where curiosity will store his data
 
