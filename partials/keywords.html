@@ -1,1 +1,36 @@
 <h1>Keywords and Advanced Query</h1>
+
+<h2>Keywords</h2>
+
+<p>One of our goal was to create system that allow user to built a query close from human language. To do that we add keywords. 
+You can associate a query to a word, it will be stored in elasticsearch and accessible for everyone working on the same cluster. One intersting features of those keywords is that you can chains them with "and" or "or" to built a complexe but understandable query. 
+</p>
+<p>
+	Each keywords have a specifique range, it can be associated to an index or to all indexes (global range). There is two way to create a new keyword. 
+</p>
+<h3>Througth keyword tab</h3>
+<div class="col-sm-12">
+	<img src="img/curiosity-keywords-tab.png" alt="Screenshot of Curiosity's keywords tab" title="Curiosity's keywords tab">
+</div>
+
+<p>
+	You can access to this tab by clicking on "customization" then "keywords" in the navbar. This tab is about managing your keywords dictionanry. First of all select your index (by default your current work's index will be selected), if you want to add a global keyword select "global" in the selector.  
+</p>
+<p>
+	Then if you have some keywords in the selected index, they will appear in the center of your screen as a list. If you want to add one, hit the button "add", a new entry with 3 input will be added to the list. 
+	<ul>
+		<li>
+			The first input is the "name" of your keyword, this value will be used when you will built your query (No space are allowed, if you add one, curiosity will suppress it automaticly during save processus)
+		</li>
+		<li>
+			The second input is the elasticsearch value of your keywords. In this fields you can writte whatever you wants if its match elasticsearch syntax. 
+		</li>
+		<li>
+			The last input is a description of your keyword. This field isn't required, fill it if your keyword's name isn't enougth explicit for example.
+		</li>
+	</ul>
+</p>
+<p>
+	When you have created all of your keywords, or modified existing, hit the button save to send your data to your conf server, if you don't your keywords will no longer exist if you refresh the page. 
+</p>
+<div class="spacer"></div>
