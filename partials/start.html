@@ -1,0 +1,92 @@
+<h1>Getting Started</h1>
+<!-- Install !-->
+<h2>Installation procedure</h2>
+<p>
+	Curiosity have no external dependency, to use it clone the repos or download the archive. Then there is few things that you may have to change in the file conf.js locate at the root of Curiosity's folder.
+	The file is like : 
+</p>
+<div class="well">
+	<code>
+		<p>//Conf.js</p>
+		<p>var globalConf = {</p>
+		<p>defaultServer : 'http://localhost:9200', // Server where curiosity will connect by default</p>
+		<p>confServer : 'http://localhost:9200', // Server where curiosity will store its data (keywords, template, ...)</p>
+		<p>confIndex : "curiosity-config", // Index in confServer where curiosity will store it's data</p>
+		<p>defaultConfDocumentType : "conf-doc", // Type of simple conf document</p> 
+		<p>}</p>
+	</code>
+</div>
+<p>
+	You can modify all values, be sure that you follow json syntax, if you don't the application will not start properly.
+</p>
+<p>
+	Curiosity is multilingual, Yet the application is fully translated in English and French (almost), to change Curiosity lang, copy the file that you need from the lang folder to txt.js (This procesus will be simplified soon).
+	<div class="well">
+		<code>
+			<p>curiosity/lang> ls</p>
+			<p>en.js fr.js</p>
+			<p></p>
+			<p>curiosity/lang> cp en.js ../txt.js</p>
+		</code>	
+	</div>
+	By default the application is in english (almost).
+</p>
+
+<p>
+	After that curiosity is ready. Open index.html with a recent browser and enjoy.
+</p>
+<!-- First Query !-->
+<h2>Setting up curiosity's environement</h2>
+
+<p>When you open index.html for the first time curiosity will create its own index and store few conf file, it will take 5 to 10 second (Normally it will take less than 1 second depending of your elasticsearch server).Wait during this period, the reload the page. It will looks like </p>
+<div class="col-sm-12">
+	<img src="img/curiosity-default.png" alt="Screenshot of Curiosity's current interface" title="Curiosity's currrent inteface Interface">
+</div>
+<p>
+	At the left of the navigation bar at the top of your screen their is two buttons that represents tabs. The first called "Request" is the main tab, and that's where you are. The second button is "Customization", he allow you to edit template and keyword directly in curiosity (go on template documentation and keywords for example).
+</p>
+<p>
+	On the right it's the server selector, you can choose the server you will work on or add a new one by pressing "new" button. A form will replace the select, where you can enter the new server's adresse (do not forget the http://), then hit "Connect", if it works the button will stay green and the server will be added to the server list and now each time  you use curiosity it will be in the server list. If not the button will go red.
+</p>
+<p>
+	The second selcetor is about index, and alias. You can select an index or an alias or all index to work on.
+</p>
+<p>
+	The litle ligth represent green normally represent curiosity's status, if it goes red then a error have occure. Normally it's always green. 
+</p>
+
+<h2>First Query</h2>
+
+<p>Curiosity use elasticsearch's <a href="www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" title="Query string query documentation">query string query syntax</a> so you can easily create commplexe query. Click in the query form (first form in page's center), tape your query then hit the "enter" touch of your keyboard   or click on search button. If your request is good then the status light stay green and your result are displayed at the bottom center of the page
+</p>
+<p>
+	Here is some basics for builting query : 
+	<ul>
+		<li>
+			If you want to search on a specifique field a string : 
+			<div class="well">
+				<code>
+					<p>the.path.to.my.fields:"string you search"</p>
+				</code>
+			</div>
+		</li>
+		<li>
+			If you want to search for value in a interval on field :
+			<div class="well">
+				<code>
+					<p>the.path.to.my.fields:[Start to End]</p>
+				</code>
+			</div>
+		</li>
+		<li>
+			More Incoming
+		</li>
+	</ul>
+
+</p>
+<div class="link-bottom">
+	<a href="#/Keywords-and-Advanced-Query" title="Documentation about Keywords and Advanced Query in Curiosity">
+		Keywords and Advanced Query 
+		<span class="glyphicon glyphicon-share-alt"></span>
+	</a>
+<div class="link-bottom">

@@ -1,0 +1,17 @@
+body {
+	font-size : 15px;
+}
+
+img {
+	width : 100%;
+}
+
+.spacer {
+	height: 0;
+	clear: both;
+}
+
+.link-bottom {
+	float : right;
+	margin-top : 30px;
+}
