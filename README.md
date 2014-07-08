@@ -6,28 +6,22 @@ Curiosity is tool developed by ["Pages Jaunes"](http://www.pagesjaunes.fr/) whic
 Main curiosity's functionality are : 
 
 * Keywords system
-
 * Result templating 
-
 * Simple system to built complex aggregations
-
 * Result Export
-
 * Research Context
 
-Instalation 
+Install 
 ===========
 
-Curiosity hasn't external dependency. There is nothing to install. You just have to clone git repository or uncompress the archive where you want. 
+Curiosity hasn't external dependency. There is nothing to install. You just have to clone the git repository or uncompress the archive where you want. 
 Then you have to modify few values in conf.js located at the folder root.
 
 * "defaultServer" : The default server where curiosity will work
-
 * "confServer" : The server where curiosity will store its data (keywords, context, template, ...)
-
 * "confIndex" : The index in confServer where curiosity will store his data
 
-After that, open index.html. Wait a moment (about 5 or 10 seconde) untill curiosity initialize his data then reload the page. You are now ready to use curiosity.
+Then open index.html. Let curiosity initializes its data (about 5 or 10 secondes) and reload the page. You are now ready to use curiosity.
 
 Documentation
 =============
@@ -46,13 +40,8 @@ BABEY Arthur : 	ababey@pagesjaunes.fr or arthur.babey@epitech.eu
 Cursiosity use many librairies and plugins, thanks to all of their contributors. We highly encourage you to visit and stars their github.
 
 * [elasticsearch](https://github.com/elasticsearch/elasticsearch)
-
 * [AngularJS](https://github.com/angular/angular.js)
-
 * [bootsrap](https://github.com/twbs/bootstrap)
-
 * [elastic.js](https://github.com/fullscale/elastic.js)
-
 * [AngularUI](http://angular-ui.github.io/)
-
 * [FileSaver](https://github.com/eligrey/FileSaver.js/)
