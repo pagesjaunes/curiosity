@@ -1,23 +1,29 @@
 <h1>Getting Started</h1>
 <!-- Install !-->
 <h2>Installation procedure</h2>
+<h3>Step 1 : get Curiosity</h3>
 <p>
-	Curiosity has no external dependency, to use it clone the repository or download the archive from github. Then there is few things that you may have to change in the conf.js file located at the root of Curiosity's folder.The file is like : 
+	Curiosity has no external dependency. To use it, just clone the repository or download the archive from github. 
+</p>
+<h3>Step 2 : customize the conf file</h3>
+<p>
+	Your elasticSearch server may not on localhost ! Customize the conf.js file, at the root of Curiosity's folder :
 </p>
 <div class="well">
 	<code>
 		<p>//Conf.js</p>
 		<p>var globalConf = {</p>
-		<p>defaultServer : 'http://localhost:9200', // Server where curiosity will connect by default</p>
-		<p>confServer : 'http://localhost:9200', // Server where curiosity will store its data (keywords, template, ...)</p>
-		<p>confIndex : "curiosity-config", // Index in confServer where curiosity will store it's data</p>
+		<p>defaultServer : 'http://localhost:9200', // Curiosity will connect by default to this elasticsearch host</p>
+		<p>confServer : 'http://localhost:9200', // Curiosity stores its data (keywords, template, ...) on this server</p>
+		<p>confIndex : "curiosity-config", // Index of the ElasticSearch "confServer" where curiosity will store it's data</p>
 		<p>defaultConfDocumentType : "conf-doc", // Type of simple conf document</p> 
 		<p>}</p>
 	</code>
 </div>
 <p>
-	You can modify all values, be sure that you follow json syntax. If you don't, the application will not start properly.
+	Be sure to follow json syntax, if not, the application will not start properly.
 </p>
+<h3>Step 3 : English or French ?</h3>
 <p>
 	Curiosity is multilingual, right now the application is fully translated in English and French (almost).To change Curiosity's language, copy the file that you need from lang folder to txt.js (This process will be simplified soon).	
 <div class="well">
@@ -30,15 +36,14 @@
 	</div>
 	By default the application is in english (almost).
 </p>
-
+<h3>Step 4 : Enjoy and share your data !</h3>
 <p>
 	After that, curiosity is ready. Open index.html with a recent browser and enjoy.
 </p>
 <!-- First Query !-->
-<h2>Setting up curiosity's environement</h2>
-
+<h2>Note about Curiosity setting up</h2>
 <p>
-	When you open index.html for the first time, curiosity will create its own index and store few conf file. It will take 5 to 10 second (Normally it will take less than 1 second depending of your elasticsearch server, but it's better to wait a bit more).Wait during this period, then reload the page. The page looks like : 
+	When you open index.html for the first time, curiosity will create its own index and store few conf files. It will take 1 to 10 second depending on your elasticsearch server, but it's better to wait a bit more. Wait during this period, then reload the page. The page looks like : 
 </p>
 
 <div class="col-sm-12">
@@ -47,27 +52,27 @@
 <div class="spacer"></div>
 
 <p>
-	At the left of the navigation bar on the top of your screen, their is two buttons that represents tabs. The first button called "Request" is the main tab, and that's where you are. The second button is "Customization", he allow you to edit template and keyword directly in curiosity (go on template and keywords documentation for example).
+	At the left of the navigation bar on the top of your screen, there is two buttons that represents tabs. The "Request" button is the main tab, and that's where you are. The "Customization" button allows to edit template and keyword (go on template and keywords documentation for example).
 </p>
 
 <p>
-	On the right it's the server selector, you can choose the server you will work on, or add a new one by pressing the "new" button. A form will replace the select, where you can enter the new server address (do not forget the http://), then click the button "Connect" , if it works, the button will stay green and the server will be added to the server list. If not, the button will go red.
+	On the right side is the server selector, you may choose the server you will work on, but also add a new one by pressing the "new" button. A form will replace the select, where you can enter the new server address (do not forget the http://), then click the button "Connect" : if it works, the button will stay green and the server will be added to the server list. If not, the button will go red.
 </p>
 
 <p>
-	The second selector is the indexes and alias selector. You can choose an index, an alias or all indexes to work on.
+	The second selector allows to choose the indexes (and alias). Pick one to query it !
 </p>
 
 <p>
-	The light normally green represent curiosity's status, if it goes red, that means an error occurred. If you want more information about the error, check the developper console or curiosity's console(curiosity's console isn't explicit yet, we work on it).
+	The green/red light represents the curiosity's status. If it goes red, an error has occurred. If you want more information about it, check the developper console (a curiosity's console will soon be added).
 </p>
 
 <h2>First Query</h2>
 
-<p>Curiosity use elasticsearch's <a href="www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" title="Query string query documentation">query string query syntax</a>, so you can easily create complex query. Click in the query form (first form in page center), enter your query then press "enter" or click on search button. If your request is good then the status light stay green and your result will appear at the bottom center of the page.
+<p>Curiosity use elasticsearch's <a href="www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" title="Query string query documentation">query string query syntax</a>, so you can easily create complex queries. Click in the query form (first form in page center), enter your query then press "enter" or click on search button. If your request is syntaxly correct, the status light remains green and the result will appear at the bottom center of the page.
 </p>
 <p>
-	Here are some basics for building query : 
+	Here are some basics for building a query : 
 	<ul>
 		<li>
 			If you want to search a string on a specific field : 
@@ -78,7 +83,7 @@
 			</div>
 		</li>
 		<li>
-			Si vous souhaitez rechercher des valeurs dans un intervalle sur un domaine spécifique:
+			Getting docs that matchs a value range for a specific field :
 			<div class="well">
 				<code>
 					<p>the.path.to.my.fields:[Start TO End]</p>
