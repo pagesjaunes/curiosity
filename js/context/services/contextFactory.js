@@ -68,11 +68,8 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 	*/
 	contextObj.newContext = function(name) {
 		if (name != "") {
-			context = {};
-			contextObj.info.currentContext = {};
-			contextObj.info.currentContext.contextName = name;
 			var i = 0;
-			while (i < contextObj.info.contextList.length) { 			// Check if a context alredy exist with the same name
+			while (i < contextObj.info.contextList.length) { // Check if a context alredy exist with the same name
 				if (contextObj.info.contextList[i].fields.contextName == name) {
 					log.log("Context : Context " + name + " already exists !!","danger");		
 					contextObj.info.error = true;
@@ -80,6 +77,9 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 				}
 				i++;
 			}
+			context = {};
+			contextObj.info.currentContext = {};
+			contextObj.info.currentContext.contextName = name;
 			contextObj.info.error = false;
 			log.log("Context : Context created locally", "success");
 		}
