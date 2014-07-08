@@ -2,8 +2,7 @@
 <!-- Install !-->
 <h2>Installation procedure</h2>
 <p>
-	Curiosity have no external dependency, to use it clone the repos or download the archive. Then there is few things that you may have to change in the conf.js file located at the root of Curiosity's folder.
-	The file is like : 
+	Curiosity has no external dependency, to use it clone the repository or download the archive from github. Then there is few things that you may have to change in the conf.js file located at the root of Curiosity's folder.The file is like : 
 </p>
 <div class="well">
 	<code>
@@ -17,11 +16,11 @@
 	</code>
 </div>
 <p>
-	You can modify all values, be sure that you follow json syntax, if you don't the application will not start properly.
+	You can modify all values, be sure that you follow json syntax. If you don't, the application will not start properly.
 </p>
 <p>
-	Curiosity is multilingual, Yet the application is fully translated in English and French (almost), to change Curiosity's language, copy the file that you need from the lang folder to txt.js (This procesus will be simplified soon).
-	<div class="well">
+	Curiosity is multilingual, right now the application is fully translated in English and French (almost).To change Curiosity's language, copy the file that you need from lang folder to txt.js (This process will be simplified soon).	
+<div class="well">
 		<code>
 			<p>curiosity/lang> ls</p>
 			<p>en.js fr.js</p>
@@ -33,38 +32,45 @@
 </p>
 
 <p>
-	After that curiosity is ready. Open index.html with a recent browser and enjoy.
+	After that, curiosity is ready. Open index.html with a recent browser and enjoy.
 </p>
 <!-- First Query !-->
 <h2>Setting up curiosity's environement</h2>
 
-<p>When you open index.html for the first time curiosity will create its own index and store few conf file, it will take 5 to 10 second (Normally it will take less than 1 second depending of your elasticsearch server).Wait during this period, then reload the page. It will looks like </p>
+<p>
+	When you open index.html for the first time, curiosity will create its own index and store few conf file. It will take 5 to 10 second (Normally it will take less than 1 second depending of your elasticsearch server, but it's better to wait a bit more).Wait during this period, then reload the page. The page looks like : 
+</p>
+
 <div class="col-sm-12">
 	<img src="img/curiosity-default.png" alt="Screenshot of Curiosity's current interface" title="Curiosity's current interface">
 </div>
 <div class="spacer"></div>
+
 <p>
 	At the left of the navigation bar on the top of your screen, their is two buttons that represents tabs. The first button called "Request" is the main tab, and that's where you are. The second button is "Customization", he allow you to edit template and keyword directly in curiosity (go on template and keywords documentation for example).
 </p>
+
 <p>
-	On the right it's the server selector, you can choose the server you will work on, or add a new one by pressing the "new" button. A form will replace the select, where you can enter the new server adresse (do not forget the http://), then hit "Connect" button, if it works the button will stay green and the server will be added to the server list. If not the button will go red.
+	On the right it's the server selector, you can choose the server you will work on, or add a new one by pressing the "new" button. A form will replace the select, where you can enter the new server address (do not forget the http://), then click the button "Connect" , if it works, the button will stay green and the server will be added to the server list. If not, the button will go red.
 </p>
+
 <p>
-	The second selecetor is the index, and alias selector. You can choose an index, an alias or all indexes to work on.
+	The second selector is the indexes and alias selector. You can choose an index, an alias or all indexes to work on.
 </p>
+
 <p>
-	The light normally green represent curiosity's status, if it goes red then a error have occure. If you want more information about the error check the developper console or curiosity's console(curiosity's console isn't explicit yet, we working on it). 
+	The light normally green represent curiosity's status, if it goes red, that means an error occurred. If you want more information about the error, check the developper console or curiosity's console(curiosity's console isn't explicit yet, we work on it).
 </p>
 
 <h2>First Query</h2>
 
-<p>Curiosity use elasticsearch's <a href="www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" title="Query string query documentation">query string query syntax</a> so you can easily create complex query. Click in the query form (first form in page's center), tape your query then hit "enter" or click on search button. If your request is good then the status light stay green and your result will appear at the bottom center of the page.
+<p>Curiosity use elasticsearch's <a href="www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" title="Query string query documentation">query string query syntax</a>, so you can easily create complex query. Click in the query form (first form in page center), enter your query then press "enter" or click on search button. If your request is good then the status light stay green and your result will appear at the bottom center of the page.
 </p>
 <p>
-	Here is some basics for builting query : 
+	Here are some basics for building query : 
 	<ul>
 		<li>
-			If you want to search on a specifique field a string : 
+			If you want to search a string on a specific field : 
 			<div class="well">
 				<code>
 					<p>the.path.to.my.fields:"string you search"</p>
@@ -72,10 +78,10 @@
 			</div>
 		</li>
 		<li>
-			If you want to search for value in a interval on field :
+			Si vous souhaitez rechercher des valeurs dans un intervalle sur un domaine spécifique:
 			<div class="well">
 				<code>
-					<p>the.path.to.my.fields:[Start to End]</p>
+					<p>the.path.to.my.fields:[Start TO End]</p>
 				</code>
 			</div>
 		</li>

@@ -8,29 +8,57 @@ You can associate a query to a word, it will be stored in elasticsearch and acce
 <p>
 	Each keywords have a specifique range, it can be associated to an index or to all indexes (global range). There is two way to create a new keyword. 
 </p>
-<h3>Througth keyword tab</h3>
+<h3>Through keyword tab</h3>
 <div class="col-sm-12">
 	<img src="img/curiosity-keywords-tab.png" alt="Screenshot of Curiosity's keywords tab" title="Curiosity's keywords tab">
 </div>
+<div class="spacer"></div>
 
 <p>
-	You can access to this tab by clicking on "customization" then "keywords" in the navbar. This tab is about managing your keywords dictionanry. First of all select your index (by default your current work's index will be selected), if you want to add a global keyword select "global" in the selector.  
+	You can access to this tab by clicking on "customization" then "keywords" in the navbar. This tab is about managing your keywords dictionary. First of all select your index (by default your current work index will be selected), if you want to add a global keyword select "global" in the dropdown list.  
 </p>
+
 <p>
-	Then if you have some keywords in the selected index, they will appear in the center of your screen as a list. If you want to add one, hit the button "add", a new entry with 3 input will be added to the list. 
+	Then if you have some keywords in the selected index, they will appear in the center of your screen as a list. If you want to add one, hit the button "add", a new entry with 3 input will be added to the list.
 	<ul>
 		<li>
-			The first input is the "name" of your keyword, this value will be used when you will built your query (No space are allowed, if you add one, curiosity will suppress it automaticly during save processus)
+			The first input is the "name" of your keyword, this value will be used when you will built your query (No space allowed, if you add one, curiosity  will suppress it automatically during save processus)
 		</li>
 		<li>
-			The second input is the elasticsearch value of your keywords. In this fields you can writte whatever you wants if its match elasticsearch syntax. 
+			The second input is the elasticsearch value of your keywords. In this fields you can write whatever you wants if it match elasticsearch's syntax. 
 		</li>
 		<li>
-			The last input is a description of your keyword. This field isn't required, fill it if your keyword's name isn't enougth explicit for example.
+			The last input is a description of your keyword. This field isn't required, fill it if your keywords name isn't enough 	explicit for example.
 		</li>
 	</ul>
 </p>
+
 <p>
-	When you have created all of your keywords, or modified existing, hit the button save to send your data to your conf server, if you don't your keywords will no longer exist if you refresh the page. 
+	When you have created all of your keywords, or made some modifications, hit the button save to send your data to your conf server, if you don't, your keywords will no longer exist if you refresh the page. 
 </p>
+<h3>Directly from your query</h3>
+
+<p>
+	You can create a new keyword directly from your query, by pressing "keyword from query" button in the request tab. Two fields will appear under the button. It's the same procedure as before, fill inputs, press save, your keyword is ready to use.
+</p>
+
+<div class="col-sm-12">
+	<img src="img/curiosity-keywords-query.png" alt="Screenshot of Curiosity's keywords from query functionality" title="Curiosity's keyword from query">
+</div>
+<div class="spacer"></div>
+
+<h3>Keywords and fields panels</h3>
+
+<p>
+	On default interface there are two blue panels in the middle of the page. The first one contains all of your keywords associated to your current index (global + index keywords), if you click one, it will be added to your query automatically. By default there are only 9 keywords displayed, you can display more by pressing button "Show all" . On the button's left, there is an input, use it to filter your keywords.
+</p>
+
+<p>
+	The second panel does exactly the same thing with your index's fields, but instead of adding the name of the field, it will add the full path of your field, from the root of the document.
+</p>
+
+<h3>Advancd Query</h3>
+
+<p>INCOMING (sort, csv export....)</p>
+
 <div class="spacer"></div>
