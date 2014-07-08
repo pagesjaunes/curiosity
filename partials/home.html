@@ -2,28 +2,34 @@
 <p>
 	Curiosity is a tool developed by 
 	<a href="https://github.com/pagesjaunes/curiosity.git" title="Pages Jaunes">Pages Jaunes</a>,
-	that aims to facilitate datas exploration in elasticsearch. 
+	that makes elasticsearch data exploration easy for an end-user. 
 	It's fully Open Source (MIT License), developped in javascript with AngularJS.
 </p>
 <p></p>
 <p>
-	Our goal is to provide a totally customizable search experience for everyone, with technical skills or not. Curiosity hides elasticsearch's complexity and give to users the possibility to create their dashboards, customize the result list and aggregations, create keywords, export their result in csv... You can with ease almost do whatever you want.
+	Our goal is to provide a totally customizable search experience for everyone, with technical skills or not.
 </p>
 <div class="col-sm-12">
 	<img src="img/curiosity-index.png" alt="Screenshot of Curiosity's current interface" title="Curiosity's currrent inteface Interface">
 </div>
 <div class="spacer"></div>
 
-<h2>Incoming Features</h2>
+<h2>Main Features</h2>
+<ul>
+	<li>Keywords : highlevel keywords definition allows to hide a complex elasticsearch query. Once created, they can be coordinated into logical expression, making it possible for an end-user to create its own query, without knowing anything about elasticsearch.</li>
+	<li>Templates : all results may be customized by an HTML template that may includes javascript call. An expert may create a template for a given type of document list, and this template may then be used to display the result of a query. That allows to hide the "json-view" of a query result to an end-user.</li>
+	<li>Agregations : all the elasticsearch agregation types are availables. It possible to define interactively its own agregation by choosing its type (terms, stats, ...) and the fields on with it will operate. Once done, it decorates the result page and allows to refine it interactively.</li>
+	<li>Contexts : a search experience is defined by a server, an index to query, a query, some agregations and templating. All this context can be saved so as to make it available again.</li>
+	<li>Exports : all the query results can be exported to a csv file.</li>
+</ul>
 
 <p>
-	Right now we are working on the documentation and code comments. There's a lot of things in curiosity, maybe sometimes hard to understand and that's why we try to create a useful and full documentation to this project.
+	Thus, we identify two main actors in a nominal use case :
+	<ul>
+		<li>A curiosity expert, who will be able to define keywords from an ElasticSearch simplified syntax, to create template for result rendering, to define agregations based on technical document fields. This user is able to create easily a complete and interactive Dashboard.</li>
+		<lI>A curiosity consumer, who will use a prepared dashboard, accessible by a context. He will be then able to interactively use the agregation result, so as to browse the index data. Moreover, he will be able to modify the prepared query, using the highlevel keywords, and thus customize himself its own search experience.</lI>
+	</ul>
 </p>
-
-<p>
-	In terms of functionality we will try to implement all elasticsearch search functionality, but before we will work on adding more possibility in templating, to create more interaction between users and curiosity. 
-</p>
-
 
 <div class="link-bottom">
 <a href="#/Getting-Started" title="Getting Started with Curiosity">
