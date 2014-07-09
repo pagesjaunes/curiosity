@@ -15,7 +15,6 @@ Curiosity.directive('barchart', function($rootScope){
 				$scope.datay = $scope.datax
 			} 			
 
-
 			var data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
 			var w = $(elem).width()
 			var h = w*2/3
