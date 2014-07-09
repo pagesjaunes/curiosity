@@ -21,7 +21,8 @@ Then you have to modify few values in conf.js located at the folder root.
 * "confServer" : The server where curiosity will store its data (keywords, context, template, ...)
 * "confIndex" : The index in confServer where curiosity will store his data
 
-Then open index.html. Let curiosity initializes its data (about 5 or 10 secondes) and reload the page. You are now ready to use curiosity.
+Then open index.html. Let curiosity initializes its data (about 5 or 10 secondes) and reload the page. You are now ready to use curiosity. 
+Note : If you don't run curiosity on a web server then use firefox instead of chrome because of the same origin policy.
 
 Documentation
 =============
