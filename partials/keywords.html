@@ -2,44 +2,44 @@
 
 <h2>Keywords</h2>
 
-<p>One of our goal was to create system that allow user to built a query close from human language. To do that we add keywords. 
-You can associate a query to a word, it will be stored in elasticsearch and accessible for everyone working on the same cluster. One intersting features of those keywords is that you can chains them with "and" or "or" to built a complexe but understandable query. 
+<p>Keywords aim to provide an easier way for querying elasticsearch : instead of using the elasticsearch syntax, one can define a keyword that relies to an elasticsearch query. This keywords is then available for any curiosity user on the cluseter. They may ben chained in a logical expressionto build a complex but human understandable query.
 </p>
 <p>
-	Each keywords have a specifique range, it can be associated to an index or to all indexes (global range). There is two way to create a new keyword. 
+	Each keyword has a specific scope : it may be associated to an index or to all indexes (global scope).
+	There is two way to add a new keyword.
 </p>
-<h3>Through keyword tab</h3>
+<h3>Keyword creation from "keyword tab"</h3>
 <div class="col-sm-12">
 	<img src="img/curiosity-keywords-tab.png" alt="Screenshot of Curiosity's keywords tab" title="Curiosity's keywords tab">
 </div>
 <div class="spacer"></div>
 
 <p>
-	You can access to this tab by clicking on "customization" then "keywords" in the navbar. This tab is about managing your keywords dictionary. First of all select your index (by default your current work index will be selected), if you want to add a global keyword select "global" in the dropdown list.  
+	This tab deals with keywords managing : access to it by clicking on "customization > keywords" in the navbar. 
+	To add a new Keyword, select first the scope : it may be a specific index, but may be set as "global" for more general purpose (global is a specific entry of the index dropdown list).
 </p>
-
 <p>
-	Then if you have some keywords in the selected index, they will appear in the center of your screen as a list. If you want to add one, hit the button "add", a new entry with 3 input will be added to the list.
+	A list of all the existing keywords attached to the selected index is then displayed. Hitting the "add" button opens a 3 input field form.
 	<ul>
 		<li>
-			The first input is the "name" of your keyword, this value will be used when you will built your query (No space allowed, if you add one, curiosity  will suppress it automatically during save processus)
+			The first input is the "name" of your keyword, this value will be used when you will build your query (No space allowed, if you add one, curiosity  will suppress it automatically during save processus)
 		</li>
 		<li>
-			The second input is the elasticsearch value of your keywords. In this fields you can write whatever you wants if it match elasticsearch's syntax. 
+			The second input is the elasticsearch query that the keyword will hide. This field any be set with anything as it is ""elasticly" correct :) 
 		</li>
 		<li>
-			The last input is a description of your keyword. This field isn't required, fill it if your keywords name isn't enough 	explicit for example.
+			The last input is a description of your keyword. This field isn't required, fill it if your keywords name isn't enough explicit.
 		</li>
 	</ul>
 </p>
 
 <p>
-	When you have created all of your keywords, or made some modifications, hit the button save to send your data to your conf server, if you don't, your keywords will no longer exist if you refresh the page. 
+	When you have created all of your keywords, or made some modifications, hit the button save to send your data to your conf server and make it persistent. 
 </p>
-<h3>Directly from your query</h3>
+<h3>Keyword creation from a query</h3>
 
 <p>
-	You can create a new keyword directly from your query, by pressing "keyword from query" button in the request tab. Two fields will appear under the button. It's the same procedure as before, fill inputs, press save, your keyword is ready to use.
+	You can create a new keyword directly from your query, by pressing "keyword from query" button in the request tab. Two fields will appear under the button. Refer then to the previous procedure (keyword creation from "keyword tab") : fill inputs, press the "save" button to make your keyword available.
 </p>
 
 <div class="col-sm-12">
@@ -50,11 +50,13 @@ You can associate a query to a word, it will be stored in elasticsearch and acce
 <h3>Keywords and fields panels</h3>
 
 <p>
-	On default interface there are two blue panels in the middle of the page. The first one contains all of your keywords associated to your current index (global + index keywords), if you click one, it will be added to your query automatically. By default there are only 9 keywords displayed, you can display more by pressing button "Show all" . On the button's left, there is an input, use it to filter your keywords.
+	On default interface there are two blue panels in the middle of the page.
 </p>
-
 <p>
-	The second panel does exactly the same thing with your index's fields, but instead of adding the name of the field, it will add the full path of your field, from the root of the document.
+	The first one contains all the keywords that relies to the current index (global + index keywords) : selecting one will add it to your query automatically. By default only 9 keywords are displayed : "Show all" button makes all the keywords visible. The input field at the top of the list may be used to filter the keywords.
+</p>
+<p>
+	The second panel works in a similar way but deals whith index's fields : selecting a field will add its document full path to the query input. This may be used to query the index by a field in an easy way (no need to know the document structure to search one that match a specific value for a given field).
 </p>
 
 <h3>Advancd Query</h3>
