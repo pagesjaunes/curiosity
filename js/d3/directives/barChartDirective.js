@@ -1,4 +1,4 @@
-Curiosity.directive('barchart', function(){
+Curiosity.directive('barchart', function($rootScope){
 	// Runs during compile
 	return {
 		restrict :'A',
@@ -10,18 +10,34 @@ Curiosity.directive('barchart', function(){
 			pathy: "=",
 		},		
 		
-		link: function($scope, iElm, iAttrs) {
+		link: function($scope, elem, iAttrs) {
 			if (typeof ($scope.datay) === "undefined") {
 				$scope.datay = $scope.datax
 			} 			
 
-			console.log($scope.datay);
 
 			var data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
+			var w = $(elem).width()
+			var h = w*2/3
+			console.log('elem.load',w,h)
+			var chart = nv.models.multiBarChart()
+							.width(w)
+							.height(h)
+							.margin({top:20,right:30,bottom:50,left:30})
 
-			console.log(data);
+			nv.utils.windowResize(chart.update)
 
-			function getData(dataSet, path) {
+			d3.select(elem[0])
+				.append('svg')
+				.attr('width',w)
+				.attr('height',h)
+				.style('width',w)
+				.style('height',h)
+				.attr('class','barchart')
+				.datum(data)
+				.call(chart)			
+
+			function getData(dataSet, path, num) {
 				var i = 0;
 				while (i < path.length) {		
 					if (typeof dataSet[path[i]] === "undefined")
@@ -29,19 +45,21 @@ Curiosity.directive('barchart', function(){
 					dataSet = dataSet[path[i]];
 					i++;
 				}
+				if (num) {
+					return (parseFloat(dataSet)); 
+				}
 				return (dataSet);
 			}
 
-			function builtSerie(name, datax, pathx, datay, pathy) {
+			function builtSerie(datax, pathx, datay, pathy) {
 				var res = {};
-				res.key = name;
+				res.key = pathy[pathy.length -1];
 				var i = 0;
 				res.values = [];
 				while (i < datax.length) {
 					var tmp = {};
 					tmp.x = getData(datax[i], pathx);
-					console.log(pathy);
-					tmp.y = getData(datay[i], pathy);
+					tmp.y = getData(datay[i], pathy, true);
 					res.values.push(tmp);
 					i++;
 				}
@@ -53,10 +71,11 @@ Curiosity.directive('barchart', function(){
 				var i = 0;
 				var pathxArray = pathx.split('.'); 
 				while (i < pathsy.length) {
-					var tmp = builtSerie("test", datax, pathxArray, datay, pathsy[i].split('.'));
+					var tmp = builtSerie(datax, pathxArray, datay, pathsy[i].split('.'));
 					res.push(tmp);
 					i++;					
 				}
+				console.log(res);
 				return (res);
 			}
 		}
