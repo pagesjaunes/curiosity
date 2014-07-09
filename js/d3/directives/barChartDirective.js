@@ -25,6 +25,11 @@ Curiosity.directive('barchart', function($rootScope){
 							.margin({top:20,right:30,bottom:50,left:30})
 
 			nv.utils.windowResize(chart.update)
+			
+			$rootScope.$on("QueryLaunched", function() {
+				data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy);
+			
+			});
 
 			d3.select(elem[0])
 				.append('svg')
