@@ -1,69 +1,65 @@
 Curiosity.directive('barchart', function(){
+	// Runs during compile
 	return {
-		restrict : 'A',
-		link: function($scope, element, attrs) {
-			var dataset = [{key:"berry", doc_count:890}, {key:"toto", doc_count:155}, {key:"bibi", doc_count:6500},{key:"berry", doc_count:645},{key:"berry", doc_count:750}];
-			// TODO :  set width and height dynamicly
-			var margin = {top: 20, right: 20, bottom: 30, left: 40},
-			width = attrs.width - margin.left - margin.right,
-			height = attrs.height - margin.top - margin.bottom;
+		restrict :'A',
+		
+		scope: {
+			datax :"=",
+			datay :"=",
+			pathx: "=",
+			pathy: "=",
+		},		
+		
+		link: function($scope, iElm, iAttrs) {
+			if (typeof ($scope.datay) === "undefined") {
+				$scope.datay = $scope.datax
+			} 			
 
-			var x = d3.scale.ordinal()
-			.domain(d3.range(dataset.length))
-			.rangeRoundBands([0, width], .1)
+			console.log($scope.datay);
 
-			var y = d3.scale.linear()
-			.domain([0, d3.max(dataset, function (d){return	d[attrs.abscissa]})])
-			.range([height, 0 ])
+			var data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
 
-			var xAxis = d3.svg.axis()
-    		.scale(x)
-    		.orient("bottom");
+			console.log(data);
 
-			var yAxis = d3.svg.axis()
-    		.scale(y)
-    		.orient("left")
-    		.ticks(10);
+			function getData(dataSet, path) {
+				var i = 0;
+				while (i < path.length) {		
+					if (typeof dataSet[path[i]] === "undefined")
+						return (null);
+					dataSet = dataSet[path[i]];
+					i++;
+				}
+				return (dataSet);
+			}
 
-			/* xScale initialisation
-			var xAxis = d3.scale.ordinal()
-			
+			function builtSerie(name, datax, pathx, datay, pathy) {
+				var res = {};
+				res.key = name;
+				var i = 0;
+				res.values = [];
+				while (i < datax.length) {
+					var tmp = {};
+					tmp.x = getData(datax[i], pathx);
+					console.log(pathy);
+					tmp.y = getData(datay[i], pathy);
+					res.values.push(tmp);
+					i++;
+				}
+				return (res);
+			}
 
-			 yScale initialisation
-			var yAxis = d3.scale.linear()
-			*/
-
-			//Create SVG element
-			var svg = d3.select(element[0])
-			.append("svg")
-			.attr("width", width)
-			.attr("height", height);
-
-			svg.append("g")
-			.attr("class", "x axis")
-			.attr("transform", "translate(0," + height + ")")
-			.call(xAxis);
-
-			svg.append("g")
-			.attr("class", "y axis")
-			.call(yAxis)
-			.append("text")
-			.attr("transform", "rotate(-90)")
-			.attr("y", 6)
-			.attr("dy", ".71em")
-			.style("text-anchor", "end")
-			.text(attrs.abscissa);
-
-			svg.selectAll(".bar")
-			.data(dataset)
-			.enter().append("rect")
-			.attr("class", "bar")
-			.attr("x", function(d, i) {
-				return x(i); })
-			.attr("width", x.rangeBand())
-			.attr("y", function(d) { 
-				return y(d.doc_count); })
-			.attr("height", function(d) { return height - y(d[attrs.abscissa]); });
+			function builtAllSeries(datax, pathx, datay, pathsy) {
+				var res = [];
+				var i = 0;
+				var pathxArray = pathx.split('.'); 
+				while (i < pathsy.length) {
+					var tmp = builtSerie("test", datax, pathxArray, datay, pathsy[i].split('.'));
+					res.push(tmp);
+					i++;					
+				}
+				return (res);
+			}
 		}
-	}
+	};
 });
+
