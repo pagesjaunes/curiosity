@@ -1,7 +1,6 @@
 {
 "defaultModule":
 [
-	{"name":"context","template": "template/context/context_selector.html", "moduleBlocks":"rigth-column"},
 	{"name":"diary", "template":"template/diary/diary.html", "moduleBlocks":"rigth-column"},
 	{"name":"moduleManager", "template":"template/moduleManager/module_moduleManager.html", "moduleBlocks":"rigth-column"},
 	{"name":"trash", "template":"template/moduleManager/trash.html", "moduleBlocks":"rigth-column"},
