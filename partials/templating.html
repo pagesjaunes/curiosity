@@ -1,7 +1,9 @@
 <h2> Templating </h2>
 
 <p>
-	Curiosity allows you to create template directly in the application. To do that go to the template tab, in customization menu. In this tab, there are two subtabs. The first one manages results template, and the second aggregations template.
+	Templating in Curiosity is a generic and powerfull feature that allows to customize both the search result rendering, and the way an agregation is displayed.
+	Templating management tab is accessible from the customization menu.
+	Note that this step requires some development skills : from basic, if the goal is only to display raw field values, to expert, if you want to display the result on a map using a D3js function.
 </p>
 
 <h3> Result Template </h3>
@@ -12,13 +14,10 @@
 <div class="spacer"></div>
 
 <p>
-	On this tab you can add, remove or modify existing template. If you want to edit an existing one select it in the dropdown list. Once you did it, selected template will appear in the text area. Then you can edit the template itself or its name.
+	This tab manage the way a result list is displayed.
+	You may update an existing template : just select one in the dropdown list and edit the code in the text area.
+	You may add a new template : press the "new" button and edit the name. Then edit directly the code in the text area : to refer a field of a document, select it in the "field zone", it will be added with the correct syntax (angularjs one) in the template code area. In this zone be free to use HTML, javascript and angularjs directive !
 </p>
-
-<p>
-	To create a new template, press new button, it will fill all fields with default values (name, and template value).	Every modification are immediately available, but not synchronized, to do it press "save" button it will store your template in curiosity's index.
-</p>
-
 <p>
 	To use a template when you use default interface, go on the request tab, there is an input group composed of a dropdown list and a checkbox. Choose a template, your result list will automaticly change its display. Then if you want to switch between template and json view, check or uncheck the checkbox.
 </p>
