@@ -4,25 +4,14 @@ Curiosity.directive('barchart', function($rootScope){
 		restrict :'A',
 		
 		scope: {
-			datax :"=",
-			datay :"=",
-			pathy: "=",
-			pathx: "=",
+			data  :"=",
+			pathy : "=",
+			pathx : "=",
 		},		
 		
 		link: function($scope, elem, iAttrs) {
-			if (typeof ($scope.datay) === "undefined") {
-				$scope.datay = $scope.datax
-			} 			
-
-			var path = iAttrs.datapath;
-			var data = [];
-			if (typeof(path) !== "undefined") {
-				data = builtAllSeries(getData($scope.datax, path.split('.')), $scope.pathx, getData($scope.datay, path.split('.')), $scope.pathy);
-			}
-			else {
-				data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
-			}
+			
+			var data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy);
 
 			var w = $(elem).width()
 			var h = w*2/3
@@ -43,16 +32,14 @@ Curiosity.directive('barchart', function($rootScope){
 				.datum(data)
 				.call(chart)
 
-			$rootScope.$on("QueryLaunched", function() {
-				console.log($scope.datax);				
-				if (typeof(path) !== "undefined") {
-					data = builtAllSeries(getData($scope.datax, path.split('.')), $scope.pathx, getData($scope.datay, path.split('.')), $scope.pathy);
-				}
-				else {
-					data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
-				}
-				svg.datum(data)
+			$scope.$watch('data', function () {
+				data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
+				svg.datum(data);
 				chart.update()	
+
+			});
+
+			$rootScope.$on("AggregationUpdated", function() {
 			});
 
 			function getData(dataSet, path, num) {
@@ -93,7 +80,6 @@ Curiosity.directive('barchart', function($rootScope){
 					res.push(tmp);
 					i++;					
 				}
-				console.log(res);
 				return (res);
 			}
 		}

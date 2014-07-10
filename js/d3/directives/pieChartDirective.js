@@ -4,22 +4,17 @@ Curiosity.directive('piechart', function($rootScope){
 		restrict :'A',
 		
 		scope: {
-			datax :"=",
-			datay :"=",
+			data :"=",
 			pathx: "=",
 			pathy: "=",
 		},		
 		
 		link: function($scope, elem, iAttrs) {
-			if (typeof ($scope.datay) === "undefined") {
-				$scope.datay = $scope.datax
-			} 			
-
-			var data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy);
+			
+			var data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy);
 			data = data.pop().values
 			var w = $(elem).width()
 			var h = w
-			console.log('piechart',data)
 			var chart = nv.models.pieChart()
 							.x(function(d) { return d.x })
 							.y(function(d) { return d.y })
@@ -35,9 +30,14 @@ Curiosity.directive('piechart', function($rootScope){
 
 			nv.utils.windowResize(chart.update)
 
+			$scope.$watch('data', function () {
+				data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
+				data = data.pop().values
+				svg.datum(data);
+				chart.update();
+			});
 
-
-			d3.select(elem[0])
+			var svg = d3.select(elem[0])
 				.append('svg')
 				.attr('width',w)
 				.attr('height',h)
@@ -85,7 +85,6 @@ Curiosity.directive('piechart', function($rootScope){
 					res.push(tmp);
 					i++;					
 				}
-				console.log(res);
 				return (res);
 			}
 		}
