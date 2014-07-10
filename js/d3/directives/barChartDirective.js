@@ -15,10 +15,35 @@ Curiosity.directive('barchart', function($rootScope){
 
 			var w = $(elem).width()
 			var h = w*2/3
-			var chart = nv.models.multiBarChart()
-							.width(w)
-							.height(h)
+
+			var horizontal = true;
+
+			var chart
+			if(horizontal)
+			{
+				//length of labels to compute margin left
+				var maxLengthLabel = 0
+				if(data.length>0)
+				{					
+					data[0].values.forEach(function(d){
+						maxLengthLabel = Math.max(d.x.length,maxLengthLabel)
+					})				
+					h = Math.max(h,80+16*data[0].values.length)
+				}
+
+				chart = nv.models.multiBarHorizontalChart()
+							.margin({top:20,right:30,bottom:50,left:20+maxLengthLabel*7})
+
+			}else{
+				chart = nv.models.multiBarChart()
 							.margin({top:20,right:30,bottom:50,left:30})
+							
+			}
+
+			chart.width(w)
+				.height(h)
+				
+				
 
 			nv.utils.windowResize(chart.update)
 			
