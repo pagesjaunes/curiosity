@@ -35,8 +35,7 @@ Curiosity.directive('barchart', function($rootScope){
 			$scope.$watch('data', function () {
 				data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
 				svg.datum(data);
-				chart.update()	
-
+				chart.update();
 			});
 
 			$rootScope.$on("AggregationUpdated", function() {

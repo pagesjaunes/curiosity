@@ -53,7 +53,7 @@ Curiosity.directive('piechart', function($rootScope){
 					if (typeof dataSet[path[i]] === "undefined")
 						return (null);
 					dataSet = dataSet[path[i]];
-					i++;
+					i++;	
 				}
 				if (num) {
 					return (parseFloat(dataSet)); 
