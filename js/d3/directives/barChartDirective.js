@@ -6,8 +6,8 @@ Curiosity.directive('barchart', function($rootScope){
 		scope: {
 			datax :"=",
 			datay :"=",
-			pathx: "=",
 			pathy: "=",
+			pathx: "=",
 		},		
 		
 		link: function($scope, elem, iAttrs) {
@@ -15,10 +15,17 @@ Curiosity.directive('barchart', function($rootScope){
 				$scope.datay = $scope.datax
 			} 			
 
-			var data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
+			var path = iAttrs.datapath;
+			var data = [];
+			if (typeof(path) !== "undefined") {
+				data = builtAllSeries(getData($scope.datax, path.split('.')), $scope.pathx, getData($scope.datay, path.split('.')), $scope.pathy);
+			}
+			else {
+				data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
+			}
+
 			var w = $(elem).width()
 			var h = w*2/3
-			console.log('elem.load',w,h)
 			var chart = nv.models.multiBarChart()
 							.width(w)
 							.height(h)
@@ -27,8 +34,13 @@ Curiosity.directive('barchart', function($rootScope){
 			nv.utils.windowResize(chart.update)
 			
 			$rootScope.$on("QueryLaunched", function() {
-				data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy);
-			
+				console.log($scope.datax);				
+				if (typeof(path) !== "undefined") {
+					data = builtAllSeries(getData($scope.datax, path.split('.')), $scope.pathx, getData($scope.datay, path.split('.')), $scope.pathy);
+				}
+				else {
+					data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
+				}
 			});
 
 			d3.select(elem[0])
