@@ -24,14 +24,7 @@ Curiosity.directive('barchart', function($rootScope){
 							.height(h)
 							.margin({top:20,right:30,bottom:50,left:30})
 
-			nv.utils.windowResize(chart.update)
-			
-			$rootScope.$on("QueryLaunched", function() {
-				data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy);
-			
-			});
-
-			d3.select(elem[0])
+			var svg = d3.select(elem[0])
 				.append('svg')
 				.attr('width',w)
 				.attr('height',h)
@@ -40,6 +33,17 @@ Curiosity.directive('barchart', function($rootScope){
 				.attr('class','barchart')
 				.datum(data)
 				.call(chart)			
+
+			nv.utils.windowResize(chart.update)
+
+
+			
+			$rootScope.$on("QueryLaunched", function() {
+				data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy);
+				svg.datum(data)
+				chart.update()				
+			});
+
 
 			function getData(dataSet, path, num) {
 				var i = 0;
