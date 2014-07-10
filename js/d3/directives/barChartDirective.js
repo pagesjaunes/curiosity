@@ -33,6 +33,16 @@ Curiosity.directive('barchart', function($rootScope){
 
 			nv.utils.windowResize(chart.update)
 			
+			var svg = d3.select(elem[0])
+				.append('svg')
+				.attr('width',w)
+				.attr('height',h)
+				.style('width',w)
+				.style('height',h)
+				.attr('class','barchart')
+				.datum(data)
+				.call(chart)
+
 			$rootScope.$on("QueryLaunched", function() {
 				console.log($scope.datax);				
 				if (typeof(path) !== "undefined") {
@@ -41,17 +51,9 @@ Curiosity.directive('barchart', function($rootScope){
 				else {
 					data = builtAllSeries($scope.datax, $scope.pathx, $scope.datay, $scope.pathy); 
 				}
+				svg.datum(data)
+				chart.update()	
 			});
-
-			d3.select(elem[0])
-				.append('svg')
-				.attr('width',w)
-				.attr('height',h)
-				.style('width',w)
-				.style('height',h)
-				.attr('class','barchart')
-				.datum(data)
-				.call(chart)			
 
 			function getData(dataSet, path, num) {
 				var i = 0;
