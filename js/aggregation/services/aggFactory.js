@@ -38,6 +38,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 			agg.name = name;	
 		}
 		agg.nested = {};
+		agg.filters = [];
 		agg.tpl = "default";
 		agg.aggregationTypeIdx = -1;
 		agg.displayName = "New Aggregation";
@@ -95,6 +96,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 				i++;
 			}
 		}
+		$rootScope.$broadcast("AggregationUpdated");
 	}
 
 	/**

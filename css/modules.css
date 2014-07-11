@@ -65,4 +65,14 @@
 		}
 
 /*
+Agg result
 */
+
+.agg-result .label {
+	float: left;
+	margin : 0 2px 2px 0;
+}
+
+	.agg-result .label span{
+		cursor: pointer;
+	}

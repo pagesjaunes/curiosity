@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context,log , aggFactory){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context,log , aggFactory, aggFilter){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -71,18 +71,22 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	});
 
 	function builtRequest(query) {
+		var filteredQuery;
 		request = ejs.Request();
 		queryString.query(query);
 		aggFactory.addAggregationToRequest(request);
+		var filter = aggFilter.getRequestFilter();
 		if (typeof(query) === "undefined" || !query.length){
-			request.query(ejs.MatchAllQuery())
+			filteredQuery = ejs.FilteredQuery(ejs.MatchAllQuery(), filter);
 		}
 		else {
-			request.query(queryString);
+			filteredQuery = ejs.FilteredQuery(queryString, filter);
 		}
+		request.query(filteredQuery);
 		request.size(queryObj.info.nbResult);
 		request.from(queryObj.info.page * queryObj.info.nbResult);
 		addSortToRequest(request,queryObj.info.sort);
+		
 		queryObj.info.jsonRequest = request;
 		return (request);
 	}
@@ -142,6 +146,12 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				log.log("Requête : ko, Code : " + err.status, "danger");
 			}
 		)	
+	}
+
+	queryObj.notify = function () {
+		if (queryObj.info.autoRefresh) {
+			queryObj.search();
+		}
 	}
 
 	queryObj.addValueInQuery = function(keyword) {

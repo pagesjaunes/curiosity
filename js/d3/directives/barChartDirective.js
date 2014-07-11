@@ -16,7 +16,9 @@ Curiosity.directive('barchart', function($rootScope){
 			var w = $(elem).width()
 			var h = w*2/3
 
-			var horizontal = true;
+			
+			var horizontal = (iAttrs.hasOwnProperty('horizontal') && iAttrs.horizontal!='false');
+			
 
 			var chart
 			if(horizontal)

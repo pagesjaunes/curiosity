@@ -18,7 +18,6 @@ Curiosity.factory('aggConstructor', function(){
 			order = "desc";
 			if (agg.orderType)
 				order = "asc";
-			console.log(order);
 			result.order(agg.order, order);			
 		}
 		if (typeof (agg.minDoc) !== "undefined") 

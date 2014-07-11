@@ -53,7 +53,8 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 	* @desc send selected context, if its elasticsearch id is undefined then create a new document
 	*/
 	contextObj.sendContext = function() {
-		if (typeof (context._id) === "undefined") {
+		if (typeof (context._id) === "undefined" && contextObj.info.currentContext.contextName != "" && typeof(contextObj.info.currentContext.contextName) !== "undefined") {
+			console.log("nouveau context");
 			elasticFunc.sendNewDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, contextObj.getContextList);	
 		}
 		else {
