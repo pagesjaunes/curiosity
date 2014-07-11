@@ -1,12 +1,14 @@
 <div class="agg-result">
 	<div class="panel panel-primary panel-request">
-		<div class="panel-body">
+		<div class="panel-heading">
 			<div>
 				<span ng-repeat="filter in agg.__ref__.filters" class="label label-info">{{ filter.data.term }} 
 					<span class="glyphicon glyphicon-remove" ng-click="removeFilter(agg, $index)"></span>
 				</span>
 				<div class="spacer"></div>
 			</div>
+		</div>
+		<div class="panel-body">
 			<div ng-repeat="bucket in agg.buckets">
 				<span class="aggregation-items"> 
 					<label>
@@ -21,15 +23,15 @@
 						<div ng-switch="agg.__ref__.tpl">
 							<!-- Default Tpl !-->
 							<div ng-switch-when="default">
-								<div ng-include="agg.__ref__.type + '_template'">	
+								<div ng-include="agg.__ref__.resultTemplate">	
 								</div>
 							</div>
 							<!-- Specifique Tpl !-->
 							<div ng-switch-default>
 								<div ng-include="agg.__ref__.tpl">
-								</div>							
+								</div>
 							</div>
-						</div>							
+						</div>
 					</div>
 				</div>
 			</div>

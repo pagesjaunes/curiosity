@@ -53,6 +53,7 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 		if (typeof (idx) != "undefined" && idx != null && idx >= 0) {
 			agg.type = $scope.data.aggList[idx].type;
 			agg.displayTemplate = $scope.data.aggList[idx].template;
+			agg.resultTemplate = $scope.data.aggList[idx].resultTemplate;
 			agg.aggTypeSelected = true;
 		}
 	}

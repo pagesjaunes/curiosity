@@ -1,13 +1,11 @@
 // templateFactory.js
 
-Curiosity.factory('template', function($http, $templateCache, conf, aggFactory){
+Curiosity.factory('template', function($http, $templateCache, conf){
 	var templateObj = {};
 	templateObj.info = {};
 	templateObj.info.template = [];
 	templateObj.info.aggregationsTemplates = [];
-	templateObj.info.aggregationsAssociation = [];
-	templateObj.info.possibleAggregation = aggFactory.info.aggList;
-
+	
 	/**
 	* templateObj.update
 	* Update service's data from conf document. 
@@ -21,15 +19,10 @@ Curiosity.factory('template', function($http, $templateCache, conf, aggFactory){
 		if (typeof(templateObj.info.aggregationsTemplates) === "undefined") {
 			templateObj.info.aggregationsTemplates = [];
 		}	
-		templateObj.info.aggregationsAssociation = conf.getConfDocument("aggregationsTemplates").defaultValue;
-		if (typeof(templateObj.info.aggregationAssociation) === "undefined") {
-			templateObj.info.aggregationAssociation = [];
-		}
-		updateAggTemplate();
 	}
 
 	/* 
-	* The next function work with a type. 
+	* Next function work with a type. 
 	* By convention the type is equal to the conf document type.
 	* This way we can add as many template type as we want and use the same functions
 	*/
@@ -66,31 +59,6 @@ Curiosity.factory('template', function($http, $templateCache, conf, aggFactory){
 		}
 	}
 
-	/**
-	* templateObj.updateAggAssoc
-	* Update the associaction between a template and and aggregation type  
-	* @param type : aggregation's type
-	* @param value : template's name
-	*/
-	templateObj.updateAggAssoc = function (type, value) {
-		var i = 0; 
-		var find = false;
-		while (i < templateObj.info.aggregationsAssociation.length){
-			if (templateObj.info.aggregationsAssociation[i].type == type) {
-				find = true;
-				templateObj.info.aggregationsAssociation[i].tpl = value;
-				break;
-			}
-			i++;
-		}
-		if (!find) {
-			templateObj.info.aggregationsAssociation.push({'type':type,'tpl':value});
-		}
-		conf.getConfDocument('aggregationsTemplates').defaultValue = templateObj.info.aggregationsAssociation;
-		conf.sendConfDocument('aggregationsTemplates');
-		updateAggTemplate();
-	}
-
 
 	/**
 	* templateObj.addTemplateToCache
@@ -118,33 +86,5 @@ Curiosity.factory('template', function($http, $templateCache, conf, aggFactory){
 		}
 	}
 
-	/**
-	*
-	*/
-	function updateAggTemplate () {
-		$http.get('template/aggregation/default.html', {cache:$templateCache}).then(function() {
-			var defaultTemplate = $templateCache.get('template/aggregation/default.html')[1];
-			var i = 0;
-			templateObj.info.possibleAggregation = aggFactory.info.aggList;
-			while (i < templateObj.info.possibleAggregation.length) {
-				$templateCache.put(templateObj.info.possibleAggregation[i].type + "_template", defaultTemplate);
-				i++;
-			}
-			i = 0;
-			if (typeof (templateObj.info.aggregationsAssociation) !== "undefined") {
-				while (i < templateObj.info.aggregationsAssociation.length){
-					var j = 0;
-					while (j < templateObj.info.aggregationsTemplates.length){
-						if (templateObj.info.aggregationsTemplates[j].name == templateObj.info.aggregationsAssociation[i].tpl) {
-							$templateCache.put(templateObj.info.aggregationsAssociation[i].type + "_template", templateObj.info.aggregationsTemplates[j].value);
-							break;
-						}
-						j++;
-					}
-					i++;
-				}
-			}
-		});
-	}
 	return (templateObj);
 })

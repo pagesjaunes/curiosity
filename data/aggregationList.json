@@ -1,15 +1,15 @@
 {
 "list":
 [
-	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html"},
-	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html"},
-	{"type":"Avg", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"Stats", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"Min", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"Sum", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html"},
-	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html"}
+	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html", "resultTemplate":"template/aggregation/Terms.html"},
+	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"Avg", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"Stats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"Min", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"Sum", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html", "resultTemplate":"template/aggregation/default.html"}
 ]	
 }
