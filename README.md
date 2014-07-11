@@ -46,3 +46,5 @@ Cursiosity use many librairies and plugins, thanks to all of their contributors.
 * [elastic.js](https://github.com/fullscale/elastic.js)
 * [AngularUI](http://angular-ui.github.io/)
 * [FileSaver](https://github.com/eligrey/FileSaver.js/)
+* [D3](https://github.com/mbostock/d3)
+* [nvd3](https://github.com/novus/nvd3)
