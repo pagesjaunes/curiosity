@@ -1,58 +1,42 @@
-Curiosity.controller('contextCtrl', function($scope, context){	
-	$scope.data = context.info;	
-	$scope.info.newContextName = "";
-	
+var newContextModalCtrl = function($scope, $modalInstance, context){	
+	$scope.nc = {};
+	$scope.nc.contextName = "New Context";
+	$scope.nc.contextDescr = "";
+	$scope.data = context.info;
+	$scope.error = false;
+	$scope.info = true;
+
 	/**
 	* @desc ask contet's service to send context 
 	*/
-	$scope.sendContext = function() {
-		context.sendContext();
-	}
-
-	/**
-	* @desc ask context's services to create a new context
-	*/
-	$scope.saveNewContext = function () {
-		context.newContext($scope.info.newContextName); 
-	}
-
-	/**
-	* @desc set context selected as current context
-	*/
-	$scope.setDefaultContext = function () {
-		context.setDefaultContext($scope.data.currentContext.contextName);
-	}
-	
-	/**
-	* @desc update current context
-	*/
-	$scope.updateContext = function () {
-		context.updateContext();
-	}
-
-	/**
-	* @desc select a context from the context list
-	*/
-	$scope.selectContext = function () {
-		if ($scope.data.contextIdx != null && $scope.data.contextIdx >= 0) {
-			context.loadContext($scope.data.contextList[$scope.data.contextIdx]._id);
+	$scope.newContext = function() {
+		if ($scope.contextName == "") {
+			$scope.error = true;				
 		}
 		else {
-			context.setContextIdx();
+			context.saveNewContext($scope.nc.contextName, $scope.nc.contextDescr);
+			$scope.info = false;
 		}
 	}
-	
-	/**
-	* @desc select a context from the context list
-	*/
-	$scope.deleteContext = function () {
-		context.deleteContext();
+
+	$scope.cancel = function () {
+		$modalInstance.close();
+	}
+};
+
+var contextManagerModalCtrl = function ($scope, $modalInstance, context) {
+	$scope.data = context.info;
+
+	$scope.removeContext = function (id, index) {
+	 	context.deleteContext(id);
+	 	context.info.contextList.splice(index, 1);
 	}
 
-	/**
-	* @desc reload the context list
-	*/
-	$scope.reloadContextList = function () {
-		context.getContextList();
+	$scope.close = function () {
+		$modalInstance.close();
 	}
-});
+
+	$scope.selectContext = function(id) {
+		context.loadContext(id);
+	}
+};

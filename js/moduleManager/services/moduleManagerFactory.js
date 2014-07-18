@@ -170,6 +170,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		return (result + 1);
 	}
 
+	/*
 	moduleManagerObj.initModule = function() {
 		moduleManagerObj.cleanModule();
 		var i = 0;
@@ -179,7 +180,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 			i++;
 		}
 	}
-
+	*/
 	
 	$rootScope.$on("ContextLoaded", function () {
 		var tmp = {};
@@ -211,7 +212,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 	}) 
 	
 	$rootScope.$on("NoContext", function (){
-		getDefaultModule(moduleManagerObj.initModule);		
+		//getDefaultModule(moduleManagerObj.initModule);		
 	})
 
 	
@@ -220,6 +221,6 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 	})
 
 	getModuleList();
-	getDefaultModule();
+	//getDefaultModule();
 	return (moduleManagerObj);
 })

@@ -11,7 +11,7 @@ var global_text = {
 		AutoRefresh : "Rafraichissement auto.",
 		Hits : "Résultats : ",
 		Error : "Erreur",
-		Status : "Status",
+		Status : "Statut",
 		NoError : "OK",
 		Customization : "Personnalisation",
 		NewServerTitle : "Cacher / Montrer le formulaire d'ajout d'un nouveau serveur",
@@ -30,7 +30,7 @@ var global_text = {
 		Index : "Index",
 		Save : "Sauvegarder", 
 		Add : "Ajouter"
-	},+
+	},
 	request : {
 		ShowAll : "Voir tout",
 		Hide : "Cacher", 

@@ -25,14 +25,7 @@
 }
 
 [draggable=true]:hover{
-    border: dashed 2px #428bca; /* CSS3 */
-}
-
-[type="trash"] {
-	background-image:url("../resources/trash.png");
-	background-repeat: no-repeat;
-	background-position: center;
-	padding: 20px;
+	border: dashed 2px #428bca; /* CSS3 */
 }
 
 .unlock [type="trash"] [dropzone] {

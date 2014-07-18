@@ -1,0 +1,23 @@
+<div ng-controller="cardCtrl">
+	<div class="btn-option" ng-click="showOpt = !showOpt">
+		<span class="glyphicon" 
+			ng-class="{'glyphicon-chevron-down':!showOpt,'glyphicon-chevron-up': showOpt}"></span>
+	</div>
+	<div ng-if="showOpt" class="card-opt">
+		<h3>Card Options</h3>
+		<label>Add Modules</label>
+		<div class="margin-top">
+			<select ng-model="selectedModuleIdx" ui-select2 class="form-control margin-top">
+				<option ng-repeat="module in data.moduleList" value="{{$index}}">{{ module.type }}</option>
+			</select>
+		</div>
+		<button ng-click="addModule(selectedModuleIdx)" class="btn btn-default">
+			ok
+		</button>
+	</div>
+	<div ng-show="!showOpt">
+		<div moduleblock name="{{ 'w'+ ws.idx + '-r' + card.row + '-c' + card.col }}" 
+			type="{{ workspaceData.currentWorspace.row + 'x' + workspaceData.currentWorspace.col }}">
+		</div>
+	</div>
+</div>

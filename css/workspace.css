@@ -1,0 +1,116 @@
+/*
+* workspaces
+*/
+
+.workspace {
+	height: 100%;
+}
+
+	.workspace .cards-row > div {
+		padding : 0 5px 0 0;
+	}
+
+	.fade-hide, .fade-show {
+    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+	}
+	.fade-hide {
+	    opacity:1;
+	}
+	.fade-hide.fade-hide-active {
+	    opacity:0;
+	}
+	.fade-show {
+	    opacity:0;
+	}
+	.fade-show.fade-show-active {
+	    opacity:1;
+	}
+
+/*
+* cards
+*/
+.row-1 {
+	height : 100%;
+}
+
+.row-6 {
+	height : 50%;
+}
+
+.row-4 {
+	height : 33%;
+}
+
+.row-3 {
+	height : 25%;
+}
+
+.card {
+	height				: 97%;
+	margin				: 5px 0 0 0;
+	-webkit-box-shadow 	: 1px 1px 1px 1px rgba(150,150,150,125);
+	box-shadow 			: 1px 1px 1px 1px rgba(150,150,150,125);
+	overflow			: auto;
+	position			: relative;
+}
+
+	.card .module-block {
+		height		: 100%;
+		padding 	: 1px; 
+		z-index 	: 1; 
+		position	: relative;
+	}
+
+	.card .card-opt {
+		z-index		: 1; 
+		position	: relative; 
+	}
+
+	.card .btn-option {
+		position	: absolute;
+		top 		: 1px;
+		left		: 48%;
+		font-size 	: 12px;
+		color 		: rgba(175,175,175,70);
+		cursor		: pointer;
+		z-index		: 2;  
+	}
+
+/*
+* Layout Selector
+*/
+.layout-selector .layout-table {
+	width 		: 100%;
+	text-align	: center;
+}
+
+	.layout-selector .layout-table > div {
+		display : inline-block;	
+	}
+
+		.layout-selector .layout-table > div > div {
+			display	: block;	
+		}
+
+			.layout-selector .layout-table div div div.col {
+				width  	: 40px;
+				height 	: 40px;
+				margin 	: 15px 15px 0 0;
+				border  : 1px solid #000000;
+				float 	: left;
+			}
+
+			.layout-selector .layout-table div div div.high {
+				border-width		: 2px;
+				-webkit-box-shadow	: 2px 2px 2px 2px rgba(100,100,100,150);
+				box-shadow 			: 2px 2px 2px 2px rgba(100,100,100,150);
+			}
+
+			.layout-selector .layout-table div div div.selected {
+			 	border-width	: 2px;
+			 	border-color 	: #428bca;
+			}
+

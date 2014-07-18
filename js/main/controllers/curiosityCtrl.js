@@ -1,11 +1,15 @@
-Curiosity.controller('curiosityCtrl', function($scope, conf, curiosity, query, moduleManager){	
+Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, query, moduleManager, layout,context){	
 	/* INITIALISATION */
 	$scope.data = curiosity.info;
+	$scope.data.tab = 0;
 	$scope.queryData = query.info;
 	$scope.moduleManagerData = moduleManager.info;
-	
+	$scope.layoutData = layout.info;
+	$scope.contextData = context.info;
+	$scope.showHeader = true;	
 	$scope.info = {};
 	$scope.info.txt = global_text;
+	
 	/* EVENTS */
 	$scope.$on("ConfLoaded", function() {
 		curiosity.init();
@@ -13,7 +17,6 @@ Curiosity.controller('curiosityCtrl', function($scope, conf, curiosity, query, m
 		$scope.data.serverList = conf.getConfDocument("server").servers;
 	});
 	
-	//conf.reInitConf();
 	conf.getConf($scope);
 	
 	$scope.selectIndex = function (){
@@ -32,31 +35,71 @@ Curiosity.controller('curiosityCtrl', function($scope, conf, curiosity, query, m
 		query.updateQuery();	
 	}
 
-	$scope.tiny = {};	
+	$scope.switchTab = function (tab) {
+		if (tab == $scope.data.tab) {
+			$scope.data.tab = 0;
+		}
+		else {
+			$scope.data.tab = tab
+		}
+	}
 
-	$scope.tiny.tinymceOptions = {
-		verify_html: false,
-	 	plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table contextmenu directionality",
-        "emoticons paste textcolor"
-    	],
-		toolbar1: "bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect",
-		toolbar2: "cut copy paste | searchreplace | bullist numlist | outdent indent blockquote | undo redo | link unlink anchor image media code | inserttime preview | forecolor backcolor",
-		toolbar3: "table | hr removeformat | subscript superscript | charmap emoticons | print fullscreen | ltr rtl | spellchecker | visualchars visualblocks nonbreaking template pagebreak restoredraft",
+	$scope.nextWorkspace = function () {
+		layout.nextWorkspace();
+	}
 
-		menubar: false,
-		toolbar_items_size: 'small',
+	$scope.prevWorkspace = function () {
+		layout.prevWorkspace();
+	}
 
-		style_formats: [
-		{title: 'Bold text', inline: 'b'},
-		{title: 'Red text', inline: 'span', styles: {color: '#ff0000'}},
-		{title: 'Red header', block: 'h1', styles: {color: '#ff0000'}},
-		{title: 'Example 1', inline: 'span', classes: 'example1'},
-		{title: 'Example 2', inline: 'span', classes: 'example2'},
-		{title: 'Table styles'},
-		{title: 'Table row 1', selector: 'tr', classes: 'tablerow1'}
-		],
-	};
+	$scope.newWorkspace = function () {
+		layout.newWorkspace();
+	}
+
+	$scope.goToWorkspace = function (idx) {
+		layout.goTo(idx);
+	}
+
+	$scope.newContext = function () {
+		openNewContextModal();
+	}
+
+	$scope.quickSaveContext = function () {
+		if (context.info.contextLoaded) {
+			context.updateContext();
+		}
+		else {
+			openNewContextModal();
+		}
+	}
+
+	$scope.manageContext = function () {
+		openManageContextModal();
+	}
+
+	function openNewContextModal() {
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/new_context_modal.html',
+			controller: newContextModalCtrl,
+			size: 'sm',
+			resolve: {
+				item: function () {
+				}}
+			});
+		modalInstance.result.then(function (value) {
+		}, function () {})	
+	}
+
+	function openManageContextModal() {
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/manage_context_modal.html',
+			controller: contextManagerModalCtrl,
+			size: 'sm',
+			resolve: {
+				item: function () {
+				}}
+			});
+		modalInstance.result.then(function (value) {
+		}, function () {})	
+	}
 });

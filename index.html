@@ -17,6 +17,7 @@
 			<!-- Project specifique file !-->
 		<link href="css/curiosity.css" rel="stylesheet">
 		<link href="css/modules.css" rel="stylesheet">
+		<link href="css/workspace.css" rel="stylesheet">
 		<!-- Dependency  Libs !--> 
 			<!-- Latest compiled and minified JavaScript -->
 		<script type="text/javascript" src="vendor/jquery/jquery-2.1.0.min.js"></script>
@@ -94,43 +95,113 @@
 		<script type="text/javascript" src="js/moduleManager/services/moduleManagerFactory.js"></script>
 		<script type="text/javascript" src="js/moduleManager/controllers/moduleManagerCtrl.js"></script>
 		<script type="text/javascript" src="js/moduleManager/directives/moduleBlockDirective.js"></script>
-		<!--  !-->
+		<!-- Layout  !-->
+		<script type="text/javascript" src="js/layout/services/layoutFactory.js"></script>
+		<script type="text/javascript" src="js/layout/controllers/workspacesCtrl.js"></script>
+		<script type="text/javascript" src="js/layout/controllers/layoutSelectorCtrl.js"></script>
+		<script type="text/javascript" src="js/layout/controllers/cardCtrl.js"></script>
+
 		<!-- Document 		
 		<script type="text/javascript" src="js/doc/services/docFactory.js"></script>
 		<script type="text/javascript" src="js/doc/controllers/docCtrl.js"></script>
 		!-->
 	</head>
-	<body>
-		<div ng-controller="curiosityCtrl" ng-class="{'unlock':!moduleManagerData.lock}">
+	<body ng-controller="curiosityCtrl" ng-class="{'header-hidden':!showHeader}">
+		<div ng-class="{'unlock':!moduleManagerData.lock}">
 			<div id="loading-image" ng-show="data.loading">
 				<span><img src="resources/ajax-loader.gif" id="loading-image"></img></span>
 			</div>
-				<div id="header" ng-include="'template/common/header.html'">
+			<div ng-show="showHeader">
+				<div id="header" ng-include="'template/common/header.html'"></div>
 			</div>
-			
-			<div id="content-left" class="col-sm-2">
-				<div moduleblock name="left-column" type="column"></div>
+			<div ng-show="data.tab == 0" ng-include="'template/layout/workspaces.html'" class="content">
 			</div>
-			
-			<div id="content" class="col-sm-8"> 
-				<div class="tab" ng-show="data.tab == 1" moduleblock name="content" type="content"></div>
+	
+			<div ng-show="data.tab == 2" class="container">
+				<div ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl"></div>
+			</div>
 
-				<!-- Mapping Pannel !-->
-				<div ng-show="data.tab == 2" class="tab">
-					<div ng-include="'template/mapping_tab/mapping_tab.html'" ng-controller="mappingCtrl"></div>
-				</div>
-				<!-- KeyWord Panel !-->
-				<div ng-show="data.tab == 3" class="tab">
-					<div ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl"></div>
-				</div>
-				<!-- Template Panel !-->
-				<div ng-show="data.tab == 5" class="tab">
-					<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
-				</div>
+			<div ng-show="data.tab == 3" class="container">
+				<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
 			</div>
 			
-			<div id="content-right" class="col-sm-2">
-				<div moduleblock name="rigth-column" type="column">
+			<div ng-show="data.tab == 10" class="tab">
+				<div ng-include="'template/mapping_tab/mapping_tab.html'" ng-controller="mappingCtrl"></div>
+			</div>
+			
+			<div class="workspace-selector">
+				<div ng-click="hideWSS = !hideWSS" class="hider">
+					<span class="glyphicon" ng-class="{'glyphicon-chevron-right':!hideWSS,'glyphicon-chevron-left':hideWSS}">
+					</span>
+				</div>
+				<div ng-show="!hideWSS" class="workspace-item" ng-repeat="ws in layoutData.workspaces" ng-click="goToWorkspace($index)" 
+					title="Go To {{ws.displayName}}" ng-class="{'selected':$index == layoutData.idx}">
+				</div>
+				<div class="spacer"></div>
+			</div>
+
+			<div class="btn-show-header" ng-click="showHeader = !showHeader" title="Show/Hide header">		
+				<span class="glyphicon" 
+					ng-class="{'glyphicon-chevron-down':!showHeader,'glyphicon-chevron-up': showHeader}">
+				</span>
+			</div>
+
+			<div class="control cleft blue" ng-click="prevWorkspace()" title="Prev Workspace">
+				<span class="glyphicon glyphicon-arrow-left"></span>	
+			</div>
+
+			<div class="control cright blue" ng-click="nextWorkspace()" title="Next Workspace">
+				<span class="glyphicon glyphicon-arrow-right" ></span>					
+			</div>
+
+			<div class="btn-hide-toolbar" ng-class="{'toolbar-hidden':hideToolbar}" ng-click="hideToolbar = !hideToolbar" title="Hide/Show Toolbar">
+					<span class="glyphicon" 
+					ng-class="{'glyphicon-chevron-down':!hideToolbar,'glyphicon-chevron-up':hideToolbar}">
+				</span>		
+			</div>
+			
+			<div class="toolbar-bottom" ng-hide="hideToolbar">
+				<div class="ico-container">
+					<div ng-click="search()" title="Search" class="ico">
+						<span class="glyphicon glyphicon-search blue">
+						</span>
+					</div>
+					<div ng-click="switchTab(2)" title="Go to Keywords Tab" class="ico">
+						<span class="glyphicon yellow" 
+							ng-class="{'glyphicon-font':data.tab != 2, 'glyphicon-home': data.tab == 2}">
+						</span>
+					</div>
+					<div ng-click="switchTab(3)" title="Go to Templates Tab" class="ico">
+						<span class="glyphicon green"
+							ng-class="{'glyphicon-align-justify':data.tab != 3, 'glyphicon-home':data.tab == 3}">
+						</span>
+					</div>
+					
+					<div ng-click="newWorkspace()" title="New Workspace" class="ico">
+						<span class="glyphicon glyphicon-plus red"></span>
+					</div>
+
+					<div ng-click="moduleManagerData.lock = !moduleManagerData.lock" title="Lock/Unlock modules" class="ico">
+						<span class="glyphicon violet" ng-class="{'glyphicon-lock':!moduleManagerData.lock,'glyphicon-fullscreen':moduleManagerData.lock}">
+						</span>
+					</div>
+					
+					<div class="ico context-button"> 
+						<span class="glyphicon glyphicon-floppy-disk blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Save your context" ng-click="quickSaveContext()">
+						</span>
+						<div class="ico-hidden">
+							<span class="glyphicon glyphicon-folder-open blue" ng-click="manageContext()" title="Manage Context">
+							</span>
+							<span class="glyphicon glyphicon-floppy-save blue" ng-click="newContext()"title="Save As"></span>
+						</div>
+					</div>
+
+					<div class="ico" title="Trash (drop module here to remove them)">
+						<span class="glyphicon glyphicon-trash orange"></span>
+						<div moduleblock name="trash" type="trash" class="trash"></div>
+					</div>
+
+					<div class="spacer"></div>
 				</div>
 			</div>
 			<div class="spacer"></div>

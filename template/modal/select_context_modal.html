@@ -1,0 +1,14 @@
+<div>
+	<div class="modale-title">
+		<h3>{{ info.txt.context.Context }}</h3>
+	</div>
+	<div class="input-group">
+		<input>
+		<span class="input-group-addon">{{ info.txt.context.Context }}</span>
+		<select ng-model="data.contextIdx" ui-select2 class="form-control" ng-change="selectContext()">
+			<option ng-repeat="context in data.contextList" value="{{ $index }}" >
+				{{ context.fields.contextName }}
+			</option>  
+		</select>
+	</div>
+</div>

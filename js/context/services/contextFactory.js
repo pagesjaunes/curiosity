@@ -12,7 +12,8 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 	contextObj.info.currentContext = {};
 	contextObj.info.contextList = [];
 	contextObj.info.contextIdx = -1;
-
+	contextObj.info.contextLoaded = false;
+	contextObj.info.updateStatus = "ok";
 
 	/**
 	* @desc Load a context from its id
@@ -29,7 +30,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 			.then(function(data) {
 				context = data.hits.hits[0];
 				if (typeof (context) === "undefined")  { 				// Context not found => default context loaded
-					$rootScope.$broadcast("NoContext"); 				
+					//$rootScope.$broadcast("NoContext"); 				
 					log.log("Context : Error : context " + contextId + " not found", "danger");
 				}
 				else {													// Context found
@@ -37,6 +38,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 					contextObj.setContextIdx();
 					$location.search("context", contextId);
 					prevIdx = contextObj.info.contextIdx;
+					contextObj.info.contextLoaded = true;
 					$rootScope.$broadcast("ContextLoaded");
 				}
 			}, 
@@ -49,44 +51,81 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 		}
 	}
 
-	/**
-	* @desc send selected context, if its elasticsearch id is undefined then create a new document
-	*/
-	contextObj.sendContext = function() {
-		if (typeof (context._id) === "undefined" && contextObj.info.currentContext.contextName != "" && typeof(contextObj.info.currentContext.contextName) !== "undefined") {
-			console.log("nouveau context");
-			elasticFunc.sendNewDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, contextObj.getContextList);	
+	/* NEW CONTEXT FUNCTIONS*/
+	contextObj.saveNewContext = function (name, desc) {
+		contextObj.info.newContextStatus = "Initializing new Context";
+		contextObj.info.newContextoK = false;
+		contextObj.info.newContextPercent = 0;
+		contextObj.info.currentContext = {};
+		contextObj.info.currentContext.contextName = name;
+		contextObj.info.currentContext.contextDesc = desc;
+		$rootScope.$broadcast("UpdateContext"); // Notifie module to update their data 
+		contextObj.info.newContextPercent = 25;
+		contextObj.info.newContextStatus = "Updating modules informations";
+		// Wait till module update their data
+		setTimeout(function () {
+      		// Send new context to es server -> see getNewContext function for next steps
+       		contextObj.info.newContextStatus = "Sending context to server";
+       		contextObj.info.newContextPercent = 50;
+       		elasticFunc.sendNewDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, contextObj.getNewContext);
+       	}, 1000);
+	}
+
+	contextObj.getNewContext = function (error,resp) {
+		if (error) { // Error TODO : notifie user
+			console.error(error);
+			log.log("Error :" + error.status, "danger");
 		}
-		else {
-			elasticFunc.sendDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, context._id);
+		else { // New Context saved
+			contextObj.info.newContextStatus = "Context sent. Waiting till indexed";
+			contextObj.info.newContextPercent = 75;
+			//Wait till the document is indexed
+			waitTillIndexed(resp._id);
 		}
 	}
 
-
-	/**
-	* @desc create a new context from a name, if its name is alredy attributed then do nothing and set error attribut to true
-	* @param string name context's name
-	*/
-	contextObj.newContext = function(name) {
-		if (name != "") {
-			var i = 0;
-			while (i < contextObj.info.contextList.length) { // Check if a context alredy exist with the same name
-				if (contextObj.info.contextList[i].fields.contextName == name) {
-					log.log("Context : Context " + name + " already exists !!","danger");		
-					contextObj.info.error = true;
-					return;
+	function waitTillIndexed(contextId) {
+		setTimeout(function () {
+			var request = ejs.Request();
+			var query = ejs.QueryStringQuery("_id:\"" + contextId + "\"");
+			var filter = ejs.TypeFilter(contextDocumentType);
+			client.search({index:globalConf.confIndex, body:request}).then(function(data) {
+				var tmp = data.hits.hits[0];
+				if (typeof (tmp) === "undefined")  { // Context not found => Do it again till found
+					waitTillIndexed(contextId); 
 				}
-				i++;
-			}
-			context = {};
-			contextObj.info.currentContext = {};
-			contextObj.info.currentContext.contextName = name;
-			contextObj.info.error = false;
-			log.log("Context : Context created locally", "success");
+				else {	// Context found
+					context = tmp; 
+					contextObj.info.currentContext = context._source;
+					contextObj.setContextIdx();
+					$location.search("context", contextId); // Add context ID in url
+					contextObj.info.contextLoaded = true;
+					contextObj.info.newContextStatus = "Context created with success";
+					contextObj.info.newContextoK = true;
+					contextObj.info.newContextPercent = 100;
+					contextObj.getContextList();
+				}
+			});
+		}, 1000);
+	}
+
+	contextObj.updateContext = function () {
+		$rootScope.$broadcast("UpdateContext"); // Notifie module to update their data 
+		contextObj.info.updateStatus = "Updating"; 
+		// Wait till module update their data
+		setTimeout(function () {
+			elasticFunc.sendDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, context._id, contextObj.updateCB);
+		}, 1000);
+	}
+
+	contextObj.updateCB = function (error, resp) {
+		if (error) {
+			contextObj.info.updateStatus = "error";
+			alert("Error while updating context");
 		}
 		else {
-			contextObj.info.error = true;
-			log.log("Context : You have to name your new context", "danger");
+			contextObj.info.updateStatus = "ok";
+			alert("Context update success");
 		}
 	}
 
@@ -111,10 +150,14 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 	/*
 	* @desc delete current context from elasticsearch server and reinitialise current context object
 	*/
-	contextObj.deleteContext = function () {
-		elasticFunc.deleteDocument(client, globalConf.confIndex, contextDocumentType, context._id);
-		contextObj.info.currentContext = {};
-		context = {};
+	contextObj.deleteContext = function (id) {
+		elasticFunc.deleteDocument(client, globalConf.confIndex, contextDocumentType, id, deleteContextCB);
+	}
+
+	function deleteContextCB () {
+		setTimeout(function () {
+			contextObj.getContextList();
+		},1000);
 	}
 
 	/*
@@ -124,7 +167,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 		var request = ejs.Request();
 		var query = ejs.MatchAllQuery();
 		var filter = ejs.TypeFilter(contextDocumentType);	 
-		request.fields("contextName");
+		request.fields(["contextName", "contextDesc"]);
 		request.size(100);
 		request.query(query).filter(filter);
 		client.search({index:globalConf.confIndex, body:request})
@@ -132,10 +175,15 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 			contextObj.info.contextList = data.hits.hits;
 			var i = 0;
 			while (i < contextObj.info.contextList.length) {
-				if (contextObj.info.contextList[i].fields.contextName instanceof Array)
-					contextObj.info.contextList[i].fields.contextName = contextObj.info.contextList[i].fields.contextName[0]; 
-				else 
-					break;
+				if (typeof(contextObj.info.contextList[i].fields) !== "undefined") {
+					if (contextObj.info.contextList[i].fields.contextName instanceof Array)
+						contextObj.info.contextList[i].fields.contextName = contextObj.info.contextList[i].fields.contextName[0];
+					else 
+						break;
+				}
+				else {
+					contextObj.info.contextList.splice(i,1);
+				}
 				i++;
 			}
 		}, 
@@ -159,13 +207,6 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 				i++;
 			}
 		}
-	}
-
-	/*
-	* @desc send UpdateContext event to notifie each services to update their information
-	*/
-	contextObj.updateContext = function () {
-		$rootScope.$broadcast("UpdateContext");
 	}
 
 	/*

@@ -14,7 +14,7 @@ Curiosity.directive('piechart', function($rootScope){
 			var data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy);
 			data = data.pop().values
 			var w = $(elem).width()
-			var h = w
+			var h = $(".cards").height();
 			var chart = nv.models.pieChart()
 							.x(function(d) { return d.x })
 							.y(function(d) { return d.y })

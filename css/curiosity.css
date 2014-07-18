@@ -1,54 +1,301 @@
 /* curiosity.css */ 
 
 .module-block {
-    padding: 10px 0;
+    padding   : 10px 0;
 }
 
 /* Global */
 
-body { 
-    padding-top: 70px; 
+body {
+  padding-top : 70px;
+}
+body.header-hidden {
+    padding-top : 0px;
 }
 
 .pointer {
-  cursor: pointer;
+  cursor  : pointer;
 }
 
 .spacer {
-  clear: both;
-  width : 0;
-  height :  0;
+  clear   : both;
+  width   : 0;
+  height  : 0;
 }
 
 #loading-image {
   margin-top : -5px;
 }
 
-.btn-with-image {
-  padding : 4px 2px;
-}
-
-.tab {
-}
-
 .margin-top {
   margin-top: 10px;
 }
 
+.blue {
+  color: #1EA3B9;
+}
+
+.yellow {
+  color: #FFCD05;
+}
+
+.orange {
+  color: #FF5E38;
+}
+
+.green {
+  color : #41D394;
+}
+
+.violet {
+  color : #C33AEB;
+}
+
+.red {
+  color: #FF1F2B;
+}
+
+
+/* Workspace Selector */
+
+.workspace-selector {
+  position: fixed;
+  top : 0;
+  right: 0;
+  transition : 0.5s;
+  z-index: 2000;
+}
+
+  .workspace-selector div.workspace-item {
+    float: left;
+    margin: 5px 5px 0 0;
+    border: 1px solid #000;
+    background-color: #888888;
+    opacity: 0.2;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    transition : 0.5s;
+  }
+  
+    .workspace-selector div.workspace-item.selected{
+      opacity: 0.5;
+    }
+
+    .workspace-selector div.workspace-item:hover{
+      opacity: 1;
+    }
+
+  .workspace-selector .hider {
+    float: left;
+    font-size: 13px;
+    line-height: 13px;
+    margin: 5px 5px 0 0;
+    opacity: 0.5;  
+  }
+
+    .workspace-selector:hover .hider {
+      opacity: 1;  
+    }
+
+
+/* Controls */
+
+.control {
+  position : fixed;
+  top : 45%;
+  font-size: 30px;
+  transition : 0.5s;
+  opacity: 0.3;
+  padding: 10px;
+  z-index: 1030;
+}
+
+  .control.cleft {
+    left: 0;
+  }
+
+  .control.cright {
+    right: 0;
+  }
+
+  .control:hover {
+    font-size: 50px;
+    opacity: 1;
+  }
+
+
+
+/* Toolbar */ 
+.toolbar-bottom {
+  position                : fixed;
+  bottom                  : 0;
+  text-align              : center;
+  height                  : 60px;
+  width                   : 100%;
+  font-size               : 30px;
+  padding                 : 10px;
+  z-index                 : 1031;
+}
+
+  .toolbar-bottom .ico-container {
+    display: inline-block;
+  }
+ 
+  .toolbar-bottom div.ico  {
+      display:    : block;
+      float       : left; 
+      opacity     : 0.4;
+      transition  : 0.5s;
+      margin      : 0 30 0px;
+      position    : relative;
+      cursor      : pointer; 
+  }
+
+    .toolbar-bottom:hover div.ico  {
+        opacity     : 0.7;
+    }
+
+    .toolbar-bottom div.ico:hover {
+        opacity     : 1;
+        font-size   : 50px;
+    }
+
+    .toolbar-bottom div.ico .trash {
+        position: absolute;
+        top : 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+.btn-hide-toolbar {
+  position   : fixed;
+  bottom     : 70px;
+  opacity    : 0.25;
+  font-size  : 20px;
+  left       : 49%;
+  z-index    : 1040;
+  transition : 0.5s;
+}
+
+  .btn-hide-toolbar:hover {
+    opacity: 1;
+    font-size: 30px;
+  }
+
+  .btn-hide-toolbar.toolbar-hidden {
+    bottom     : 0;
+  }
+
+
+/*Context Button */
+
+.context-button .ico-hidden {
+  display: none;
+  position: absolute;
+  bottom : 0;
+  transition : 0.5s display;
+}
+
+.context-button:hover .ico-hidden {
+  display: block;
+  bottom : 50px;
+}
+
+.context-button:hover .ico-hidden span{
+  display: block;
+  padding : 0 0 30px 0;
+}
+
+@-moz-keyframes pendulum {
+    100% {
+        -moz-transform:rotate(360deg);
+    }
+}
+
+@-ms-keyframes pendulum {
+    100% {
+        -ms-transform:rotate(360deg);
+    }
+}
+
+@-o-keyframes pendulum {
+    100% {
+        -o-transform:rotate(360deg);
+    }
+}
+
+@-webkit-keyframes pendulum {
+    100% {
+        -webkit-transform:rotate(360deg);
+    }
+}
+
+@keyframes pendulum {
+    100% {
+        transform:rotate(360deg);
+    }
+}
+
+.rotating {
+     moz-animation: pendulum;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-duration: 2s;
+    -ms-animation: pendulum;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-duration: 2s;
+    -o-animation: pendulum;
+    -o-animation-iteration-count: infinite;
+    -o-animation-duration: 2s;
+    -webkit-animation: pendulum;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 2s;
+    animation: pendulum;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+}
+
+
 /* header */
+.btn-show-header { 
+  position  : fixed;
+  opacity   : 0.25;
+  font-size : 20px;
+  left      : 49%;
+  top       : 50px;
+  z-index   : 1040;
+  transition: 0.5s;
+}
+
+  .header-hidden .btn-show-header {
+    top : 0px;
+  } 
+
+  .btn-show-header:hover {
+    opacity: 1;
+    font-size: 30px; 
+  }
 
 .light {
 
 }
 
   .light img {
-      width: 20px;
-      height: 20px;
+      width   : 20px;
+      height  : 20px;
   }
 
 .version {
-  font-style: italic;
-  font-size: 14px;
+  font-style  : italic;
+  font-size   : 14px;
+}
+
+/* content */
+
+.content {
+  position    : relative;
+  z-index     : 1;
 }
 
 /* query Tab */ 

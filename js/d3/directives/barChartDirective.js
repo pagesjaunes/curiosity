@@ -14,7 +14,7 @@ Curiosity.directive('barchart', function($rootScope){
 			var data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy);
 
 			var w = $(elem).width()
-			var h = w*2/3
+			var h = $(elem).closest(".cards").height()
 
 			
 			var horizontal = (iAttrs.hasOwnProperty('horizontal') && iAttrs.horizontal!='false');
@@ -34,7 +34,7 @@ Curiosity.directive('barchart', function($rootScope){
 				}
 
 				chart = nv.models.multiBarHorizontalChart()
-							.margin({top:20,right:30,bottom:50,left:20+maxLengthLabel*7})
+							.margin({top:20,right:30,bottom:50,left:30+maxLengthLabel*7})
 
 			}else{
 				chart = nv.models.multiBarChart()
@@ -47,7 +47,7 @@ Curiosity.directive('barchart', function($rootScope){
 				
 				
 
-			nv.utils.windowResize(chart.update)
+			//nv.utils.windowResize(chart.update)
 			
 			var svg = d3.select(elem[0])
 				.append('svg')
@@ -62,10 +62,9 @@ Curiosity.directive('barchart', function($rootScope){
 			$scope.$watch('data', function () {
 				data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
 				svg.datum(data);
-				chart.update();
-			});
-
-			$rootScope.$on("AggregationUpdated", function() {
+				if($(elem).is(":visible")) {
+					chart.update();					
+				}
 			});
 
 			function getData(dataSet, path, num) {
