@@ -1,12 +1,11 @@
 Curiosity.factory('aggFilter', function(aggFactory){
 	var aggFilterObj = {};
 	aggFilterObj.info = {};
-	aggFilterObj.info.aggList = aggFactory.info.currentAggregation;
 
 	aggFilterObj.getRequestFilter = function () {
 		var filter = ejs.AndFilter([]);
-		for (value in aggFilterObj.info.aggList) {
-			var tmp = aggFilterObj.info.aggList[value];
+		for (value in aggFactory.info.currentAggregation) {
+			var tmp = aggFactory.info.currentAggregation[value];
 			var i = 0;
 			while (i < tmp.filters.length) {
 				aggFilterObj[tmp.filters[i].type](filter,tmp.filters[i].data);
