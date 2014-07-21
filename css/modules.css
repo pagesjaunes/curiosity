@@ -69,3 +69,17 @@ Agg result
 	.agg-result .label span{
 		cursor: pointer;
 	}
+
+
+/* 
+	Context Modal
+*/
+
+.context-modal {
+
+}
+
+	.context-modal .context-ico {
+		cursor: pointer;
+		margin : 0 5px 0 0;	
+	}

@@ -1,4 +1,4 @@
-Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, query, moduleManager, layout,context){	
+Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, query, moduleManager, layout, context){	
 	/* INITIALISATION */
 	$scope.data = curiosity.info;
 	$scope.data.tab = 0;
@@ -77,6 +77,14 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		openManageContextModal();
 	}
 
+	$scope.manageTemplate = function () {
+		openTemplateModal();
+	}
+
+	$scope.manageKeyword = function () {
+		openKeywordsModal();
+	}
+
 	function openNewContextModal() {
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/new_context_modal.html',
@@ -95,6 +103,32 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 			templateUrl: 'template/modal/manage_context_modal.html',
 			controller: contextManagerModalCtrl,
 			size: 'sm',
+			resolve: {
+				item: function () {
+				}}
+			});
+		modalInstance.result.then(function (value) {
+		}, function () {})	
+	}
+
+	function openTemplateModal() {
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/template_modal.html',
+			size: 'lg',
+			controller:templateCtrl,
+			resolve: {
+				item: function () {
+				}}
+			});
+		modalInstance.result.then(function (value) {
+		}, function () {})	
+	}
+
+	function openKeywordsModal() {
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/keywords_modal.html',
+			size: 'lg',
+			controller:keywordCtrl,
 			resolve: {
 				item: function () {
 				}}

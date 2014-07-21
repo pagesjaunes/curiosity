@@ -1,5 +1,5 @@
 //confUtils.js
-Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
+Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 	
 	/*
 	* Default value for the keyword list conf document
@@ -95,7 +95,7 @@ Curiosity.factory("conf", function(elasticClient, elasticFunc, log){
 				.then(function(data) {
 					gConf = data.hits.hits;
 					log.log("Configuration loaded", "info");
-					scope.$broadcast("ConfLoaded");
+					$rootScope.$broadcast("ConfLoaded");
 				},
 				function (err) {
 					elasticFunc.createIndex(confClient, globalConf.confIndex);

@@ -22,7 +22,7 @@ var mappingModalCtrl = function($scope, $modalInstance, mapping, item){
 	}
 
 	$scope.cancel = function () {
-		 $modalInstance.dismiss('cancel');
+		$modalInstance.dismiss('cancel');
 	}
 
 	$scope.selectField = function(field) {

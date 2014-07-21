@@ -1,4 +1,4 @@
-Curiosity.factory('curiosity', function($http, $rootScope, aggFactory, conf, log, context){
+Curiosity.factory('curiosity', function($http, $rootScope, aggFactory, conf, log, context, template){
 	var curiosityObj = {};
 	curiosityObj.info = {};
 

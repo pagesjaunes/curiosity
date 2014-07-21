@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
 		<script type="text/javascript" src="vendor/angular-ui-select2/select2.js"></script>
 		<script type="text/javascript" src="vendor/bootstrap/bootstrap.min.js"></script>
-		<script type="text/javascript" src="vendor/bootstrap/ui-bootstrap-tpls-0.10.0.min.js"></script>
+		<script type="text/javascript" src="vendor/bootstrap/ui-bootstrap-tpls-0.11.0.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elastic2.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elastic-angular-client.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elasticsearch.angular.min.js"></script>
@@ -65,7 +65,6 @@
 			<!-- Mapping !-->
 		<script type="text/javascript" src="js/mapping/utils/mappingUtils.js"></script>
 		<script type="text/javascript" src="js/mapping/services/mappingFactory.js"></script>
-		<script type="text/javascript" src="js/mapping/controllers/mappingCtrl.js"></script>
 		<script type="text/javascript" src="js/mapping/controllers/mappingModalCtrl.js"></script>
 			<!-- Aggregation !-->
 		<script type="text/javascript" src="js/aggregation/services/aggFactory.js"></script>
@@ -100,6 +99,7 @@
 		<script type="text/javascript" src="js/layout/controllers/workspacesCtrl.js"></script>
 		<script type="text/javascript" src="js/layout/controllers/layoutSelectorCtrl.js"></script>
 		<script type="text/javascript" src="js/layout/controllers/cardCtrl.js"></script>
+		<script type="text/javascript" src="js/layout/controllers/cardModalCtrl.js"></script>
 
 		<!-- Document 		
 		<script type="text/javascript" src="js/doc/services/docFactory.js"></script>
@@ -114,21 +114,10 @@
 			<div ng-show="showHeader">
 				<div id="header" ng-include="'template/common/header.html'"></div>
 			</div>
+			
 			<div ng-show="data.tab == 0" ng-include="'template/layout/workspaces.html'" class="content">
 			</div>
-	
-			<div ng-show="data.tab == 2" class="container">
-				<div ng-include="'template/keyword_tab/keyword_tab.html'" ng-controller="keyWordCtrl"></div>
-			</div>
-
-			<div ng-show="data.tab == 3" class="container">
-				<div ng-include="'template/template_tab/template_tab.html'" ng-controller="templateCtrl"></div>
-			</div>
-			
-			<div ng-show="data.tab == 10" class="tab">
-				<div ng-include="'template/mapping_tab/mapping_tab.html'" ng-controller="mappingCtrl"></div>
-			</div>
-			
+						
 			<div class="workspace-selector">
 				<div ng-click="hideWSS = !hideWSS" class="hider">
 					<span class="glyphicon" ng-class="{'glyphicon-chevron-right':!hideWSS,'glyphicon-chevron-left':hideWSS}">
@@ -162,27 +151,26 @@
 			
 			<div class="toolbar-bottom" ng-hide="hideToolbar">
 				<div class="ico-container">
-					<div ng-click="search()" title="Search" class="ico">
-						<span class="glyphicon glyphicon-search blue">
+					<div ng-click="search()" title="Search" class="ico blue">
+						<span class="glyphicon glyphicon-search">
 						</span>
 					</div>
-					<div ng-click="switchTab(2)" title="Go to Keywords Tab" class="ico">
-						<span class="glyphicon yellow" 
+					<div ng-click="manageKeyword()" title="Open Keywords window " class="ico yellow">
+						<span class="glyphicon" 
 							ng-class="{'glyphicon-font':data.tab != 2, 'glyphicon-home': data.tab == 2}">
 						</span>
 					</div>
-					<div ng-click="switchTab(3)" title="Go to Templates Tab" class="ico">
-						<span class="glyphicon green"
-							ng-class="{'glyphicon-align-justify':data.tab != 3, 'glyphicon-home':data.tab == 3}">
+					<div ng-click="manageTemplate()" title="Open Templates window" class="ico green">
+						<span class="glyphicon glyphicon-align-justify">
 						</span>
 					</div>
 					
-					<div ng-click="newWorkspace()" title="New Workspace" class="ico">
-						<span class="glyphicon glyphicon-plus red"></span>
+					<div ng-click="newWorkspace()" title="New Workspace" class="ico red">
+						<span class="glyphicon glyphicon-plus"></span>
 					</div>
 
-					<div ng-click="moduleManagerData.lock = !moduleManagerData.lock" title="Lock/Unlock modules" class="ico">
-						<span class="glyphicon violet" ng-class="{'glyphicon-lock':!moduleManagerData.lock,'glyphicon-fullscreen':moduleManagerData.lock}">
+					<div ng-click="moduleManagerData.lock = !moduleManagerData.lock" title="Lock/Unlock modules" class="ico violet">
+						<span class="glyphicon" ng-class="{'glyphicon-lock':!moduleManagerData.lock,'glyphicon-fullscreen':moduleManagerData.lock}">
 						</span>
 					</div>
 					

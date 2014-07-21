@@ -20,7 +20,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 	* @param string contextId elasticsearch context's id
 	*/
 	contextObj.loadContext = function(contextId) {
-		if (prevIdx != contextObj.info.contextIdx && typeof(contextId) !== "undefined" && contextId != "") {
+		if (prevIdx != contextId && typeof(contextId) !== "undefined" && contextId != "") {
 			var request = ejs.Request();
 			var query = ejs.QueryStringQuery("_id:\"" + contextId + "\"");
 			var filter = ejs.TypeFilter(contextDocumentType);		
@@ -37,7 +37,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 					contextObj.info.currentContext = context._source;
 					contextObj.setContextIdx();
 					$location.search("context", contextId);
-					prevIdx = contextObj.info.contextIdx;
+					prevIdx = context._id;	
 					contextObj.info.contextLoaded = true;
 					$rootScope.$broadcast("ContextLoaded");
 				}

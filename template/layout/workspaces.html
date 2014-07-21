@@ -5,8 +5,8 @@
 		</div>
 		<div ng-if="!ws.new">
 			<div ng-repeat="row in ws.cards" 
-				class="cards-row row-{{12/data.currentWorkspace.row}}">
-				<div ng-repeat="card in row" class="{{card.colType}}">
+				class="cards-row row-{{12/data.currentWorkspace.row}}" >
+				<div ng-repeat="card in row" class="{{card.colType}}" style="{{card.styles}}">
 					<div class="card" ng-include="'template/layout/card.html'" >
 					</div>
 				</div>

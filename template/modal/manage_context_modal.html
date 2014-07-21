@@ -1,4 +1,4 @@
-<div>
+<div class="context-modal">
 	
 	<div class="modal-header">
 		<h3>Manage Context</h3>
@@ -8,9 +8,19 @@
 		<label>Contexts List : </label>
 		<div ng-repeat="context in data.contextList" class="margin-top">
 			<b>{{ context.fields.contextName }}</b>
-			<span class="glyphicon glyphicon-bookmark" ng-click="selectContext(context._id)"></span>
-			<span class="glyphicon glyphicon-trash" ng-click="removeContext(context._id)"></span>
-			<span class="glyphicon" ng-class="{'glyphicon-minus':context.showDesc,'glyphicon-plus':!context.showDesc}" title="Show/hide description" ng-click="context.showDesc = !context.showDesc"></span>
+			<span class="context-ico" title="Use Context">
+				<span class="glyphicon glyphicon-bookmark" ng-click="selectContext(context._id)">
+				</span>
+			</span>
+			<span class="context-ico" title="Delete Context">
+				<span class="glyphicon glyphicon-trash" ng-click="removeContext(context._id)">
+				</span>
+			</span>
+
+			<span class="context-ico">
+				<span class="glyphicon" ng-class="{'glyphicon-minus':context.showDesc,'glyphicon-plus':!context.showDesc}" title="Show/hide description" ng-click="context.showDesc = !context.showDesc"></span>
+			</span>
+			
 			<div ng-if="context.showDesc">
 				{{ context.fields.contextDesc }}
 			</div>

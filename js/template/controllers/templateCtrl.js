@@ -1,7 +1,6 @@
-Curiosity.controller('templateCtrl', ['$scope', 'template','mapping', '$http',
-function($scope, template, mapping, $http){
-	// INITIALISATION
-	
+var templateCtrl = function($scope, $modalInstance, template, mapping, $http){	
+	$scope.info = {};
+	$scope.info.txt = global_text;
 
 	$scope.data = template.info;
 	$scope.mappingData = mapping.info;
@@ -15,10 +14,6 @@ function($scope, template, mapping, $http){
 	$scope.template.currentTemplate = {};
 	$scope.template.aggregation.currentTemplate = {};
 	// EVENT
-	
-	$scope.$on("ConfLoaded", function() {
-		template.update();
-	});
 
 	$scope.fieldLimit = 12;
 
@@ -81,5 +76,9 @@ function($scope, template, mapping, $http){
 		else {
 			$scope.fieldLimit = 12;
 		}
-	} 
-}]);
+	}
+
+	$scope.close = function () {
+		$modalInstance.close();
+	}
+};

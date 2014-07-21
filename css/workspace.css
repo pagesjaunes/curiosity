@@ -71,13 +71,20 @@
 
 	.card .btn-option {
 		position	: absolute;
-		top 		: 1px;
-		left		: 48%;
+		top 		: 3px;
+		right 		: 0;
 		font-size 	: 12px;
 		color 		: rgba(175,175,175,70);
 		cursor		: pointer;
-		z-index		: 2;  
+		z-index		: 2;
+		opacity 	: 0.5;  
+		transition  : 0.5s;   
 	}
+
+		.card .btn-option:hover {
+			font-size: 15px;
+			opacity: 1;
+		}
 
 /*
 * Layout Selector

@@ -1,11 +1,15 @@
 // templateFactory.js
 
-Curiosity.factory('template', function($http, $templateCache, conf){
+Curiosity.factory('template', function($http, $templateCache, $rootScope, conf){
 	var templateObj = {};
 	templateObj.info = {};
 	templateObj.info.template = [];
 	templateObj.info.aggregationsTemplates = [];
 	
+	$rootScope.$on("ConfLoaded", function() {
+		templateObj.update();
+	});
+
 	/**
 	* templateObj.update
 	* Update service's data from conf document. 

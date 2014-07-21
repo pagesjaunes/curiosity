@@ -65,7 +65,6 @@ Curiosity.factory('layout', function($rootScope, context){
 				card.col = j;
 				card.colType = "col-xs-" + 12 / col;
 				card.rowType = "row-" + 12 / row;
-				console.log(card.rowType);
 				layoutObj.info.currentWorkspace.cards[i].push(card);
 				j++;		
 			}

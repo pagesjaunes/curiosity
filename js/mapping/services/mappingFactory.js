@@ -1,6 +1,6 @@
 // mappingFactory.js
 
-Curiosity.factory('mapping', function(elasticClient, elasticFunc){
+Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, curiosity){
 	var mappingObj = {};
 	mappingObj.info = {};
 	mappingObj.info.currentIndex = "";
@@ -11,6 +11,14 @@ Curiosity.factory('mapping', function(elasticClient, elasticFunc){
 
 	var client = elasticClient.getClient(globalConf.curentServer);
 	
+	$rootScope.$on("IndexChange", function () {
+		mappingObj.updateMapping(curiosity.info.selectedIndex);
+	});
+	$rootScope.$on("ServerChange", function () {
+		mappingObj.updateClient(curiosity.info.currentServer);
+	});
+
+
 	/**
 	* updateClient
 	* update the service's client when server change

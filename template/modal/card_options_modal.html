@@ -1,0 +1,37 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">Card's Options</h3>
+	</div>
+	
+	<div class="modal-body">
+		<div>
+			<label>Add Modules</label>
+		
+			<div class="margin-top">
+				<select ng-model="selectedModuleIdx" ui-select2 class="form-control margin-top">
+					<option ng-repeat="module in data.moduleList" value="{{$index}}">{{ module.type }}</option>
+				</select>
+			</div>
+			
+			<button ng-click="addModule(selectedModuleIdx)" class="btn btn-default margin-top"> 
+				Add module
+			</button>
+			
+			<ul class="margin-top">
+				<li ng-repeat="module in res.modules">
+					{{module.name}} <span class="glyphicon glyphicon-trash" ng-click="removeModule($index)"></span>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<label>Card's Styles</label>
+			<input type="text" class="form-control" ng-model="res.styles">
+		</div>
+	</div>
+	
+	<div class="modal-footer">
+		<button ng-click="validate()" class="btn btn-primary">Ok</button>		
+		<button ng-click="cancel()" class="btn btn-warning">Cancel</button>		
+	</div>
+
+</div>

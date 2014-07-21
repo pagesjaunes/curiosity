@@ -1,28 +1,28 @@
 /**
 * @desc keyword controllers associated to the keywords module, used for keyword management
 */
-Curiosity.controller('keyWordCtrl', function($scope, keyword, curiosity, mapping){
+var keywordCtrl = function($scope, $modalInstance, keyword, curiosity, mapping){
 	/* INITIALISATION */
+	$scope.info = {};
+	$scope.info.txt = global_text;
 	$scope.curiosityData = curiosity.info;
 	$scope.keyword = {};
 	$scope.currentKeywords = [];
 	$scope.keyword.selectedIndex = "global";
 
 	/* EVENTS */
-	$scope.$on("ConfLoaded", function () {
-		keyword.update();
-		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
-	});
-	
-	$scope.$on("IndexChange", function () {
+	function init () {
 		$scope.keyword.selectedIndex = curiosity.info.selectedIndex;
 		if ($scope.keyword.selectedIndex == "") {
 			$scope.keyword.selectedIndex = "global";
 		}
 		$scope.currentKeywords = keyword.getIndex($scope.keyword.selectedIndex).keywords;
-		if (typeof ($scope.currentKeywords) === "undefined")
+		if (typeof ($scope.currentKeywords) === "undefined"){
 			$scope.currentKeywords = [];
-	})
+		}
+	}
+
+	init();
 	
 	/**
 	* @desc manage the index selection which impact the keyword list
@@ -55,5 +55,8 @@ Curiosity.controller('keyWordCtrl', function($scope, keyword, curiosity, mapping
 		$scope.currentKeywords.splice(index, 1);
 	};
 
-});
+	$scope.close = function () {
+		$modalInstance.close();
+	}
+};
 

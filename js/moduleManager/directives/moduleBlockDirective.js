@@ -9,7 +9,6 @@ Curiosity.directive('moduleblock', function(moduleManager){
 			$scope.info.txt = global_text;
 			$scope.data = moduleManager.info;
 			if (typeof(Attrs["name"]) !== "undefined") {
-				console.log(Attrs["name"]);
 				$scope.moduleBlock = moduleManager.getModuleBlock(Attrs["name"]);
 			}
 

@@ -7,8 +7,6 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	$scope.data = aggFactory.info;
 	$scope.tplData = template.info;   
 
-
-
 	/**
 	* @desc function call by ng-init, called to load aggregation specifique data, and load template in $templateCache
 	* @param string name : the name of the aggregation attached to the controller
