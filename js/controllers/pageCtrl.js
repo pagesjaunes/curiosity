@@ -6,4 +6,7 @@ app.controller('pageCtrl', function($scope, $rootScope, $location){
 		$scope.path = $location.path();
 	}); 
 
+	$rootScope.$on("$viewContentLoaded", function () {
+		$window.ga('send', 'pageview', { page: $location.path() });
+	});
 });
