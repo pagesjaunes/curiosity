@@ -1,4 +1,4 @@
-app.controller('pageCtrl', function($scope, $rootScope, $location){
+app.controller('pageCtrl', function($scope, $rootScope, $location, $window){
 	$scope.menu = menu;
 
 	$rootScope.$on("$routeChangeSuccess", function () {
