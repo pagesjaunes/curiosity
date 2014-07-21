@@ -1,5 +1,5 @@
 var app = angular.module('curiosityDoc', ['ngRoute'])
-.config(function($routeProvider, $locationProvider) {
+.config(function($routeProvider) {
 	$routeProvider
 	.when('/', {
 		templateUrl: 'partials/home.html',
@@ -22,5 +22,4 @@ var app = angular.module('curiosityDoc', ['ngRoute'])
 	.when('/Contexts', {
 		templateUrl: 'partials/context.html',
 	});
-	$locationProvider.html5Mode(true);
 });
