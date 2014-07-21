@@ -10,14 +10,13 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 	mappingObj.info.mappingsList = {}; 
 
 	var client = elasticClient.getClient(globalConf.curentServer);
-	
+	console.log(123123123213);
 	$rootScope.$on("IndexChange", function () {
 		mappingObj.updateMapping(curiosity.info.selectedIndex);
 	});
 	$rootScope.$on("ServerChange", function () {
 		mappingObj.updateClient(curiosity.info.currentServer);
 	});
-
 
 	/**
 	* updateClient
@@ -119,6 +118,8 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 			return (obj);
 		}
 	}
+
+	mappingObj.updateMapping(curiosity.info.selectedIndex);
 
 	return (mappingObj);
 });

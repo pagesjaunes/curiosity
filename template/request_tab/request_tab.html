@@ -17,7 +17,7 @@
 				</div>
 				<div class="panel-body">
 					<span ng-repeat="keyWord in data.keywordToShow | filter:keywordFilter | limitTo:keywordLimit track by $index" class="field col-sm-4">
-						<a href ="#" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}">{{ keyWord.label }}</a>
+						<a ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}" href="">{{ keyWord.label }}</a>
 					</span>
 					<div class="spacer"></div>
 				</div>

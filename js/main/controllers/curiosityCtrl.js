@@ -1,4 +1,4 @@
-Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, query, moduleManager, layout, context){	
+Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, query, moduleManager, layout, context, mapping){	
 	/* INITIALISATION */
 	$scope.data = curiosity.info;
 	$scope.data.tab = 0;
