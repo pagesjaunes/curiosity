@@ -1,25 +1,25 @@
 var app = angular.module('curiosityDoc', ['ngRoute'])
 .config(function($routeProvider, $locationProvider) {
 	$routeProvider
-	.when('/', {
+	.when('/curiosity/', {
 		templateUrl: 'curiosity/partials/home.html',
 	})
-	.when('/Getting-Started', {
+	.when('/curiosity/Getting-Started', {
 		templateUrl: 'curiosity/partials/start.html',
 	})
-	.when('/Keywords-and-Advanced-Query', {
+	.when('/curiosity/Keywords-and-Advanced-Query', {
 		templateUrl: 'curiosity/partials/keywords.html',
 	})
-	.when('/Templating', {
+	.when('/curiosity/Templating', {
 		templateUrl: 'curiosity/partials/templating.html',
 	})
-	.when('/Aggregations', {
+	.when('/curiosity/Aggregations', {
 		templateUrl: 'curiosity/partials/aggregations.html',
 	})
-	.when('/Modules', {
+	.when('/curiosity/Modules', {
 		templateUrl: 'curiosity/partials/modules.html',
 	})
-	.when('/Contexts', {
+	.when('/curiosity/Contexts', {
 		templateUrl: 'curiosity/partials/context.html',
 	});
 	$locationProvider.html5Mode(true);
