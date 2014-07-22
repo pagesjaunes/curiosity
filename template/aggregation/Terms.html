@@ -12,10 +12,10 @@
 			<div ng-repeat="bucket in agg.buckets">
 				<span class="aggregation-items"> 
 					<label>
-						<a href="#" 
-						ng-click="addFilter(agg, {type:'Terms', data:{field:agg.__ref__.field, term:bucket.key }})">
+						<span href="#" 
+						ng-click="addFilter(agg, {type:'Terms', data:{field:agg.__ref__.field, term:bucket.key }})" class="link">
 							{{bucket.key}} :
-						</a>
+						</span>
 					{{bucket.doc_count}}
 				</span>
 				<div ng-repeat="(key, agg) in bucket">

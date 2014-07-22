@@ -24,7 +24,7 @@
 		<hr>
 		
 		<div ng-repeat="field in data.fields | filter:fieldFilter | limitTo:fieldLimit track by $index" class="field col-sm-4 dropdown" >
-			<a href ="#" ng-click="selectField(field)" title="{{ field.ancestor  }}">{{ field.name }}</a>
+			<span class="link" href ="#" ng-click="selectField(field)" title="{{ field.ancestor  }}">{{ field.name }}</span>
 		</div>
 		<div class="spacer"></div>
 	</div>

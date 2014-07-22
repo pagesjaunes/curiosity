@@ -25,31 +25,31 @@
 			<div class="margin-top">
 				<ul class="pager pagination-result">
 					<li ng-class="{'disabled':queryData.page==0}">
-						<a href="#" ng-click="firstPage()" title="{{ info.txt.result.request_sub_tab.First }}">
+						<span class="link" ng-click="firstPage()" title="{{ info.txt.result.request_sub_tab.First }}">
 							<span class="glyphicon glyphicon-fast-backward">
 							</span> 
-						</a>
+						</span>
 					</li>
 					<li ng-class="{'disabled':queryData.page==0}">
-						<a href="#" ng-click="prevPage()" title="{{ info.txt.result.request_sub_tab.Prev }}">
+						<span class="link" ng-click="prevPage()" title="{{ info.txt.result.request_sub_tab.Prev }}">
 							<span class="glyphicon glyphicon-chevron-left">
 							</span>
-						</a>
+						</span>
 					</li>
 					<li class="disabled">
-						<a href="#" >{{ queryData.page  }} / {{ queryData.maxPage }}</a>
+						<span href="#" >{{ queryData.page  }} / {{ queryData.maxPage }}</span>
 					</li>
 					<li ng-class="{'disabled':queryData.page==queryData.maxPage}">
-						<a href="#" ng-click="nextPage()" title="{{ info.txt.result.request_sub_tab.Next }}">
+						<span class="link" ng-click="nextPage()" title="{{ info.txt.result.request_sub_tab.Next }}">
 							<span class="glyphicon glyphicon-chevron-right">
 							</span>
-						</a>
+						</span>
 					</li>
 					<li  ng-class="{'disabled':queryData.page==queryData.maxPage}">
-						<a href="#" ng-click="lastPage()" title="{{ info.txt.result.request_sub_tab.Last }}"> 
+						<span class="link" ng-click="lastPage()" title="{{ info.txt.result.request_sub_tab.Last }}"> 
 							<span class="glyphicon glyphicon-fast-forward">
 							</span>
-						</a>
+						</span>
 					</li>
 				</ul>
 			</div>

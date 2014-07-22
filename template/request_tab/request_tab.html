@@ -17,7 +17,7 @@
 				</div>
 				<div class="panel-body">
 					<span ng-repeat="keyWord in data.keywordToShow | filter:keywordFilter | limitTo:keywordLimit track by $index" class="field col-sm-4">
-						<a ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}" href="">{{ keyWord.label }}</a>
+						<span class="link" ng-click="addKeyWord(keyWord.label)" title="{{ keyWord.desc }}" href="">{{ keyWord.label }}</span>
 					</span>
 					<div class="spacer"></div>
 				</div>
@@ -41,7 +41,7 @@
 				</div>
 				<div class="panel-body">
 					<div ng-repeat="field in mappingData.fields | filter:fieldFilter | limitTo:fieldLimit track by $index" class="field col-sm-4 dropdown" >
-						<a href ="#" ng-click="addKeyWord(field.ancestor)" title="{{ field.ancestor  }}">{{ field.name }}</a>
+						<span class="link" href ="#" ng-click="addKeyWord(field.ancestor)" title="{{ field.ancestor  }}">{{ field.name }}</span>
 					</div>
 					<div class="spacer"></div>
 				</div>
@@ -126,9 +126,9 @@
 			<div class="panel panel-default" id="json-panel">
 				<div class="panel-heading" ng-click="showJson=!showJson">
 					<h3 class="panel-title">
-						<a class="col-sm-11" href="#" title="Show the query in json">
+						<span class="col-sm-11 link" href="#" title="Show the query in json">
 							{{ info.txt.request.JsonQuery }}
-						</a>
+						</span>
 						<span class="glyphicon col-sm-1" ng-class="{'glyphicon-collapse-down': !showJson, 'glyphicon-collapse-up': showJson}"></span>
 						<div class="spacer"></div>
 					</h3>

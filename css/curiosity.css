@@ -23,6 +23,15 @@ body.header-hidden {
   height  : 0;
 }
 
+.link {
+  color: #428bca;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
 #loading-image {
   margin-top : -5px;
 }

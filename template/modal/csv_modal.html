@@ -46,7 +46,7 @@
 			
 			<div ng-repeat="field in data.fields | filter:keywordFilter" class="margin-top">
 				<label class="col-sm-4">
-					<a title="{{ field.ancestor }}">{{ field.name }}</a> 
+					<span class="link" title="{{ field.ancestor }}">{{ field.name }}</span> 
 				</label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" ng-model="field.alias">
