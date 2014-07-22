@@ -1,7 +1,7 @@
 Overview 
 ========
 
-Curiosity is tool developed by ["Pages Jaunes"](http://www.pagesjaunes.fr/) which is used to browse elasticSearch's data in a simple and intuivive way.
+Curiosity a is tool developed by ["Pages Jaunes"](http://www.pagesjaunes.fr/) which is used to browse elasticSearch's data in a simple and intuivive way.
 If you want more information and screenshot refer to [Curiosity's Documentation](http://pagesjaunes.github.io/curiosity/).
 The current version is a preview of the next release, which will occure i hope next week (07/21/2014). If you want a more stable version download 0.1.3 tag.
 
