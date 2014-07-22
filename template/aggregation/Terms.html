@@ -12,7 +12,7 @@
 			<div ng-repeat="bucket in agg.buckets">
 				<span class="aggregation-items"> 
 					<label>
-						<span href="#" 
+						<span 
 						ng-click="addFilter(agg, {type:'Terms', data:{field:agg.__ref__.field, term:bucket.key }})" class="link">
 							{{bucket.key}} :
 						</span>
@@ -38,3 +38,4 @@
 		</div>
 	</div>
 </div>
+

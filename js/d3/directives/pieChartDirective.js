@@ -12,9 +12,9 @@ Curiosity.directive('piechart', function($rootScope){
 		link: function($scope, elem, iAttrs) {
 			
 			var data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy);
-			data = data.pop().values
+			data = data.pop().values // Multiple series fixx
 			var w = $(elem).width()
-			var h = $(".cards").height();
+			var h = $(elem).closest(".cards").height()
 			var chart = nv.models.pieChart()
 							.x(function(d) { return d.x })
 							.y(function(d) { return d.y })
@@ -22,20 +22,24 @@ Curiosity.directive('piechart', function($rootScope){
 							.height(h)
 							.margin({top:20,right:20,bottom:20,left:20})
 							//.showLabels(true)
-			if(w<150)
-			{
+			if(w<150) {
 				chart.showLegend(false)
 					 .showLabels(true)
 			}
 
-			nv.utils.windowResize(chart.update)
+			function updateChart() {
+				if($(elem).is(":visible")) {
+					data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
+					data = data.pop().values
+					svg.datum(data);
+					chart.update();					
+				}				
+			}
 
-			$scope.$watch('data', function () {
-				data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
-				data = data.pop().values
-				svg.datum(data);
-				chart.update();
-			});
+			// EVENT
+			nv.utils.windowResize(updateChart)
+			$scope.$watch('data',updateChart);
+			$scope.$on("workspaceChange", updateChart);
 
 			var svg = d3.select(elem[0])
 				.append('svg')

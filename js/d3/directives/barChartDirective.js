@@ -25,29 +25,22 @@ Curiosity.directive('barchart', function($rootScope){
 			{
 				//length of labels to compute margin left
 				var maxLengthLabel = 0
-				if(data.length>0)
-				{					
+				if(data.length>0){					
 					data[0].values.forEach(function(d){
 						maxLengthLabel = Math.max(d.x.length,maxLengthLabel)
 					})				
 					h = Math.max(h,80+16*data[0].values.length)
 				}
-
 				chart = nv.models.multiBarHorizontalChart()
 							.margin({top:20,right:30,bottom:50,left:30+maxLengthLabel*7})
-
-			}else{
+			}
+			else{
 				chart = nv.models.multiBarChart()
-							.margin({top:20,right:30,bottom:50,left:30})
-							
+							.margin({top:20,right:30,bottom:50,left:50})				
 			}
 
 			chart.width(w)
 				.height(h)
-				
-				
-
-			//nv.utils.windowResize(chart.update)
 			
 			var svg = d3.select(elem[0])
 				.append('svg')
@@ -59,13 +52,18 @@ Curiosity.directive('barchart', function($rootScope){
 				.datum(data)
 				.call(chart)
 
-			$scope.$watch('data', function () {
-				data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
-				svg.datum(data);
+			function updateChart() {
 				if($(elem).is(":visible")) {
+					data = builtAllSeries($scope.data, $scope.pathx, $scope.data, $scope.pathy); 
+					svg.datum(data);
 					chart.update();					
-				}
-			});
+				}				
+			}
+
+			nv.utils.windowResize(updateChart);
+
+			$scope.$watch('data',updateChart);
+			$scope.$on("workspaceChange", updateChart);
 
 			function getData(dataSet, path, num) {
 				var i = 0;

@@ -4,6 +4,28 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 	layoutObj.info.workspaces = []; 
 	layoutObj.info.currentWorkspace = {};
 	layoutObj.info.idx = 0;
+	layoutObj.info.turn = false;
+
+
+	layoutObj.switchWorkspaceEvent = function(){
+		setTimeout(function () {
+			$rootScope.$broadcast("workspaceChange");
+		}, 100);
+	}
+
+	layoutObj.updateIntervale = function (turn, time) {
+		if (turn) {
+			layoutObj.info.turn = true;	
+			layoutObj.info.interval = setInterval(function(){layoutObj.nextWorkspace();$rootScope.$apply()}, time);
+		}
+		
+		else {	
+			layoutObj.info.turn = false;
+			if (typeof(layoutObj.info.interval) !== "undefined") {
+				clearInterval(layoutObj.info.interval);
+			}		
+		}
+	}
 
 	layoutObj.newWorkspace = function () {
 		var newWS = {};
@@ -17,14 +39,17 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 		layoutObj.info.workspaces.push(newWS);
 		layoutObj.info.currentWorkspace = newWS;
 		layoutObj.info.idx = layoutObj.info.workspaces.length - 1;
+		layoutObj.switchWorkspaceEvent();
 	}
 
 	layoutObj.nextWorkspace = function () {
+		console.log(123123);
 		layoutObj.info.idx++;
 		if (layoutObj.info.idx == layoutObj.info.workspaces.length) {
 			layoutObj.info.idx = 0;
 		}
 		layoutObj.info.currentWorkspace = layoutObj.info.workspaces[layoutObj.info.idx]; 
+		layoutObj.switchWorkspaceEvent();
 	}
 
 	layoutObj.prevWorkspace = function () {
@@ -33,6 +58,7 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 			layoutObj.info.idx = layoutObj.info.workspaces.length - 1;
 		}
 		layoutObj.info.currentWorkspace = layoutObj.info.workspaces[layoutObj.info.idx]; 
+		layoutObj.switchWorkspaceEvent()
 	}
 
 	layoutObj.goTo = function (idx) {
@@ -44,6 +70,7 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 		}
 		layoutObj.info.currentWorkspace = layoutObj.info.workspaces[idx];
 		layoutObj.info.idx = idx;
+		layoutObj.switchWorkspaceEvent();
 	}
 
 	layoutObj.removeWorkspace = function (idx) {
@@ -60,6 +87,7 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 				layoutObj.prevWorkspace();
 			}
 		}
+		layoutObj.switchWorkspaceEvent()
 	}
 
 	layoutObj.modifyWorkspace = function () {

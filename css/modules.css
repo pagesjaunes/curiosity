@@ -70,6 +70,17 @@ Agg result
 		cursor: pointer;
 	}
 
+.bucket-header {
+	font-weight: bold;
+}
+
+.bucket {
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.nested {
+	margin : 3px 0 3px 10px;
+}
 
 /* 
 	Context Modal
