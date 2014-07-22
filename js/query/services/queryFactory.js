@@ -75,7 +75,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		request = ejs.Request();
 		queryString.query(query);
 		aggFactory.addAggregationToRequest(request);
-		var filter = aggFilter.getRequestFilter();
+		var filter = aggFilter.getRequestFilter(aggFactory.info.currentAggregation);
 		if (typeof(query) === "undefined" || !query.length){
 			filteredQuery = ejs.FilteredQuery(ejs.MatchAllQuery(), filter);
 		}
