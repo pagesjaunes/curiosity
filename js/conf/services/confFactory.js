@@ -27,8 +27,11 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 	var aggregationsTemplate = 
 	{
 		"type":"aggregationsTemplates",
-		"defaultValue":[],
-		"templates":[]
+		"templates":
+			[
+				{"name":"pieChart", "value":"<div piechart data=\"agg.buckets\" pathx=\"'key'\" pathy=\"['doc_count']\" ></div>"},
+				{"name":"barChart", "value":"<div barchart data=\"agg.buckets\" pathx=\"'key'\" pathy=\"['doc_count']\" ></div>"}
+			]
 	};
 
 	var bugReportDefault = 
