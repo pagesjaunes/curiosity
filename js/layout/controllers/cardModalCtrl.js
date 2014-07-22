@@ -3,6 +3,7 @@ var cardModalCtrl = function($scope, $modalInstance, moduleManager, item){
 	$scope.res = {};
 	$scope.res.modules = [];
 	$scope.res.styles = "";
+	$scope.item = item;
 
 	$scope.addModule = function (idx) {
 		$scope.res.modules.push({'name':$scope.data.moduleList[idx].type, idx:idx});

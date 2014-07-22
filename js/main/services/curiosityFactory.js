@@ -105,7 +105,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, aggFactory, conf, log
 	curiosityObj.switchTab = function(tab) {
 		curiosityObj.info.tab = tab;
 	}
-
+	
 	// Context event	
 	$rootScope.$on("ContextLoaded", function () {
 		context.setModuleInformation("curiosity", curiosityObj.serverInfo);

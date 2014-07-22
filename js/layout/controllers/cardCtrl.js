@@ -3,7 +3,7 @@ Curiosity.controller('cardCtrl', function($scope, $modal, moduleManager, layout)
 	$scope.workspaceData = layout.info;
 
 	function addModule (moduleIdx) {
-		var moduleBlock = 'w'+ $scope.workspaceData.idx + '-r' + $scope.card.row + '-c' + $scope.card.col;
+		var moduleBlock = $scope.workspaceData.currentWorkspace.name + '-r' + $scope.card.row + '-c' + $scope.card.col;
 		if (typeof(moduleIdx) !== "undefined" && moduleIdx >= 0 
 			&& typeof($scope.data.moduleList[moduleIdx]) !== "undefined") {
 			// Create random name for the new module to avoid conflict
@@ -24,9 +24,9 @@ Curiosity.controller('cardCtrl', function($scope, $modal, moduleManager, layout)
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/card_options_modal.html',
 			controller: cardModalCtrl,
-			size: 'sm',
 			resolve: {
 				item: function () {
+					return $scope.card;
 				}}
 			});
 		modalInstance.result.then(function (value) {
@@ -35,7 +35,6 @@ Curiosity.controller('cardCtrl', function($scope, $modal, moduleManager, layout)
 				addModule(value.modules[i].idx);
 				i++;
 			}
-			$scope.card.styles = value.styles;
 		}, function () {})	
 	}
 });

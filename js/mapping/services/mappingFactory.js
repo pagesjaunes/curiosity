@@ -10,7 +10,6 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 	mappingObj.info.mappingsList = {}; 
 
 	var client = elasticClient.getClient(globalConf.curentServer);
-	console.log(123123123213);
 	$rootScope.$on("IndexChange", function () {
 		mappingObj.updateMapping(curiosity.info.selectedIndex);
 	});

@@ -85,11 +85,18 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		openKeywordsModal();
 	}
 
+	$scope.modifyWorkspace = function () {
+		layout.modifyWorkspace();
+	}
+
+	$scope.removeWorkspace = function () {
+		layout.removeWorkspace(layout.info.idx);
+	}
+
 	function openNewContextModal() {
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/new_context_modal.html',
 			controller: newContextModalCtrl,
-			size: 'sm',
 			resolve: {
 				item: function () {
 				}}
@@ -102,7 +109,6 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/manage_context_modal.html',
 			controller: contextManagerModalCtrl,
-			size: 'sm',
 			resolve: {
 				item: function () {
 				}}

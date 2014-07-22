@@ -53,8 +53,12 @@
 	margin				: 5px 0 0 0;
 	-webkit-box-shadow 	: 1px 1px 1px 1px rgba(150,150,150,125);
 	box-shadow 			: 1px 1px 1px 1px rgba(150,150,150,125);
-	overflow			: auto;
+	overflow			: hidden;
 	position			: relative;
+}
+
+.card:hover {
+	overflow: auto;
 }
 
 	.card .module-block {

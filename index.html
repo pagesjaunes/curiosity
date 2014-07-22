@@ -165,8 +165,12 @@
 						</span>
 					</div>
 					
-					<div ng-click="newWorkspace()" title="New Workspace" class="ico red">
-						<span class="glyphicon glyphicon-plus"></span>
+					<div class="ico red context-button">
+						<span class="glyphicon glyphicon-plus" ng-click="newWorkspace()" title="New Workspace"></span>
+						<div class="ico-hidden">
+							<span class="glyphicon glyphicon-cog" ng-click="modifyWorkspace()" title="Edit Workspace"></span>
+							<span class="glyphicon glyphicon-trash" ng-click="removeWorkspace()" title="Remove Workspace"></span>
+						</div>
 					</div>
 
 					<div ng-click="moduleManagerData.lock = !moduleManagerData.lock" title="Lock/Unlock modules" class="ico violet">

@@ -111,7 +111,6 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 		var modalInstance = $modal.open({
 			templateUrl: 'template/modal/fieldsModal.html',
 			controller: mappingModalCtrl,
-			size: size,
 			resolve: {
 				item: function () {
 					return curAgg;

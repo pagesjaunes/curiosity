@@ -106,6 +106,15 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		}
 	}
 
+	moduleManagerObj.cleanModuleStartingBy = function(name) {
+		var re = new RegExp("^" + name + ".*");
+		for (key in moduleManagerObj.info.moduleBlocks) {
+			if (re.test(key)) {
+				delete moduleManagerObj.info.moduleBlocks[key];
+			}
+		}
+	}
+
 	moduleManagerObj.cleanModule = function () {
 		for (key in  moduleManagerObj.info.moduleBlocks) {
 			moduleManagerObj.info.moduleBlocks[key].modules = [];	
@@ -209,6 +218,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		else {
 			getDefaultModule(moduleManagerObj.initModule);
 		}
+		console.log(moduleManagerObj.info.moduleBlocks);
 	}) 
 	
 	$rootScope.$on("NoContext", function (){
