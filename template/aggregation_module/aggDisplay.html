@@ -16,10 +16,6 @@
 
 	<div ng-if="!curAgg.hideCurAgg">
 		<div ng-if="!curAgg.displayResult">
-			<div class="input-group">
-				<span class="input-group-addon">Name</span>
-				<input type="text" class="form-control" ng-model="curAgg.displayName">
-			</div>
 			<div class="margin-top">
 				<select class="form-control" ui-select2 ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg,curAgg.aggregationTypeIdx)">
 					<option ng-repeat="item in data.aggList"  value="{{ $index }}">

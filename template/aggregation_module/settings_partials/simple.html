@@ -1,9 +1,14 @@
 <form class="agg_option">
-	<select ng-model="curAgg.tpl" ui-select2 class="form-control" ng-change="loadTpl(curAgg.tpl)">
-		<option value="default">Default</option>
-		<option ng-repeat="tpl in tplData.aggregationsTemplates" value="{{ tpl.name }}"> {{tpl.name}} </option>
-	</select>
-	
+	<div class="input-group">
+		<span class="input-group-addon">Name</span>
+		<input type="text" class="form-control" ng-model="curAgg.displayName">
+	</div>
+	<div class="margin-top">
+		<select ng-model="curAgg.tpl" ui-select2 class="form-control" ng-change="loadTpl(curAgg.tpl)">
+			<option value="default">Default</option>
+			<option ng-repeat="tpl in tplData.aggregationsTemplates" value="{{ tpl.name }}"> {{tpl.name}} </option>
+		</select>
+	</div>
 	<div class="input-group margin-top">
 		<span class="input-group-addon">Field :</span>
 		<input class="form-control" type="text" ng-model="curAgg.field">
