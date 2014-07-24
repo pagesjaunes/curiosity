@@ -45,8 +45,17 @@
 	    		<!-- Collect the nav links, forms, and other content for toggling -->
 	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      			<ul class="nav navbar-nav">
-						<li ng-repeat="link in menu" ng-class="{'active':link.url == '#' + path}">		
-							<a href="{{link.url}}" title="{{ link.title }}" desc="{{ link.desc }}">{{link.txt}}</a>
+						<li ng-repeat="link in menu" ng-class="{'active':link.url == '#' + path, 'dropdown':link.subPage}">		
+							<a ng-if="!link.subPage" href="{{link.url}}" title="{{ link.title }}" desc="{{ link.desc }}">{{link.txt}}</a>
+							
+							<a ng-if="link.subPage" class="dropdown-toggle" data-toggle="dropdown">
+								{{link.txt}}<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="sub in link.pages" title="{{ sub.title }}" ng-class="{'active':sub.url == '#' + path}">
+									<a href="{{sub.url}}">{{sub.txt}}</a>
+								</li>
+							</ul>
 						</li>
 					</ul>
 				</div>
@@ -69,11 +78,11 @@
 	</div>
 	<div ng-view class="container"></div>
 </body>
-<script>
+<!--script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-53036871-1', 'auto');
-</script>
+</script>:!-->

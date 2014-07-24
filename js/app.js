@@ -4,8 +4,11 @@ var app = angular.module('curiosityDoc', ['ngRoute'])
 	.when('/', {
 		templateUrl: 'partials/home.html',
 	})
-	.when('/Getting-Started', {
-		templateUrl: 'partials/start.html',
+	.when('/Installation', {
+		templateUrl: 'partials/instal.html',
+	})
+	.when('/FirstSteps', {
+		templateUrl: 'partials/steps.html',
 	})
 	.when('/Keywords-and-Advanced-Query', {
 		templateUrl: 'partials/keywords.html',
