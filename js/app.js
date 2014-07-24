@@ -1,5 +1,5 @@
 var app = angular.module('curiosityDoc', ['ngRoute'])
-.config(function($routeProvider) {
+.config(function($routeProvider, $locationProvider) {
 	$routeProvider
 	.when('/', {
 		templateUrl: 'partials/home.html',
