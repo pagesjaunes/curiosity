@@ -11,11 +11,30 @@ img {
 	clear: both;
 }
 
-.link-bottom {
-	float : right;
-	margin-top : 30px;
-}
-
 h3 {
 	margin: 25px 0 15px 0;
 }
+
+.margin-top {
+	margin-top : 5px;
+}
+
+.container {
+	position: relative;
+}
+
+#btn-container {
+	z-index : 9000;
+}
+
+	#btn-container > div{
+		position : absolute;
+		top : 0;
+		right : 0;
+	}
+
+.content {
+	z-index : 700;
+	margin-top: 50px;
+}
+
