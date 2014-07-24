@@ -1,0 +1,144 @@
+<h1>First step</h1>
+
+<h3>Main page overview</h3>
+
+<div class="col-sm-12">
+	<img src="img/curiosity-default.png" alt="Screenshot of Curiosity's current interface" title="Curiosity's current interface">
+</div>
+
+<div class="spacer"></div>
+
+<p>
+	As you can see on the previous screenshot, curiosity is divided in three main area :
+	<ul>
+		<li>
+			First area allows you to add/choose an elasticsearch server and select an alias or index to work on.
+		</li>
+		<li>
+			The second area is where you will work, you can create and personalize your layout, add modules, navigate throught workspaces ...
+		</li>
+		<li>
+			And then the last area is the toolbar, that give you the possibility to save your work, launch query, open few menu ... 
+		</li>
+	</ul>
+
+	Let's create our first workspace and launch some queries.
+</p>
+
+<h3>
+	Step 1 : Select your server and index 
+</h3>
+<div class="margin-top">
+	<div class="col-sm-5">
+
+		<p >
+			On the first area, there are two dropdown list(1) : 
+		</p>
+		<ul>
+			<li>
+				The first one allows you to chose a server. If you use curiosity for the first time, normally there is only one server in this list. If you want to add a new server, press "New" button, fill the input that just appeared, then click on connect. If you curiosity was able to reach the server "connect" button stay green (2) and your server is add to the server list, otherwise the button goes red (3).
+			</li>	
+			<li> 
+				The second list contains all current server's indexes and alias.    
+			</li>
+		</ul>
+	
+	</div>
+	<div class="col-sm-7">
+		<img src="img/curiosity-server-selector.png" alt="Screenshot of Curiosity's dropdown list" title="Curiosity's server and index selector">
+	</div>
+
+	<div class="spacer"></div>
+
+</div>
+
+<p class="margin-top">
+	Choose a server and an index then let's custmize our layout
+</p>
+
+<div class="alert alert-info" role="alert">
+	The green/red light represents the curiosity's status. If it goes red, an error has occurred. If you want more information about it, check the developper console (a curiosity's console will soon be added).
+</div>
+
+<h3>
+	Step 2 : Configure your layout
+</h3>
+
+<p>
+	Now you choosed your server and index, it's time to create your first workspace and cutsomize its layout.
+</p>
+<div>
+	<div class="col-sm-7">
+		<img src="img/curiosity-ws-creator.png" alt="Screenshot of Curiosity's workspace configuration screen" title="Curiosity's workspace customization screen">
+	</div>
+	<div class="col-sm-5">
+		<p>
+			First step, give a name to your workspace (1) (not required), then you have to choose the number of line and columns of your workspace. You can do this by filling coresponding input (2,3) or through the square (4) by clicking on the layout you want. Then click on "ok" (4).   
+		</p>
+	</div>
+	<div class="spacer"></div>
+</div>
+<p>
+	Your layout is created, let's add some modules.
+</p>
+
+<h3>
+	Step 3 : Add some modules 
+</h3>
+
+<p>
+	Curisotisy works with modules, each module has a different goals, there is a module to display result, an other to built a query, make aggregation... Each workspace is divide in cards that are the representation of your layout. In each card you can add as many module as you want.
+</p>
+
+<div>
+	<div class="col-sm-5">
+		<p>When you want to add a module to a card :</p>
+		<ul>
+			<li>Click on the well on the top right corner of the card (1).</li>	
+			<li>a window will appear, select a module in the module list (2), click on "add module", the the module will be added in the card's temporary module list (3).For this example add the "Query" and "result" modules to your card.</li>
+			<li>
+				Then press "ok"(6) to add your module in your card.
+			</li>
+		</ul>
+		<p>
+			If you want to add some still to your card fill the Card's style (5) input with css styles.
+		</p>
+	</div>
+
+	
+	<div class="col-sm-7">
+		<img src="img/curiosity-add-modules.png" alt="Screenshot of Curiosity's workspace configuration screen" title="Curiosity's workspace customization screen">
+	</div>
+
+
+	<div class="spacer"></div>
+</div>
+
+<h3>
+	Step 4 : Launch a query
+</h3>
+
+<p>Curiosity use elasticsearch's <a href="www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" title="Query string query documentation">query string query syntax</a>, so you can easily create complex queries. Click in the query form (first form in page center), enter your query then press "enter" or click on search button. If your request is syntaxly correct, the status light remains green and the result will appear at the bottom center of the page.
+</p>
+<p>
+	Here are some basics for building a query : 
+	<ul>
+		<li>
+			If you want to search a string on a specific field : 
+			<pre style="background:rgba(238,238,238,0.92);color:#000">the<span style="color:#36c;font-style:italic">.path</span><span style="color:#36c;font-style:italic">.to</span><span style="color:#36c;font-style:italic">.my</span><span style="color:#36c;font-style:italic">.fields</span>:"string you search"
+			</pre>					
+		</li>
+		<li>
+			Getting docs that matchs a value range for a specific field :
+			<pre style="background:rgba(238,238,238,0.92);color:#000">the<span style="color:#36c;font-style:italic">.path</span><span style="color:#36c;font-style:italic">.to</span><span style="color:#36c;font-style:italic">.my</span><span style="color:#36c;font-style:italic">.fields</span>:[Start TO End]
+			</pre>
+		</li>
+	</ul>
+</p>
+
+<div class="link-bottom">
+	<a href="#/Keywords-and-Advanced-Query" title="Documentation about Keywords and Advanced Query in Curiosity">
+		Keywords and Advanced Query 
+		<span class="glyphicon glyphicon-share-alt"></span>
+	</a>
+</div>
