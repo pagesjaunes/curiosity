@@ -9,6 +9,7 @@
 			<option ng-repeat="tpl in tplData.aggregationsTemplates" value="{{ tpl.name }}"> {{tpl.name}} </option>
 		</select>
 	</div>
+	
 	<div class="input-group margin-top">
 		<span class="input-group-addon">Query :</span>
 		<input class="form-control" type="text" ng-model="curAgg.query">
@@ -37,6 +38,7 @@
 					</option>
 				</select>
 				<div ng-if="curAgg.aggTypeSelected" ng-include="curAgg.displayTemplate" class="margin-top">
+				</div>
 			</div>
 		</li>
 	</ul>

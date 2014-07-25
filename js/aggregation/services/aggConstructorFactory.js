@@ -36,6 +36,68 @@ Curiosity.factory('aggConstructor', function(){
 		return (result);
 	}
 
+	obj.Histogram = function (agg) {
+		var result = ejs.HistogramAggregation(agg.name);
+		result.field(agg.field);
+		if (typeof (agg.order) !== "undefined") {
+			order = "desc";
+			if (agg.orderType)
+				order = "asc";
+			result.order(agg.order, order);			
+		}
+		if (typeof (agg.format) !== "undefined" && agg.format != "") {
+			result.format(agg.format);
+		}
+		if (typeof (agg.interval) !== "undefined") {
+			result.interval(agg.interval);
+		}
+		if (typeof (agg.minDoc) !== "undefined") 
+			result.minDocCount(agg.minDoc);
+		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+			result.script(agg.script);
+		if (typeof (agg.include) !== "undefined" && agg.include != "") 
+			result.include(agg.include);
+		if (typeof (agg.exclude) !== "undefined" && agg.exclude != "") 
+			result.exclude(agg.exclude);
+		
+		for (key in agg.nested) {
+			if (agg.nested[key].validate)
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+		}
+		return (result);
+	}
+
+	obj.DateHistogram = function (agg) {
+		var result = ejs.DateHistogramAggregation(agg.name);
+		result.field(agg.field);
+		if (typeof (agg.order) !== "undefined") {
+			order = "desc";
+			if (agg.orderType)
+				order = "asc";
+			result.order(agg.order, order);			
+		}
+		if (typeof (agg.format) !== "undefined" && agg.format != "") {
+			result.format(agg.format);
+		}
+		if (typeof (agg.interval) !== "undefined") {
+			result.interval(agg.interval);
+		}
+		if (typeof (agg.minDoc) !== "undefined") 
+			result.minDocCount(agg.minDoc);
+		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+			result.script(agg.script);
+		if (typeof (agg.include) !== "undefined" && agg.include != "") 
+			result.include(agg.include);
+		if (typeof (agg.exclude) !== "undefined" && agg.exclude != "") 
+			result.exclude(agg.exclude);
+		
+		for (key in agg.nested) {
+			if (agg.nested[key].validate)
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+		}
+		return (result);
+	}
+
 	/**
 	* @desc Built range aggregation 
 	* @param object agg contains all aggregation's param
