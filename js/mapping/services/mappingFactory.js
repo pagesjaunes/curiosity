@@ -9,7 +9,7 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 	mappingObj.info.fields = [];
 	mappingObj.info.mappingsList = {}; 
 
-	var client = elasticClient.getClient(globalConf.curentServer);
+	var client = elasticClient.getClient(curiosity.info.currentServer);
 	$rootScope.$on("IndexChange", function () {
 		mappingObj.updateMapping(curiosity.info.selectedIndex);
 	});

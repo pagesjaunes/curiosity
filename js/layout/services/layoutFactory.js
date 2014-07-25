@@ -43,7 +43,6 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 	}
 
 	layoutObj.nextWorkspace = function () {
-		console.log(123123);
 		layoutObj.info.idx++;
 		if (layoutObj.info.idx == layoutObj.info.workspaces.length) {
 			layoutObj.info.idx = 0;

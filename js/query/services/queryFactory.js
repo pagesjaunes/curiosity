@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context,log , aggFactory, aggFilter){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log , aggFactory, aggFilter){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";

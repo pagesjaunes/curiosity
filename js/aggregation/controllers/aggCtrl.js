@@ -20,7 +20,6 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 		else {
 			$scope.curAgg = aggFactory.getAggregation(name);
 			initTemplate($scope.curAgg);
-			console.log($scope.curAgg);
 		}
 	}
 	

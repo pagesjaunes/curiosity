@@ -1,6 +1,6 @@
 // resultFactory.js
 
-Curiosity.factory('result', function($rootScope, query, template, context){
+Curiosity.factory('result', function($rootScope, template, context){
 	var resultObj = {};
 	resultObj.info = {};
 	resultObj.info.useTemplate = false;

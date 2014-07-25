@@ -63,7 +63,6 @@ Curiosity.factory('template', function($http, $templateCache, $rootScope, conf){
 		}
 	}
 
-
 	/**
 	* templateObj.addTemplateToCache
 	* Add a template in $templateCache
