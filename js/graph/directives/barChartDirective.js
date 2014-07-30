@@ -4,8 +4,9 @@ Curiosity.directive('barchart', function($rootScope){
 		restrict :'A',
 		
 		scope: {
-			'data' :"=",
-			'cols' :"=",
+			'data' 	:"=",
+			'cols' 	:"=",
+			'agg' 	:"=",
 			'options' : "="
 		},
 		
@@ -26,7 +27,23 @@ Curiosity.directive('barchart', function($rootScope){
 			chart.draw(data, $scope.options);
 
 			$scope.$watch('data',updateChart);
-			$scope.$on("workspaceChange", updateChart);			
+			$scope.$on("workspaceChange", updateChart);
+
+			function selectHandler(){
+				var select = chart.getSelection();
+				var  i = 0;
+				while (i < select.length) {
+					item = select[i];
+					if (item.row != null) {
+						filters.addFilter({type:'Terms', data:{field:$scope.agg.__ref__.field, term:data.getFormattedValue(item.row, 0)}});
+					}
+					i++;
+				}			
+			}
+			// agg filters
+			if (typeof $scope.agg !== "undefined")  {
+				google.visualization.events.addListener(chart, 'select', selectHandler);	
+			}	
 
 			function updateChart() {	
 				if($(elem).is(":visible")) {					

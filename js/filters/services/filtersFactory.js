@@ -1,4 +1,4 @@
-Curiosity.factory('filters', function(){
+Curiosity.factory('filters', function($rootScope){
 	var filterObj = {};
 	filterObj.info = {};
 	filterObj.info.filters = {'opBool':'And', 'type':"node", 'nestedFilter':[]};	
@@ -54,16 +54,56 @@ Curiosity.factory('filters', function(){
 	}
 
 	filterObj.addFilter = function (filter, container) {
+		filter.id = "filter" + Math.floor((Math.random() * 1000000) + 1);
 		if (typeof(container)  === "undefined") {
-			filterObj.info.filters.nestedFilter.push(filter);		
+			filterObj.info.filters.nestedFilter.push(filter);
 		}
 		else {
 			container.nestedFilter.push(filter);
-		}	
+		}
+		return (filter.id);
 	}
 
 	filterObj.removeFilter = function(idx, filterContainer) {
 		filterContainer.nestedFilter.splice(idx, 1);
+	}
+
+	filterObj.getFilterFromId = function (id) {
+		return findFilterRec(id, filterObj.info.filters.nestedFilter);
+	}
+
+	filterObj.notifyUpdate = function () {
+		$rootScope.$broadcast("updateFilter");
+	}
+
+	function findFilterRec(id, container) {
+		var i = 0;
+		while (i < container.length) {
+			if (container[i].id == id) {
+				return (container[i]);
+			}
+			if (typeof (container[i].nestedFilter) !== "undefined" && container[i].nestedFilter.length > 0) {
+				var tmp = findFilterRec(id, container[i].nestedFilter);
+				if (typeof(tmp) !== "undefined") {
+					return (tmp);
+				}
+			}
+			i++;
+		}
+	}
+
+	function removeFilterRec(id, container) {
+		var i = 0;
+		while (i < container.length) {
+			if (container[i].id == id) {
+				container.splice(i, 1);	
+				return ;
+			}
+			if (typeof (container[i].nestedFilter) !== "undefined" && container[i].nestedFilter.length > 0) {
+				removeFilterRec(id, container[i].nestedFilter);
+			}			
+			i++;
+		}	
 	}
 
 	filterObj.Terms = function (filter, filterdata) {

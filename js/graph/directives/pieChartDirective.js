@@ -19,7 +19,6 @@ Curiosity.directive('piechart', function($rootScope, filters){
 			var chart = new google.visualization.PieChart(elem[0]);
 			
 			$(elem[0]).height("100%");
-
 			chart.draw(data, {});
 			
 			function selectHandler(){
@@ -35,8 +34,10 @@ Curiosity.directive('piechart', function($rootScope, filters){
 			}
 
 			// agg filters
-			// google.visualization.events.addListener(chart, 'select', selectHandler);
-			
+			if (typeof $scope.agg !== "undefined")  {
+				google.visualization.events.addListener(chart, 'select', selectHandler);	
+			}
+
 			$scope.$watch('data',updateChart);
 			$scope.$on("workspaceChange", updateChart);
 			function updateChart() {	
