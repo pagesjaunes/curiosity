@@ -4,6 +4,7 @@
 	{"type" :"Query", "url":"template/request_module/partials/request_form.html"}, 
 	{"type" :"Query's options", "url":"template/request_module/partials/request_option_bar.html"}, 
 	{"type" :"Aggregation", "url":"template/aggregation_module/aggDisplay.html"},
+	{"type" :"Filters", "url":"template/filters/filters.html"}, 
 	{"type" :"Advanced Query", "url":"template/request_module/partials/request_advanced_query.html"}, 
 	{"type" :"Pagination", "url":"template/request_module/partials/request_pagination.html"},
 	{"type" :"Result", "url":"template/request_module/partials/request_result_display.html"},

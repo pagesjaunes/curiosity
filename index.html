@@ -32,64 +32,70 @@
 		<script type="text/javascript" src="vendor/elastic/elastic-angular-client.min.js"></script>
 		<script type="text/javascript" src="vendor/elastic/elasticsearch.angular.min.js"></script>
 		<script type="text/javascript" src="vendor/FileSaver/FileSaver.js"></script>
-		<script type="text/javascript" src="vendor/d3js/d3.min.js"></script>
-		<script type="text/javascript" src="vendor/nvd3/nv.d3.min.js"></script>
+		<!--<script type="text/javascript" src="vendor/d3js/d3.min.js"></script>
+		<script type="text/javascript" src="vendor/nvd3/nv.d3.min.js"></script>!-->
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   		<script type="text/javascript">
+      		google.load("visualization", "1", {packages:["corechart", "table", "calendar"]});
+      	</script>
 		<!-- Project specique files !-->
-			<!-- Conf file !-->
+		<!-- Conf file !-->
 		<script type="text/javascript" src="conf.js"></script>
 		<script type="text/javascript" src=".version.js"></script>
 		<script type="text/javascript" src="txt.js"></script>		
-			<!-- Service and stuff !-->
+		<!-- Service and stuff !-->
 		<script type="text/javascript" src="js/app.js"></script>
-			<!-- Conf !-->
+		<!-- Conf !-->
 		<script type="text/javascript" src="js/conf/services/confFactory.js"></script>
-			<!-- ElasticSearchfunc !-->
+		<!-- ElasticSearchfunc !-->
 		<script type="text/javascript" src="js/elasticsearch/services/elasticFuncFactory.js"></script>		
-			<!-- Main Controller !-->
+		<!-- Main Controller !-->
 		<script type="text/javascript" src="js/main/services/curiosityFactory.js"></script>
 		<script type="text/javascript" src="js/main/controllers/curiosityCtrl.js"></script>
-			<!-- Query !-->
+		<!-- Query !-->
 		<script type="text/javascript" src="js/query/utils/queryUtils.js"></script>
 		<script type="text/javascript" src="js/query/services/queryFactory.js"></script>
 		<script type="text/javascript" src="js/query/controllers/queryCtrl.js"></script>
-			<!-- Keyword !-->
+		<!-- Keyword !-->
 		<script type="text/javascript" src="js/keyword/services/keywordFactory.js"></script>
 		<script type="text/javascript" src="js/keyword/controllers/keywordCtrl.js"></script>
-			<!-- Template !-->
+		<!-- Template !-->
 		<script type="text/javascript" src="js/template/services/templateFactory.js"></script>
 		<script type="text/javascript" src="js/template/controllers/templateCtrl.js"></script>
-			<!-- Result !-->
+		<!-- Result !-->
 		<script type="text/javascript" src="js/result/services/resultFactory.js"></script>
 		<script type="text/javascript" src="js/result/controllers/resultCtrl.js"></script>
 		<script type="text/javascript" src="js/result/controllers/resultAutoCtrl.js"></script>
-			<!-- Mapping !-->
+		<!-- Mapping !-->
 		<script type="text/javascript" src="js/mapping/utils/mappingUtils.js"></script>
 		<script type="text/javascript" src="js/mapping/services/mappingFactory.js"></script>
 		<script type="text/javascript" src="js/mapping/controllers/mappingModalCtrl.js"></script>
-			<!-- Aggregation !-->
+		<!-- Aggregation !-->
 		<script type="text/javascript" src="js/aggregation/services/aggFactory.js"></script>
-		<script type="text/javascript" src="js/aggregation/services/aggFilterFactory.js"></script>
 		<script type="text/javascript" src="js/aggregation/services/aggConstructorFactory.js"></script>
 		<script type="text/javascript" src="js/aggregation/controllers/mainAggCtrl.js"></script>
 		<script type="text/javascript" src="js/aggregation/controllers/aggCtrl.js"></script>
 		<script type="text/javascript" src="js/aggregation/directives/aggResultDirectives.js"></script>
-			<!-- Context !-->
+		<!-- Context !-->
 		<script type="text/javascript" src="js/context/services/contextFactory.js"></script>
 		<script type="text/javascript" src="js/context/controllers/contextCtrl.js"></script>
-			<!-- CSV !-->
+		<!-- CSV !-->
 		<script type="text/javascript" src="js/csv/services/csvFactory.js"></script>
 		<script type="text/javascript" src="js/csv/controllers/csvCtrl.js"></script>
 		<script type="text/javascript" src="js/csv/controllers/csvAggCtrl.js"></script>
-			<!-- LOG !-->
+		<!-- LOG !-->
 		<script type="text/javascript" src="js/log/services/logFactory.js"></script>
 		<script type="text/javascript" src="js/log/controllers/logCtrl.js"></script>
-			<!-- Diary !-->
+		<!-- Diary !-->
 		<script type="text/javascript" src="js/diary/services/diaryFactory.js"></script>
 		<script type="text/javascript" src="js/diary/controllers/diaryCtrl.js"></script>
-			<!-- Charts !-->
-		<script type="text/javascript" src="js/d3/directives/geoPointDirective.js"></script>
-		<script type="text/javascript" src="js/d3/directives/barChartDirective.js"></script>
-		<script type="text/javascript" src="js/d3/directives/pieChartDirective.js"></script>
+		<!-- Charts !-->
+		<script type="text/javascript" src="js/graph/directives/barChartDirective.js"></script>
+		<script type="text/javascript" src="js/graph/directives/columnChartDirective.js"></script>
+		<script type="text/javascript" src="js/graph/directives/pieChartDirective.js"></script>
+		<script type="text/javascript" src="js/graph/directives/lineChartDirective.js"></script>
+		<script type="text/javascript" src="js/graph/directives/calendarChartDirective.js"></script>
+		<script type="text/javascript" src="js/graph/misc/utils.js"></script>
 		<!-- ModuleManager !-->
 		<script type="text/javascript" src="js/moduleManager/services/moduleManagerFactory.js"></script>
 		<script type="text/javascript" src="js/moduleManager/controllers/moduleManagerCtrl.js"></script>
@@ -100,7 +106,10 @@
 		<script type="text/javascript" src="js/layout/controllers/layoutSelectorCtrl.js"></script>
 		<script type="text/javascript" src="js/layout/controllers/cardCtrl.js"></script>
 		<script type="text/javascript" src="js/layout/controllers/cardModalCtrl.js"></script>
-
+		<!-- Filters !-->
+		<script type="text/javascript" src="js/filters/services/filtersFactory.js"></script>
+		<script type="text/javascript" src="js/filters/controllers/filtersCtrl.js"></script>
+		
 		<!-- Document 		
 		<script type="text/javascript" src="js/doc/services/docFactory.js"></script>
 		<script type="text/javascript" src="js/doc/controllers/docCtrl.js"></script>
@@ -109,7 +118,7 @@
 	<body ng-controller="curiosityCtrl" ng-class="{'header-hidden':!showHeader}">
 		<div ng-class="{'unlock':!moduleManagerData.lock}">
 			<div id="loading-image" ng-show="data.loading">
-				<span><img src="resources/ajax-loader.gif" id="loading-image"></img></span>
+				<span><img src="resources/ajax-loader.gif" id="loading-image"></span>
 			</div>
 			<div ng-show="showHeader">
 				<div id="header" ng-include="'template/common/header.html'"></div>

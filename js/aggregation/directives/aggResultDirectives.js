@@ -1,7 +1,7 @@
 /** 
 * @desc directives used to aggregation result display 
 */
-Curiosity.directive('aggResult', function(aggFactory, query){
+Curiosity.directive('aggResult', function(aggFactory, filters){
 	return {	
 		scope: {
 			agg : '='
@@ -22,20 +22,17 @@ Curiosity.directive('aggResult', function(aggFactory, query){
 			* @param object agg the aggregation where to add the filter
 			* @param object filter the filter to add
 			*/
-			$scope.addFilter = function(agg, filter) {
-				agg.__ref__.filters.push(filter);
-				query.notify();
+			$scope.addFilter = function(filter) {
+				filters.addFilter(filter);
 			}
-
 			/**
 			* @desc remove an aggregation filter 
 			* @param object agg agg where the filter is
 			* @param int index filter's index in the index tab
 			*/
-			$scope.removeFilter = function(agg, index) {
+			/*$scope.removeFilter = function(agg, index) {
 				agg.__ref__.filters.splice(index, 1);	
-				query.notify();
-			} 
+			} */
 
 			/**
 			* @desc call an external function and pass the agg data into parameters

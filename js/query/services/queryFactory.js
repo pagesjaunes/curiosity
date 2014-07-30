@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log , aggFactory, aggFilter){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log , aggFactory, filters){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -75,7 +75,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		request = ejs.Request();
 		queryString.query(query);
 		aggFactory.addAggregationToRequest(request);
-		var filter = aggFilter.getRequestFilter(aggFactory.info.currentAggregation);
+		var filter = filters.builtFilter(filters.info.filters);
 		if (typeof(query) === "undefined" || !query.length){
 			filteredQuery = ejs.FilteredQuery(ejs.MatchAllQuery(), filter);
 		}
@@ -86,7 +86,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		request.size(queryObj.info.nbResult);
 		request.from(queryObj.info.page * queryObj.info.nbResult);
 		addSortToRequest(request,queryObj.info.sort);
-		
 		queryObj.info.jsonRequest = request;
 		return (request);
 	}

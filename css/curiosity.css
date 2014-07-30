@@ -29,7 +29,11 @@ body.header-hidden {
 }
 
 .link:hover {
-  text-decoration: underline;
+  text-decoration: ;
+}
+
+.line-stroke {
+  text-decoration : line-through;
 }
 
 #loading-image {
