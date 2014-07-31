@@ -74,16 +74,20 @@ Curiosity.directive('aggResult', function($rootScope, aggFactory, filters){
 					agg = $scope.agg;									
 				}
 
-				if (typeof($scope.agg.__ref__.idFilters) !== "undefined"){
+				var newFilters = []; 
+
+				if (typeof(agg.__ref__.aggfilters) !== "undefined"){
 					var i = 0;
-					while (i < $scope.agg.__ref__.idFilters.length) {
-						var filter = filters.getFilterFromId($scope.agg.__ref__.idFilters[i]);
+					while (i < agg.__ref__.aggfilters.length) {
+						var filter = filters.getFilterFromId(agg.__ref__.aggfilters[i].id);
 						if (typeof(filter) !== "undefined") {
-							$scope.filters.push(filter)
+							newFilters.push(filter)
 						}
 						i++;
 					}
+					
 				}
+				agg.__ref__.aggfilters = newFilters;
 			}
 		}
 	}

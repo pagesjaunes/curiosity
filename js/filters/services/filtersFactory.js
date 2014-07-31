@@ -54,6 +54,7 @@ Curiosity.factory('filters', function($rootScope){
 	}
 
 	filterObj.addFilter = function (filter, container) {
+		console.log(filter);
 		filter.id = "filter" + Math.floor((Math.random() * 1000000) + 1);
 		if (typeof(container)  === "undefined") {
 			filterObj.info.filters.nestedFilter.push(filter);
@@ -66,10 +67,15 @@ Curiosity.factory('filters', function($rootScope){
 
 	filterObj.removeFilter = function(idx, filterContainer) {
 		filterContainer.nestedFilter.splice(idx, 1);
+		filterObj.notifyUpdate();
 	}
 
 	filterObj.getFilterFromId = function (id) {
 		return findFilterRec(id, filterObj.info.filters.nestedFilter);
+	}
+
+	filterObj.removeFilterFromId = function(id) {
+		removeFilterRec(id, filterObj.info.filters.nestedFilter);
 	}
 
 	filterObj.notifyUpdate = function () {

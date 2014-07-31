@@ -2,7 +2,8 @@
 	<div class="panel panel-primary panel-request">
 		<div class="panel-heading">
 			<div>
-				<span ng-repeat="filter in agg.__ref__.filters" class="label label-info">{{ filter.data.term }} 
+				<span ng-repeat="filter in agg.__ref__.aggfilters" class="label label-info">
+					{{ filter.data.term }} 
 					<span class="glyphicon glyphicon-remove" ng-click="removeFilter(agg, $index)"></span>
 				</span>
 				<div class="spacer"></div>
@@ -13,7 +14,7 @@
 				<span class="aggregation-items"> 
 					<label>
 						<span 
-						ng-click="addFilter({type:'Terms', data:{field:agg.__ref__.field, term:bucket.key }})" class="link">
+						ng-click="addFilter(agg, {type:'Terms', data:{field:agg.__ref__.field, term:bucket.key }})" class="link">
 							{{bucket.key}} :
 						</span>
 					</label>
