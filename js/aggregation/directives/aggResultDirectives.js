@@ -27,19 +27,17 @@ Curiosity.directive('aggResult', function($rootScope, aggFactory, filters){
 			* @param object agg the aggregation where to add the filter
 			* @param object filter the filter to add
 			*/
-			$scope.addFilter = function(filter) {
-				var id = filters.addFilter(filter);
-				if (typeof ($scope.agg.__ref__.idFilters) === "undefined") {
-					$scope.agg.__ref__.idFilters = [];
+			$scope.addFilter = function(agg, filter) {
+				var tmpFilter = filters.addFilter(filter);
+				if (typeof (agg.__ref__.aggfilters) === "undefined") {
+					agg.__ref__.aggfilters = [];
 				}
-				$scope.agg.__ref__.idFilters.push(id);
-				updateFilter();
+				agg.__ref__.aggfilters.push(tmpFilter);
 			}
 			
-			$scope.removeFilter = function(agg, idx, id) {
-				filters.removeFilterFromId(id);
-				agg.__ref__.idFilters.splice(idx, 1) 
-				$scope.filters.splice(id); 
+			$scope.removeFilter = function(agg, idx) {
+				filters.removeFilterFromId(agg.__ref__.aggfilters[idx].id);
+				agg.__ref__.aggfilters.splice(idx,1); 
 			}
 
 			/**
@@ -71,7 +69,11 @@ Curiosity.directive('aggResult', function($rootScope, aggFactory, filters){
 				script.onload = callback;
 			}
 
-			function updateFilter() {
+			function updateFilter(agg) {
+				if (typeof(agg) === "undefined") {
+					agg = $scope.agg;									
+				}
+
 				if (typeof($scope.agg.__ref__.idFilters) !== "undefined"){
 					var i = 0;
 					while (i < $scope.agg.__ref__.idFilters.length) {

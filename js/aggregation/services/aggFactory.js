@@ -197,6 +197,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 	// CONTEXT EVENT 
 	$rootScope.$on("UpdateContext", function () {
  		var list = cloneAggList(aggObj.info.currentAggregation);
+ 		console.log(list);
  		context.setContextInformation("agg", list);
 	});
 

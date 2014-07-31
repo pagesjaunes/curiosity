@@ -218,6 +218,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		else {
 			getDefaultModule(moduleManagerObj.initModule);
 		}
+		id = findMaxId();
 		console.log(moduleManagerObj.info.moduleBlocks);
 	}) 
 	

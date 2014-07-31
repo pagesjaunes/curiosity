@@ -3,6 +3,7 @@
 [
 	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html", "resultTemplate":"template/aggregation/Terms.html"},
 	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html", "resultTemplate":"template/aggregation/default.html"},
+	{"type":"DateRange", "template":"template/aggregation_module/settings_partials/date_range.html", "resultTemplate":"template/aggregation/Terms.html"},
 	{"type":"Histogram", "template":"template/aggregation_module/settings_partials/histogram.html", "resultTemplate":"template/aggregation/Terms.html"},
 	{"type":"DateHistogram", "template":"template/aggregation_module/settings_partials/date_histogram.html", "resultTemplate":"template/aggregation/Terms.html"},
 	{"type":"Avg", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},

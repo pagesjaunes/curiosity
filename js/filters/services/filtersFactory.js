@@ -61,7 +61,7 @@ Curiosity.factory('filters', function($rootScope){
 		else {
 			container.nestedFilter.push(filter);
 		}
-		return (filter.id);
+		return (filter);
 	}
 
 	filterObj.removeFilter = function(idx, filterContainer) {

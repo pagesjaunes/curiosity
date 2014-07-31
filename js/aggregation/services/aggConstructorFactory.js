@@ -129,6 +129,33 @@ Curiosity.factory('aggConstructor', function(){
 		return (result);
 	}
 
+	obj.DateRange = function (agg) {
+		var result = ejs.DateRangeAggregation(agg.name);
+		result.field(agg.field); 
+		var i = 0;
+		if (typeof (agg.intervals) !== "undefined") {
+			while (i < agg.intervals.length) {
+				var from = null;
+				var to = null;
+				if (typeof (agg.intervals[i].from) !== "undefined" 	&& agg.intervals[i].from != "") {
+					from = agg.intervals[i].from;
+				}
+				if (typeof (agg.intervals[i].to) !== "undefined" && agg.intervals[i].to != "") {
+					to = agg.intervals[i].to;
+				}
+				result.range(from, to);
+				i++;
+			}
+		}
+		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+			result.script(agg.script);
+		for (key in agg.nested) {
+			if (agg.nested[key].validate)
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+		}
+		return (result);
+	}
+
 	/**
 	* @desc generic function used to built simple aggregation with not a lot of params 
 	* @param object agg contains all aggregation's param
