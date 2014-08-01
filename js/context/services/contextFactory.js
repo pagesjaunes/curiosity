@@ -1,4 +1,4 @@
-Curiosity.factory('context', function($rootScope, $location, elasticClient, elasticFunc, log){
+Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFunc, log){
 	
 	// initializing service's vars 
 	var contextObj = {};
@@ -36,7 +36,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 				else {													// Context found
 					contextObj.info.currentContext = context._source;
 					contextObj.setContextIdx();
-					$location.search("context", contextId);
+					url.addData("context", contextId);
 					prevIdx = context._id;	
 					contextObj.info.contextLoaded = true;
 					$rootScope.$broadcast("ContextLoaded");
@@ -98,7 +98,7 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 					context = tmp; 
 					contextObj.info.currentContext = context._source;
 					contextObj.setContextIdx();
-					$location.search("context", contextId); // Add context ID in url
+					url.addData("context", contextId);
 					contextObj.info.contextLoaded = true;
 					contextObj.info.newContextStatus = "Context created with success";
 					contextObj.info.newContextoK = true;
@@ -228,14 +228,13 @@ Curiosity.factory('context', function($rootScope, $location, elasticClient, elas
 	*/
 	contextObj.init = function() {
 		contextObj.getContextList();
-		var params = $location.search();
-		if (typeof(params) != "undefined" && params.context) { 	// Context in url => get context from es server
-			contextObj.loadContext(params.context);
+		var params = url.getData("context");
+		if (typeof(params) !== "undefined") { 	// Context in url => get context from es server
+			contextObj.loadContext(params);
 		}
 		else { 													// no context =>  Default context
 			$rootScope.$broadcast("NoContext");
 		}
 	}
-
 	return (contextObj); 
 })
