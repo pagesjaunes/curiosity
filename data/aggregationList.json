@@ -13,6 +13,6 @@
 	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
 	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
 	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html", "resultTemplate":"template/aggregation/default.html"}
+	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html", "resultTemplate":"template/aggregation/Filter.html"}
 ]	
 }

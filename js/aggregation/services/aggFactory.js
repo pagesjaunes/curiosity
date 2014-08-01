@@ -119,8 +119,11 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		if (typeof(aggResult.buckets !== "undefined")) {
 			for (bucket in aggResult.buckets) {
 				aggObj.setReference(agg, aggResult.buckets[bucket]);
-			}	
-		}	
+			}
+		}
+		if (agg.type == "Filter") { // Manage Filter agg that have not bucket attribute
+			aggObj.setReference(agg, aggResult);
+		} 	
 	}
 	
 	/** 
