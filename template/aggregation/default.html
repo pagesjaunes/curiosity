@@ -1,5 +1,10 @@
 <div>
 	<div class="panel panel-primary panel-request">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				{{ agg.__ref__.displayName }}
+			</h3>
+		</div>
 		<div class="panel-body">
 			<div ng-repeat="(key, value) in agg">
 				<div ng-if="key !='__ref__' ">

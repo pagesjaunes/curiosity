@@ -2,6 +2,9 @@
 	<div class="panel panel-primary panel-request">
 		<div class="panel-heading">
 			<div>
+				<h3 class="panel-title">
+					{{ agg.__ref__.displayName }}
+				</h3>
 				<span ng-repeat="filter in agg.__ref__.aggfilters" class="label label-info">
 					{{ filter.data.term }} 
 					<span class="glyphicon glyphicon-remove" ng-click="removeFilter(agg, $index)"></span>
