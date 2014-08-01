@@ -1,6 +1,6 @@
 <div ng-controller="aggCtrl" class="module" ng-init="init(module.name)">
 	
-	<h4> {{ curAgg.displayName }}
+	<h4 ng-hide="card.hideTitle"> {{ curAgg.displayName }}
 		<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ info.txt.log.Hide }}">	
 		</span>
 		

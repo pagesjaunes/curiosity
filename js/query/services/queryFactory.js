@@ -141,7 +141,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
 				$rootScope.$broadcast("QueryLaunched");
 				log.log("Request : ok", "success");
-				queryObj.updateUrlData();
+				queryObj.updateUrlData(); // Update url data on success
 			},
 			function err(err) {
 				curiosity.load(false);

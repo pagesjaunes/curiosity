@@ -8,7 +8,6 @@
 	{"type" :"Advanced Query", "url":"template/request_module/partials/request_advanced_query.html"}, 
 	{"type" :"Pagination", "url":"template/request_module/partials/request_pagination.html"},
 	{"type" :"Result", "url":"template/request_module/partials/request_result_display.html"},
-	{"type" :"Independent Result", "url":"template/Test/resultAuto.html"},
 	{"type" :"Log Console",  "url":"template/log/logConsole.html"},
 	{"type" :"Diary", "url":"template/diary/diary.html"}
 ]

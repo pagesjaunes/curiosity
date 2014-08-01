@@ -73,22 +73,29 @@
 		position	: relative; 
 	}
 
-	.card .btn-option {
-		position	: absolute;
-		top 		: 3px;
-		right 		: 0;
-		font-size 	: 12px;
-		color 		: rgba(175,175,175,70);
-		cursor		: pointer;
-		z-index		: 2;
-		opacity 	: 0.5;  
-		transition  : 0.5s;   
+	.card .card-bar {
+		position: absolute;
+		top : 0;
+		right: 0;
+		margin-top : 5px;
+		z-index : 15;
 	}
 
-		.card .btn-option:hover {
-			font-size: 15px;
-			opacity: 1;
+		.card .card-bar .icon {
+			float : left;
+			position :relative;
+			font-size : 13px;
+			opacity: 0.25;
+			transition : 0.5s;
+			margin-right: 5px;
 		}
+			
+			.card .card-bar .icon:hover {
+				opacity: 1;
+			}
+	.card .card-content {
+		z-index: 1;
+	}
 
 /*
 * Layout Selector

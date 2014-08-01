@@ -1,5 +1,5 @@
 <div ng-controller="logCtrl" class="log-module module">
-	<h4>{{ info.txt.log.Logs }}
+	<h4 ng-hide="card.hideTitle">{{ info.txt.log.Logs }}
 		<span class="glyphicon" ng-class="{'glyphicon-minus':!hideConsole,'glyphicon-plus':hideConsole}" ng-click="hideConsole = !hideConsole" title="{{ info.txt.log.Hide }}">	
 		</span>
 		<span class="glyphicon glyphicon-trash" ng-click="clean()" title="{{ info.txt.log.Empty }}"></span>

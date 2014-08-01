@@ -2,7 +2,8 @@ Curiosity.directive('moduleblock', function(moduleManager){
 	return {
 		templateUrl: "template/moduleManager/moduleBlock.html", 
 		restrict: 'A',
-		scope: {
+		scope:{
+			'card':'='
 		},
 		link: function($scope, Elm, Attrs) {
 			$scope.info = {};
