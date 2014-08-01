@@ -97,6 +97,26 @@
 		z-index: 1;
 	}
 
+/* 
+* Card options modal
+*/
+
+.module-elem {
+	cursor: pointer;
+}
+
+	.module-elem.selected {
+		background-color: #1ea3b9
+	}
+
+	.module-tag {
+		margin : 10px;
+	}
+
+		.module-tag span {
+			margin-left: 5px; 
+		}
+
 /*
 * Layout Selector
 */

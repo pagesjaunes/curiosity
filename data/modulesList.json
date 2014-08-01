@@ -1,14 +1,23 @@
 {
 "list":
 [ 
-	{"type" :"Query", "url":"template/request_module/partials/request_form.html"}, 
-	{"type" :"Query's options", "url":"template/request_module/partials/request_option_bar.html"}, 
-	{"type" :"Aggregation", "url":"template/aggregation_module/aggDisplay.html"},
-	{"type" :"Filters", "url":"template/filters/filters.html"}, 
-	{"type" :"Advanced Query", "url":"template/request_module/partials/request_advanced_query.html"}, 
-	{"type" :"Pagination", "url":"template/request_module/partials/request_pagination.html"},
-	{"type" :"Result", "url":"template/request_module/partials/request_result_display.html"},
-	{"type" :"Log Console",  "url":"template/log/logConsole.html"},
-	{"type" :"Diary", "url":"template/diary/diary.html"}
+	{"type" :"Query", "url":"template/request_module/partials/request_form.html","tags":["Basic","Query"],
+	"desc":"A basic module which contains a search bar","visual":""}, 
+	{"type" :"Result", "url":"template/request_module/partials/request_result_display.html","tags":["Basic","Query","Result"], 
+	"desc":"A basic module which is use to display the results list","visual":""},
+	{"type" :"Query's options", "url":"template/request_module/partials/request_option_bar.html","tags":["Basic","Query"],
+	"desc":"A basic module which allows you to select a template for query's results and set few options","visual":""}, 
+	{"type" :"Pagination", "url":"template/request_module/partials/request_pagination.html" ,"tags":["Basic","Query"],
+	"desc":"A basic module which allows you to navigate through results and modify the number of items per page", "visual":""},
+	{"type" :"Aggregation", "url":"template/aggregation_module/aggDisplay.html", "tags":["Basic","Aggregation","Query"],
+	"desc":"Aggregation module allows you to built and personalize an aggregation and its childs", "visual":""},
+	{"type" :"Filters", "url":"template/filters/filters.html", "tags":["Advanced","Query","Aggregation"], "visual":"", 
+	"desc":"A module that allows you to add Boolean logic and hierarchy between your filters"}, 
+	{"type" :"Advanced Query", "url":"template/request_module/partials/request_advanced_query.html","tags":["Advanced","Query"],
+	"desc":"An Advanced module which allows you to customize you request with sorts, keywords ... and see how looks your request in elasticsearch language", "visual":""}, 
+	{"type" :"Log Console",  "url":"template/log/logConsole.html","tags":["Advanced","Diverse","BETA"],
+	"desc":"Curiosity's log console. Contains few information like status error ect","visual":""},
+	{"type" :"Diary", "url":"template/diary/diary.html","tags":["Advanced","Diverse","BETA"], 
+	"desc":"An Advanced module which you can use to add information to your context, each informations are synchronized with es server","visual":""}
 ]
 }
