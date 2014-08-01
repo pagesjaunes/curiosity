@@ -9,6 +9,7 @@
 body {
   padding-top : 70px;
 }
+
 body.header-hidden {
     padding-top : 0px;
 }

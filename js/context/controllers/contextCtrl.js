@@ -40,3 +40,7 @@ var contextManagerModalCtrl = function ($scope, $modalInstance, context) {
 		context.loadContext(id);
 	}
 };
+
+Curiosity.controller('contextCtrl', function($scope, context){
+	$scope.data = context.info;
+});

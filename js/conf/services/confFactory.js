@@ -29,24 +29,17 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 		"type":"aggregationsTemplates",
 		"templates":
 			[
-				{"name":"pieChart", "value":"<div piechart data=\"agg.buckets\" pathx=\"'key'\" pathy=\"['doc_count']\" ></div>"},
-				{"name":"barChart", "value":"<div barchart data=\"agg.buckets\" pathx=\"'key'\" pathy=\"['doc_count']\" ></div>"}
+				{"name":"pieChart","value" : "<div piechart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"},
+				{"name":"barChart","value" : "<div barchart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"}
 			]
 	};
-
-	var bugReportDefault = 
-	{
-		"type":"bugreport",
-		"list":[]
-	};
-
 
 	var confClient = elasticClient.getClient(globalConf.confServer); 
 
 	/*
 	* An array which contains all default conf document
 	*/
-	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate, bugReportDefault];
+	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate];
 	
 	return {
 

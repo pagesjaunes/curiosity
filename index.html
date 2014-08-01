@@ -94,7 +94,7 @@
 		<script type="text/javascript" src="js/graph/directives/columnChartDirective.js"></script>
 		<script type="text/javascript" src="js/graph/directives/pieChartDirective.js"></script>
 		<script type="text/javascript" src="js/graph/directives/lineChartDirective.js"></script>
-		<script type="text/javascript" src="js/graph/directives/calendarChartDirective.js"></script>
+		<!--script type="text/javascript" src="js/graph/directives/calendarChartDirective.js"></script!-->
 		<script type="text/javascript" src="js/graph/directives/comboChartDirective.js"></script>
 		<script type="text/javascript" src="js/graph/directives/scatterChartDirective.js"></script>
 		<!--<script type="text/javascript" src="js/graph/directives/diffChartDirective.js"></script>!-->
@@ -130,6 +130,9 @@
 			<div ng-show="data.tab == 0" ng-include="'template/layout/workspaces.html'" class="content">
 			</div>
 						
+			<!--<div ng-include="'template/context/context_selector_tab.html'">
+			</div>!-->
+
 			<div class="workspace-selector">
 				<div ng-click="hideWSS = !hideWSS" class="hider">
 					<span class="glyphicon" ng-class="{'glyphicon-chevron-right':!hideWSS,'glyphicon-chevron-left':hideWSS}">

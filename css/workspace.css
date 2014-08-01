@@ -125,3 +125,13 @@
 			 	border-color 	: #428bca;
 			}
 
+/* Workspace Selector */ 
+
+.context-card {
+	height: 40%;
+	margin				: 5px 0 0 0;
+	-webkit-box-shadow 	: 1px 1px 1px 1px rgba(150,150,150,125);
+	box-shadow 			: 1px 1px 1px 1px rgba(150,150,150,125);
+	overflow			: hidden;
+	position			: relative;		
+}
