@@ -27,7 +27,7 @@ Curiosity.factory('url', function($location){
 
 	urlObj.dataToObj = function (obj) {
 		for (key  in obj) {
-			obj[key] = getData(key);
+			obj[key] = urlObj.getData(key);
 		}
 	}
 	

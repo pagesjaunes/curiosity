@@ -19,6 +19,7 @@ var globalKeywords = [{"label":"et", "value":"AND"},
 						{"label":"ou", "value":"OR"},
 						{"label":"OU", "value":"OR"},
 						{"label":"or", "value":"OR"},
+						{"label":"NON", "value":"NOT"},
 						{"label":"non", "value":"NOT"},
 						{"label":"not", "value":"NOT"} ]
 

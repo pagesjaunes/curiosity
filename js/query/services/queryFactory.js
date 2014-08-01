@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log , aggFactory, filters){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log , aggFactory, filters, url){
 	var queryObj = {};
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
@@ -40,6 +40,8 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		queryObj.info.complexRequest = queryObj.queryInfo.complexRequest; 
  		queryObj.info.autoRefresh = queryObj.queryInfo.autoRefresh;
 		queryObj.info.nbResult = queryObj.queryInfo.nbResult;
+		queryObj.updateDataFromUrl(); // Load url data after context data
+		queryObj.updateQuery(); // Update query
 		if (typeof(queryObj.info.nbResult) === "undefined") {
 			queryObj.info.nbResult = 10;
 		}
@@ -55,6 +57,10 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		queryObj.queryInfo.complexRequest = queryObj.info.complexRequest;
 		queryObj.queryInfo.nbResult = queryObj.info.nbResult;
 		context.setContextInformation("request", queryObj.queryInfo);
+	});
+
+	$rootScope.$on("NoContext", function () {
+		queryObj.updateDataFromUrl();
 	});
 
 	$rootScope.$on('IndexChange',function (){
@@ -134,7 +140,8 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 					 queryObj.info.nbResult = 10;
 				queryObj.info.maxPage = Math.floor(resp.hits.total/queryObj.info.nbResult);
 				$rootScope.$broadcast("QueryLaunched");
-				log.log("Requête : ok", "success");
+				log.log("Request : ok", "success");
+				queryObj.updateUrlData();
 			},
 			function err(err) {
 				curiosity.load(false);
@@ -142,7 +149,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				queryObj.info.hits = 0;
 				queryObj.info.maxPage = 0;
 				curiosity.addError(err);
-				log.log("Requête : ko, Code : " + err.status, "danger");
+				log.log("Request : ko, Code : " + err.status, "danger");
 			}
 		)	
 	}
@@ -271,6 +278,21 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 			request.sort(sortTmp);
 			i++;
 		}
+	}
+
+	queryObj.updateDataFromUrl = function () {
+		var obj = {simplifiedRequest:"", page:""};
+		url.dataToObj(obj);
+		for (key in obj) {
+			if (typeof(obj[key]) !== "undefined") {
+				queryObj.info[key] = obj[key];
+			}
+		}
+	}
+
+	queryObj.updateUrlData = function () {
+		var obj = {simplifiedRequest:queryObj.info.simplifiedRequest, page:queryObj.info.page};
+		url.addDataFromObj(obj);
 	}
 
 	return queryObj;
