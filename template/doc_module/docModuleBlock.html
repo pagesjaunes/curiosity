@@ -1,11 +1,10 @@
 <div ng-controller="docCtrl">
-	<div class="input-group">
-		<span class="input-group-addon">id</span>
-		<input ng-model="id" class="form-control">
-	</div>
-	<div class="input-group">
-		<span class="input-group-addon">type</span>
-		<input ng-model="type">
-	</div>
-	<button ng-click="deleteDocument(id, type)" class="btn btn-default">Ok</button>
+<div ng-repeat="item in queryData.result.hits.hits">
+	<span>type : {{item._type}}</span> <span>id : {{item._id}</span>
+	<textarea ng-model="_source" />
+	<button ng-click="updateDocument(item._id, item._type)" class="btn btn-default">Update</button>
+	<button ng-click="showToId = !showToId" class="btn btn-default">Clone</button>
+	<input type="text" ng-show="showToId" ng-model="toId" ng-init="generateId()"></input>
+	<button ng-show="showToId" ng-click="cloneDocument(item._id, item._type, toId, item._type)" class="btn btn-default">Go and clone</button>
+	<button ng-click="deleteDocument(item._id, item._type)" class="btn btn-danger">Delete</button>
 </div>
