@@ -28,6 +28,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	var currentKeyword = [];
 	var currentIndex = "";
 	var queryString = ejs.QueryStringQuery();
+	filters.setQueryObj(queryObj);
 
 	// Context event
 	$rootScope.$on("ContextLoaded", function () {
