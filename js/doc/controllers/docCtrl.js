@@ -16,6 +16,7 @@ Curiosity.controller('docCtrl', function($scope, doc, query){
 		doc.deleteDocument(id, type);
 	}
 
+
 	/**
 	* @desc update a elasticsearch document
 	* @param string id elastcsearch document's id
@@ -23,26 +24,7 @@ Curiosity.controller('docCtrl', function($scope, doc, query){
 	* @param json doc to update
 	*/
 	$scope.updateDocument = function (id, type, source) {
-		doc.updateDocument = function (id, type, source);
+		doc.updateDocument(id, type, source);
 	}
-
-	/**
-	* @desc clone a elasticsearch document
-	* @param string id elastcsearch document's id to clone
-	* @param string type document's type to clone
-	* @param string id elastcsearch document's id to create
-	* @param string type document's type to create
-	*/
-	$scope.cloneDocument = function (fromId, fromType, toId, toType) {
-		doc.cloneDocument = function (fromId, fromType, toId, toType);
-	}
-
-	/**
-	* @desc generate an id. Can be usefull to clone a doc
-	*/
-	$scope.generateId = function () {
-		return doc.generateId();
-	};
-
 
 });
