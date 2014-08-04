@@ -59,6 +59,23 @@ Curiosity.factory("elasticFunc", function(log){
 				body: doc
 			}, func)
 		},
+		/**
+		* @desc get document on an elasticsearch server
+		* @param client elasticsearch js client
+		* @param indexName the index name where to post the document
+		* @param type document type
+		* @param id id of the document 
+		* @param func callback function by default elasticearchError 
+		*/
+		"getDocument" : function (client, indexName, type, id, func) {
+			if (typeof(func) ==='undefined') 
+				func = this.elasticsearchError;
+			client.get({
+				index:indexName,
+				type:type,
+				id:id
+			}, func)
+		},
 		
 		/**
 		* @desc delete document on an elasticsearch server
