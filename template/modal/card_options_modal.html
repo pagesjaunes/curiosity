@@ -30,13 +30,18 @@
 		</div>
 
 		<div ng-show="advancedOpt">
+			<ul class="margin-top">
+				<li ng-repeat="module in res.modules">
+					{{module.name}} <span class="glyphicon glyphicon-trash" ng-click="removeModule($index)"></span>
+				</li>
+			</ul>
 			<div ng-repeat="module in data.moduleList" class="media col-sm-6 module-elem" 
 				ng-click="selectModule($index)" ng-class="{'selected':selectedModule[$index]}">
-  				<div class="pull-left" href="#">
-    				<img class="media-object" src="{{ module.visual }}">
-  				</div>
+				<div class="pull-left" href="#">
+					<img class="media-object" src="{{ module.visual }}" style="width: 64px; height: 64px;">
+				</div>
  		 		<div class="media-body">
-    				<h4 class="media-heading">{{module.type}}</h4>
+				<h4 class="media-heading">{{module.type}}</h4>
     				<div class="module-tag">
     					<span ng-repeat="tag in module.tags" class="label label-primary"> {{tag}} </span>
     				</div>
