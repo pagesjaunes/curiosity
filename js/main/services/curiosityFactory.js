@@ -9,6 +9,7 @@ Curiosity.factory('curiosity', function($http, $rootScope, aggFactory, conf, log
 	curiosityObj.info.err = false;
 	curiosityObj.info.errList = [];
 	curiosityObj.info.log = [];
+	context.setCuriosityObj(curiosityObj);
 	
 	// Server Informations 
 	curiosityObj.info.currentServer = globalConf.defaultServer;
@@ -122,6 +123,10 @@ Curiosity.factory('curiosity', function($http, $rootScope, aggFactory, conf, log
 			curiosityObj.selectIndex();
 		}
 	}) 
+
+	$rootScope.$on("NoContext", function () {
+		curiosityObj.connectToServer(curiosityObj.serverInfo.server);
+	});
 
 	$rootScope.$on("UpdateContext", function () {
 		curiosityObj.serverInfo.server = curiosityObj.info.currentServer;

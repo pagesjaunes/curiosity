@@ -5,7 +5,7 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	var contextDocumentType = "context-doc";
 	var prevIdx = -2;
 	var client = elasticClient.getClient(globalConf.confServer);
-
+	var curiosityObj = {};
 	var context = {}
 
 	contextObj.info = {};
@@ -24,10 +24,11 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 			var request = ejs.Request();
 			var query = ejs.QueryStringQuery("_id:\"" + contextId + "\"");
 			var filter = ejs.TypeFilter(contextDocumentType);		
-			
+			curiosityObj.load(true);
 			request.query(query).filter(filter);
 			client.search({index:globalConf.confIndex, body:request})
 			.then(function(data) {
+				curiosityObj.load(false);
 				context = data.hits.hits[0];
 				if (typeof (context) === "undefined")  { 				// Context not found => default context loaded
 					//$rootScope.$broadcast("NoContext"); 				
@@ -236,5 +237,10 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 			$rootScope.$broadcast("NoContext");
 		}
 	}
+
+	contextObj.setCuriosityObj = function(obj){
+		curiosityObj = obj;
+	}
+
 	return (contextObj); 
 })

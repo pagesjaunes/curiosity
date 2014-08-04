@@ -13,8 +13,8 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 	/* EVENTS */
 	$scope.$on("ConfLoaded", function() {
 		curiosity.init();
-		$scope.connectServer($scope.data.currentServer); /* Init the Index list */
 		$scope.data.serverList = conf.getConfDocument("server").servers;
+		//$scope.connectServer($scope.data.currentServer); /* Init the Index list */
 	});
 	
 	conf.getConf($scope);
