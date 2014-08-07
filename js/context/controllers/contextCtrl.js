@@ -38,6 +38,7 @@ var contextManagerModalCtrl = function ($scope, $modalInstance, context) {
 
 	$scope.selectContext = function(id) {
 		context.loadContext(id);
+		$modalInstance.close();
 	}
 };
 

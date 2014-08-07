@@ -11,6 +11,11 @@ Curiosity.directive('piechart', function($rootScope, filters){
 		},			
 		
 		link: function($scope, elem, iAttrs) {
+			var options = {};
+			if (typeof $scope.options !== "undefined") {
+				options = $scope.options
+			}
+
 			var data = new google.visualization.DataTable({
 				cols: $scope.cols,
 				rows: builtDataFromCols($scope.data, $scope.cols)
@@ -19,7 +24,7 @@ Curiosity.directive('piechart', function($rootScope, filters){
 			var chart = new google.visualization.PieChart(elem[0]);
 			
 			$(elem[0]).height("100%");
-			chart.draw(data, {});
+			chart.draw(data, options);
 			
 			function selectHandler(){
 				var select = chart.getSelection();
@@ -46,7 +51,7 @@ Curiosity.directive('piechart', function($rootScope, filters){
 						cols: $scope.cols,
 						rows: builtDataFromCols($scope.data, $scope.cols)
 					});
-					chart.draw(data, {});
+					chart.draw(data, options);
 				}
 			}
 		}

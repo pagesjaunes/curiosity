@@ -4,6 +4,19 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 	aggObj.info.currentAggregation = [];
 	aggObj.info.aggList = {};
 
+	aggObj.init = function () {
+		context.registerModule("agg", aggObj);
+		loadAggList();
+	}
+
+	aggObj.store = function () {
+		return (cloneAggList(aggObj.info.currentAggregation)); 	
+	}
+
+	aggObj.load = function (obj) {
+		aggObj.info.currentAggregation = obj;
+	}
+
 	/**
 	* @desc Built a aggregation from params store it in a list and resiter a new module in the module manager
 	* @param object obj aggregation list where store the new aggregation 
@@ -194,22 +207,6 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 			console.log("Unable to fecth aggregation's list");
 		});
 	}
-
-	loadAggList(); 
-	
-	// CONTEXT EVENT 
-	$rootScope.$on("UpdateContext", function () {
- 		var list = cloneAggList(aggObj.info.currentAggregation);
- 		console.log(list);
- 		context.setContextInformation("agg", list);
-	});
-
-	$rootScope.$on("ContextLoaded", function () {
-		var list = []; 
-		context.setModuleInformation("agg", list);
-		aggObj.info.currentAggregation = list;
-	});
-
  
 	// Utils 
 		

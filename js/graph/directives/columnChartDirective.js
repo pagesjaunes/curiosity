@@ -11,8 +11,9 @@ Curiosity.directive('columnchart', function($rootScope){
 		},
 		
 		link: function($scope, elem, iAttrs) {
-			if (typeof $scope.options === "undefined") {
-				$scope.options = {};
+			var options = {};
+			if (typeof $scope.options !== "undefined") {
+				options = $scope.options
 			}
 
 			var data = new google.visualization.DataTable({
@@ -23,7 +24,7 @@ Curiosity.directive('columnchart', function($rootScope){
 			var chart = new google.visualization.ColumnChart(elem[0]);
 			
 			$(elem[0]).height("100%");
-			chart.draw(data, $scope.options);
+			chart.draw(data, options);
 
 			function selectHandler(){
 				var select = chart.getSelection();
@@ -45,11 +46,11 @@ Curiosity.directive('columnchart', function($rootScope){
 			$scope.$on("workspaceChange", updateChart);			
 			function updateChart() {	
 				if($(elem).is(":visible")) {					
-					data = new google.visualization.DataTable({
+					var toto = new google.visualization.DataTable({
 					cols: $scope.cols,
 					rows: builtDataFromCols($scope.data, $scope.cols)
 					});
-					chart.draw(data, $scope.options);		
+					chart.draw(toto, options);		
 				}
 			}
 		}

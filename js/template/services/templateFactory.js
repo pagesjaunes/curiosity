@@ -2,13 +2,13 @@
 
 Curiosity.factory('template', function($http, $templateCache, $rootScope, conf){
 	var templateObj = {};
-	templateObj.info = {};
-	templateObj.info.template = [];
-	templateObj.info.aggregationsTemplates = [];
 	
-	$rootScope.$on("ConfLoaded", function() {
+	templateObj.init = function () {
+		templateObj.info = {};
+		templateObj.info.template = [];
+		templateObj.info.aggregationsTemplates = [];
 		templateObj.update();
-	});
+	}
 
 	/**
 	* templateObj.update

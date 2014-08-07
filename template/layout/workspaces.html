@@ -1,5 +1,5 @@
 <div class="container-fluid workspace" ng-controller="workspaces">
-	<div ng-repeat="ws in data.workspaces" ng-show="data.idx == $index" ng-animate="{show: 'fade-show', hide: 'fade-hide'}">
+	<div ng-repeat="ws in data.workspaces" ng-if="data.idx == $index" ng-animate="{show: 'fade-show', hide: 'fade-hide'}">
 		<div ng-if="ws.new">
 			<div ng-include="'template/layout/layout_selector.html'"></div>
 		</div>

@@ -1,7 +1,12 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log , aggFactory, filters, url){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log, aggFactory, filters, url){
 	var queryObj = {};
+	var client;
+	var currentKeyword = [];
+	var currentIndex = "";
+	var queryString = ejs.QueryStringQuery();
+
 	queryObj.info = {};
 	queryObj.info.simplifiedRequest = "";
 	queryObj.info.complexRequest = "";
@@ -17,52 +22,32 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	queryObj.info.error = false;
 	queryObj.info.errorContent = "";
 	queryObj.info.result = {};
-	
-	// Infomration to save in context
-	queryObj.queryInfo = {};
-	queryObj.queryInfo.simplifiedRequest = queryObj.info.simplifiedRequest;	 
-	queryObj.queryInfo.complexRequest = queryObj.info.complexRequest;
- 	queryObj.queryInfo.autoRefresh = queryObj.info.autoRefresh;
+	queryObj.info.sort = [];
+	// Information to save in context	
 
-	var client = elasticClient.getClient(curiosity.info.currentServer);
-	var currentKeyword = [];
-	var currentIndex = "";
-	var queryString = ejs.QueryStringQuery();
-	filters.setQueryObj(queryObj);
-
-	// Context event
-	$rootScope.$on("ContextLoaded", function () {
-		var flag = false;
-		context.setModuleInformation("request", queryObj.queryInfo);
-		queryObj.info.simplifiedRequest = queryObj.queryInfo.simplifiedRequest; 	 
-		if (queryObj.info.complexRequest = queryObj.queryInfo.complexRequest) {
-			flag = true;
-		}
-		queryObj.info.complexRequest = queryObj.queryInfo.complexRequest; 
- 		queryObj.info.autoRefresh = queryObj.queryInfo.autoRefresh;
-		queryObj.info.nbResult = queryObj.queryInfo.nbResult;
+	queryObj.init = function () {		
+		context.registerModule("request", queryObj);
+		filters.setQueryObj(queryObj);
 		queryObj.updateDataFromUrl(); // Load url data after context data
 		queryObj.updateQuery(); // Update query
-		if (typeof(queryObj.info.nbResult) === "undefined") {
-			queryObj.info.nbResult = 10;
-		}
-		if (flag && queryObj.info.autoRefresh) {
-			queryObj.search();
-		}
-		currentKeyword = keyword.getKeywordListFromIndex(currentIndex);
-	});
+	};
 
-	$rootScope.$on("UpdateContext", function () {
- 		queryObj.queryInfo.autoRefresh = queryObj.info.autoRefresh;
-		queryObj.queryInfo.simplifiedRequest = queryObj.info.simplifiedRequest;	 
-		queryObj.queryInfo.complexRequest = queryObj.info.complexRequest;
-		queryObj.queryInfo.nbResult = queryObj.info.nbResult;
-		context.setContextInformation("request", queryObj.queryInfo);
-	});
+	queryObj.store = function () {
+		var toStore = {};
+		toStore.simplifiedRequest = queryObj.info.simplifiedRequest;	 
+		toStore.complexRequest = queryObj.info.complexRequest;
+ 		toStore.autoRefresh = queryObj.info.autoRefresh;
+ 		toStore.nbResult = queryObj.info.nbResult;
+		return (toStore);
+	}
 
-	$rootScope.$on("NoContext", function () {
-		queryObj.updateDataFromUrl();
-	});
+	queryObj.load = function (obj) {
+		for (key in obj) {
+			queryObj.info[key] = obj[key]; 				
+		}
+		queryObj.updateDataFromUrl(); // Load url data after context data
+		queryObj.updateQuery(); // Update query	
+	}
 
 	$rootScope.$on('IndexChange',function (){
 		queryObj.updateIndex();
@@ -126,13 +111,13 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	}
 
 	queryObj.search = function (noReset) {
-		curiosity.load(true);
+		curiosity.setLoad(true);
 		if (typeof(noReset) === "undefined") {
 			queryObj.info.page = 0;
 		}
 		client.search({index:currentIndex,body:builtRequest(queryObj.info.complexRequest)}).then(
 			function (resp) {
-				curiosity.load(false);
+				curiosity.setLoad(false);
 				curiosity.stopError();
 				queryObj.info.result = resp;
 				queryObj.info.hits = resp.hits.total;
@@ -145,7 +130,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 				queryObj.updateUrlData(); // Update url data on success
 			},
 			function err(err) {
-				curiosity.load(false);
+				curiosity.setLoad(false);
 				queryObj.info.result = {};
 				queryObj.info.hits = 0;
 				queryObj.info.maxPage = 0;
@@ -233,9 +218,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	}
 	
 	// SORT FUNCTION
-	// Initialisation
-	queryObj.info.sort = [];
-
 	queryObj.addSort = function () {
 		queryObj.info.sort.push({"field":"",type:true});
 	}

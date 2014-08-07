@@ -11,8 +11,9 @@ Curiosity.directive('scatterchart', function($rootScope){
 		},
 		
 		link: function($scope, elem, iAttrs) {
-			if (typeof $scope.options === "undefined") {
-				$scope.options = {};
+			var options = {};
+			if (typeof $scope.options !== "undefined") {
+				options = $scope.options
 			}
 
 			var data = new google.visualization.DataTable({
@@ -24,7 +25,7 @@ Curiosity.directive('scatterchart', function($rootScope){
 			
 			$(elem[0]).height("100%");
 
-			chart.draw(data, $scope.options);
+			chart.draw(data, options);
 
 			$scope.$watch('data',updateChart);
 			$scope.$on("workspaceChange", updateChart);
@@ -51,7 +52,7 @@ Curiosity.directive('scatterchart', function($rootScope){
 					cols: $scope.cols,
 					rows: builtDataFromCols($scope.data, $scope.cols)
 					});
-					chart.draw(data, $scope.options);		
+					chart.draw(data, options);		
 				}
 			}
 		}

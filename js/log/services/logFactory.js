@@ -3,6 +3,10 @@ Curiosity.factory('log', function(){
 	logObj.info = {};
 	logObj.info.logList = []; 
 	
+	logObj.init = function () {
+
+	} 
+
 	logObj.log = function(value, type) {
 		var date = new Date;
 		logObj.info.logList.unshift({"value":value,"type":type, "date":date});			

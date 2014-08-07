@@ -7,8 +7,10 @@ Curiosity.directive('linechart', function(){
 		},
 		restrict: 'A',
 		link: function($scope, elem) {
-			if (typeof($scope.options) === "undefined")
-				$scope.options = {};
+			var options = {};
+			if (typeof $scope.options !== "undefined") {
+				options = $scope.options
+			}
 
 			var data = new google.visualization.DataTable({
 				cols: $scope.cols,
@@ -18,7 +20,7 @@ Curiosity.directive('linechart', function(){
 			var chart = new google.visualization.LineChart(elem[0]);
 			
 			$(elem[0]).height("100%");
-			chart.draw(data, $scope.options);
+			chart.draw(data, options);
 
 			$scope.$watch('data',updateChart);
 			$scope.$on("workspaceChange", updateChart);
@@ -28,7 +30,7 @@ Curiosity.directive('linechart', function(){
 					cols: $scope.cols,
 					rows: builtDataFromCols($scope.data, $scope.cols)
 					});
-					chart.draw(data, $scope.options);		
+					chart.draw(data, options);		
 				}
 			}
 		}

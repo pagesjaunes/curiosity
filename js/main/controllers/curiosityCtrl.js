@@ -10,15 +10,6 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 	$scope.info = {};
 	$scope.info.txt = global_text;
 	
-	/* EVENTS */
-	$scope.$on("ConfLoaded", function() {
-		curiosity.init();
-		$scope.data.serverList = conf.getConfDocument("server").servers;
-		//$scope.connectServer($scope.data.currentServer); /* Init the Index list */
-	});
-	
-	conf.getConf($scope);
-	
 	$scope.selectIndex = function (){
 		curiosity.selectIndex();
 	}	

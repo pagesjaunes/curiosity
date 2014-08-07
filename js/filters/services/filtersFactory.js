@@ -1,8 +1,20 @@
-Curiosity.factory('filters', function($rootScope){
+Curiosity.factory('filters', function($rootScope, context){
 	var filterObj = {};
 	var queryObj = {};
-	filterObj.info = {};
-	filterObj.info.filters = {'opBool':'And', 'type':"node", 'nestedFilter':[]};	
+
+	filterObj.init = function () {
+		filterObj.info = {};
+		filterObj.info.filters = {'opBool':'And', 'type':"node", 'nestedFilter':[]};	
+		context.registerModule("filters", filterObj);
+	}
+
+	filterObj.load = function (obj) {		
+		filterObj.info = obj;
+	}
+
+	filterObj.store = function () {
+		return (filterObj.info);
+	}
 
 	filterObj.getRequestFilter = function (agg) {
 		var filter = ejs.AndFilter([]);

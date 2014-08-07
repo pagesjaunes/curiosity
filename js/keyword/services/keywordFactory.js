@@ -5,9 +5,9 @@ Curiosity.factory('keyword', function($rootScope, conf){
 	var keywordObj = {};
 	var keywordArray  = [];
 
-	$rootScope.$on("ConfLoaded", function () {
+	keywordObj.init = function (){
 		keywordObj.update();
-	});
+	}
 
 	/**
 	* @desc find the index indice on the index list  

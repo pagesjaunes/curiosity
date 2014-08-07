@@ -43,6 +43,8 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate];
 	
 	return {
+			"init": function () {
+			}, 
 
 			/**
 			* @desc send all default document to an index 

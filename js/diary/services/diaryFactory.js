@@ -3,14 +3,20 @@ Curiosity.factory('diary',function($rootScope, context){
 	diaryObj.info = {};
 	diaryObj.info.txt = "";
 	diaryObj.info.hide = false;
+	
+	diaryObj.init = function () {
+		context.registerModule("diary", diaryObj);		
+	}
 
-	// Context event
-	$rootScope.$on("ContextLoaded", function () {
-		context.setModuleInformation("diary", diaryObj.info);
-	});
+	diaryObj.load = function (obj) {
+		for (key in obj) {
+			diaryObj.info[key] = obj[key];
+		}
+	}
 
-	$rootScope.$on("UpdateContext", function () {
-		context.setContextInformation("diary", diaryObj.info);
-	});
+	diaryObj.store = function () {
+		return (diaryObj.info);	
+	}
+
 	return (diaryObj);
 });

@@ -5,7 +5,21 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 	layoutObj.info.currentWorkspace = {};
 	layoutObj.info.idx = 0;
 	layoutObj.info.turn = false;
+		
+	layoutObj.init = function () {
+		context.registerModule("layout", layoutObj);		
+	}
 
+	layoutObj.load = function (obj) {
+		for (key in obj) {
+			layoutObj.info[key] = obj[key];
+		}
+		layoutObj.info.currentWorkspace = layoutObj.info.workspaces[layoutObj.info.idx];
+	}
+
+	layoutObj.store = function () {
+		return (layoutObj.info);	
+	}
 
 	layoutObj.switchWorkspaceEvent = function(){
 		setTimeout(function () {
@@ -117,15 +131,5 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 		}
 	}
 
-	$rootScope.$on("ContextLoaded", function () {
-		context.setModuleInformation("layout", layoutObj.info);
-		layoutObj.info.currentWorkspace = layoutObj.info.workspaces[layoutObj.info.idx];
-	});
-
-
-	$rootScope.$on("UpdateContext", function () {
-		context.setContextInformation("layout", layoutObj.info);
-	});
-	
 	return (layoutObj);
 });

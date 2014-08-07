@@ -1,5 +1,4 @@
 Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFunc, log){
-	
 	// initializing service's vars 
 	var contextObj = {};
 	var contextDocumentType = "context-doc";
@@ -8,12 +7,16 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	var curiosityObj = {};
 	var context = {}
 
-	contextObj.info = {};
-	contextObj.info.currentContext = {};
-	contextObj.info.contextList = [];
-	contextObj.info.contextIdx = -1;
-	contextObj.info.contextLoaded = false;
-	contextObj.info.updateStatus = "ok";
+	contextObj.init = function () {
+		contextObj.info = {};
+		contextObj.info.modules = {};
+		contextObj.info.currentContext = {};
+		contextObj.info.contextList = [];
+		contextObj.info.contextIdx = -1;
+		contextObj.info.contextLoaded = false;
+		contextObj.info.updateStatus = "ok";
+		contextObj.getContextList();
+	}
 
 	/**
 	* @desc Load a context from its id
@@ -24,14 +27,15 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 			var request = ejs.Request();
 			var query = ejs.QueryStringQuery("_id:\"" + contextId + "\"");
 			var filter = ejs.TypeFilter(contextDocumentType);		
-			curiosityObj.load(true);
+			//curiosityObj.load(true);
 			request.query(query).filter(filter);
 			client.search({index:globalConf.confIndex, body:request})
 			.then(function(data) {
-				curiosityObj.load(false);
+				//curiosityObj.load(false);
 				context = data.hits.hits[0];
 				if (typeof (context) === "undefined")  { 				// Context not found => default context loaded
-					//$rootScope.$broadcast("NoContext"); 				
+					//$rootScope.$broadcast("NoContext");
+					curiosityObj.connectToServer(globalConf.defaultServer);
 					log.log("Context : Error : context " + contextId + " not found", "danger");
 				}
 				else {													// Context found
@@ -40,15 +44,33 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 					url.addData("context", contextId);
 					prevIdx = context._id;	
 					contextObj.info.contextLoaded = true;
-					$rootScope.$broadcast("ContextLoaded");
+					setModulesDatas();
 				}
 			}, 
 			function (err) {
 				log.log("Context : Error during context loading", "danger");
+				curiosityObj.connectToServer(globalConf.defaultServer);
 			});
 		}
 		else {
-			$rootScope.$broadcast("NoContext"); 						// Undefined context id => default context
+			curiosityObj.connectToServer(globalConf.defaultServer);
+			// TODO				// Undefined context id => default context
+		}
+	}
+
+	function setModulesDatas () {
+		for (key in contextObj.info.currentContext) {
+			if (key != "contextDesc" && key != "contextName"){
+				contextObj.info.modules[key].load(contextObj.info.currentContext[key]);
+			}
+		}
+	}
+
+	function updateContextData() {
+		for (key in contextObj.info.modules) {
+			if (key != "contextDesc" && key != "contextName"){
+				contextObj.info.currentContext[key] = contextObj.info.modules[key].store();
+			}
 		}
 	}
 
@@ -60,16 +82,12 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		contextObj.info.currentContext = {};
 		contextObj.info.currentContext.contextName = name;
 		contextObj.info.currentContext.contextDesc = desc;
-		$rootScope.$broadcast("UpdateContext"); // Notifie module to update their data 
-		contextObj.info.newContextPercent = 25;
+		contextObj.info.newContextPercent = 26;
 		contextObj.info.newContextStatus = "Updating modules informations";
-		// Wait till module update their data
-		setTimeout(function () {
-      		// Send new context to es server -> see getNewContext function for next steps
-       		contextObj.info.newContextStatus = "Sending context to server";
-       		contextObj.info.newContextPercent = 50;
-       		elasticFunc.sendNewDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, contextObj.getNewContext);
-       	}, 1000);
+      	updateContextData();
+       	contextObj.info.newContextStatus = "Sending context to server";
+       	contextObj.info.newContextPercent = 50;
+       	elasticFunc.sendNewDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, contextObj.getNewContext);
 	}
 
 	contextObj.getNewContext = function (error,resp) {
@@ -111,12 +129,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	}
 
 	contextObj.updateContext = function () {
-		$rootScope.$broadcast("UpdateContext"); // Notifie module to update their data 
 		contextObj.info.updateStatus = "Updating"; 
-		// Wait till module update their data
-		setTimeout(function () {
-			elasticFunc.sendDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, context._id, contextObj.updateCB);
-		}, 1000);
+      	updateContextData();
+		elasticFunc.sendDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, context._id, contextObj.updateCB);
 	}
 
 	contextObj.updateCB = function (error, resp) {
@@ -227,14 +242,13 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	/**
 	* @desc function calls when services is created, getContext list from elasticSearch server and set context from url if there is one  
 	*/
-	contextObj.init = function() {
-		contextObj.getContextList();
+	contextObj.launch = function() {
 		var params = url.getData("context");
 		if (typeof(params) !== "undefined") { 	// Context in url => get context from es server
 			contextObj.loadContext(params);
 		}
 		else { 													// no context =>  Default context
-			$rootScope.$broadcast("NoContext");
+			curiosityObj.connectToServer(globalConf.defaultServer);
 		}
 	}
 
@@ -242,5 +256,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		curiosityObj = obj;
 	}
 
+	contextObj.registerModule = function(name, obj) {
+		contextObj.info.modules[name] = obj;
+	}
+	
 	return (contextObj); 
 })

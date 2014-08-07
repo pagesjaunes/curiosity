@@ -2,14 +2,17 @@
 
 Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, curiosity){
 	var mappingObj = {};
-	mappingObj.info = {};
-	mappingObj.info.currentIndex = "";
-	mappingObj.info.currentMapping = {}; 
-	mappingObj.info.autoRefreshMapping = true;
-	mappingObj.info.fields = [];
-	mappingObj.info.mappingsList = {}; 
+	 
 
-	var client = elasticClient.getClient(curiosity.info.currentServer);
+	mappingObj.init = function () {
+		mappingObj.info = {};
+		mappingObj.info.currentIndex = "";
+		mappingObj.info.currentMapping = {}; 
+		mappingObj.info.autoRefreshMapping = true;
+		mappingObj.info.fields = [];
+		mappingObj.info.mappingsList = {};
+	}
+
 	$rootScope.$on("IndexChange", function () {
 		mappingObj.updateMapping(curiosity.info.selectedIndex);
 	});
@@ -117,8 +120,5 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 			return (obj);
 		}
 	}
-
-	mappingObj.updateMapping(curiosity.info.selectedIndex);
-
 	return (mappingObj);
 });

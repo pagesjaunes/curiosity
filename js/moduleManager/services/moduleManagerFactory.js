@@ -8,7 +8,20 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 
 	moduleManagerObj.info.moduleBlocks = {};
 
-	
+	moduleManagerObj.init = function () {
+		getModuleList();
+		context.registerModule("moduleManager", moduleManagerObj);
+	}
+
+	moduleManagerObj.load = function (obj) {
+		udpadeModuleFromContext(obj)
+	}
+
+	moduleManagerObj.store = function () {
+		return (moduleManagerObj.info.moduleBlocks);
+	} 
+
+
 	moduleManagerObj.registerModuleBlock = function (name) {
 		if (typeof(moduleManagerObj.info.moduleBlocks[name]) === "undefined") {
 			moduleManagerObj.info.moduleBlocks[name] = {"name":name, "display":true, "modules":[], "id":id};
@@ -179,27 +192,12 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		return (result + 1);
 	}
 
-	/*
-	moduleManagerObj.initModule = function() {
-		moduleManagerObj.cleanModule();
-		var i = 0;
-		while (i < moduleManagerObj.info.defaultModule.length) {
-			tmp = moduleManagerObj.info.defaultModule[i]; 
-			moduleManagerObj.registerModule(tmp.name, tmp.template, tmp.moduleBlocks);
-			i++;
-		}
-	}
-	*/
-	
-	$rootScope.$on("ContextLoaded", function () {
-		var tmp = {};
-		context.setModuleInformation("moduleManager", tmp);
+	function udpadeModuleFromContext (tmp) {
 		var i = 0;
 		for (key in tmp){
 			i++;
 			break;
 		}
-
 		if (i) {
 			id = findMaxId();
 			for (key in  tmp) {
@@ -219,19 +217,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 			getDefaultModule(moduleManagerObj.initModule);
 		}
 		id = findMaxId();
-		console.log(moduleManagerObj.info.moduleBlocks);
-	}) 
+	}
 	
-	$rootScope.$on("NoContext", function (){
-		//getDefaultModule(moduleManagerObj.initModule);		
-	})
-
-	
-	$rootScope.$on("UpdateContext", function () {
-		context.setContextInformation("moduleManager", moduleManagerObj.info.moduleBlocks);
-	})
-
-	getModuleList();
-	//getDefaultModule();
 	return (moduleManagerObj);
 })

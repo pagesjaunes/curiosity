@@ -16,18 +16,27 @@ Curiosity.factory('result', function($rootScope, template, context){
 		}
 	}
 
+	resultObj.init = function () {
+		context.registerModule("result", resultObj);			
+	}
+
+	resultObj.store = function () {
+		return (resultObj.info);
+	}
+
+	resultObj.load = function (obj) {
+		resultObj.info =  obj;
+		resultObj.switchDisplayMode("template", resultObj.info.templateSelected)			
+	}
+
 	resultObj.switchDisplayMode = function (type, templateId) {
 		resultObj.info.currentTemplate = template.addTemplateToCache(type, templateId);
 	}
 
 	$rootScope.$on("ContextLoaded", function () {
 		context.setModuleInformation("result", resultObj.info);
-		resultObj.switchDisplayMode("template", resultObj.info.templateSelected)
 	});
 
-	$rootScope.$on("UpdateContext", function () {
-		context.setContextInformation("result", resultObj.info);
-	});
-
+	
 	return (resultObj);
 });
