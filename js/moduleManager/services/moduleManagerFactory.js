@@ -87,9 +87,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 		if (from != "") {
 			var blockFrom =  moduleManagerObj.info.moduleBlocks[from];
 			var blockTo = moduleManagerObj.info.moduleBlocks[to];
-
-			var i = 0;
-			
+			var i = 0;		
 			while (i < blockFrom.modules.length) {
 				if (blockFrom.modules[i].id == id) {
 					var tmp = blockFrom.modules[i];
@@ -199,6 +197,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 			break;
 		}
 		if (i) {
+			moduleManagerObj.info.moduleBlocks = {}; 
 			id = findMaxId();
 			for (key in  tmp) {
 				if (typeof(moduleManagerObj.info.moduleBlocks[key]) !== "undefined") {
@@ -212,9 +211,6 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 					moduleManagerObj.info.moduleBlocks[key] = tmp[key]; 
 				}
 			}
-		}
-		else {
-			getDefaultModule(moduleManagerObj.initModule);
 		}
 		id = findMaxId();
 	}
