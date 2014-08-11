@@ -1,18 +1,18 @@
 {
 "list":
 [
-	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html", "resultTemplate":"template/aggregation/Terms.html"},
-	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"DateRange", "template":"template/aggregation_module/settings_partials/date_range.html", "resultTemplate":"template/aggregation/Terms.html"},
-	{"type":"Histogram", "template":"template/aggregation_module/settings_partials/histogram.html", "resultTemplate":"template/aggregation/Terms.html"},
-	{"type":"DateHistogram", "template":"template/aggregation_module/settings_partials/date_histogram.html", "resultTemplate":"template/aggregation/Terms.html"},
-	{"type":"Avg", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"Stats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"Min", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"Sum", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html"},
-	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html", "resultTemplate":"template/aggregation/Filter.html"}
+	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html", "resultTemplate":"template/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html", "resultTemplate":"template/aggregation/default.html", "mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"DateRange", "template":"template/aggregation_module/settings_partials/date_range.html", "resultTemplate":"template/aggregation/Terms.html", "mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"Histogram", "template":"template/aggregation_module/settings_partials/histogram.html", "resultTemplate":"template/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"DateHistogram", "template":"template/aggregation_module/settings_partials/date_histogram.html", "resultTemplate":"template/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"Avg", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
+	{"type":"Stats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"count":"", "min":"", "max":"", "sum":"", "avg":""}},
+	{"type":"Min", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
+	{"type":"Sum", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
+	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
+	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"count":"","min":"","max":"","avg":"","sum":"","sum_of_squares":"","variance":"","std_deviation":""}},
+	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html", "mapping":{"value":""}},
+	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html", "resultTemplate":"template/aggregation/Filter.html","mapping":{"doc_count":"","nested":""}}
 ]	
 }

@@ -171,14 +171,14 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 	* @param string id aggregation id in module manager
 	*/
 	aggObj.removeMainAgg = function (agg, id) {
-		var  i = 0; 
+		var  i = 0;
 		while (i < aggObj.info.currentAggregation.length) {
+			
 			if (aggObj.info.currentAggregation[i].name == agg.name)
 				break;
 			i++;
 		}
 		moduleManager.removeModule(id);
-		aggObj.info.currentAggregation.splice(i, 1);
 	}
 
 	/**

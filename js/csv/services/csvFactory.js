@@ -268,12 +268,14 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 	*/	
 	function initLoading (size) {
 		if (!currentDownload.working) {
+			var tmp = query.info.jsonRequest;
+			delete query.info.jsonRequest.aggs
 			currentDownload = {
 								working:true,
 								idx:0,
 							 	index:curiosity.info.selectedIndex,
 							 	end:size,
-							 	request:query.info.jsonRequest,
+							 	request:tmp,
 								result:[],
 								done:false
 							}
@@ -313,5 +315,5 @@ Curiosity.factory('csv', function($rootScope, mapping, curiosity, query){
 		}
 	}
 
-	return (csvObj)
+	return (csvObj);
 })

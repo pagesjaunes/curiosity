@@ -1,7 +1,7 @@
 /** 
 * @desc directives used to aggregation result display 
 */
-Curiosity.directive('aggResult', function($rootScope, aggFactory, filters){
+Curiosity.directive('aggResult', function($rootScope, $modal, aggFactory, filters, aggCsv){
 	return {	
 		scope: {
 			agg : '='
@@ -10,10 +10,29 @@ Curiosity.directive('aggResult', function($rootScope, aggFactory, filters){
 		controller : function ($scope) {	
 			$scope.filters = [];
 			// Event 
+			
 			$rootScope.$on("updateFilter", function() {
 				updateFilter();
 			});
-				
+			
+			function updateFilter(agg) {
+				if (typeof(agg) === "undefined") {
+					agg = $scope.agg;									
+				}
+				var newFilters = []; 
+				if (typeof(agg.__ref__.aggfilters) !== "undefined"){
+					var i = 0;
+					while (i < agg.__ref__.aggfilters.length) {
+						var filter = filters.getFilterFromId(agg.__ref__.aggfilters[i].id);
+						if (typeof(filter) !== "undefined") {
+							newFilters.push(filter)
+						}
+						i++;
+					}
+				}
+				agg.__ref__.aggfilters = newFilters;
+			}
+			
 			/**
 			* @desc check if a string is an aggregation name or not
 			* @param string key the string to test
@@ -22,6 +41,10 @@ Curiosity.directive('aggResult', function($rootScope, aggFactory, filters){
 				return (aggFactory.isAgg(key));
 			}
 			
+			$scope.aggToCsv = function (agg) {
+				console.log(aggCsv.builtMapping(agg.__ref__));
+			}
+
 			/**
 			* @desc add an agregation filter to an aggregation
 			* @param object agg the aggregation where to add the filter
@@ -67,27 +90,6 @@ Curiosity.directive('aggResult', function($rootScope, aggFactory, filters){
 				document.body.appendChild(script);
 				script.src = url;
 				script.onload = callback;
-			}
-
-			function updateFilter(agg) {
-				if (typeof(agg) === "undefined") {
-					agg = $scope.agg;									
-				}
-
-				var newFilters = []; 
-
-				if (typeof(agg.__ref__.aggfilters) !== "undefined"){
-					var i = 0;
-					while (i < agg.__ref__.aggfilters.length) {
-						var filter = filters.getFilterFromId(agg.__ref__.aggfilters[i].id);
-						if (typeof(filter) !== "undefined") {
-							newFilters.push(filter)
-						}
-						i++;
-					}
-					
-				}
-				agg.__ref__.aggfilters = newFilters;
 			}
 		}
 	}

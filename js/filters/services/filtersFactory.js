@@ -9,7 +9,10 @@ Curiosity.factory('filters', function($rootScope, context){
 	}
 
 	filterObj.load = function (obj) {		
-		filterObj.info = obj;
+		filterObj.info.filters = {'opBool':'And', 'type':"node", 'nestedFilter':[]};
+		for (key in obj) {
+			filterObj.info[key] = obj[key];	
+		}
 	}
 
 	filterObj.store = function () {
