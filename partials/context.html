@@ -1,57 +1,152 @@
-<h1> Contexts </h1>
+<!DOCTYPE html>
+<html ng-app="curiosityDoc" ng-controller="pageCtrl">
+<head>
+	<title>
+		Cursiosity's context systems
+	</title>
+    <meta charset="utf-8">
+	<meta name="description" content="Curiosity's context, system use to store all search informations (aggregations, queries, filters) in an elasticsearch index to share and use later" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Favicon !-->
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../img/apple-touch-icon-152x152.png" />
+	<link rel="icon" type="image/png" href="../img/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="../img/favicon-16x16.png" sizes="16x16" />
 
-<p>
-	Context's system allows you to save and share everything you made in curiosity (aggregations, query, layout).	It work as a file, you just have to save your context, then it will be available for everyone who use your application.
-</p>
-
-<h3> Create a new Context </h3>
-
-<p>
-	To create a new context, press the blue floppy disk button at the bottom of your screen, it will open a window, where you can add a name and a description to the new context. Fill it, then press save. A wild progress bar appear, that show you the save process. When it's done, your url include now the context id, so if you refresh your page, curiosity will automatically reload  your context.
-</p>
-
-<p>
-	If you want to update your context again, hit the floppy disk, it will update your current context. When it's done an alert will notify you. 
-</p>
-
-<p>
-In the case you want to create a new context from an existing one, fly over the floppy disk, 2 new buttons will appear, press "save as", it will show the new context window.
-</p>
-
-<div class="row">
-	<div class="col-xs-6 col-md-4">
-		<a href="img/curiosity-context-buttons.png" class="thumbnail" title="Curiosity's context buttons">
-			<img src="img/curiosity-context-buttons.png" alt="Screenshot of Curiosity's context buttons">
-		</a>
+	<!-- Javascript !-->
+		<!--JQuery !-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<!-- Angular !-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-route.min.js"></script>
+		<!-- Bootstrap !-->
+		<!-- Application Specifique file !-->
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/controllers/pageCtrl.js"></script>
+		<!-- Data !-->
+	<script type="text/javascript" src="../data/menu.js"></script>
+	<script type="text/javascript" src="../data/pages.js"></script>
+	<!-- CSS !-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/body.css">
+	
+</head>
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+    		<div class="container">
+	    		<!-- Brand and toggle get grouped for better mobile display -->
+	    		<div class="navbar-header">
+	      			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+	      			</button>
+	      			<a class="navbar-brand" href="../index.html">Curiosity</a>
+	    		</div>
+	    		<!-- Collect the nav links, forms, and other content for toggling -->
+	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      			<ul class="nav navbar-nav">
+						<li ng-repeat="link in menu" ng-class="{'active':link.url == '#' + path, 'dropdown':link.subPage}">		
+							<a ng-if="!link.subPage" href="{{link.url}}" title="{{ link.title }}" desc="{{ link.desc }}">{{link.txt}}</a>
+							
+							<a ng-if="link.subPage" class="dropdown-toggle" data-toggle="dropdown">
+								{{link.txt}}<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="sub in link.pages" title="{{ sub.title }}" ng-class="{'active':sub.url == '#' + path}">
+									<a href="{{sub.url}}">{{sub.txt}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="container" id="btn-container">
+			<div >
+				<div>
+					<iframe src="http://ghbtns.com/github-btn.html?user=pagesjaunes&repo=curiosity&type=watch&count=true"allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+				</div>
+		  		<div >
+					<a href="https://github.com/pagesjaunes/curiosity" class="btn btn-default btn-xs" target="_blank">
+						View on GitHub
+					</a>
+				</div>
+				<div class="btn-group margin-top">
+					<button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+						Download <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="https://github.com/pagesjaunes/curiosity/zipball/master">As .zip</a></li>
+						<li><a href="https://github.com/pagesjaunes/curiosity/tarball/master">As tar.gz</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="col-xs-6 col-md-4">
-		<a href="img/curiosity-new-context-window.png" class="thumbnail" title="Curiosity's new context window">
-			<img src="img/curiosity-new-context-window.png" alt="Screenshot of Curiosity's new context window">
-		</a>
+	<div class="container">
+		<h1> Contexts </h1>
+
+		<p>
+			Context's system allows you to save and share everything you made in curiosity (aggregations, query, layout).	It work as a file, you just have to save your context, then it will be available for everyone who use your application.
+		</p>
+
+		<h3> Create a new Context </h3>
+
+		<p>
+			To create a new context, press the blue floppy disk button at the bottom of your screen, it will open a window, where you can add a name and a description to the new context. Fill it, then press save. A wild progress bar appear, that show you the save process. When it's done, your url include now the context id, so if you refresh your page, curiosity will automatically reload  your context.
+		</p>
+
+		<p>
+			If you want to update your context again, hit the floppy disk, it will update your current context. When it's done an alert will notify you. 
+		</p>
+
+		<p>
+		In the case you want to create a new context from an existing one, fly over the floppy disk, 2 new buttons will appear, press "save as", it will show the new context window.
+		</p>
+
+		<div class="row">
+			<div class="col-xs-6 col-md-4">
+				<a href="../img/curiosity-context-buttons.png" class="thumbnail" title="Curiosity's context buttons">
+					<img src="../img/curiosity-context-buttons.png" alt="Screenshot of Curiosity's context buttons">
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<a href="../img/curiosity-new-context-window.png" class="thumbnail" title="Curiosity's new context window">
+					<img src="../img/curiosity-new-context-window.png" alt="Screenshot of Curiosity's new context window">
+				</a>
+			</div>
+			<div class="col-xs-6 col-md-4">
+				<a href="../img/curiosity-alert-context-update.png" class="thumbnail" alt="Curiosity's context update alert">
+					<img src="../img/curiosity-alert-context-update.png" alt="Screenshot of Curiosity's context update alert">
+				</a>
+			</div>
+		</div>
+
+		<h3>Open and Manage your contexts</h3>
+
+		<p>
+			To open a specific context, fly over the floppy disk, then hit "Manage Context" button (blue folder). It will open a window, where are listed all contexts. Press the "plus" icon near a context to show its description. If you press the "bookmark" icon it will load the selected context, and the trash icon deletes the associated context.
+		</p>
+
+		<div class="col-sm-12">
+			<img src="../img/curiosity-manage-context.png" alt="Screenshot of Curiosity's manage context window" title="Curiosity's manage context window">
+		</div>
+
+		<div class="spacer"></div>
+
+		<ul class="pager">
+
+		  <li class="previous">
+		  	<a href="templating.html">&larr; Templating</a>
+		  </li>
+
+		</ul>
 	</div>
-	<div class="col-xs-6 col-md-4">
-		<a href="img/curiosity-alert-context-update.png" class="thumbnail" alt="Curiosity's context update alert">
-			<img src="img/curiosity-alert-context-update.png" alt="Screenshot of Curiosity's context update alert">
-		</a>
-	</div>
-</div>
-
-<h3>Open and Manage your contexts</h3>
-
-<p>
-	To open a specific context, fly over the floppy disk, then hit "Manage Context" button (blue folder). It will open a window, where are listed all contexts. Press the "plus" icon near a context to show its description. If you press the "bookmark" icon it will load the selected context, and the trash icon deletes the associated context.
-</p>
-
-<div class="col-sm-12">
-	<img src="img/curiosity-manage-context.png" alt="Screenshot of Curiosity's manage context window" title="Curiosity's manage context window">
-</div>
-
-<div class="spacer"></div>
-
-<ul class="pager">
-
-  <li class="previous">
-  	<a href="#/Modules">&larr; Modules</a>
-  </li>
-
-</ul>
+</body>
+</html>

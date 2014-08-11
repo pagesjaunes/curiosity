@@ -1,76 +1,196 @@
-<h1>Keywords and Advanced Query</h1>
+<!DOCTYPE html>
+<html ng-app="curiosityDoc" ng-controller="pageCtrl">
+<head>
+	<title>
+		Curiosity's keywords and ElasticSearch complex queries
+	</title>
+    <meta charset="utf-8">
+	<meta name="description" content="Documentation about keywords in curiosity and complex queries (sorts, fields, json query ...)" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Favicon !-->
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../img/apple-touch-icon-152x152.png" />
+	<link rel="icon" type="image/png" href="../img/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="../img/favicon-16x16.png" sizes="16x16" />
 
-<h2>Keywords</h2>
+	<!-- Javascript !-->
+		<!--JQuery !-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<!-- Angular !-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-route.min.js"></script>
+		<!-- Bootstrap !-->
+		<!-- Application Specifique file !-->
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/controllers/pageCtrl.js"></script>
+		<!-- Data !-->
+	<script type="text/javascript" src="../data/menu.js"></script>
+	<script type="text/javascript" src="../data/pages.js"></script>
+	<!-- CSS !-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/body.css">
+	
+</head>
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+    		<div class="container">
+	    		<!-- Brand and toggle get grouped for better mobile display -->
+	    		<div class="navbar-header">
+	      			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+	      			</button>
+	      			<a class="navbar-brand" href="../index.html">Curiosity</a>
+	    		</div>
+	    		<!-- Collect the nav links, forms, and other content for toggling -->
+	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      			<ul class="nav navbar-nav">
+						<li ng-repeat="link in menu" ng-class="{'active':link.url == '#' + path, 'dropdown':link.subPage}">		
+							<a ng-if="!link.subPage" href="{{link.url}}" title="{{ link.title }}" desc="{{ link.desc }}">{{link.txt}}</a>
+							
+							<a ng-if="link.subPage" class="dropdown-toggle" data-toggle="dropdown">
+								{{link.txt}}<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="sub in link.pages" title="{{ sub.title }}" ng-class="{'active':sub.url == '#' + path}">
+									<a href="{{sub.url}}">{{sub.txt}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div>
+		<div class="container" id="btn-container">
+			<div >
+				<div>
+					<iframe src="http://ghbtns.com/github-btn.html?user=pagesjaunes&repo=curiosity&type=watch&count=true"allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+				</div>
+		  		<div >
+					<a href="https://github.com/pagesjaunes/curiosity" class="btn btn-default btn-xs" target="_blank">
+						View on GitHub
+					</a>
+				</div>
+				<div class="btn-group margin-top">
+					<button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+						Download <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="https://github.com/pagesjaunes/curiosity/zipball/master">As .zip</a></li>
+						<li><a href="https://github.com/pagesjaunes/curiosity/tarball/master">As tar.gz</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<h1>Keywords and Advanced Query</h1>
 
-<p>Keywords aim to provide an easier way for querying elasticsearch : instead of using the elasticsearch syntax, one can define a keyword that relies to an elasticsearch query. This keywords is then available for any curiosity user on the cluseter. They may ben chained in a logical expressionto build a complex but human understandable query.
-</p>
-<p>
-	Each keyword has a specific scope : it may be associated to an index or to all indexes (global scope).
-	There is two way to add a new keyword.
-</p>
-<h3>Keyword creation from "keyword tab"</h3>
-<div class="col-sm-12">
-	<img src="img/curiosity-keywords-tab.png" alt="Screenshot of Curiosity's keywords tab" title="Curiosity's keywords tab">
-</div>
-<div class="spacer"></div>
+		<h2>Keywords</h2>
 
-<p>
-	This tab deals with keywords managing : access to it by clicking on "customization > keywords" in the navbar. 
-	To add a new Keyword, select first the scope : it may be a specific index, but may be set as "global" for more general purpose (global is a specific entry of the index dropdown list).
-</p>
-<p>
-	A list of all the existing keywords attached to the selected index is then displayed. Hitting the "add" button opens a 3 input field form.
-	<ul>
-		<li>
-			The first input is the "name" of your keyword, this value will be used when you will build your query (No space allowed, if you add one, curiosity  will suppress it automatically during save processus)
-		</li>
-		<li>
-			The second input is the elasticsearch query that the keyword will hide. This field any be set with anything as it is ""elasticly" correct :) 
-		</li>
-		<li>
-			The last input is a description of your keyword. This field isn't required, fill it if your keywords name isn't enough explicit.
-		</li>
-	</ul>
-</p>
+		<p>
+			Keywords aim to provide an easier way for querying elasticsearch : instead of using the elasticsearch syntax, one can define a keyword that relies to an elasticsearch query. This keywords is then available for any curiosity user on the cluseter. They may ben chained in a logical expressionto build a complex but human understandable query.
+		</p>
 
-<p>
-	When you have created all of your keywords, or made some modifications, hit the button save to send your data to your conf server and make it persistent. 
-</p>
-<h3>Keyword creation from a query</h3>
+		<p>
+			Each keyword has a specific scope : it may be associated to an index or to all indexes (global scope).
+			There is two way to add a new keyword.
+		</p>
 
-<p>
-	You can create a new keyword directly from your query, by pressing "keyword from query" button in the request tab. Two fields will appear under the button. Refer then to the previous procedure (keyword creation from "keyword tab") : fill inputs, press the "save" button to make your keyword available.
-</p>
+		<h3>Keyword's Pop-up</h3>
 
-<div class="col-sm-12">
-	<img src="img/curiosity-keywords-query.png" alt="Screenshot of Curiosity's keywords from query functionality" title="Curiosity's keyword from query">
-</div>
-<div class="spacer"></div>
+		<div class="col-sm-12">
+			<img src="../img/curiosity-keywords-tab.png" alt="Screenshot of Curiosity's keywords pop up" title="Curiosity's keywords pop up">
+		</div>
 
-<h3>Keywords and fields panels</h3>
+		<div class="spacer"></div>
 
-<p>
-	On default interface there are two blue panels in the middle of the page.
-</p>
-<p>
-	The first one contains all the keywords that relies to the current index (global + index keywords) : selecting one will add it to your query automatically. By default only 9 keywords are displayed : "Show all" button makes all the keywords visible. The input field at the top of the list may be used to filter the keywords.
-</p>
-<p>
-	The second panel works in a similar way but deals whith index's fields : selecting a field will add its document full path to the query input. This may be used to query the index by a field in an easy way (no need to know the document structure to search one that match a specific value for a given field).
-</p>
+		<p>
+			Open the pop-up by clicking on the yellow "A" in the navbar present at the bottom of your screen.	
+		</p>
 
-<h3>Advanced Query</h3>
+		<p>
+			To add a new Keyword, select first the scope : it may be a specific index, but may be set as "global" for more general purpose (global is a specific entry of the index dropdown list).
+		</p>
+		<p>
+			A list of all the existing keywords attached to the selected index is then displayed. Hitting the "add" button opens a 3 input field form.
+			<ul>
+				<li>
+					The first input is the "name" of your keyword, this value will be used when you will build your query (No space allowed, if you add one, curiosity  will suppress it automatically during save processus)
+				</li>
+				<li>
+					The second input is the elasticsearch query that the keyword will hide. This field any be set with anything as it is ""elasticly" correct :) 
+				</li>
+				<li>
+					The last input is a description of your keyword. This field isn't required, fill it if your keywords name isn't enough explicit.
+				</li>
+			</ul>
+		</p>
 
-<p>Documentation  (sort, csv export....)</p>
+		<p>
+			When you have created all of your keywords, or made some modifications, hit the button save to send your data to your conf server and make it persistent. 
+		</p>
+		<h3>Keyword creation from a query</h3>
 
-<ul class="pager">
+		<p>
+			You can create a new keyword directly from your query, when you use the advanced query module, by pressing "keyword from query" button. Two fields will appear under the button. Refer then to the previous procedure (keyword creation from "keyword tab") : fill inputs, press the "save" button to make your keyword available.
+		</p>
 
-  <li class="previous">
-  	<a href="#/FirstSteps">&larr; First Steps</a>
-  </li>
-  
-  <li class="next">
-  	<a href="#/Aggregations">Aggregations &rarr;</a>
-  </li>
+		<div class="col-sm-12">
+			<img src="../img/curiosity-keywords-query.png" alt="Screenshot of Curiosity's keywords from query functionality" title="Curiosity's keyword from query">
+		</div>
+		<div class="spacer"></div>
 
-</ul>
+		<h3>Advanced Query Module</h3>
+
+		<p>
+			Advanced query modules allows you to built more complex request than the default query module. 
+		</p>
+
+		<h4>Keywords and fields panels</h4>
+
+		<p>
+			There is two panel at the top of the module. The first one is your keywords list, you can filter them by filling the input at the top of the panel, or display the full list by clicking on "Show all" button. If you click on a keyword, it will be add into your query. 
+		</p>
+
+		<p>
+			The second panel works in a similar way but deals whith index's fields : selecting a field will add its document full path to the query input. This may be used to query the index by a field in an easy way (no need to know the document structure to search one that match a specific value for a given field).
+		</p>
+
+		<h4>Sort</h4>
+
+		<p>
+			You can add sort (as many as you want) by clicking on "Add sort" button. It will add a text input with 4 buttons on its rigth. Fill the input with the path to the field you want to sort on. The first button is the sort's order (Asc/Desc), the second remove the sort and the two last buttons allows you to reorder your sort. 
+		</p>
+
+		<div class="alert alert-danger" role="alert">
+		<strong>Warning : </strong>
+			If you add a sort but don't fill the input or sort on a bad field your query will fail. 
+		</div>
+
+		<h4>JSon Query</h4>
+
+		<p>
+			By clicking on "Json Query" at the bottom of the module it will show you the json of the last query which has been sent
+		</p>
+
+		<ul class="pager">
+
+		  <li class="previous">
+		  	<a href="firststeps.html">&larr; First Steps</a>
+		  </li>
+		  
+		  <li class="next">
+		  	<a href="aggregations.html">Aggregations &rarr;</a>
+		  </li>
+
+		</ul>
+	</div>
+</body>
+</html>

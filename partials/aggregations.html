@@ -1,17 +1,207 @@
-<h2> Aggregations </h2>
+<!DOCTYPE html>
+<html ng-app="curiosityDoc" ng-controller="pageCtrl">
+<head>
+	<title>
+		ElasticSearch Aggregatrions in Curiosity
+	</title>
+    <meta charset="utf-8">
+	<meta name="description" content="Built ElassticSearch complex aggregations with curiosty (nested aggregations, script ...)" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<!-- Favicon !-->
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../img/apple-touch-icon-152x152.png" />
+	<link rel="icon" type="image/png" href="../img/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="../img/favicon-16x16.png" sizes="16x16" />
 
-<p>
-	Doc Incoming
-</p>
+	<!-- Javascript !-->
+		<!--JQuery !-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<!-- Angular !-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-route.min.js"></script>
+		<!-- Bootstrap !-->
+		<!-- Application Specifique file !-->
+	<script type="text/javascript" src="../js/app.js"></script>
+	<script type="text/javascript" src="../js/controllers/pageCtrl.js"></script>
+		<!-- Data !-->
+	<script type="text/javascript" src="../data/menu.js"></script>
+	<script type="text/javascript" src="../data/pages.js"></script>
+	<!-- CSS !-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/body.css">
+	
+</head>
+<body>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid">
+    		<div class="container">
+	    		<!-- Brand and toggle get grouped for better mobile display -->
+	    		<div class="navbar-header">
+	      			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+	      			</button>
+	      			<a class="navbar-brand" href="../index.html">Curiosity</a>
+	    		</div>
+	    		<!-- Collect the nav links, forms, and other content for toggling -->
+	    		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      			<ul class="nav navbar-nav">
+						<li ng-repeat="link in menu" ng-class="{'active':link.url == '#' + path, 'dropdown':link.subPage}">		
+							<a ng-if="!link.subPage" href="{{link.url}}" title="{{ link.title }}" desc="{{ link.desc }}">{{link.txt}}</a>
+							
+							<a ng-if="link.subPage" class="dropdown-toggle" data-toggle="dropdown">
+								{{link.txt}}<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+								<li ng-repeat="sub in link.pages" title="{{ sub.title }}" ng-class="{'active':sub.url == '#' + path}">
+									<a href="{{sub.url}}">{{sub.txt}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<div>
+		<div class="container" id="btn-container">
+			<div >
+				<div>
+					<iframe src="http://ghbtns.com/github-btn.html?user=pagesjaunes&repo=curiosity&type=watch&count=true"allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+				</div>
+		  		<div >
+					<a href="https://github.com/pagesjaunes/curiosity" class="btn btn-default btn-xs" target="_blank">
+						View on GitHub
+					</a>
+				</div>
+				<div class="btn-group margin-top">
+					<button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown">
+						Download <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="https://github.com/pagesjaunes/curiosity/zipball/master">As .zip</a></li>
+						<li><a href="https://github.com/pagesjaunes/curiosity/tarball/master">As tar.gz</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<h1> Aggregations </h1>
 
-<ul class="pager">
+		<p>
+			Curiosity brings a complex aggregation system, which allows you to create fully customizable aggregation (nested, script ...)
+		</p>
 
-  <li class="previous">
-  	<a href="#/Keywords-and-Advanced-Query">&larr; Keywords and Advanced Query</a>
-  </li>
-  
-  <li class="next">
-  	<a href="#/Templating">Templating &rarr;</a>
-  </li>
+		<h3>
+			Create an Aggregation	
+		</h3>
 
-</ul>
+		<p>
+			To create an aggregation, you just have to add an aggregation module to a card, a dropdown list will appears in the card in which you can chose aggregation's type. Then depending of the type, many input will be added automaticly in which you can specify aggregation's params.
+		</p>
+
+		<p>
+			The first fields is always aggregation's name (just for display, the real aggregation's name is random to avoid conflict if you add a lot of aggrgations), and the second is the aggregation's template, which is used to customize the way results will be shown.  
+		</p>
+
+		<div class="alert alert-info" role="alert">
+		<strong>NB : </strong>
+			other fields depend on the type of aggregation chosen, check 
+			<a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations.html" target="_blank"> 
+				aggregation's documentation 
+			</a> 
+			for futher informations 
+		</div>
+
+		<p>
+			Then, when you finished to create your aggregation, click on "Activate" buttons. It will add your aggregation to your query, After that click on the "List" icon to show results and launch your query.  
+			If your aggregation is corect, the results should appear.  
+		</p>
+
+		<h3>
+			Nested Aggregation
+		</h3>
+
+		<p>
+			If your aggregation is a bucket aggregation (terms, range, histogram), you can add nested aggregation.
+			Click on "Add Nested Aggregation" button, then fill input the same way you did before for the last aggregation.
+		</p>
+
+		<div class="alert alert-warning" role="alert">
+			For the moment you can't remove a nested aggregation, but you can disabel it (it will be fixed soon). 
+		</div>
+
+		<h3>
+			Example
+		</h3>
+		<p> 
+			In this example we will see how to create an aggregation step by step. I'm working on an index that contains few lines of the works of shakespear. My goals is to create a simple terms aggregation on speaker.
+		</p>
+
+		<h4>
+			Step 1 : Add an aggregation
+		</h4>
+		<div>
+			<div class="col-sm-5">
+				<ul>
+					<li>First open modules pop-up</li>
+					<li>Then select "Aggregation" in the dropdown list</li>
+					<li>Click on "Add module"</li>
+					<li>Click on "Ok"</li>
+				</ul> 
+				<p>You just add an aggregation !</p>
+			</div>
+
+			<div class="col-sm-7">
+				<img src="../img/agg-first-step.png">
+			</div>
+
+			<div class="spacer"></div>
+		</div>
+
+		<h4>
+			Step 2 : Configure the aggregation
+		</h4>
+		<div>
+			<div class="col-sm-7">
+				<img src="../img/agg-second-step.png">
+			</div>
+
+			<div class="col-sm-5">
+				<ul>
+					<li>Choose aggregation's type in the dropdown list (here "Terms")</li>
+					<li>Name your aggregation</li>
+					<li>Select your template (for the example we will use default template)</li>
+					<li>Select the field you want to work on</li>
+					<li>Click on validate</li>
+					<li>Switch display mode</li>
+				</ul>
+			</div>
+
+			<div class="spacer"></div>	
+		</div>
+
+		<h4>
+			Step 3 : Launch the query !
+		</h4>
+		<div class="container">
+			<img src="../img/agg-result.png">	
+		</div>
+
+		<ul class="pager">
+
+		  <li class="previous">
+		  	<a href="keywords.html">&larr; Keywords and Advanced Query</a>
+		  </li>
+		  
+		  <li class="next">
+		  	<a href="templating.html">Templating &rarr;</a>
+		  </li>
+
+		</ul>
+	</div>
+</body>
