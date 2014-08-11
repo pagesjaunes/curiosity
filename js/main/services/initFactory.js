@@ -1,4 +1,4 @@
-Curiosity.factory('init', function($rootScope, context, aggFactory, log, template, keyword, filters, result, query, conf, mapping, moduleManager, layout, curiosity){
+Curiosity.factory('init', function($rootScope, context, aggFactory, log, template, keyword, filters, result, query, conf, mapping, moduleManager, layout, curiosity, notebook){
 	var initObj = {};
 	var arg = arguments;
 	conf.getConf();

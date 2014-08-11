@@ -1,0 +1,20 @@
+<div ng-controller="notebookCtrl" class="module" ng-init="init(module.name)">
+	
+	<h4 ng-hide="card.hideTitle">
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!curNotebook.hideCurNotebook,'glyphicon-plus':curNotebook.hideCurNotebook}" ng-click="curNotebook.hideCurNotebook = !curNotebook.hideCurNotebook" title="{{ info.txt.log.Hide }}">	
+		</span>
+		
+		<span class="glyphicon" ng-class="{'glyphicon-cog':curNotebook.displayResult, 'glyphicon-list-alt':!curNotebook.displayResult}" ng-click="switchDisplay()">
+		</span>
+	</h4>
+
+	<div ng-if="!curNotebook.hideCurNotebook">
+		<div ng-if="!html">
+			<textarea ng-model="curNotebook.template" class="form-control" rows="3"></textarea>
+		</div>
+
+		<div ng-if="html">
+			<div ng-include="curNotebook.name"></div>
+ 		</div>
+	</div>	
+</div>
