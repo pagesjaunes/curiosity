@@ -22,7 +22,6 @@ Curiosity.controller('notebookCtrl', function($scope, $modal, notebook) {
 		}
 		$scope.curNotebook.displayResult = !$scope.curNotebook.displayResult;
 		$scope.html = $scope.curNotebook.displayResult;
-		console.log($scope.html);
 	}
 
 

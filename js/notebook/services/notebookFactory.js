@@ -8,7 +8,6 @@ Curiosity.factory('notebook',function($rootScope, context, moduleManager, $templ
 	}
 
 	notebookObj.load = function (obj) {
-		console.log(obj)
 		for (var key in obj) {
 			notebookObj.info[key] = obj[key];
 		}
