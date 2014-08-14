@@ -9,12 +9,16 @@ Curiosity.directive('aggResult', function($rootScope, $modal, aggFactory, filter
 		templateUrl : "template/aggregation_module/aggResult.html",	
 		controller : function ($scope) {	
 			$scope.filters = [];
-			// Event 
 			
+			// Event 
 			$rootScope.$on("updateFilter", function() {
 				updateFilter();
 			});
 			
+			/**
+			* @desc Update aggregation's filter list from aggregation sevices when "updateFilter" event is catch
+			* @param object agg the aggregation to update
+			*/
 			function updateFilter(agg) {
 				if (typeof(agg) === "undefined") {
 					agg = $scope.agg;									
@@ -41,6 +45,10 @@ Curiosity.directive('aggResult', function($rootScope, $modal, aggFactory, filter
 				return (aggFactory.isAgg(key));
 			}
 			
+			/**
+			* @desc Open aggreagations csv modal
+			* @param object agg aggregation where to take information used in csv modal
+			*/
 			$scope.aggToCsv = function (agg) {
 				console.log(aggCsv.builtMapping(agg.__ref__));
 			}
@@ -58,6 +66,11 @@ Curiosity.directive('aggResult', function($rootScope, $modal, aggFactory, filter
 				agg.__ref__.aggfilters.push(tmpFilter);
 			}
 			
+			/**
+			* @desc remove filter in an aggregation's filters list and in filters service
+			* @param object agg aggregation where to remove the filter
+			* @param int idx filter's index in the agg filters list
+			*/
 			$scope.removeFilter = function(agg, idx) {
 				filters.removeFilterFromId(agg.__ref__.aggfilters[idx].id);
 				agg.__ref__.aggfilters.splice(idx,1); 

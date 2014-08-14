@@ -4,11 +4,17 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 	aggObj.info.currentAggregation = [];
 	aggObj.info.aggList = {};
 
+	/*
+	* Init service function
+	*/
 	aggObj.init = function () {
 		context.registerModule("agg", aggObj);
 		loadAggList();
 	}
 
+	/**
+ 	* Context's functions 
+	*/
 	aggObj.store = function () {
 		return (cloneAggList(aggObj.info.currentAggregation)); 	
 	}

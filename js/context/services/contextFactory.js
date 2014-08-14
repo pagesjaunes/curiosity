@@ -7,6 +7,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	var curiosityObj = {};
 	var context = {}
 
+	/**
+	* Init service function
+	*/
 	contextObj.init = function () {
 		contextObj.info = {};
 		contextObj.info.modules = {};
@@ -58,6 +61,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		}
 	}
 
+	/**
+	* @desc function that call load function of each modules registered with their context's specicifique datas
+	*/
 	function setModulesDatas () {
 		for (key in contextObj.info.currentContext) {
 			if (key != "contextDesc" && key != "contextName"){
@@ -66,6 +72,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		}
 	}
 
+	/**
+	* @desc update current context data with returns of store function for each module registered
+	*/
 	function updateContextData() {
 		for (key in contextObj.info.modules) {
 			if (key != "contextDesc" && key != "contextName"){
@@ -74,7 +83,11 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		}
 	}
 
-	/* NEW CONTEXT FUNCTIONS*/
+	/**
+	* @desc initialize a new context, update its content from modules datas then store it in elasticsearch
+	* @param string name new context's name
+	* @param string desc new context's description
+	*/
 	contextObj.saveNewContext = function (name, desc) {
 		contextObj.info.newContextStatus = "Initializing new Context";
 		contextObj.info.newContextoK = false;
@@ -90,6 +103,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
        	elasticFunc.sendNewDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, contextObj.getNewContext);
 	}
 
+	/*
+	* @desc function call after a new context as been sent to elasticsearch, manage error and call function that will wait till context is indexed
+	*/
 	contextObj.getNewContext = function (error,resp) {
 		if (error) { // Error TODO : notifie user
 			console.error(error);
@@ -103,6 +119,10 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		}
 	}
 
+	/*
+	* Launch search query in loop until a context is indexed in es
+	* @param string contextId new context's id
+	*/
 	function waitTillIndexed(contextId) {
 		setTimeout(function () {
 			var request = ejs.Request();
@@ -128,12 +148,18 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		}, 1000);
 	}
 
+	/**
+	* @desc update current context data's then update its associated documents in es
+	*/
 	contextObj.updateContext = function () {
 		contextObj.info.updateStatus = "Updating"; 
       	updateContextData();
 		elasticFunc.sendDocument(client, globalConf.confIndex, contextDocumentType, contextObj.info.currentContext, context._id, contextObj.updateCB);
 	}
 
+	/**
+	* @desc updateContext function's callback, manage errors and notify users 
+	*/
 	contextObj.updateCB = function (error, resp) {
 		if (error) {
 			contextObj.info.updateStatus = "error";
@@ -252,10 +278,16 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 		}
 	}
 
+	/**
+	* @desc set curiosityObj with curiosity service to avoid circular depencies  
+	*/	
 	contextObj.setCuriosityObj = function(obj){
 		curiosityObj = obj;
 	}
 
+	/**
+	* @desc add a new attr in context's modules object  
+	*/
 	contextObj.registerModule = function(name, obj) {
 		contextObj.info.modules[name] = obj;
 	}

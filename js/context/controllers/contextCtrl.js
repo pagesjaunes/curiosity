@@ -27,6 +27,11 @@ var newContextModalCtrl = function($scope, $modalInstance, context){
 var contextManagerModalCtrl = function ($scope, $modalInstance, context) {
 	$scope.data = context.info;
 
+	/**  
+	* @desc call contexts service to remove a context
+	* @param string id context's id
+	* @param int index context's id in context list
+	*/
 	$scope.removeContext = function (id, index) {
 	 	context.deleteContext(id);
 	 	context.info.contextList.splice(index, 1);
@@ -36,6 +41,10 @@ var contextManagerModalCtrl = function ($scope, $modalInstance, context) {
 		$modalInstance.close();
 	}
 
+	/**
+	* @desc ask contexts service to switch context
+	* @param string context's id 
+	*/
 	$scope.selectContext = function(id) {
 		context.loadContext(id);
 		$modalInstance.close();

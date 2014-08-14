@@ -1,3 +1,4 @@
+// More information comming soon
 Curiosity.factory('aggCsv', function(aggFactory){
 	var aggCsvObj = {}; 
 	var list = aggFactory.info.aggList; 
