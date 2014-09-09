@@ -56,6 +56,10 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		openNewContextModal();
 	}
 
+	$scope.home = function() {
+		context.loadContext(globalConf.homeContext);
+	}
+
 	$scope.quickSaveContext = function () {
 		if (context.info.contextLoaded) {
 			openUpdateContextModal();
