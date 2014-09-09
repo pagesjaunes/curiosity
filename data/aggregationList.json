@@ -1,18 +1,18 @@
 {
 "list":
 [
-	{"type":"Terms", "template":"template/aggregation_module/settings_partials/terms.html", "resultTemplate":"template/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"Range", "template":"template/aggregation_module/settings_partials/range.html", "resultTemplate":"template/aggregation/default.html", "mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"DateRange", "template":"template/aggregation_module/settings_partials/date_range.html", "resultTemplate":"template/aggregation/Terms.html", "mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"Histogram", "template":"template/aggregation_module/settings_partials/histogram.html", "resultTemplate":"template/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"DateHistogram", "template":"template/aggregation_module/settings_partials/date_histogram.html", "resultTemplate":"template/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"Avg", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
-	{"type":"Stats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"count":"", "min":"", "max":"", "sum":"", "avg":""}},
-	{"type":"Min", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
-	{"type":"Sum", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
-	{"type":"ValueCount", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"value":""}},
-	{"type":"ExtendedStats", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html","mapping":{"count":"","min":"","max":"","avg":"","sum":"","sum_of_squares":"","variance":"","std_deviation":""}},
-	{"type":"Max", "template":"template/aggregation_module/settings_partials/simple.html", "resultTemplate":"template/aggregation/default.html", "mapping":{"value":""}},
-	{"type":"Filter", "template":"template/aggregation_module/settings_partials/filter.html", "resultTemplate":"template/aggregation/Filter.html","mapping":{"doc_count":"","nested":""}}
+	{"type":"Terms", "template":"partials/aggregation_module/settings_partials/terms.html", "resultTemplate":"partials/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"Range", "template":"partials/aggregation_module/settings_partials/range.html", "resultTemplate":"partials/aggregation/default.html", "mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"DateRange", "template":"partials/aggregation_module/settings_partials/date_range.html", "resultTemplate":"partials/aggregation/Terms.html", "mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"Histogram", "template":"partials/aggregation_module/settings_partials/histogram.html", "resultTemplate":"partials/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"DateHistogram", "template":"partials/aggregation_module/settings_partials/date_histogram.html", "resultTemplate":"partials/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"Avg", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
+	{"type":"Stats", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"count":"", "min":"", "max":"", "sum":"", "avg":""}},
+	{"type":"Min", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
+	{"type":"Sum", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
+	{"type":"ValueCount", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
+	{"type":"ExtendedStats", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"count":"","min":"","max":"","avg":"","sum":"","sum_of_squares":"","variance":"","std_deviation":""}},
+	{"type":"Max", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html", "mapping":{"value":""}},
+	{"type":"Filter", "template":"partials/aggregation_module/settings_partials/filter.html", "resultTemplate":"partials/aggregation/Filter.html","mapping":{"doc_count":"","nested":""}}
 ]	
 }

@@ -87,7 +87,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	function openNewContextModal() {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/new_context_modal.html',
+			templateUrl: 'partials/modal/new_context_modal.html',
 			controller: newContextModalCtrl,
 			resolve: {
 				item: function () {
@@ -100,7 +100,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	function openUpdateContextModal() {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/update_context_modal.html',
+			templateUrl: 'partials/modal/update_context_modal.html',
 			controller: updateContextModalCtrl,
 			resolve: {
 				item: function () {
@@ -113,7 +113,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	function openManageContextModal() {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/manage_context_modal.html',
+			templateUrl: 'partials/modal/manage_context_modal.html',
 			controller: contextManagerModalCtrl,
 			resolve: {
 				item: function () {
@@ -125,7 +125,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	function openTemplateModal() {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/template_modal.html',
+			templateUrl: 'partials/modal/template_modal.html',
 			size: 'lg',
 			controller:templateCtrl,
 			resolve: {
@@ -138,7 +138,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	function openKeywordsModal() {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/keywords_modal.html',
+			templateUrl: 'partials/modal/keywords_modal.html',
 			size: 'lg',
 			controller:keywordCtrl,
 			resolve: {

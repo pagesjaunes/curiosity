@@ -61,7 +61,7 @@
 		<!-- Keyword !-->
 		<script type="text/javascript" src="js/keyword/services/keywordFactory.js"></script>
 		<script type="text/javascript" src="js/keyword/controllers/keywordCtrl.js"></script>
-		<!-- Template !-->
+		<!-- template !-->
 		<script type="text/javascript" src="js/template/services/templateFactory.js"></script>
 		<script type="text/javascript" src="js/template/controllers/templateCtrl.js"></script>
 		<!-- Result !-->
@@ -130,13 +130,13 @@
 				<span><img src="resources/ajax-loader.gif" id="loading-image"></span>
 			</div>
 			<div ng-show="showHeader">
-				<div id="header" ng-include="'template/common/header.html'"></div>
+				<div id="header" ng-include="'partials/common/header.html'"></div>
 			</div>
 			
-			<div ng-show="data.tab == 0" ng-include="'template/layout/workspaces.html'" class="content">
+			<div ng-show="data.tab == 0" ng-include="'partials/layout/workspaces.html'" class="content">
 			</div>
 						
-			<!--<div ng-include="'template/context/context_selector_tab.html'">
+			<!--<div ng-include="'partials/context/context_selector_tab.html'">
 			</div>!-->
 
 			<div class="workspace-selector">

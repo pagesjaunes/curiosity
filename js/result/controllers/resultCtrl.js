@@ -39,7 +39,7 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 
 	$scope.openModalCsv = function (size) {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/csv_modal.html',
+			templateUrl: 'partials/modal/csv_modal.html',
 			controller: csvCtrl,
 			size: size,
 			resolve: {
@@ -55,7 +55,7 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 
 	$scope.openModalAgg = function (size) {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/aggregation_modal.html',
+			templateUrl: 'partials/modal/aggregation_modal.html',
 			controller: aggregationCtrl,
 			size: size,
 			resolve: {

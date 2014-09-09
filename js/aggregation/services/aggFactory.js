@@ -39,7 +39,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		agg.nestedAgg = [];
 		agg.data = [];
 		obj.push(agg);
-		moduleManager.registerModule(name, "template/aggregation_module/aggDisplay.html");
+		moduleManager.registerModule(name, "partials/aggregation_module/aggDisplay.html");
 	}
 
 	/** 
