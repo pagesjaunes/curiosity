@@ -1,0 +1,11 @@
+{{key}}
+<span class="text-muted" ng-if="field.type.length">
+	({{field.type}})
+</span>
+<input type="checkbox" ng-change="showChange(field.ancestor)" ng-model="tmp" ng-checked="field.__display__">
+<a ng-if="field.type.length" ng-click="quickAgg(field.ancestor)" title="Add a terms aggregation on this field">
+	<span class="glyphicon glyphicon-plus-sign"></span>
+</a>
+<ul>
+    <li ng-repeat="(key,field) in field.properties" ng-include="'partials/mapping_tab/mapping_renderer.html'"></li>
+</ul>

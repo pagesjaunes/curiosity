@@ -1,0 +1,69 @@
+<div>
+	<div class="modal-header">
+		<h3>Keywords</h3>	
+	</div>	
+	<div class="modal-body">
+	<div class="input-group">
+		<span class="input-group-addon">{{ info.txt.keyword.Index }}</span>
+		<select ng-model="keyword.selectedIndex" ng-change="selectIndex()" ui-select2 class="form-control" tabindex="-1">
+			<option value="global" >global</option>
+			<optgroup label="Alias">
+	          	<option ng-repeat="alias in curiosityData.aliases" value="{{ alias }}">
+	          			{{ alias }}
+	          	</option>
+          	</optgroup>
+          	<optgroup label="Index">
+	          	<option ng-repeat="index in curiosityData.indexList" value ="{{ index }}"> 
+					{{ index }}
+				</option>
+			</optgroup>
+		</select>
+	</div>
+	<div class="spacer"></div>
+	<div class="btn-group btn-keyword">
+		<button ng-click="saveKeyWords()" class="btn btn-default">{{ info.txt.keyword.Save }}</button>
+		<button ng-click="addKeyWord()" class="btn btn-default">{{ info.txt.keyword.Add }}</button>
+	</div>
+	<div class="spacer"></div>
+	<div>	
+		<hr>
+		<div>
+			<div class="col-sm-2">	
+				<label>Label</label>
+			</div>
+			<div class="col-sm-5">	
+				<label>Value</label>
+			</div>
+			<div class="col-sm-4">	
+				<label>Desc</label>
+			</div>
+			<div class="spacer"></div>
+		</div>
+		<hr>
+		<div ng-repeat="keyword in currentKeywords" class="margin-top">
+			<div class="col-sm-2">	
+				<input class="form-control" ng-model="keyword.label">
+			</div>
+			
+			<div class="col-sm-5">	
+				<input class="form-control" ng-model="keyword.value">
+			</div>
+			
+			<div class="col-sm-4">	
+				<input class="form-control" ng-model="keyword.desc">
+			</div>
+			
+			<div class="col-sm-1">	
+				<button type="button" class="btn btn-danger" title="Remove keywords" ng-click="removeRow($index)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</button>
+			</div>
+			<div class="spacer"></div>
+		</div>
+		<div class="spacer"></div>
+	</div>	
+	
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click="close()">Ok</button>
+	</div>
+</div>

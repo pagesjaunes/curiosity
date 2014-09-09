@@ -1,0 +1,49 @@
+<div class="margin-top" id="pagination-bar" ng-controller="resultCtrl">
+	<div class="col-sm-3">
+		<div class="input-group">
+			<label class="input-group-addon">{{ info.txt.request.ResultPerPage }}</label>
+			<input class="form-control" ng-model="queryData.nbResult"></input>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<ul class="pager pagination-result">
+			<li ng-class="{'disabled':queryData.page==0}">
+				<span class="link" ng-click="firstPage()" title="{{ info.txt.result.request_sub_tab.First }}">
+					<span class="glyphicon glyphicon-fast-backward">
+					</span> 
+				</span>
+			</li>
+			<li ng-class="{'disabled':queryData.page==0}">
+				<span class="link" ng-click="prevPage()" title="{{ info.txt.result.request_sub_tab.Prev }}">
+					<span class="glyphicon glyphicon-chevron-left">
+					</span>
+				</span>
+			</li>
+			<li class="disabled">
+				<span >{{ queryData.page  }} / {{ queryData.maxPage }}</span>
+			</li>
+			<li ng-class="{'disabled':queryData.page==queryData.maxPage}">
+				<span class="link" ng-click="nextPage()" title="{{ info.txt.result.request_sub_tab.Next }}">
+					<span class="glyphicon glyphicon-chevron-right">
+					</span>
+				</span>
+			</li>
+			<li  ng-class="{'disabled':queryData.page==queryData.maxPage}">
+				<span class="link" ng-click="lastPage()" title="{{ info.txt.result.request_sub_tab.Last }}"> 
+					<span class="glyphicon glyphicon-fast-forward">
+					</span>
+				</span>
+			</li>
+		</ul>
+	</div>		
+	<div class="col-sm-3">
+		<div class="input-group">
+			<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Page }} </span>
+			<input type="number" ng-model="queryData.page" min="0" max="{{queryData.maxPage}}"class="form-control">
+			<span class="input-group-btn">
+				<button class="btn btn-default" ng-click="goTo(queryData.page)">{{ info.txt.result.request_sub_tab.Go }}</button>
+			</span>
+		</div>			
+	</div>
+	<div class="spacer"></div>
+</div>

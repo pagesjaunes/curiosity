@@ -1,0 +1,11 @@
+<form ng-controller="queryCtrl">
+	<div class="input-group" id="search-bar">
+		<input ng-change="updateQuery()" ng-model="data.simplifiedRequest" type="text" ng-trim="false" class="form-control" placeholder="Query">
+		<span class="input-group-btn">
+			<button ng-click="search()" class="btn btn-default" type="submit">
+				<span class="glyphicon glyphicon-search"></span> 
+					{{ info.txt.header.Search }}
+			</button>
+		</span>
+	</div>
+</form>

@@ -1,0 +1,10 @@
+<div class="module notebook-module" ng-controller="notebookCtrl">
+	<h4 ng-hide="card.hideTitle">Notes 
+		<span ng-click="data.hide = !data.hide" 
+			class="glyphicon" ng-class="{'glyphicon-plus':data.hide, 'glyphicon-minus':!data.hide}">
+		</span>
+	</h4>
+	<div ng-if="!data.hide">
+		<textarea ng-model="data.text" class="form-control" rows="3"></textarea>
+	</div>	
+</div>

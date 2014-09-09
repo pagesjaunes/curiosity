@@ -1,0 +1,18 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">{{ info.txt.csvModal.CsvExport }}</h3>
+		<div id="modal-csv-option">
+			<div class="input-group">
+				<label class="input-group-addon">{{ info.txt.csvModal.Sep }} :</label>
+				<input type="text" class="form-control" ng-model="data.sep"></input>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="col-sm-3">
+			<button ng-click="builtCsv()" class="btn btn-default" title="{{ info.txt.csvModal.CurrentResultTitle }}">
+				Export				
+			</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,34 @@
+<form class="agg_option">
+	<div class="input-group">
+		<span class="input-group-addon">Name</span>
+		<input type="text" class="form-control" ng-model="curAgg.displayName">
+	</div>
+	<div class="margin-top">
+		<select ng-model="curAgg.tpl" ui-select2 class="form-control" ng-change="loadTpl(curAgg.tpl)">
+			<option value="default">Default</option>
+			<option ng-repeat="tpl in tplData.aggregationsTemplates" value="{{ tpl.name }}"> {{tpl.name}} </option>
+		</select>
+	</div>
+	<div class="input-group margin-top">
+		<span class="input-group-addon">Field :</span>
+		<input class="form-control" type="text" ng-model="curAgg.field">
+		<div class="input-group-btn">
+			<button title="Display Fields" type="button" class="btn btn-default" ng-click="openModalFields('sm', curAgg)">
+				<span class="glyphicon glyphicon-align-justify"></span>
+			</button>
+		</div>	
+	</div>
+
+	<div class="input-group margin-top">
+		<span class="input-group-addon">Script :</span>
+		<input class="form-control" type="text" ng-model="curAgg.script">
+	</div>
+
+	<div class="margin-top">
+		<button class="btn btn-default" ng-click="validateAgg(curAgg)">
+			<span ng-if="curAgg.validate">Deactivate</span>
+			<span ng-if="!curAgg.validate">Activate</span>
+		</button>
+	</div>
+
+</form>

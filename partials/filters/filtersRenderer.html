@@ -1,0 +1,41 @@
+<div ng-if="filter.type == 'node'" class="col-sm-12 margin-top">
+	<div class="panel"
+		ng-class="{'panel-info': filter.opBool== 'And', 'panel-warning': filter.opBool=='Or'}">
+		<div class="panel-heading">
+			<div class="btn-group">
+				<span class="dropdown-toggle" data-toggle="dropdown">
+					{{filter.opBool}} <span class="caret"></span>
+		  		</span>		
+		  		<ul class="dropdown-menu" role="menu">
+					<li class="link" ng-click="changeNodeOp(filter,'And')"> And</li>
+					<li class="link" ng-click="changeNodeOp(filter,'Or')">  Or</li>
+					<li class="link" ng-click="addNode(filter)">Add Sub Level</li>
+					<li class="link" ng-click="dropFilter(filter)">DropSelectedFilter</li>
+				</ul>	
+			</div>
+		
+		</div>
+
+		<div class="panel-body">
+			<div ng-repeat="filter in filter.nestedFilter" ng-include="'partials/filters/filtersRenderer.html'">
+			</div>
+			<div class="spacer"></div>
+		</div>
+	</div>
+</div>
+<div ng-if="filter.type != 'node'">	
+	<div class="col-sm-4"> 
+		<div class="btn-group">
+			<span class="dropdown-toggle" data-toggle="dropdown" ng-class="{'line-stroke':filter.data.not}">
+					{{filter.data.term}} <span class="caret"></span>
+		  	</span>	
+		  	<ul class="dropdown-menu" role="menu">
+				<li class="link" ng-click="removeFilter($index, $parent.$parent.$parent.filter)">Remove</li>
+				<li class="link" ng-click="selectFilter(filter, $index, $parent.$parent.$parent.filter)">
+					Put in Temporary List
+				<li class="link" ng-click="filter.data.not = !filter.data.not">Not</li>
+				</li>
+			</ul>	
+		</div>
+	</div>
+</div>

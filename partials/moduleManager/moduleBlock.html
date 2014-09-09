@@ -1,0 +1,4 @@
+<div ng-show="moduleBlock.display" dropzone="move" id="{{ moduleBlock.id}}" class="module-block">
+	<div ng-repeat="module in moduleBlock.modules" ng-show="module.display" ng-include="module.template" draggable="{{ !data.lock }}" ondragstart="drag(event)" id="{{ module.id }}">
+	</div>
+</div>

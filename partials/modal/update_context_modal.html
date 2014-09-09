@@ -1,0 +1,27 @@
+<div>
+	<div class="modal-header">
+		<h3  class="modal-title">{{ data.currentContext.contextName }}</h3>
+	</div>
+	
+	<div>
+		<form>
+		<div class="modal-body">
+			<textarea class="form-control margin-top" row="3" ng-model="data.currentContext.contextDesc"></textarea>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success" ng-click="updateContext()">Save</button>
+			<button class="btn btn-warning" ng-click="cancel()" type="button">Cancel</button>
+		</div>
+		</form>
+	</div>
+
+	<div ng-if="!info">
+		<form>
+			<span class="label label-success" ng-show="data.updateStatus == 'ok'">Context update success</span>
+			<span class="label label-danger" ng-show="data.updateStatus == 'error'">Error while updating context</span>
+			<div class="modal-footer">
+				<button ng-click="cancel()" class="btn btn-default" ng-show="data.updateStatus == 'ok'">Close</button>
+			</div>
+		</form>
+	</div>
+</div>

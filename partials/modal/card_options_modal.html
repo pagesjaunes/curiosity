@@ -1,0 +1,64 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">Card's Options</h3>
+		<button class="btn btn-default" ng-click="advancedOpt=!advancedOpt">Show/Hide Advanced Opt</button>
+	</div>
+	
+	<div class="modal-body">
+		<div ng-show="!advancedOpt">
+			<label>Add Modules</label>
+		
+			<div class="margin-top">
+				<select ng-model="selectedModuleIdx" ui-select2 class="form-control margin-top">
+					<option ng-repeat="module in data.moduleList" value="{{$index}}">{{ module.type }}</option>
+				</select>
+			</div>
+			
+			<button ng-click="addModule(selectedModuleIdx)" class="btn btn-default margin-top"> 
+				Add module
+			</button>
+			
+			<ul class="margin-top">
+				<li ng-repeat="module in res.modules">
+					{{module.name}} <span class="glyphicon glyphicon-trash" ng-click="removeModule($index)"></span>
+				</li>
+			</ul>
+			<div>
+				<label>Card's Styles</label>
+				<input type="text" class="form-control" ng-model="item.styles">
+			</div>
+		</div>
+
+		<div ng-show="advancedOpt">
+			<ul class="margin-top">
+				<li ng-repeat="module in res.modules">
+					{{module.name}} <span class="glyphicon glyphicon-trash" ng-click="removeModule($index)"></span>
+				</li>
+			</ul>
+			<div ng-repeat="module in data.moduleList" class="media col-sm-6 module-elem" 
+				ng-click="selectModule($index)" ng-class="{'selected':selectedModule[$index]}">
+				<div class="pull-left" href="#">
+					<img class="media-object" src="{{ module.visual }}" style="width: 64px; height: 64px;">
+				</div>
+ 		 		<div class="media-body">
+				<h4 class="media-heading">{{module.type}}</h4>
+    				<div class="module-tag">
+    					<span ng-repeat="tag in module.tags" class="label label-primary"> {{tag}} </span>
+    				</div>
+    				<div class="module-desc">
+    					{{ module.desc }}
+    				</div>
+  				</div>
+  				<hr>
+			</div>
+			<div class="spacer"></div>
+		</div>
+	
+	</div>
+	
+	<div class="modal-footer">
+		<button ng-click="validate()" class="btn btn-primary">Ok</button>		
+		<button ng-click="cancel()" class="btn btn-warning">Cancel</button>		
+	</div>
+
+</div>

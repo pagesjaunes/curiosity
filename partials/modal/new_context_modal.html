@@ -1,0 +1,37 @@
+<div>
+	<div class="modal-header">
+		<h3  class="modal-title">New Context</h3>
+	</div>
+	
+	<div ng-if="info">
+		<form>
+		<div class="modal-body">
+			<div class="input-group">
+				<span class="input-group-addon">Context's name</span>
+				<input type="text" class="form-control"  ng-model="nc.contextName">
+			</div>
+			<textarea class="form-control margin-top" row="3" ng-model="nc.contextDesc"></textarea>
+		</div>
+		<div class="modal-footer">
+			<button class="btn btn-success" ng-click="newContext()">Save</button>
+			<button class="btn btn-warning" ng-click="cancel()" type="button">Cancel</button>
+		</div>
+		</form>
+	</div>
+
+	<div ng-if="!info">
+		<form>
+			<div class="modal-body">
+				<label>Status</label>: {{data.newContextStatus}}
+				<div class="progress">
+	  				<div class="progress-bar progress-bar-info progress-bar-striped"  role="progressbar" aria-valuenow="{{data.newContextPercent}}" aria-valuemin="0" aria-valuemax="100" style="width: {{data.newContextPercent}}%">
+	    				<span class="sr-only">45% Complete</span>
+	  				</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button ng-click="cancel()" class="btn btn-default" ng-show="data.newContextoK">Close</button>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,0 +1,30 @@
+<div ng-controller="moduleManagerCtrl" class="module">
+	<h4>
+		{{ info.txt.moduleManager.ModulesManager }}		
+		<span class="glyphicon" ng-class="{'glyphicon-lock':data.lock,'glyphicon-fullscreen':!data.lock}" ng-click="data.lock = !data.lock" title="{{ info.txt.moduleManager.Lock }}"></span>
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!hideModuleManager,'glyphicon-plus':hideModuleManager}" ng-click="hideModuleManager = !hideModuleManager" title="{{ info.txt.log.Hide }}">	
+		</span>
+	</h4>
+	<div ng-if="!hideModuleManager" class="margin-top">
+		<div class="margin-top">
+			<select ng-model="selectedModuleIdx" ui-select2 class="form-control margin-top">
+				<option ng-repeat="module in data.moduleList" value="{{$index}}">{{ module.type }}</option>
+			</select>
+		</div>
+		
+		<div class="margin-top">
+			<select ng-model="moduleBlocks" ui-select2 class="form-control margin-top">
+				<option ng-repeat="(key, value) in data.moduleBlocks" value="{{ key }}">{{ key }}</option>  
+			</select>
+		</div>
+		
+		<button class="btn btn-default margin-top" ng-click="addModule(selectedModuleIdx, moduleBlocks)">
+			{{ info.txt.moduleManager.Add }} 
+		</button>
+		
+		<button class="btn btn-default margin-top" ng-click="reinitModules()">
+			 {{ info.txt.moduleManager.RestartInterface }}  
+		</button>
+
+	</div>
+</div>

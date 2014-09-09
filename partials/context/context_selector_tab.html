@@ -1,0 +1,9 @@
+<div ng-controller="contextCtrl">
+
+	<div ng-repeat="context in data.contextList | limitTo : 6 " class="context-card col-sm-4" >
+		<div>
+			<h4>{{ context.fields.contextName }}</h3>
+			<div>{{ context.fields.contextDesc }}</div>
+		</div>	
+	</div>
+</div>

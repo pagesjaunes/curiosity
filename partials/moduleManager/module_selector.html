@@ -1,0 +1,18 @@
+<div>
+	<div ng-repeat="module in data.moduleList">
+		<div class="media">
+  			<div class="pull-left" href="#">
+    			<img class="media-object" src="{{ module.visual }}">
+  			</div>
+ 		 	<div class="media-body">
+    			<h4 class="media-heading">{{module.type}}</h4>
+    			<div class="module.tag">
+    				<span ng-repeat="tag in module.tags">{{tag}} </span>
+    			</div>
+    			<div class="module-desc">
+    				{{ module.desc }}
+    			</div>
+  			</div>
+		</div>
+	</div>
+</div>

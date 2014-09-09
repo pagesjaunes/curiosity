@@ -1,0 +1,17 @@
+<div class="container-fluid workspace" ng-controller="workspaces">
+	<div ng-repeat="ws in data.workspaces" ng-if="data.idx == $index" ng-animate="{show: 'fade-show', hide: 'fade-hide'}">
+		<div ng-if="ws.new">
+			<div ng-include="'partials/layout/layout_selector.html'"></div>
+		</div>
+		<div ng-if="!ws.new">
+			<div ng-repeat="row in ws.cards" 
+				class="cards-row row-{{12/data.currentWorkspace.row}}" >
+				<div ng-repeat="card in row" class="{{card.colType}}" style="{{card.styles}}">
+					<div class="card" ng-include="'partials/layout/card.html'" >
+					</div>
+				</div>
+				<div class="spacer"></div>
+			</div>
+		</div>
+	</div>
+</div>

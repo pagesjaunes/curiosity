@@ -1,0 +1,28 @@
+<div ng-controller="docCtrl">
+	<div ng-repeat="item in queryData.result.hits.hits">
+		<form role="form">
+		  	<div class="form-group">
+		    	<label for="type">type</label>
+    			<span id="type">{{item._type}}</span>
+  			</div>
+		  	<div class="form-group">
+		    	<label for="id">id</label>
+    			<span id="id">{{item._id}}</span>
+  			</div>
+		  	<div class="form-group">
+		    	<label for="source">source</label>
+				<textarea class="form-control" id="source" ng-model="item._source" json></textarea>
+  			</div>
+
+			<button ng-click="updateDocument(item._id, item._type, item._source)" class="btn btn-info">Update</button>
+			<button ng-click="showToId = !showToId" class="btn btn-default">Clone</button>
+			<div class="form-group" ng-show="showToId">
+				<label for="toId">New id</label>
+				<input class="form-control" id="toId" type="text" ng-model="toId"></input>
+				<button ng-click="updateDocument(toId, item._type, item._source)" class="btn btn-default">Go and clone</button>
+			</div>
+			<button ng-click="deleteDocument(item._id, item._type)" class="btn btn-danger">Delete</button>
+		</form>
+		<hr />
+	</div>
+</div>

@@ -1,0 +1,12 @@
+<div ng-switch="agg.__ref__.tpl">
+	<!-- Default Tpl !-->
+	<div ng-switch-when="default">
+		<div ng-include="agg.__ref__.resultTemplate">	
+		</div>
+	</div>
+	<!-- Specifique Tpl !-->
+	<div ng-switch-default>
+		<div ng-include="agg.__ref__.tpl">
+		</div>							
+	</div>
+</div>

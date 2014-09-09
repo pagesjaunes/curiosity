@@ -1,0 +1,54 @@
+<div ng-controller="contextCtrl" class="context-module module">
+	
+	<h4> {{ info.txt.context.Context }}
+		<span ng-click="data.hide = !data.hide" 
+			class="glyphicon" ng-class="{'glyphicon-plus':data.hide, 'glyphicon-minus':!data.hide}">
+		</span>
+	 </h4>
+
+	<div ng-if="!data.hide">
+		<div class="input-group">
+			<span class="input-group-addon">{{ info.txt.context.Context }}</span>
+			<select ng-model="data.contextIdx" ui-select2 class="form-control" ng-change="selectContext()">
+				<option ng-repeat="context in data.contextList" value="{{ $index }}" >
+					{{ context.fields.contextName }}
+				</option>  
+			</select>
+		</div>
+
+		<div class="margin-top">
+			<button class="btn btn-default" ng-click="updateContext()" title="{{ info.txt.context.UpdateContext }}">
+				<span class="glyphicon glyphicon-refresh"></span>
+			</button>
+
+			<button class="btn btn-default" ng-click="sendContext()" title="{{ info.txt.context.SaveContext }}">
+				<span class="glyphicon glyphicon-floppy-disk"></span>
+			</button>	
+
+			<button class="btn btn-default" ng-click="showNewContext = !showNewContext" title="{{ info.txt.context.NewContext }}">
+				<span ng-if="!showNewContext" class="glyphicon glyphicon-plus-sign">
+				</span>
+				<span ng-if="showNewContext" class="glyphicon glyphicon-ban-circle">
+				</span>
+			</button>
+			<!--button class="btn btn-default" ng-click="deleteContext()" title="{{ info.txt.context.Remove }}">
+				<span class="glyphicon glyphicon-trash"></span>
+			</button!-->
+			<button ng-click="reloadContextList()" title="Reload context list" class="btn btn-default">
+				<span  class="glyphicon glyphicon-share-alt"> </span>	
+			</button>
+		</div>
+
+		<div class="margin-top" ng-show="showNewContext">
+			<div class="input-group">
+				<span class="input-group-addon">{{ info.txt.context.ContextName }}</span>
+				<input type="text" ng-model="info.newContextName" class="form-control">
+			</div>
+			
+			<button class="btn margin-top" ng-click="saveNewContext()" ng-class="{'btn-danger':data.error,'btn-default':!data.error}"
+			 title="{{ info.txt.context.Validate }}">
+				<span class="glyphicon glyphicon-ok"></span>
+			</button>
+		</div>
+	</div>
+</div>

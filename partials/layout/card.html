@@ -1,0 +1,19 @@
+<div ng-controller="cardCtrl">
+	<div class="card-bar">
+
+		<div class="icon" ng-click="openOption()" title="Show card's options">
+			<span class="glyphicon glyphicon-cog"></span>
+		</div>
+
+		<div class="icon" title="Show/Hide module Title" ng-click="card.hideTitle = !card.hideTitle">
+			<span class="glyphicon" ng-class="{'glyphicon-eye-open':!card.hideTitle, 'glyphicon-eye-close':card.hideTitle}">
+			</span>
+		</div>
+		<div class="spacer"></div>	
+	</div>
+
+	<div ng-show="!showOpt" class="card-content">
+		<div moduleblock  card="card" name="{{ ws.name + '-r' + card.row + '-c' + card.col }}" type="{{ card.name }}">
+		</div>
+	</div>
+</div>
