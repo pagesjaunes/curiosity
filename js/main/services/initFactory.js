@@ -9,6 +9,7 @@ Curiosity.factory('init', function($rootScope, context, aggFactory, log, templat
 			services[i].init();
 			i++;
 		}
+		console.log(services)
 		context.launch();
 	}	
 	
