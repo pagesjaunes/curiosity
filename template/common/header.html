@@ -50,6 +50,8 @@
 				<img ng-if="data.err" src="resources/red_light.png">
 				<img ng-if="!data.err" src="resources/green_light.png">
 			</p>
+
+			<p class="navbar-text">{{ info.txt.header.Context }} : {{ contextData.currentContext.contextName }} -> {{layoutData.currentWorkspace.displayName}}</p>
 		</div>
 	</div>
 </div>

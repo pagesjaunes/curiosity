@@ -9,6 +9,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 	$scope.showHeader = true;	
 	$scope.info = {};
 	$scope.info.txt = global_text;
+
 	
 	$scope.selectIndex = function (){
 		curiosity.selectIndex();
@@ -57,7 +58,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	$scope.quickSaveContext = function () {
 		if (context.info.contextLoaded) {
-			context.updateContext();
+			openUpdateContextModal();
 		}
 		else {
 			openNewContextModal();
@@ -90,6 +91,20 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 			controller: newContextModalCtrl,
 			resolve: {
 				item: function () {
+					return "new"
+				}}
+			});
+		modalInstance.result.then(function (value) {
+		}, function () {})	
+	}
+
+	function openUpdateContextModal() {
+		var modalInstance = $modal.open({
+			templateUrl: 'template/modal/update_context_modal.html',
+			controller: updateContextModalCtrl,
+			resolve: {
+				item: function () {
+					return "update"
 				}}
 			});
 		modalInstance.result.then(function (value) {

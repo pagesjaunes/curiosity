@@ -1,9 +1,11 @@
 Curiosity.controller('layoutSelectorCtrl', function($scope, layout){
+	$scope.data = layout.info;
+
 	$scope.colh = 0;
-	$scope.cols = 2;
+	$scope.cols = $scope.data.currentWorkspace.col;
 	$scope.rowh = 0;
-	$scope.rows = 2;
-	$scope.name = "New Workspace";
+	$scope.rows = $scope.data.currentWorkspace.row;
+	$scope.name = $scope.data.currentWorkspace.displayName;
 
 	$scope.highlight = function (x, y) {
 		$scope.rowh = x;
