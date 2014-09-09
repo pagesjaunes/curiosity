@@ -281,7 +281,8 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 			contextObj.loadContext(params);
 		}
 		else { 													// no context =>  Default context
-			curiosityObj.connectToServer(globalConf.defaultServer);
+			//curiosityObj.connectToServer(globalConf.defaultServer);
+			contextObj.loadContext(globalConf.homeContext);
 		}
 	}
 

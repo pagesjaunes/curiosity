@@ -3,5 +3,5 @@ var globalConf = {
     confServer : 'http://localhost:9200',
     confIndex : "curiosity-config",
     defaultConfDocumentType : "conf-doc",
-    homeContext: ""
+    homeContext: "nbjaxY0DS7Kyyo9UfH6l3Q"
 }
