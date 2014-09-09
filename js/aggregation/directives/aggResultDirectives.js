@@ -6,7 +6,7 @@ Curiosity.directive('aggResult', function($rootScope, $modal, aggFactory, filter
 		scope: {
 			agg : '='
 		},	
-		templateUrl : "template/aggregation_module/aggResult.html",	
+		templateUrl : "partials/aggregation_module/aggResult.html",	
 		controller : function ($scope) {	
 			$scope.filters = [];
 			

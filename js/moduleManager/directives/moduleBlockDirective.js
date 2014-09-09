@@ -1,6 +1,6 @@
 Curiosity.directive('moduleblock', function(moduleManager){
 	return {
-		templateUrl: "template/moduleManager/moduleBlock.html", 
+		templateUrl: "partials/moduleManager/moduleBlock.html", 
 		restrict: 'A',
 		scope:{
 			'card':'='

@@ -1,11 +1,14 @@
 -------------------------------------------------------------------------------------------------------------------
 version 0.2.3 (09/09/2014)
 
+
 	-Bugs :
 		- change the way context init to solve a bug
+		- Fix #14 : Rename /template to /partials
 	-Interface :
 		- Rename workspace
 		- Update description of context
+
 
 -------------------------------------------------------------------------------------------------------------------
 
