@@ -48,7 +48,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 					curiosityObj.connectToServer(globalConf.defaultServer);
 					log.log("Context : Error : context " + contextId + " not found", "danger");
 				}
-				else {													// Context found
+				else {		// Context found
+					// if a previous context was already loaded, blank url query	
+					if (contextObj.info.contextLoaded == true) url.addData("simplifiedRequest", "");
 					contextObj.info.currentContext = context._source;
 					contextObj.setContextIdx();
 					url.addData("context", contextId);

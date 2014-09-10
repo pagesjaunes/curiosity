@@ -1,4 +1,4 @@
-Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, csv){
+Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, csv, context){
 	$scope.queryData = query.info;
 	$scope.templateData = template.info
 	$scope.showAggregationFilter = true;
@@ -20,6 +20,11 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 	$scope.goTo = function (page) {
 		query.goTo(page);
 	}
+	$scope.loadContext = function(idContext) {
+		console.log(idContext)
+		context.loadContext(idContext);
+	}
+
 
 	$scope.selectTemplate = function(type, id) {
 		result.changeCurrentTemplate(type, id);
