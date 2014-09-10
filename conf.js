@@ -1,7 +1,9 @@
 var globalConf = {
     defaultServer : 'http://localhost:9200', 
     confServer : 'http://localhost:9200',
-    confIndex : "curiosity-config",
+    confIndex : "curiosity-conf",
     defaultConfDocumentType : "conf-doc",
-    homeContext: ""
+    defaultContextDocumentType : "context-doc",
+    readonlyContext : ["exploreContext","basicSearch"],
+    homeContext: "exploreContext"
 }

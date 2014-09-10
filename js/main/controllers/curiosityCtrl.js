@@ -61,7 +61,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 	}
 
 	$scope.quickSaveContext = function () {
-		if (context.info.contextLoaded) {
+		if (context.info.contextLoaded && globalConf.readonlyContext.indexOf(context.info.currentContext.contextName) == -1) {
 			openUpdateContextModal();
 		}
 		else {

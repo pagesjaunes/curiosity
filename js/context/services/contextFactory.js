@@ -8,7 +8,7 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	contextObj.info.contextIdx = -1;
 	contextObj.info.contextLoaded = false;
 	contextObj.info.updateStatus = "ok";
-	var contextDocumentType = "context-doc";
+	var contextDocumentType = globalConf.defaultContextDocumentType;
 	var prevIdx = -2;
 	var client = elasticClient.getClient(globalConf.confServer);
 	var curiosityObj = {};

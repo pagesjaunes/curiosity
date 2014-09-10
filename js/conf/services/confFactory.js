@@ -35,6 +35,15 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 			]
 	};
 
+	var basicSearchContext = 
+	{"contextName":"basicSearch","agg":[],"filters":{"filters":{"opBool":"And","type":"node","nestedFilter":[]}},"result":{"useTemplate":false,"currentTemplate":""},"request":{"simplifiedRequest":"","complexRequest":"","autoRefresh":true,"nbResult":10},"moduleManager":{"trash":{"name":"trash","display":true,"modules":[],"id":0,"type":"trash"},"ws748760-r0-c0":{"name":"ws748760-r0-c0","display":true,"modules":[{"name":"module147804","display":true,"template":"partials/request_module/partials/request_form.html","id":2,"$$hashKey":"02X"},{"name":"module462756","display":true,"template":"partials/request_module/partials/request_option_bar.html","id":3,"$$hashKey":"02Y"},{"name":"module238113","display":true,"template":"partials/request_module/partials/request_pagination.html","id":4,"$$hashKey":"02Z"},{"name":"module254706","display":true,"template":"partials/request_module/partials/request_result_display.html","id":5,"$$hashKey":"030"}],"id":1,"type":"ws748760-r0-c0"}},"layout":{"workspaces":[{"name":"ws748760","displayName":"New Workspace","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"}],"currentWorkspace":{"name":"ws748760","displayName":"New Workspace","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"},"idx":0,"turn":false},"curiosity":{"server":"http://localhost:9200","index":""},"notebook":{"currentNotebook":[]}};
+
+	var exploreContext = 
+	{"contextName":"exploreContext","agg":[],"filters":{"filters":{"opBool":"And","type":"node","nestedFilter":[]}},"result":{"useTemplate":false,"currentTemplate":""},"request":{"simplifiedRequest":"","complexRequest":"","autoRefresh":true,"nbResult":10},"moduleManager":{"trash":{"name":"trash","display":true,"modules":[],"id":0,"type":"trash"},"ws748760-r0-c0":{"name":"ws748760-r0-c0","display":true,"modules":[{"name":"module147804","display":true,"template":"partials/request_module/partials/request_form.html","id":2,"$$hashKey":"02X"},{"name":"module462756","display":true,"template":"partials/request_module/partials/request_option_bar.html","id":3,"$$hashKey":"02Y"},{"name":"module238113","display":true,"template":"partials/request_module/partials/request_pagination.html","id":4,"$$hashKey":"02Z"},{"name":"module254706","display":true,"template":"partials/request_module/partials/request_result_display.html","id":5,"$$hashKey":"030"}],"id":1,"type":"ws748760-r0-c0"}},"layout":{"workspaces":[{"name":"ws748760","displayName":"New Workspace","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"}],"currentWorkspace":{"name":"ws748760","displayName":"New Workspace","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"},"idx":0,"turn":false},"curiosity":{"server":"http://localhost:9200","index":""},"notebook":{"currentNotebook":[]}};
+
+
+
+
 	var confClient = elasticClient.getClient(globalConf.confServer); 
 
 	/*
@@ -42,7 +51,11 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 	*/
 	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate];
 	
+	var defaultContextDocument = [basicSearchContext, exploreContext];
+
+
 	return {
+
 			"init": function () {
 			}, 
 
@@ -53,10 +66,20 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 			"initConf" : function () {
 				var i = 0;
 				while (i < defaultConfDocument.length) {
-					elasticFunc.sendNewDocument(confClient, 
+					elasticFunc.sendDocument(confClient, 
 						globalConf.confIndex, 
 						globalConf.defaultConfDocumentType, 
-						defaultConfDocument[i]);
+						defaultConfDocument[i],
+						defaultConfDocument[i].type);
+					i++;
+				}
+				i = 0;
+				while (i < defaultContextDocument.length) {
+					elasticFunc.sendDocument(confClient, 
+						globalConf.confIndex, 
+						globalConf.defaultContextDocumentType, 
+						defaultContextDocument[i],
+						defaultContextDocument[i].contextName);
 					i++;
 				}
 			},
