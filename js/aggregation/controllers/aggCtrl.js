@@ -130,7 +130,7 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 		if (typeof(agg.nestedAgg) !== "undefined") {
 			var i = 0;
 			while (i < agg.nestedAgg.length) {
-				initTempalte(agg.nestedAgg[i]);
+				initTemplate(agg.nestedAgg[i]);
 				i++;
 			}
 		}
