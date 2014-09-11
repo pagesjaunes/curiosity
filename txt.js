@@ -6,6 +6,7 @@ var global_text = {
 		Hide: "Hide",
 		AddServer : "Add a new server",
 		Connect : "Connect",
+		Context : "Context",
 		Index : "Index",
 		AllIndex : "All Index",
 		Search : "Search",

@@ -1,4 +1,18 @@
 -------------------------------------------------------------------------------------------------------------------
+version 0.2.3 (09/09/2014)
+
+	-Functionality :
+		- add home button associate with a context by default in conf file
+	-Bugs :
+		- change the way context init to solve a bug
+		- Fix #14 : Rename /template to /partials
+	-Interface :
+		- Rename workspace
+		- Update description of context
+
+
+-------------------------------------------------------------------------------------------------------------------
+
 version 0.2.0 (07/21/2014)
 
 	-Functionality :

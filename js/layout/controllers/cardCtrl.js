@@ -22,7 +22,7 @@ Curiosity.controller('cardCtrl', function($scope, $modal, moduleManager, layout)
 
 	function openCardModal() {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/card_options_modal.html',
+			templateUrl: 'partials/modal/card_options_modal.html',
 			controller: cardModalCtrl,
 			size: 'lg',
 			resolve: {

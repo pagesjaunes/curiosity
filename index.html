@@ -61,7 +61,7 @@
 		<!-- Keyword !-->
 		<script type="text/javascript" src="js/keyword/services/keywordFactory.js"></script>
 		<script type="text/javascript" src="js/keyword/controllers/keywordCtrl.js"></script>
-		<!-- Template !-->
+		<!-- template !-->
 		<script type="text/javascript" src="js/template/services/templateFactory.js"></script>
 		<script type="text/javascript" src="js/template/controllers/templateCtrl.js"></script>
 		<!-- Result !-->
@@ -130,13 +130,13 @@
 				<span><img src="resources/ajax-loader.gif" id="loading-image"></span>
 			</div>
 			<div ng-show="showHeader">
-				<div id="header" ng-include="'template/common/header.html'"></div>
+				<div id="header" ng-include="'partials/common/header.html'"></div>
 			</div>
 			
-			<div ng-show="data.tab == 0" ng-include="'template/layout/workspaces.html'" class="content">
+			<div ng-show="data.tab == 0" ng-include="'partials/layout/workspaces.html'" class="content">
 			</div>
 						
-			<!--<div ng-include="'template/context/context_selector_tab.html'">
+			<!--<div ng-include="'partials/context/context_selector_tab.html'">
 			</div>!-->
 
 			<div class="workspace-selector">
@@ -176,6 +176,10 @@
 						<span class="glyphicon glyphicon-search">
 						</span>
 					</div>
+					<div ng-click="home()" title="Return to home page" class="ico black">
+						<span class="glyphicon glyphicon-home">
+						</span>
+					</div>
 					<div ng-click="manageKeyword()" title="Open Keywords window " class="ico yellow">
 						<span class="glyphicon" 
 							ng-class="{'glyphicon-font':data.tab != 2, 'glyphicon-home': data.tab == 2}">
@@ -200,12 +204,15 @@
 					</div>
 					
 					<div class="ico context-button"> 
-						<span class="glyphicon glyphicon-floppy-disk blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Save your context" ng-click="quickSaveContext()">
+						<span class="glyphicon glyphicon-dashboard blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Manage your dashbord">
 						</span>
 						<div class="ico-hidden">
 							<span class="glyphicon glyphicon-folder-open blue" ng-click="manageContext()" title="Manage Context">
 							</span>
-							<span class="glyphicon glyphicon-floppy-save blue" ng-click="newContext()"title="Save As"></span>
+							<span class="glyphicon glyphicon-floppy-save blue" ng-click="newContext()"title="Save As">
+							</span>
+							<span class="glyphicon glyphicon-floppy-disk blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Save your context" ng-click="quickSaveContext()">
+							</span>							
 						</div>
 					</div>
 

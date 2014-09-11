@@ -1,20 +1,22 @@
 var newContextModalCtrl = function($scope, $modalInstance, context){	
-	$scope.nc = {};
-	$scope.nc.contextName = "New Context";
-	$scope.nc.contextDescr = "";
 	$scope.data = context.info;
+
+	$scope.nc = {};
+	$scope.nc.contextName = "Copy of " + $scope.data.currentContext.contextName;
+	$scope.nc.contextDesc = $scope.data.currentContext.contextDesc;
+
 	$scope.error = false;
 	$scope.info = true;
 
 	/**
-	* @desc ask contet's service to send context 
+	* @desc ask context's service to send context 
 	*/
 	$scope.newContext = function() {
 		if ($scope.contextName == "") {
 			$scope.error = true;				
 		}
 		else {
-			context.saveNewContext($scope.nc.contextName, $scope.nc.contextDescr);
+			context.saveNewContext($scope.nc.contextName, $scope.nc.contextDesc);
 			$scope.info = false;
 		}
 	}
@@ -23,6 +25,26 @@ var newContextModalCtrl = function($scope, $modalInstance, context){
 		$modalInstance.close();
 	}
 };
+
+var updateContextModalCtrl = function($scope, $modalInstance, context){	
+	$scope.data = context.info;
+
+	$scope.error = false;
+	$scope.info = true;
+
+	/**
+	* @desc ask context's service to send context 
+	*/
+	$scope.updateContext = function() {
+		context.updateContext();
+		$scope.info = false;
+	}
+
+	$scope.cancel = function () {
+		$modalInstance.close();
+	}
+};
+
 
 var contextManagerModalCtrl = function ($scope, $modalInstance, context) {
 	$scope.data = context.info;

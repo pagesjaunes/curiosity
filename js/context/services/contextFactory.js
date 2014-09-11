@@ -1,6 +1,13 @@
 Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFunc, log){
 	// initializing service's vars 
 	var contextObj = {};
+	contextObj.info = {};
+	contextObj.info.modules = {};
+	contextObj.info.currentContext = {};
+	contextObj.info.contextList = [];
+	contextObj.info.contextIdx = -1;
+	contextObj.info.contextLoaded = false;
+	contextObj.info.updateStatus = "ok";
 	var contextDocumentType = "context-doc";
 	var prevIdx = -2;
 	var client = elasticClient.getClient(globalConf.confServer);
@@ -11,13 +18,13 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	* Init service function
 	*/
 	contextObj.init = function () {
-		contextObj.info = {};
-		contextObj.info.modules = {};
-		contextObj.info.currentContext = {};
-		contextObj.info.contextList = [];
-		contextObj.info.contextIdx = -1;
-		contextObj.info.contextLoaded = false;
-		contextObj.info.updateStatus = "ok";
+		// contextObj.info = {};
+		// contextObj.info.modules = {};
+		// contextObj.info.currentContext = {};
+		// contextObj.info.contextList = [];
+		// contextObj.info.contextIdx = -1;
+		// contextObj.info.contextLoaded = false;
+		// contextObj.info.updateStatus = "ok";
 		contextObj.getContextList();
 	}
 
@@ -163,11 +170,11 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	contextObj.updateCB = function (error, resp) {
 		if (error) {
 			contextObj.info.updateStatus = "error";
-			alert("Error while updating context");
+			//alert("Error while updating context");
 		}
 		else {
 			contextObj.info.updateStatus = "ok";
-			alert("Context update success");
+			//alert("Context update success");
 		}
 	}
 
@@ -274,7 +281,8 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 			contextObj.loadContext(params);
 		}
 		else { 													// no context =>  Default context
-			curiosityObj.connectToServer(globalConf.defaultServer);
+			//curiosityObj.connectToServer(globalConf.defaultServer);
+			contextObj.loadContext(globalConf.homeContext);
 		}
 	}
 
