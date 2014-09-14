@@ -137,6 +137,7 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 			var request = ejs.Request();
 			var query = ejs.QueryStringQuery("_id:\"" + contextId + "\"");
 			var filter = ejs.TypeFilter(contextDocumentType);
+			request.query(query).filter(filter);
 			client.search({index:globalConf.confIndex, body:request}).then(function(data) {
 				var tmp = data.hits.hits[0];
 				if (typeof (tmp) === "undefined")  { // Context not found => Do it again till found
