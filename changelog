@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------------------------------------------
+version 0.2.4 (18/09/2014)
+
+	-Functionality :
+		- #8 : default context simple search and context selector + Home button
+		- New template jsonPretty based on ng-json-explorer
+		- #9 : Add possibilty to open modal in results template
+	-Bugs :
+		- Fix a bug with save as feature (do not wait elasticsaerch for index document)
+
+-------------------------------------------------------------------------------------------------------------------
 version 0.2.3 (09/09/2014)
 
 	-Functionality :
@@ -9,7 +19,6 @@ version 0.2.3 (09/09/2014)
 	-Interface :
 		- Rename workspace
 		- Update description of context
-
 
 -------------------------------------------------------------------------------------------------------------------
 
