@@ -21,7 +21,6 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		query.goTo(page);
 	}
 	$scope.loadContext = function(idContext) {
-		console.log(idContext)
 		context.loadContext(idContext);
 	}
 
@@ -73,4 +72,24 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		}, function () {
 		});
 	}
+
+
+	/**
+	* @desc function used to open modals in results
+	* @param string id : the id of the div to display in the modal
+	* @param string size (optionnal) : the size (boostrap) of the modal
+	*/ 
+	$scope.openModal = function (id,size, item) {
+	    var modalInstance = $modal.open({
+    	  	templateUrl: id,
+      		size: size,
+      		controller:function($modalInstance,$scope){
+      			$scope.item = item;
+      			$scope.close = function() {
+      				$modalInstance.close();
+      			}
+      		}
+    	});
+	}
+
 })
