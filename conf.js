@@ -5,5 +5,6 @@ var globalConf = {
     defaultConfDocumentType : "conf-doc",
     defaultContextDocumentType : "context-doc",
     readonlyContext : ["exploreContext","basicSearch"],
+    readonlyTemplate : ["exploreContext","prettyJson","pieChart","barChart","lineChart"],
     homeContext: "exploreContext"
 }
