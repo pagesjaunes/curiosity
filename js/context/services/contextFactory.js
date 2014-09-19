@@ -8,7 +8,7 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 	contextObj.info.contextIdx = -1;
 	contextObj.info.contextLoaded = false;
 	contextObj.info.updateStatus = "ok";
-	var contextDocumentType = "context-doc";
+	var contextDocumentType = globalConf.defaultContextDocumentType;
 	var prevIdx = -2;
 	var client = elasticClient.getClient(globalConf.confServer);
 	var curiosityObj = {};
@@ -48,7 +48,9 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 					curiosityObj.connectToServer(globalConf.defaultServer);
 					log.log("Context : Error : context " + contextId + " not found", "danger");
 				}
-				else {													// Context found
+				else {		// Context found
+					// if a previous context was already loaded, blank url query	
+					if (contextObj.info.contextLoaded == true) url.addData("simplifiedRequest", "");
 					contextObj.info.currentContext = context._source;
 					contextObj.setContextIdx();
 					url.addData("context", contextId);
@@ -135,6 +137,7 @@ Curiosity.factory('context', function($rootScope, url, elasticClient, elasticFun
 			var request = ejs.Request();
 			var query = ejs.QueryStringQuery("_id:\"" + contextId + "\"");
 			var filter = ejs.TypeFilter(contextDocumentType);
+			request.query(query).filter(filter);
 			client.search({index:globalConf.confIndex, body:request}).then(function(data) {
 				var tmp = data.hits.hits[0];
 				if (typeof (tmp) === "undefined")  { // Context not found => Do it again till found

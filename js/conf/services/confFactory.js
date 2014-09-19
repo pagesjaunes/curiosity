@@ -21,7 +21,11 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 	var templateDefault = 
 	{
 		"type":"template",
-		"templates":[]
+		"templates":[
+			{"name": "exploreContext", "value": "<div> <div class=\"row\"> <div class=\"col-sm-6 col-md-4\" ng-repeat=\'item in queryData.result.hits.hits\'> <div class=\"thumbnail\">  <div class=\"caption\"> <h3>{{ item._source.contextName }}<\/h3> <p>{{ item._source.contextDesc }}<\/p> <p><a href=\"#?context={{ item._id }}\" target=\"_blank\" class=\"btn btn-primary\" role=\"button\">Use it !<\/a> <\/p> <\/div> <\/div> <\/div> <\/div> <\/div>"},
+			{"name": "prettyJson", "value": "<div class=\"panel-group\" id=\"accordion\">\r\n   <div class=\"panel panel-default\" ng-repeat=\'item in queryData.result.hits.hits\'>\r\n      <div class=\"panel-heading\">\r\n         <h4 class=\"panel-title\">\r\n            <a data-toggle=\"collapse\" data-parent=\"#accordion\" data-target=\"#{{item._id}}\">\r\n            {{item._type}} -> {{item._id}}\r\n            <\/a>\r\n         <\/h4>\r\n      <\/div>\r\n      <div id=\"{{item._id}}\" class=\"panel-collapse collapse in\">\r\n         <div class=\"panel-body\">\r\n            <json-explorer json-data=\"{{item._source}}\" ><\/json-explorer>\r\n         <\/div>\r\n      <\/div>\r\n   <\/div>\r\n<\/div>"},
+
+		]
 	};
 	
 	var aggregationsTemplate = 
@@ -35,6 +39,15 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 			]
 	};
 
+	var basicSearchContext = 
+	{"contextName":"basicSearch","contextDesc": "This context is usefull to just process a search and explore quickly an index.\nChoose it, select your index, eventualy add query string paramters and acces yours docs.","agg":[],"filters":{"filters":{"opBool":"And","type":"node","nestedFilter":[]}},"result":{"useTemplate":true,"currentTemplate":"prettyJson","templateSelected": "1"},"request":{"simplifiedRequest":"","complexRequest":"","autoRefresh":true,"nbResult":10},"moduleManager":{"trash":{"name":"trash","display":true,"modules":[],"id":0,"type":"trash"},"ws748760-r0-c0":{"name":"ws748760-r0-c0","display":true,"modules":[{"name":"module147804","display":true,"template":"partials/request_module/partials/request_form.html","id":2,"$$hashKey":"02X"},{"name":"module462756","display":true,"template":"partials/request_module/partials/request_option_bar.html","id":3,"$$hashKey":"02Y"},{"name":"module238113","display":true,"template":"partials/request_module/partials/request_pagination.html","id":4,"$$hashKey":"02Z"},{"name":"module254706","display":true,"template":"partials/request_module/partials/request_result_display.html","id":5,"$$hashKey":"030"}],"id":1,"type":"ws748760-r0-c0"}},"layout":{"workspaces":[{"name":"ws748760","displayName":"Default page","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"}],"currentWorkspace":{"name":"ws748760","displayName":"Default page","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"},"idx":0,"turn":false},"curiosity":{"server":globalConf.defaultServer,"index":""},"notebook":{"currentNotebook":[]}};
+
+	var exploreContext = 
+	{"contextName":"exploreContext","contextDesc": "This context is a specific context usefull for select a context !!! \nWe use the context system to display a search tool and show how to customize curiosity. Have fun !","agg":[],"filters":{"filters":{"opBool":"And","type":"node","nestedFilter":[{"type":"Terms","data":{"field":"_type","term":globalConf.defaultContextDocumentType},"id":"filter153040"}]}},"result":{"useTemplate":true,"currentTemplate":"exploreContext","templateSelected": "0"},"request":{"simplifiedRequest":"","complexRequest":"","autoRefresh":true,"nbResult":100},"moduleManager":{"trash":{"name":"trash","display":true,"modules":[],"id":0,"type":"trash"},"ws748760-r0-c0":{"name":"ws748760-r0-c0","display":true,"modules":[{"name":"module147804","display":true,"template":"partials/request_module/partials/request_form.html","id":2,"$$hashKey":"02X"},{"name":"module238113","display":true,"template":"partials/request_module/partials/request_pagination.html","id":4,"$$hashKey":"02Z"},{"name":"module254706","display":true,"template":"partials/request_module/partials/request_result_display.html","id":5,"$$hashKey":"030"}],"id":1,"type":"ws748760-r0-c0"}},"layout":{"workspaces":[{"name":"ws748760","displayName":"Default page","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"}],"currentWorkspace":{"name":"ws748760","displayName":"Default page","col":1,"row":1,"new":false,"cards":[[{"row":0,"col":0,"colType":"col-xs-12","rowType":"row-12","name":"ws748760-r0-c0","$$hashKey":"00R"}]],"idx":0,"$$hashKey":"00B"},"idx":0,"turn":false},"curiosity":{"server":globalConf.confServer,"index":globalConf.confIndex},"notebook":{"currentNotebook":[]}};
+
+
+
+
 	var confClient = elasticClient.getClient(globalConf.confServer); 
 
 	/*
@@ -42,7 +55,11 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 	*/
 	var defaultConfDocument = [keyWordDefault, serverDefault, templateDefault, aggregationsTemplate];
 	
+	var defaultContextDocument = [basicSearchContext, exploreContext];
+
+
 	return {
+
 			"init": function () {
 			}, 
 
@@ -53,10 +70,20 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 			"initConf" : function () {
 				var i = 0;
 				while (i < defaultConfDocument.length) {
-					elasticFunc.sendNewDocument(confClient, 
+					elasticFunc.sendDocument(confClient, 
 						globalConf.confIndex, 
 						globalConf.defaultConfDocumentType, 
-						defaultConfDocument[i]);
+						defaultConfDocument[i],
+						defaultConfDocument[i].type);
+					i++;
+				}
+				i = 0;
+				while (i < defaultContextDocument.length) {
+					elasticFunc.sendDocument(confClient, 
+						globalConf.confIndex, 
+						globalConf.defaultContextDocumentType, 
+						defaultContextDocument[i],
+						defaultContextDocument[i].contextName);
 					i++;
 				}
 			},

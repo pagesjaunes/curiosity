@@ -3,5 +3,8 @@ var globalConf = {
     confServer : 'http://localhost:9200',
     confIndex : "curiosity-config",
     defaultConfDocumentType : "conf-doc",
-    homeContext: ""
+    defaultContextDocumentType : "context-doc",
+    readonlyContext : ["exploreContext","basicSearch"],
+    readonlyTemplate : ["exploreContext","prettyJson","pieChart","barChart","lineChart"],
+    homeContext: "exploreContext"
 }

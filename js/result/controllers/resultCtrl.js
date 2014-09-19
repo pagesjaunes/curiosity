@@ -1,4 +1,4 @@
-Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, csv){
+Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, csv, context){
 	$scope.queryData = query.info;
 	$scope.templateData = template.info
 	$scope.showAggregationFilter = true;
@@ -20,6 +20,10 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 	$scope.goTo = function (page) {
 		query.goTo(page);
 	}
+	$scope.loadContext = function(idContext) {
+		context.loadContext(idContext);
+	}
+
 
 	$scope.selectTemplate = function(type, id) {
 		result.changeCurrentTemplate(type, id);
@@ -68,4 +72,24 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		}, function () {
 		});
 	}
+
+
+	/**
+	* @desc function used to open modals in results
+	* @param string id : the id of the div to display in the modal
+	* @param string size (optionnal) : the size (boostrap) of the modal
+	*/ 
+	$scope.openModal = function (id,size, item) {
+	    var modalInstance = $modal.open({
+    	  	templateUrl: id,
+      		size: size,
+      		controller:function($modalInstance,$scope){
+      			$scope.item = item;
+      			$scope.close = function() {
+      				$modalInstance.close();
+      			}
+      		}
+    	});
+	}
+
 })

@@ -13,10 +13,10 @@
 	<button ng-click="new('aggregationsTemplates',template.aggregation, 'currentTemplate')" class="btn btn-default">
 		{{ info.txt.template.aggregation_sub_tab.New }}
 	</button>
-	<button ng-click="save('aggregationsTemplates')" class="btn btn-default">
+	<button ng-if="!readonlyTemplate" ng-click="save('aggregationsTemplates')" class="btn btn-default">
 		{{ info.txt.template.aggregation_sub_tab.Save }}
 	</button>
-	<button ng-click="delete('aggregationsTemplates',template.aggregation, 'currentTemplate', template.aggregation.selected)" class="btn btn-default" >
+	<button ng-if="!readonlyTemplate" ng-click="delete('aggregationsTemplates',template.aggregation, 'currentTemplate', template.aggregation.selected)" class="btn btn-default" >
 		{{ info.txt.template.aggregation_sub_tab.Delete }}
 	</button>	
 </div>

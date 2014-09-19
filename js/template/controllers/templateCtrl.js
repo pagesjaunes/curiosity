@@ -13,6 +13,8 @@ var templateCtrl = function($scope, $modalInstance, template, mapping, $http){
 
 	$scope.template.currentTemplate = {};
 	$scope.template.aggregation.currentTemplate = {};
+
+	$scope.readonlyTemplate = 0;
 	// EVENT
 
 	$scope.fieldLimit = 12;
@@ -20,6 +22,8 @@ var templateCtrl = function($scope, $modalInstance, template, mapping, $http){
 	$scope.changeTemplate = function (type, obj, attr, index) {
 		if (index !== "undefined" && index >= 0) {
 			obj[attr] = $scope.data[type][index];
+			if (globalConf.readonlyTemplate.indexOf(obj[attr].name) == -1) $scope.readonlyTemplate = 0;
+			else $scope.readonlyTemplate = 1;
 		}
 	}
 	
@@ -28,9 +32,10 @@ var templateCtrl = function($scope, $modalInstance, template, mapping, $http){
 	* Add a new template in the template list
 	*/
 	$scope.new = function (type, obj, attr) {
-		var tmp = {name:"New Template",value:"<div ng-repeat='item in queryData.result.hits.hits'></div>"}
+		var tmp = {name:"New Template",value:"<div ng-repeat='item in queryData.result.hits.hits'>{{item._source}}</div>"}
 		obj[attr] = tmp;
 		template.new(type, tmp);
+		$scope.readonlyTemplate = 0;
 	}
 	/**
 	* $scope.save 

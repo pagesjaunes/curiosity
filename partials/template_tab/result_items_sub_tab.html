@@ -11,7 +11,7 @@
 	<button ng-click="new('template', template, 'currentTemplate')" class="btn btn-default">
 		{{ info.txt.template.result_items_sub_tab.New }}
 	</button>
-	<button ng-click="save('template')" class="btn btn-default">
+	<button ng-if="!readonlyTemplate" ng-click="save('template')" class="btn btn-default">
 		{{ info.txt.template.result_items_sub_tab.Save }}
 	</button>
 </div>
