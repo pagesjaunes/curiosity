@@ -18,7 +18,7 @@
 					<label>
 						<span 
 						ng-click="addFilter(agg, {type:'Terms', data:{field:agg.__ref__.field, term:bucket.key }})" class="link">
-							{{bucket.key}} :
+							{{bucket.key_as_string ? bucket.key_as_string : bucket.key}} :
 						</span>
 					</label>
 					{{bucket.doc_count}}
