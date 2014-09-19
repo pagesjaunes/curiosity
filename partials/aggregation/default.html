@@ -8,7 +8,7 @@
 		<div class="panel-body">
 			<div ng-repeat="(key, value) in agg">
 				<div ng-if="key !='__ref__' ">
-					<label>{{ key }} :</label>
+					<label>{{ key_as_string ? key_as_string : key }} :</label>
 					{{ value }}
 				</div>
 			</div>
