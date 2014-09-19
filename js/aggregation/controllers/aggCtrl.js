@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /** 
 * aggCtrl 
 * @desc this controller is attached to each aggregation displayed 
@@ -135,7 +134,7 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 				i++;
 			}
 		}
-=======
+
 /** 
 * aggCtrl 
 * @desc this controller is attached to each aggregation displayed 
@@ -272,6 +271,5 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 				i++;
 			}
 		}
->>>>>>> b785de8cb5fce773b641e20bb685f7ed28187c89
 	}
 });
