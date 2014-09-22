@@ -221,7 +221,6 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	// SORT FUNCTION
 	queryObj.addSort = function () {
 		queryObj.info.sort.push({"field":"",type:true});
-		console.log(queryObj)
 	}
 
 	queryObj.removeSort = function (index) {
