@@ -1,0 +1,27 @@
+<div class="agg-result">
+	<div class="panel panel-primary panel-request">
+		<div class="panel-heading">
+			<h3 class="panel-title">
+				{{ agg.__ref__.displayName }}
+			</h3>
+		</div>
+			<div ng-repeat="(key, agg) in agg">
+				<div ng-if="isAgg(key)">
+					<div ng-switch="agg.__ref__.tpl">
+						
+						<!-- Default Tpl !-->
+						<div ng-switch-when="default">
+							<div ng-include="agg.__ref__.resultTemplate">	
+							</div>
+						</div>
+						<!-- Specifique Tpl !-->
+						<div ng-switch-default>
+							<div ng-include="agg.__ref__.tpl">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

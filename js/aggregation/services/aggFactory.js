@@ -140,7 +140,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 				aggObj.setReference(agg, aggResult.buckets[bucket]);
 			}
 		}
-		if (agg.type == "Filter") { // Manage Filter agg that have not bucket attribute
+		if (agg.type == "Filter" || agg.type == "Global"  || agg.type == "Nested") { // Manage Filter agg that have not bucket attribute
 			aggObj.setReference(agg, aggResult);
 		} 	
 	}
