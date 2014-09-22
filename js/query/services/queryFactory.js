@@ -37,6 +37,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		toStore.simplifiedRequest = queryObj.info.simplifiedRequest;	 
 		toStore.complexRequest = queryObj.info.complexRequest;
  		toStore.autoRefresh = queryObj.info.autoRefresh;
+ 		toStore.sort = queryObj.info.sort;
  		toStore.nbResult = queryObj.info.nbResult;
 		return (toStore);
 	}
@@ -220,6 +221,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	// SORT FUNCTION
 	queryObj.addSort = function () {
 		queryObj.info.sort.push({"field":"",type:true});
+		console.log(queryObj)
 	}
 
 	queryObj.removeSort = function (index) {
