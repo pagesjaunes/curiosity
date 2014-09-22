@@ -112,6 +112,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	}
 
 	queryObj.search = function (noReset) {
+		queryObj.updateQuery();
 		curiosity.setLoad(true);
 		if (typeof(noReset) === "undefined") {
 			queryObj.info.page = 0;

@@ -1,5 +1,6 @@
-Curiosity.controller('notebookCtrl', function($scope, $modal, notebook) {
+Curiosity.controller('notebookCtrl', function($scope, $modal, notebook, query) {
 	$scope.data = notebook.info;
+	$scope.queryData = query.info;
 
 	/**
 	* @desc function call by ng-init, called to load aggregation specifique data, and load template in $templateCache
@@ -22,6 +23,16 @@ Curiosity.controller('notebookCtrl', function($scope, $modal, notebook) {
 		}
 		$scope.curNotebook.displayResult = !$scope.curNotebook.displayResult;
 		$scope.html = $scope.curNotebook.displayResult;
+	}
+
+	/**
+	* @desc function 
+	* @param string queryString : the string to search for
+	*/ 
+	$scope.search = function (queryString) {
+		console.log(queryString)
+		$scope.queryData.simplifiedRequest = queryString;
+		query.search();
 	}
 
 
