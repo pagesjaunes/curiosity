@@ -178,8 +178,12 @@
 						<span class="glyphicon glyphicon-search">
 						</span>
 					</div>
-					<div ng-click="home()" title="Return to home page" class="ico black">
+					<div ng-click="loadContext('basicSearch')" title="Home (basic search context)" class="ico black">
 						<span class="glyphicon glyphicon-home">
+						</span>
+					</div>
+					<div ng-click="loadContext('exploreContext')" title="Open the context list and choose one" class="ico brown">
+						<span class="glyphicon glyphicon-th-list">
 						</span>
 					</div>
 					<div ng-click="manageKeyword()" title="Open Keywords window " class="ico yellow">
