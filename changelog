@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------------------------------------------
+version 0.2.5 (24/09/2014)
+
+	-Functionality :
+		- Add new button to open list of context and set basic search context as home
+		- Fix #10 with all aggregation available with elasticjs. A new custom elasticjs is provided from https://github.com/Sean-Der/elastic.js with top hits agg. Test needs to be done on nested, and geo agg.
+		-  Fix #30 : query parameters can be changed from a notebook. A new search method can take a simple request and page actualize. Add a queryUpdate in factory.
+	-Bugs :
+		- Fix #33 : add sort paramter to infos to store in context
+
+-------------------------------------------------------------------------------------------------------------------
 version 0.2.4 (18/09/2014)
 
 	-Functionality :
