@@ -171,7 +171,7 @@ Curiosity.factory('aggConstructor', function(){
 
 
 	/**
-	* @desc Built range aggregation 
+	* @desc Built filter aggregation 
 	* @param object agg contains all aggregation's param
 	*/
 	obj.Filter = function (agg) {
@@ -375,7 +375,7 @@ Curiosity.factory('aggConstructor', function(){
 	}
 
 	/**
-	 * @desc Built geo distance aggregation 
+	 * @desc Built geo hash grid aggregation 
 	 * @param object agg contains all aggregation's param
 	 */
 	obj.GeoHashGrid = function (agg) { 
