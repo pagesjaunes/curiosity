@@ -35,7 +35,7 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 			[
 				{"name":"pieChart","value" : "<div piechart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"},
 				{"name":"barChart","value" : "<div barchart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"},
-				{"name":"lineChart","value": "<div linechart data=\"agg.buckets\" cols=\"[{id: 'Date', label: 'Date', type: 'date', path:'key'},{id: 'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"></div>"}
+				{"name":"lineChart","value": "<div linechart data=\"agg.buckets\" cols=\"[{id: 'Date', label: 'Date', type: 'date', path:'key'},{id: 'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"></div>"},
 			]
 	};
 
@@ -124,6 +124,8 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 					$rootScope.$broadcast("ConfLoaded");
 				},
 				function (err) {
+					log.log("Try to create configuration", "info");
+					$rootScope.$broadcast("ConfCreation");
 					elasticFunc.createIndex(confClient, globalConf.confIndex);
 					initConfFunc(confClient);
 				});
