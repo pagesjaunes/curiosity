@@ -13,6 +13,16 @@
 	{"type":"ValueCount", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
 	{"type":"ExtendedStats", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"count":"","min":"","max":"","avg":"","sum":"","sum_of_squares":"","variance":"","std_deviation":""}},
 	{"type":"Max", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html", "mapping":{"value":""}},
-	{"type":"Filter", "template":"partials/aggregation_module/settings_partials/filter.html", "resultTemplate":"partials/aggregation/Filter.html","mapping":{"doc_count":"","nested":""}}
+	{"type":"Filter", "template":"partials/aggregation_module/settings_partials/filter.html", "resultTemplate":"partials/aggregation/Filter.html","mapping":{"doc_count":"","nested":""}},
+	{"type":"IPv4Range", "template":"partials/aggregation_module/settings_partials/date_range.html", "resultTemplate":"partials/aggregation/Terms.html"},
+	{"type":"Cardinality", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html"}, 
+	{"type":"Percentiles", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/percentiles.html"}, 
+	{"type":"Missing", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html"}, 
+	{"type":"SignificantTerms", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html"}, 
+	{"type":"Global", "template":"partials/aggregation_module/settings_partials/global.html", "resultTemplate":"partials/aggregation/global.html"}, 
+	{"type":"TopHits", "template":"partials/aggregation_module/settings_partials/tophits.html", "resultTemplate":"partials/aggregation/tophits.html"}, 
+	{"type":"GeoDistance", "template":"partials/aggregation_module/settings_partials/geodistance.html", "resultTemplate":"partials/aggregation/default.html", "mapping":{"buckets":["doc_count", "key"]}},
+	{"type":"GeoHashGrid", "template":"partials/aggregation_module/settings_partials/geohashgrid.html", "resultTemplate":"partials/aggregation/default.html"},
+	{"type":"Nested", "template":"partials/aggregation_module/settings_partials/nested.html", "resultTemplate":"partials/aggregation/nested.html"}
 ]	
 }

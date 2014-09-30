@@ -171,7 +171,7 @@ Curiosity.factory('aggConstructor', function(){
 
 
 	/**
-	* @desc Built range aggregation 
+	* @desc Built filter aggregation 
 	* @param object agg contains all aggregation's param
 	*/
 	obj.Filter = function (agg) {
@@ -240,6 +240,177 @@ Curiosity.factory('aggConstructor', function(){
 	*/
 	obj.Sum = function (agg) {
 		return (simple(agg, ejs.SumAggregation));
+	}
+
+ 
+	/**
+	 * @desc Built IPv4 range aggregation 
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.IPv4Range = function (agg) {              
+		var result = ejs.IPv4RangeAggregation(agg.name);
+		result.field(agg.field);              
+		var i = 0;              
+		if (typeof (agg.intervals) !== "undefined") {                      
+			while (i < agg.intervals.length) {                              
+				var from = null;                              
+				var to = null;                              
+				if (typeof (agg.intervals[i].from) !== "undefined") {
+				    from = agg.intervals[i].from;                              
+				}                              
+				if (typeof (agg.intervals[i].to) !== "undefined") {
+				    to = agg.intervals[i].to;                              
+				}
+				result.range(from, to);
+				i++;                      
+			}              
+		}              
+		if (typeof (agg.script) !== "undefined" && agg.script != "") result.script(agg.script);              
+		for (key in agg.nested) {                      
+			if (agg.nested[key].validate) result.agg(obj[agg.nested[key].type](agg.nested[key]));                   
+		}              
+		return (result);       
+	}
+
+	/**
+	 * @desc Built cardinality aggregation with throught simple function
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.Cardinality = function (agg) {              
+		return (simple(agg, ejs.CardinalityAggregation));       
+	}
+
+	/**
+	 * @desc Built percentiles aggregation with throught simple function
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.Percentiles = function (agg) {              
+		return (simple(agg, ejs.PercentilesAggregation));       
+	}
+
+	/**
+	 * @desc Built missing aggregation with throught simple function
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.Missing = function (agg) {              
+		return (simple(agg, ejs.MissingAggregation));       
+	}
+
+	/**
+	 * @desc Built significant terms aggregation with throught simple function
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.SignificantTerms = function (agg) {              
+		return (simple(agg, ejs.SignificantTermsAggregation));       
+	}
+
+	/**
+	 * @desc Built global aggregation 
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.Global = function (agg) {              
+		var result = ejs.GlobalAggregation(agg.name);
+		for (key in agg.nested) {
+			if (agg.nested[key].validate) {
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+			}
+		}
+		return (result);
+	}
+
+	/**
+	 * @desc Built top hits aggregation 
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.TopHits = function (agg) { 
+		var result = ejs.TopHitsAggregation(agg.name);
+
+		if (typeof (agg.size) !== "undefined") 
+			result.size(agg.size);
+		if (typeof (agg.from) !== "undefined") 
+			result.from(agg.from);
+		if (typeof (agg.sort) !== "undefined" && agg.sort != "") 
+			result.sort(agg.sort);
+
+		return (result);
+	}
+
+	/**
+	 * @desc Built geo distance aggregation 
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.GeoDistance = function (agg) { 
+		var result = ejs.GeoDistanceAggregation(agg.name);
+		var i = 0;
+		if (typeof (agg.longitude) !== "undefined" && agg.longitude != "" && typeof (agg.latitude) !== "undefined" && agg.latitude != "") 
+			result.center(ejs.GeoPoint([agg.latitude,agg.longitude]));
+		if (typeof (agg.distanceType) !== "undefined" && agg.distanceType != "") 
+			result.distanceType(agg.distanceType);
+		if (typeof (agg.field) !== "undefined" && agg.field != "") 
+			result.field(agg.field);
+		if (typeof (agg.keyed) !== "undefined" && agg.keyed != "") 
+			result.keyed(agg.keyed);
+		if (typeof (agg.unit) !== "undefined" && agg.unit != "") 
+			result.unit(agg.unit);
+		if (typeof (agg.intervals) !== "undefined") {
+			while (i < agg.intervals.length) {
+				var from = null;
+				var to = null;
+				if (typeof (agg.intervals[i].from) !== "undefined" 	&& agg.intervals[i].from != "") {
+					from = agg.intervals[i].from;
+				}
+				if (typeof (agg.intervals[i].to) !== "undefined" && agg.intervals[i].to != "") {
+					to = agg.intervals[i].to;
+				}
+				result.range(from, to);
+				i++;
+			}
+		}
+		for (key in agg.nested) {
+			if (agg.nested[key].validate) {
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+			}
+		}
+		return (result);
+	}
+
+	/**
+	 * @desc Built geo hash grid aggregation 
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.GeoHashGrid = function (agg) { 
+		var result = ejs.GeoHashGridAggregation(agg.name);
+		if (typeof (agg.field) !== "undefined" && agg.field != "") 
+			result.field(agg.field);
+		if (typeof (agg.precision) !== "undefined") 
+			result.precision(agg.precision);
+		if (typeof (agg.shardSize) !== "undefined") 
+			result.shardSize(agg.shardSize);
+		if (typeof (agg.size) !== "undefined") 
+			result.size(agg.size);
+
+		for (key in agg.nested) {
+			if (agg.nested[key].validate) {
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+			}
+		}
+		return (result);
+	}
+
+	/**
+	 * @desc Built nested aggregation 
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.Nested = function (agg) {              
+		var result = ejs.NestedAggregation(agg.name);
+		if (typeof (agg.path) !== "undefined" && agg.path != "") 
+			result.path(agg.path);		
+		for (key in agg.nested) {
+			if (agg.nested[key].validate) {
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+			}
+		}
+		return (result);
 	}
 
 	// More Incoming !!!!!

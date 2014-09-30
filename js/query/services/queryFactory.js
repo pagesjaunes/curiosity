@@ -37,6 +37,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 		toStore.simplifiedRequest = queryObj.info.simplifiedRequest;	 
 		toStore.complexRequest = queryObj.info.complexRequest;
  		toStore.autoRefresh = queryObj.info.autoRefresh;
+ 		toStore.sort = queryObj.info.sort;
  		toStore.nbResult = queryObj.info.nbResult;
 		return (toStore);
 	}
@@ -111,6 +112,7 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	}
 
 	queryObj.search = function (noReset) {
+		queryObj.updateQuery();
 		curiosity.setLoad(true);
 		if (typeof(noReset) === "undefined") {
 			queryObj.info.page = 0;
