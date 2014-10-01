@@ -36,7 +36,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		agg.name = "agg" +  Math.floor((Math.random() * 1000000) + 1);
 		agg.displayName = type + "Agg on " + fields;
 		agg.size = size;
-		agg.nested = [];
+		agg.nested = {};
 		agg.data = [];
 		obj.push(agg);
 		moduleManager.registerModule(name, "partials/aggregation_module/aggDisplay.html");
@@ -56,7 +56,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		else {
 			agg.name = name;	
 		}
-		agg.nested = [];
+		agg.nested = {};
 		agg.filters = [];
 		agg.tpl = "default";
 		agg.aggregationTypeIdx = -1;

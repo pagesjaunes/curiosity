@@ -6,7 +6,6 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	$scope.aggTypeSelected = false;
 	$scope.data = aggFactory.info;
 	$scope.tplData = template.info; 
-	console.log($scope.data)
 
 	/**
 	* @desc function call by ng-init, called to load aggregation specifique data, and load template in $templateCache
@@ -129,11 +128,8 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	function initTemplate(agg) {
 		$scope.loadTpl(agg.tpl);
 		if (typeof(agg.nested) !== "undefined") {
-			console.log(agg.displayName)
-			var i = 0;
-			while (i < agg.nested.length) {
-				initTemplate(agg.nested[i]);
-				i++;
+			for (sub_agg in agg.nested)
+				initTemplate(sub_agg);
 			}
 		}
 	}
