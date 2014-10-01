@@ -124,6 +124,8 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 					$rootScope.$broadcast("ConfLoaded");
 				},
 				function (err) {
+					log.log("Try to create configuration", "info");
+					$rootScope.$broadcast("ConfCreation");
 					elasticFunc.createIndex(confClient, globalConf.confIndex);
 					initConfFunc(confClient);
 				});
