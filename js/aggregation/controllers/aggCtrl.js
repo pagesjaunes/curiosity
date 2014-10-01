@@ -128,8 +128,9 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	function initTemplate(agg) {
 		$scope.loadTpl(agg.tpl);
 		if (typeof(agg.nested) !== "undefined") {
-		for (sub_agg in agg.nested)
-			initTemplate(sub_agg);
+			for (sub_agg in agg.nested) {
+				initTemplate(agg.nested[sub_agg]);
+			}
 		}
 	}
 });
