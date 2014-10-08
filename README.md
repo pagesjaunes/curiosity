@@ -35,9 +35,10 @@ Documentation
 Contact
 =======
 
-If you have any question about curisity you can contact Arthur BABEY, who is for the moment Curiosity's main developper : 
+If you have any question about curisity you can contact Erwan PIGNEUL, who is for the moment Curiosity's main developper : 
 
-BABEY Arthur : 	ababey@pagesjaunes.fr or arthur.babey@epitech.eu
+PIGNEUL Erwan : epigneul@pagesjaunes.fr
+Initial dev is the work ofBABEY Arthur : 	arthur.babey@epitech.eu
 
 # Informations
 
