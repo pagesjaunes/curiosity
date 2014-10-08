@@ -38,6 +38,7 @@ Contact
 If you have any question about curisity you can contact Erwan PIGNEUL, who is for the moment Curiosity's main developper : 
 
 PIGNEUL Erwan : epigneul@pagesjaunes.fr
+
 Initial dev is the work ofBABEY Arthur : 	arthur.babey@epitech.eu
 
 # Informations
