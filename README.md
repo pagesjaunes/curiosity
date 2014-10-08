@@ -35,9 +35,9 @@ Documentation
 Contact
 =======
 
-If you have any question about curisity you can contact Erwan PIGNEUL : epigneul@pagesjaunes.fr
+If you have any question about curisity you can contact Erwan PIGNEUL and Fabrice DEPAULIS : epigneul@pagesjaunes.fr / fdepaulis@pagesjaunes.fr
 
-Initial dev is the work ofBABEY Arthur : 	arthur.babey@epitech.eu (many thanks Arthur)
+Initial dev is the work of Arthur BABEY : 	arthur.babey@epitech.eu (many thanks Arthur)
 
 # Informations
 
