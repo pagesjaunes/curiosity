@@ -108,7 +108,7 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	*/
 	$scope.openModalFields = function (size, curAgg) {
 		var modalInstance = $modal.open({
-			templateUrl: 'template/modal/fieldsModal.html',
+			templateUrl: 'partials/modal/fieldsModal.html',
 			controller: mappingModalCtrl,
 			resolve: {
 				item: function () {
