@@ -43,6 +43,23 @@ Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curi
 	}
 
 	queryObj.load = function (obj) {
+		 // init query...
+		queryObj.info.simplifiedRequest = "";
+		queryObj.info.complexRequest = "";
+		queryObj.info.nbResult = 10;
+		queryObj.info.page = 0;
+		queryObj.info.maxPage = 0;
+		queryObj.info.hits = 0;
+		queryObj.info.keywordToShow = [];
+		queryObj.info.currentKeyword = [];
+		queryObj.info.autoRefresh = true;
+		queryObj.info.jsonRequest = {};
+		queryObj.info.loading = false;
+		queryObj.info.error = false;
+		queryObj.info.errorContent = "";
+		queryObj.info.result = {};
+		queryObj.info.sort = [];
+
 		for (key in obj) {
 			queryObj.info[key] = obj[key]; 				
 		}
