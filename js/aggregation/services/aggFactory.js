@@ -180,8 +180,10 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 		var  i = 0;
 		while (i < aggObj.info.currentAggregation.length) {
 			
-			if (aggObj.info.currentAggregation[i].name == agg.name)
+			if (aggObj.info.currentAggregation[i].name == agg.name){
+				aggObj.info.currentAggregation.splice(i,1);
 				break;
+			}
 			i++;
 		}
 		moduleManager.removeModule(id);
