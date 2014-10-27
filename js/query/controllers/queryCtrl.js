@@ -1,7 +1,7 @@
 // queryCtrl.js
 
-Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
-    function($scope, query, mapping) {
+Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping', '$modal',
+    function($scope, query, mapping, $modal) {
 	    
 	    /* INITIALISATIONS */
     	$scope.data = query.info;
@@ -71,6 +71,26 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping',
 			else 
 				query.sortDown(index);
 		}
+
+		/**
+		* @desc open a modal which contains the fields list. When closed change aggregation field attr value
+		* @params 'sm' | 'lg' size modal size 
+		*/
+		$scope.openModalFields = function (size, curAgg) {
+			var modalInstance = $modal.open({
+				templateUrl: 'partials/modal/fieldsModal.html',
+				controller: mappingModalCtrl,
+				resolve: {
+					item: function () {
+						return curAgg;
+					}}
+				});
+			modalInstance.result.then(function (value) {
+				value.item.field = value.value;
+			}, function () {
+			})
+		}
+
 	}
 ]);
 

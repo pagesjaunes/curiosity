@@ -3,6 +3,35 @@
 */
 
 Curiosity.factory('aggConstructor', function(){
+	
+	/**
+	* @desc test mandatory values
+	* @param val value to test
+	*/
+	function checkValue(val) {
+		if (typeof(val) !== "undefined" && val != "") return true;
+		return false;
+	}
+
+	/**
+	* @desc reinit error message
+	* @param agg aggregation to reinit
+	*/
+	function initError(agg) {
+		agg.validation_error = false;
+		agg.validation_message = "";
+	}
+
+	/**
+	* @desc set an error message
+	* @param agg aggregation where is the error
+	* @param message error message
+	*/
+	function setError(agg, message) {
+		agg.validation_error = true;
+		agg.validation_message = message;
+	}
+
 	var obj = {};
 
 	/**
@@ -10,23 +39,38 @@ Curiosity.factory('aggConstructor', function(){
 	* @param object agg contains all aggregation's param
 	*/
 	obj.Terms = function (agg) {
+
+		initError(agg);
+
+		if (!checkValue(agg.field) && !checkValue(agg.script)) {
+			setError(agg, "you need to fill script or field input.");
+			return ;
+		}
+
 		var result = ejs.TermsAggregation(agg.name);
-		result.field(agg.field);
-		if (typeof (agg.size) !== "undefined") 
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
+		if (checkValue(agg.size)) 
 			result.size(agg.size);
-		if (typeof (agg.order) !== "undefined") {
+
+		if (checkValue(agg.order)) {
 			order = "desc";
 			if (agg.orderType)
 				order = "asc";
 			result.order(agg.order, order);			
 		}
-		if (typeof (agg.minDoc) !== "undefined") 
+		if (checkValue(agg.minDoc)) 
 			result.minDocCount(agg.minDoc);
-		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+
+		if (checkValue(agg.script)) 
 			result.script(agg.script);
-		if (typeof (agg.include) !== "undefined" && agg.include != "") 
+
+		if (checkValue(agg.include)) 
 			result.include(agg.include);
-		if (typeof (agg.exclude) !== "undefined" && agg.exclude != "") 
+
+		if (checkValue(agg.exclude)) 
 			result.exclude(agg.exclude);
 		
 		for (key in agg.nested) {
@@ -37,27 +81,41 @@ Curiosity.factory('aggConstructor', function(){
 	}
 
 	obj.Histogram = function (agg) {
+
+		initError(agg);
+
+		if (!checkValue(agg.interval) || !(checkValue(agg.field) || checkValue(agg.script))) {
+			setError(agg, "you need to fill interval and script or field input.");
+			return ;
+		}
+
 		var result = ejs.HistogramAggregation(agg.name);
-		result.field(agg.field);
-		if (typeof (agg.order) !== "undefined") {
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
+		if (checkValue(agg.order)) {
 			order = "desc";
 			if (agg.orderType)
 				order = "asc";
 			result.order(agg.order, order);			
 		}
-		if (typeof (agg.format) !== "undefined" && agg.format != "") {
+		if (checkValue(agg.format)) 
 			result.format(agg.format);
-		}
-		if (typeof (agg.interval) !== "undefined") {
+		
+		if (checkValue(agg.interval)) 
 			result.interval(agg.interval);
-		}
-		if (typeof (agg.minDoc) !== "undefined") 
+		
+		if (checkValue(agg.minDoc)) 
 			result.minDocCount(agg.minDoc);
-		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+
+		if (checkValue(agg.script)) 
 			result.script(agg.script);
-		if (typeof (agg.include) !== "undefined" && agg.include != "") 
+
+		if (checkValue(agg.include)) 
 			result.include(agg.include);
-		if (typeof (agg.exclude) !== "undefined" && agg.exclude != "") 
+
+		if (checkValue(agg.exclude)) 
 			result.exclude(agg.exclude);
 		
 		for (key in agg.nested) {
@@ -68,27 +126,41 @@ Curiosity.factory('aggConstructor', function(){
 	}
 
 	obj.DateHistogram = function (agg) {
+
+		initError(agg);
+
+		if (!checkValue(agg.interval) || !(checkValue(agg.field) || checkValue(agg.script))) {
+			setError(agg, "you need to fill interval and script or field input.");
+			return ;
+		}
+
 		var result = ejs.DateHistogramAggregation(agg.name);
-		result.field(agg.field);
-		if (typeof (agg.order) !== "undefined") {
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
+		if (checkValue(agg.order)) {
 			order = "desc";
 			if (agg.orderType)
 				order = "asc";
 			result.order(agg.order, order);			
 		}
-		if (typeof (agg.format) !== "undefined" && agg.format != "") {
+		if (checkValue(agg.format)) 
 			result.format(agg.format);
-		}
-		if (typeof (agg.interval) !== "undefined") {
+		
+		if (checkValue(agg.interval)) 
 			result.interval(agg.interval);
-		}
-		if (typeof (agg.minDoc) !== "undefined") 
+		
+		if (checkValue(agg.minDoc)) 
 			result.minDocCount(agg.minDoc);
-		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+
+		if (checkValue(agg.script)) 
 			result.script(agg.script);
-		if (typeof (agg.include) !== "undefined" && agg.include != "") 
+
+		if (checkValue(agg.include)) 
 			result.include(agg.include);
-		if (typeof (agg.exclude) !== "undefined" && agg.exclude != "") 
+
+		if (checkValue(agg.exclude)) 
 			result.exclude(agg.exclude);
 		
 		for (key in agg.nested) {
@@ -103,25 +175,42 @@ Curiosity.factory('aggConstructor', function(){
 	* @param object agg contains all aggregation's param
 	*/
 	obj.Range = function (agg) {
+
+		initError(agg);
+		console.log (agg)
+
+		if (!checkValue(agg.intervals) || !(checkValue(agg.field) || checkValue(agg.script))) {
+			setError(agg, "you need to fill interval and script or field input.");
+			return ;
+		}
+
+		console.log(checkValue(agg.intervals))
+		console.log(checkValue(agg.field))
+		console.log(checkValue(agg.script))
+
 		var result = ejs.RangeAggregation(agg.name);
-		result.field(agg.field); 
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
 		var i = 0;
-		if (typeof (agg.intervals) !== "undefined") {
+		if (checkValue(agg.intervals)) {
 			while (i < agg.intervals.length) {
 				var from = null;
 				var to = null;
-				if (typeof (agg.intervals[i].from) !== "undefined") {
+				if (checkValue(agg.intervals[i].from)) {
 					from = agg.intervals[i].from;
 				}
-				if (typeof (agg.intervals[i].to) !== "undefined") {
+				if (checkValue(agg.intervals[i].to)) {
 					to = agg.intervals[i].to;
 				}
 				result.range(from, to);
 				i++;
 			}
 		}
-		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+		if (checkValue(agg.script)) 
 			result.script(agg.script);
+
 		for (key in agg.nested) {
 			if (agg.nested[key].validate)
 				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
@@ -130,25 +219,37 @@ Curiosity.factory('aggConstructor', function(){
 	}
 
 	obj.DateRange = function (agg) {
+
+		initError(agg);
+
+		if (!checkValue(agg.intervals) || !(checkValue(agg.field) || checkValue(agg.script))) {
+			setError(agg, "you need to fill interval and script or field input.");
+			return ;
+		}
+
 		var result = ejs.DateRangeAggregation(agg.name);
-		result.field(agg.field); 
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
 		var i = 0;
-		if (typeof (agg.intervals) !== "undefined") {
+		if (checkValue(agg.intervals)) {
 			while (i < agg.intervals.length) {
 				var from = null;
 				var to = null;
-				if (typeof (agg.intervals[i].from) !== "undefined" 	&& agg.intervals[i].from != "") {
+				if (checkValue(agg.intervals[i].from) 	&& agg.intervals[i].from != "") {
 					from = agg.intervals[i].from;
 				}
-				if (typeof (agg.intervals[i].to) !== "undefined" && agg.intervals[i].to != "") {
+				if (checkValue(agg.intervals[i].to) && agg.intervals[i].to != "") {
 					to = agg.intervals[i].to;
 				}
 				result.range(from, to);
 				i++;
 			}
 		}
-		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+		if (checkValue(agg.script)) 
 			result.script(agg.script);
+
 		for (key in agg.nested) {
 			if (agg.nested[key].validate)
 				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
@@ -162,9 +263,20 @@ Curiosity.factory('aggConstructor', function(){
 	* @param constructor ejs constructor of the aggregation
 	*/
 	function simple(agg, constructor) {
+
+		initError(agg);
+
+		if (!checkValue(agg.field) && !checkValue(agg.script)) {
+			setError(agg, "you need to fill script or field input.");
+			return ;
+		}
+
 		var result = constructor(agg.name);
-		result.field(agg.field); 
-		if (typeof (agg.script) !== "undefined" && agg.script != "") 
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
+		if (checkValue(agg.script)) 
 			result.script(agg.script);
 		return (result);
 	}
@@ -175,6 +287,9 @@ Curiosity.factory('aggConstructor', function(){
 	* @param object agg contains all aggregation's param
 	*/
 	obj.Filter = function (agg) {
+
+		initError(agg);
+
 		var result = ejs.FilterAggregation(agg.name);
 		var tmp = ejs.QueryStringQuery(agg.query);
 		result.filter(ejs.QueryFilter(tmp));
@@ -247,25 +362,39 @@ Curiosity.factory('aggConstructor', function(){
 	 * @desc Built IPv4 range aggregation 
 	 * @param object agg contains all aggregation's param
 	 */
-	obj.IPv4Range = function (agg) {              
+	obj.IPv4Range = function (agg) {
+
+		initError(agg);
+
+		if (!checkValue(agg.intervals) || !(checkValue(agg.field) || checkValue(agg.script))) {
+			setError(agg, "you need to fill interval and script or field input.");
+			return ;
+		}
+
 		var result = ejs.IPv4RangeAggregation(agg.name);
-		result.field(agg.field);              
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
 		var i = 0;              
-		if (typeof (agg.intervals) !== "undefined") {                      
+		if (checkValue(agg.intervals)) {                      
 			while (i < agg.intervals.length) {                              
 				var from = null;                              
 				var to = null;                              
-				if (typeof (agg.intervals[i].from) !== "undefined") {
+				if (checkValue(agg.intervals[i].from)) {
 				    from = agg.intervals[i].from;                              
 				}                              
-				if (typeof (agg.intervals[i].to) !== "undefined") {
+				if (checkValue(agg.intervals[i].to)) {
 				    to = agg.intervals[i].to;                              
 				}
 				result.range(from, to);
 				i++;                      
 			}              
-		}              
-		if (typeof (agg.script) !== "undefined" && agg.script != "") result.script(agg.script);              
+		}
+
+		if (checkValue(agg.script)) 
+			result.script(agg.script);          
+
 		for (key in agg.nested) {                      
 			if (agg.nested[key].validate) result.agg(obj[agg.nested[key].type](agg.nested[key]));                   
 		}              
@@ -322,14 +451,14 @@ Curiosity.factory('aggConstructor', function(){
 	 * @desc Built top hits aggregation 
 	 * @param object agg contains all aggregation's param
 	 */
-	obj.TopHits = function (agg) { 
+	obj.TopHits = function (agg) {
 		var result = ejs.TopHitsAggregation(agg.name);
 
-		if (typeof (agg.size) !== "undefined") 
+		if (checkValue(agg.size)) 
 			result.size(agg.size);
-		if (typeof (agg.from) !== "undefined") 
+		if (checkValue(agg.from)) 
 			result.from(agg.from);
-		if (typeof (agg.sort) !== "undefined" && agg.sort != "") 
+		if (checkValue(agg.sort) && agg.sort != "") 
 			result.sort(agg.sort);
 
 		return (result);
@@ -340,32 +469,47 @@ Curiosity.factory('aggConstructor', function(){
 	 * @param object agg contains all aggregation's param
 	 */
 	obj.GeoDistance = function (agg) { 
+
+		initError(agg);
+
+		if (!checkValue(agg.intervals) || !checkValue(agg.field) && !checkValue(agg.longitude) && !checkValue(agg.latitude)) {
+			setError(agg, "you need to fill intervals and field input and specify latitude and longitude.");
+			return ;
+		}
+
 		var result = ejs.GeoDistanceAggregation(agg.name);
-		var i = 0;
-		if (typeof (agg.longitude) !== "undefined" && agg.longitude != "" && typeof (agg.latitude) !== "undefined" && agg.latitude != "") 
+
+		if (checkValue(agg.longitude) && checkValue(agg.latitude)) 
 			result.center(ejs.GeoPoint([agg.latitude,agg.longitude]));
-		if (typeof (agg.distanceType) !== "undefined" && agg.distanceType != "") 
+
+		if (checkValue(agg.distanceType)) 
 			result.distanceType(agg.distanceType);
-		if (typeof (agg.field) !== "undefined" && agg.field != "") 
+
+		if (checkValue(agg.field)) 
 			result.field(agg.field);
-		if (typeof (agg.keyed) !== "undefined" && agg.keyed != "") 
+
+		if (checkValue(agg.keyed)) 
 			result.keyed(agg.keyed);
-		if (typeof (agg.unit) !== "undefined" && agg.unit != "") 
+
+		if (checkValue(agg.unit)) 
 			result.unit(agg.unit);
-		if (typeof (agg.intervals) !== "undefined") {
+
+		var i = 0;
+		if (checkValue(agg.intervals)) {
 			while (i < agg.intervals.length) {
 				var from = null;
 				var to = null;
-				if (typeof (agg.intervals[i].from) !== "undefined" 	&& agg.intervals[i].from != "") {
+				if (checkValue(agg.intervals[i].from) 	&& agg.intervals[i].from != "") {
 					from = agg.intervals[i].from;
 				}
-				if (typeof (agg.intervals[i].to) !== "undefined" && agg.intervals[i].to != "") {
+				if (checkValue(agg.intervals[i].to) && agg.intervals[i].to != "") {
 					to = agg.intervals[i].to;
 				}
 				result.range(from, to);
 				i++;
 			}
 		}
+
 		for (key in agg.nested) {
 			if (agg.nested[key].validate) {
 				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
@@ -379,14 +523,26 @@ Curiosity.factory('aggConstructor', function(){
 	 * @param object agg contains all aggregation's param
 	 */
 	obj.GeoHashGrid = function (agg) { 
+
+		initError(agg);
+
+		if (!checkValue(agg.field)) {
+			setError(agg, "you need to specify field input where geo coordinates are indexed.");
+			return ;
+		}
+
 		var result = ejs.GeoHashGridAggregation(agg.name);
-		if (typeof (agg.field) !== "undefined" && agg.field != "") 
+
+		if (checkValue(agg.field)) 
 			result.field(agg.field);
-		if (typeof (agg.precision) !== "undefined") 
+
+		if (checkValue(agg.precision)) 
 			result.precision(agg.precision);
-		if (typeof (agg.shardSize) !== "undefined") 
+
+		if (checkValue(agg.shardSize)) 
 			result.shardSize(agg.shardSize);
-		if (typeof (agg.size) !== "undefined") 
+
+		if (checkValue(agg.size)) 
 			result.size(agg.size);
 
 		for (key in agg.nested) {
@@ -401,10 +557,19 @@ Curiosity.factory('aggConstructor', function(){
 	 * @desc Built nested aggregation 
 	 * @param object agg contains all aggregation's param
 	 */
-	obj.Nested = function (agg) {              
+	obj.Nested = function (agg) {      
+
+		initError(agg);
+
+		if (!checkValue(agg.path)) {
+			setError(agg, "you need to specify path.");
+			return ;
+		}
+
 		var result = ejs.NestedAggregation(agg.name);
-		if (typeof (agg.path) !== "undefined" && agg.path != "") 
+		if (checkValue(agg.path)) 
 			result.path(agg.path);		
+
 		for (key in agg.nested) {
 			if (agg.nested[key].validate) {
 				result.agg(obj[agg.nested[key].type](agg.nested[key]));	

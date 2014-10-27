@@ -88,9 +88,14 @@
 				<h4> {{ info.txt.request.SortBy }} </h4>
 				<div ng-repeat="sort in data.sort" class="margin-top">
 					<div class="col-sm-6">
-						<div class="input-group">
-							<span class="input-group-addon">{{ info.txt.request.Field }}</span>
-							<input class="form-control"  ng-model="sort.field">  
+						<div class="input-group" ng-class="{'has-error':sort.field?false:true}">
+							<span class="input-group-addon">Field :</span>
+							<input class="form-control" type="text" ng-model="sort.field" >
+							<div class="input-group-btn">
+								<button title="Display Fields" type="button" class="btn btn-default" ng-click="openModalFields('sm', sort)">
+								<span class="glyphicon glyphicon-align-justify"></span>
+								</button>
+							</div>
 						</div>
 					</div>
 					<div class="col-sm-6">
