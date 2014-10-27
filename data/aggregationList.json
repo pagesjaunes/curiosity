@@ -1,28 +1,190 @@
 {
-"list":
-[
-	{"type":"Terms", "template":"partials/aggregation_module/settings_partials/terms.html", "resultTemplate":"partials/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"Range", "template":"partials/aggregation_module/settings_partials/range.html", "resultTemplate":"partials/aggregation/default.html", "mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"DateRange", "template":"partials/aggregation_module/settings_partials/date_range.html", "resultTemplate":"partials/aggregation/Terms.html", "mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"Histogram", "template":"partials/aggregation_module/settings_partials/histogram.html", "resultTemplate":"partials/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"DateHistogram", "template":"partials/aggregation_module/settings_partials/date_histogram.html", "resultTemplate":"partials/aggregation/Terms.html","mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"Avg", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
-	{"type":"Stats", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"count":"", "min":"", "max":"", "sum":"", "avg":""}},
-	{"type":"Min", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
-	{"type":"Sum", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
-	{"type":"ValueCount", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"value":""}},
-	{"type":"ExtendedStats", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html","mapping":{"count":"","min":"","max":"","avg":"","sum":"","sum_of_squares":"","variance":"","std_deviation":""}},
-	{"type":"Max", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html", "mapping":{"value":""}},
-	{"type":"Filter", "template":"partials/aggregation_module/settings_partials/filter.html", "resultTemplate":"partials/aggregation/Filter.html","mapping":{"doc_count":"","nested":""}},
-	{"type":"IPv4Range", "template":"partials/aggregation_module/settings_partials/date_range.html", "resultTemplate":"partials/aggregation/Terms.html"},
-	{"type":"Cardinality", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html"}, 
-	{"type":"Percentiles", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/percentiles.html"}, 
-	{"type":"Missing", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html"}, 
-	{"type":"SignificantTerms", "template":"partials/aggregation_module/settings_partials/simple.html", "resultTemplate":"partials/aggregation/default.html"}, 
-	{"type":"Global", "template":"partials/aggregation_module/settings_partials/global.html", "resultTemplate":"partials/aggregation/global.html"}, 
-	{"type":"TopHits", "template":"partials/aggregation_module/settings_partials/tophits.html", "resultTemplate":"partials/aggregation/tophits.html"}, 
-	{"type":"GeoDistance", "template":"partials/aggregation_module/settings_partials/geodistance.html", "resultTemplate":"partials/aggregation/default.html", "mapping":{"buckets":["doc_count", "key"]}},
-	{"type":"GeoHashGrid", "template":"partials/aggregation_module/settings_partials/geohashgrid.html", "resultTemplate":"partials/aggregation/default.html"},
-	{"type":"Nested", "template":"partials/aggregation_module/settings_partials/nested.html", "resultTemplate":"partials/aggregation/nested.html"}
-]	
+    "list": [{
+        "type": "Terms",
+        "template": "partials/aggregation_module/settings_partials/terms.html",
+        "resultTemplate": "partials/aggregation/Terms.html",
+        "mapping": {
+            "buckets": ["doc_count", "key"]
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-terms-aggregation.html"
+    }, {
+        "type": "Range",
+        "template": "partials/aggregation_module/settings_partials/range.html",
+        "resultTemplate": "partials/aggregation/Terms.html",
+        "mapping": {
+            "buckets": ["doc_count", "key"]
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-range-aggregation.html"
+    }, {
+        "type": "DateRange",
+        "template": "partials/aggregation_module/settings_partials/date_range.html",
+        "resultTemplate": "partials/aggregation/Terms.html",
+        "mapping": {
+            "buckets": ["doc_count", "key"]
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-daterange-aggregation.html"
+    }, {
+        "type": "Histogram",
+        "template": "partials/aggregation_module/settings_partials/histogram.html",
+        "resultTemplate": "partials/aggregation/Terms.html",
+        "mapping": {
+            "buckets": ["doc_count", "key"]
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-histogram-aggregation.html"
+    }, {
+        "type": "DateHistogram",
+        "template": "partials/aggregation_module/settings_partials/date_histogram.html",
+        "resultTemplate": "partials/aggregation/Terms.html",
+        "mapping": {
+            "buckets": ["doc_count", "key"]
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html"
+    }, {
+        "type": "Avg",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html"
+    }, {
+        "type": "Stats",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "count": "",
+            "min": "",
+            "max": "",
+            "sum": "",
+            "avg": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html"
+    }, {
+        "type": "Min",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-min-aggregation.html"
+    }, {
+        "type": "Sum",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-sum-aggregation.html"
+    }, {
+        "type": "ValueCount",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-valuecount-aggregation.html"
+    }, {
+        "type": "ExtendedStats",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "count": "",
+            "min": "",
+            "max": "",
+            "avg": "",
+            "sum": "",
+            "sum_of_squares": "",
+            "variance": "",
+            "std_deviation": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html"
+    }, {
+        "type": "Max",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-max-aggregation.html"
+    }, {
+        "type": "Filter",
+        "template": "partials/aggregation_module/settings_partials/filter.html",
+        "resultTemplate": "partials/aggregation/Filter.html",
+        "mapping": {
+            "doc_count": "",
+            "nested": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html"
+    }, {
+        "type": "IPv4Range",
+        "template": "partials/aggregation_module/settings_partials/date_range.html",
+        "resultTemplate": "partials/aggregation/Terms.html",
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html"
+    }, {
+        "type": "Cardinality",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html"
+    }, {
+        "type": "Percentiles",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/percentiles.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-percentiles-aggregation.html"
+    }, {
+        "type": "Missing",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-missing-aggregation.html"
+    }, {
+        "type": "SignificantTerms",
+        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-significantterms-aggregation.html"
+    }, {
+        "type": "Global",
+        "template": "partials/aggregation_module/settings_partials/global.html",
+        "resultTemplate": "partials/aggregation/global.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-global-aggregation.html"
+    }, {
+        "type": "TopHits",
+        "template": "partials/aggregation_module/settings_partials/tophits.html",
+        "resultTemplate": "partials/aggregation/tophits.html",
+        "mapping": {
+            "value": ""
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-top-hits-aggregation.html"
+    }, {
+        "type": "GeoDistance",
+        "template": "partials/aggregation_module/settings_partials/geodistance.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "mapping": {
+            "buckets": ["doc_count", "key"]
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geodistance-aggregation.html"
+    }, {
+        "type": "GeoHashGrid",
+        "template": "partials/aggregation_module/settings_partials/geohashgrid.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html"
+    }, {
+        "type": "Nested",
+        "template": "partials/aggregation_module/settings_partials/nested.html",
+        "resultTemplate": "partials/aggregation/nested.html",
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html"
+    }]
 }

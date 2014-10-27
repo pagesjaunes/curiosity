@@ -11,7 +11,7 @@
 		</select>
 	</div>
 	
-	<div class="input-group margin-top">
+	<div class="input-group margin-top" ng-class="{'has-error':curAgg.field?false:true}">
 		<span class="input-group-addon">Field :</span>
 		<input class="form-control" type="text" ng-model="curAgg.field">
 		<div class="input-group-btn">
@@ -26,12 +26,12 @@
 		<input type="checkbox">
 	</div>
 
-	<div class="input-group margin-top">
+	<div class="input-group margin-top" ng-class="{'has-error':curAgg.latitude?false:true}">
 		<span class="input-group-addon">Latitude :</span>
 		<input class="form-control" type="text" ng-model="curAgg.latitude">
 	</div>
 
-	<div class="input-group margin-top">
+	<div class="input-group margin-top" ng-class="{'has-error':curAgg.longitude?false:true}">
 		<span class="input-group-addon">Longitude :</span>
 		<input class="form-control" type="text" ng-model="curAgg.longitude">
 	</div>
@@ -64,7 +64,7 @@
 	
 	</div>
 
-	<button class="btn btn-default margin-top" ng-click="addInterval(curAgg)">Add interval</button>
+	<button class="btn btn-default margin-top" ng-click="addInterval(curAgg)" ng-class="{'btn-danger':curAgg.intervals[0]?false:true}">Add interval</button>
 
 
 	<div class="margin-top">
@@ -75,25 +75,7 @@
 		<button class="btn btn-default" ng-click="addNestedAgg(curAgg)">Add Nested Agg</button>
 	</div>
 	
-	<ul>
-		<li ng-repeat="curAgg in curAgg.nested" class="margin-top">
-			<h4>
-				{{ curAgg.displayName }}
-				<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ info.txt.log.Hide }}">	
-				</span>
-				<span ng-if="curAgg.validate" class="glyphicon glyphicon-ok">
-				</span>
-			</h4>
-			<div ng-if="!curAgg.hideCurAgg">
-				<select class="form-control" ui-select2 ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg, curAgg.aggregationTypeIdx)">
-					<option ng-repeat="item in data.aggList"  value="{{ $index }}">
-						{{ item.type }}
-					</option>
-				</select>
-				<div ng-if="curAgg.aggTypeSelected" ng-include="curAgg.displayTemplate" class="margin-top">
-				</div>
-			</div>
-		</li>		
-	</ul>
+	<div ng-include="'partials/aggregation_module/aggSettingsNested.html'"></div>
+
 </form>
 

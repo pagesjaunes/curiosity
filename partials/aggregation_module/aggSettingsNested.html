@@ -1,0 +1,26 @@
+<div>
+	<ul>
+		<li ng-repeat="curAgg in curAgg.nested" class="margin-top">
+			<h4>
+				{{ curAgg.displayName }}
+				<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ info.txt.log.Hide }}">	
+				</span>
+				<span ng-if="curAgg.validate" class="glyphicon glyphicon-ok">
+				</span>
+				<div ng-if="curAgg.validation_error" class="alert alert-danger alert-dismissible" role="alert">
+  					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  					<strong>Error!</strong> {{ curAgg.validation_message }}
+				</div>
+			</h4>
+			<div ng-if="!curAgg.hideCurAgg">
+				<select class="form-control" ui-select2 ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg, curAgg.aggregationTypeIdx)">
+					<option ng-repeat="item in data.aggList"  value="{{ $index }}">
+						{{ item.type }}
+					</option>
+				</select>
+				<div ng-if="curAgg.aggTypeSelected" ng-include="curAgg.displayTemplate" class="margin-top">
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
