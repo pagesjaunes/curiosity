@@ -17,8 +17,8 @@
 
 	<div ng-if="!info">
 		<form>
-			<span class="label label-success" ng-show="data.updateStatus == 'ok'">Context update success</span>
-			<span class="label label-danger" ng-show="data.updateStatus == 'error'">Error while updating context</span>
+			<div class="alert alert-success" role="alert" ng-show="data.updateStatus == 'ok'">Context update is a success</div>
+			<div class="alert alert-danger" role="alert" ng-show="data.updateStatus == 'error'">Error while updating context</div>
 			<div class="modal-footer">
 				<button ng-click="cancel()" class="btn btn-default" ng-show="data.updateStatus == 'ok'">Close</button>
 			</div>
