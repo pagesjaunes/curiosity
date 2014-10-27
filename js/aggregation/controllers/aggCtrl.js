@@ -54,8 +54,6 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 			agg.officialDoc = $scope.data.aggList[idx].officialDoc;
 			agg.aggTypeSelected = true;
 		}
-		console.log(agg);
-		console.log($scope.data.aggList[idx]);
 	}
 
 	/**
