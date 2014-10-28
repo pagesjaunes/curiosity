@@ -126,7 +126,7 @@
 		<script type="text/javascript" src="js/doc/controllers/docCtrl.js"></script>
 
 	</head>
-	<body ng-controller="curiosityCtrl" ng-class="{'header-hidden':!showHeader}">
+	<body ng-controller="curiosityCtrl" ng-class="{'header-hidden':!showHeader,'toolbar-hidden':hideToolbar}">
 		<div ng-class="{'unlock':!moduleManagerData.lock}">
 			<div id="loading-image" ng-show="data.loading">
 				<span><img src="resources/ajax-loader.gif" id="loading-image"></span>
