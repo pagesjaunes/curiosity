@@ -1,5 +1,5 @@
 <div class="margin-top" id="option-bar" ng-controller="resultCtrl">
-	<div class="col-sm-4">
+<!-- 	<div class="col-sm-4">
 		<div class="input-group">
 			<span class="input-group-addon">{{ info.txt.result.request_sub_tab.Template }}</span>
 			<select ng-model="data.templateSelected" ui-select2 ng-change="selectTemplate('template',data.templateSelected)" class="form-control">
@@ -8,6 +8,26 @@
 			<span class="input-group-addon">
 				<input type="checkbox" ng-model="data.useTemplate" ng-change="switchDisplayMode('template',data.templateSelected)">
 			</span>
+		</div>
+	</div> -->
+	<div class="col-sm-4">
+		<button class="btn btn-default " ng-click="data.useTemplate='local'" ng-class="{'btn-primary':data.useTemplate=='local'?true:false}">Local template</button>
+		<button class="btn btn-default " ng-click="data.useTemplate='global'" ng-class="{'btn-primary':(data.useTemplate=='global' || data.useTemplate==true)?true:false}">Global template</button> <!-- data.useTemplate==true for compatibility purpose -->
+		<button class="btn btn-default " ng-click="data.useTemplate='none'" ng-class="{'btn-primary':data.useTemplate=='none'?true:false}">No template</button>
+		<button class="btn btn-default  " ng-click="openModalTemplates('lg', 'result')">View global templates code</button>
+
+		<div class="input-group" ng-if="(data.useTemplate=='global' || data.useTemplate==true)?true:false">
+			<span class="input-group-addon">Template :</span>
+			<select ng-model="data.templateSelected" ui-select2 class="form-control" ng-change="selectTemplate('template',data.templateSelected)">
+				<option ng-repeat="template in templateData.template" value="{{$index}}"> {{template.name}} </option>
+			</select>
+		</div>
+
+		<div ng-if="data.useTemplate=='local'?true:false">
+			<span class="glyphicon" ng-class="{'glyphicon-minus':!data.hideCustomTemplate,'glyphicon-plus':data.hideCustomTemplate}" ng-click="data.hideCustomTemplate = !data.hideCustomTemplate" title="{{ info.txt.log.Hide }}">
+			</span>
+			<textarea ng-if="!data.hideCustomTemplate" ng-model="data.customTemplate" ng-change="selectLocalTemplate('local',data.customTemplate); data.validate=false" class="form-control" rows="10"></textarea>
+			<button ng-if="!data.hideCustomTemplate" class="btn btn-default" ng-class="{'btn-warning':!data.validate}" ng-click="data.validate=true">Apply the changes</button>
 		</div>
 	</div>
 	<button class="btn btn-default" ng-click="openModalCsv('lg')">

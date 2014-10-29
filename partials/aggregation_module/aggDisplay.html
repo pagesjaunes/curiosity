@@ -12,8 +12,7 @@
 		<span ng-if="curAgg.validate" class="glyphicon glyphicon-ok module-info-ok" title="Aggregation activated">
 		</span>
 		<span ng-if="!curAgg.validate" class="glyphicon glyphicon-ban-circle module-info-ko" title="Aggregation desactivated"></span>
-		<div ng-if="curAgg.validation_error" class="alert alert-danger alert-dismissible" role="alert">
-  			<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		<div ng-if="curAgg.validation_error" class="alert alert-danger" role="alert">
   			<strong>Error!</strong> {{ curAgg.validation_message }}
 		</div>
 	</h4>

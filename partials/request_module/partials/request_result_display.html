@@ -1,4 +1,4 @@
-<div ng-controller="resultCtrl">
+<div ng-controller="resultCtrl" ng-init="init()">
 	<p class="text-muted result-info">
 		{{queryData.hits}} {{ info.txt.result.request_sub_tab.Results}}
 	</p>
@@ -8,7 +8,7 @@
 	</div>
 	<div ng-if="!data.showJsonResult" class="result-list">
 		<div class="flipped">
-			<div ng-if="!data.useTemplate">
+			<div ng-if="data.useTemplate=='none'">
 				<table class="table table-striped col-sm-12">
 					<tr ng-repeat="doc in queryData.result.hits.hits | filter:searchText">
 						<td>{{ doc }}</td>
@@ -16,8 +16,11 @@
 				</table>
 				<div class="spacer"></div>
 			</div>
-			<div ng-if="data.useTemplate">
+			<div ng-if="data.useTemplate=='global' || data.useTemplate==true">
 				<div ng-include="data.currentTemplate"></div>
+			</div>
+			<div ng-if="data.useTemplate=='local' && data.validate">
+				<div ng-include="'local'"></div>
 			</div>
 		</div>
 	</div>

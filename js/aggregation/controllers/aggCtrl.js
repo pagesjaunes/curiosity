@@ -134,14 +134,14 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	* @desc open a modal which contains the fields list. When closed change aggregation field attr value
 	* @params 'sm' | 'lg' size modal size 
 	*/
-	$scope.openModalTemplates = function (size, curAgg) {
+	$scope.openModalTemplates = function (size, type) {
 		var modalInstance = $modal.open({
 			templateUrl: 'partials/modal/template_modal.html',
 			controller: templateModalCtrl,
 			size: size,
 			resolve: {
-				item: function () {
-					return curAgg;
+				type: function () {
+					return type;
 				}}
 			});
 	};

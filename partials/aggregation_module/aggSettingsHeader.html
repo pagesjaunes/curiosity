@@ -6,7 +6,7 @@
 
 	<button class="btn btn-default margin-top" ng-click="curAgg.useCustomTemplate=!curAgg.useCustomTemplate" ng-class="{'btn-primary':curAgg.useCustomTemplate}">Local template</button>
 	<button class="btn btn-default margin-top" ng-click="curAgg.useCustomTemplate=!curAgg.useCustomTemplate" ng-class="{'btn-primary':!curAgg.useCustomTemplate}">Global template</button>
-	<button class="btn btn-default  margin-top" ng-click="openModalTemplates('lg', curAgg)">View global templates code</button>
+	<button class="btn btn-default  margin-top" ng-click="openModalTemplates('lg', 'aggregation')">View global templates code</button>
 
 	<div class="input-group" ng-if="!curAgg.useCustomTemplate">
 		<span class="input-group-addon">Template :</span>

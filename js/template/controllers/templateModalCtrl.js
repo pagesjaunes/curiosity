@@ -1,4 +1,4 @@
-var templateModalCtrl = function($scope, $modalInstance, template, item){
+var templateModalCtrl = function($scope, $modalInstance, template, type){
 	$scope.info = {};
 	$scope.info.txt = global_text;
 
@@ -9,7 +9,7 @@ var templateModalCtrl = function($scope, $modalInstance, template, item){
 
 	$scope.template.currentTemplate = {};
 
-	var itemloc = item;
+	$scope.type = type;
 
 	$scope.changeTemplate = function (type, obj, attr, index) {
 		if (index !== "undefined" && index >= 0) {
