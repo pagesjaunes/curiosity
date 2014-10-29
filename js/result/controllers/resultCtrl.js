@@ -1,4 +1,4 @@
-Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, csv, context, $templateCache){
+Curiosity.controller('resultCtrl', function($scope, $modal, result, query, template, csv, context){
 	$scope.queryData = query.info;
 	$scope.templateData = template.info
 	$scope.showAggregationFilter = true;
