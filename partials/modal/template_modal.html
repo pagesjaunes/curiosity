@@ -1,24 +1,31 @@
 <div>
 	<div class="modal-header">
 		<h3 class="modal-title">
-			Template		
+			See global templates
 		</h3>
 	</div>
 	<div class="modal-body">
-	  	<button type="button" class="btn" ng-click="template.tab=0" ng-class="{'btn-default':template.tab==1,'btn-primary':template.tab==0}">
-	  		{{ info.txt.template.ResultItems }}
-	  	</button>
-	  	<button type="button" class="btn" ng-click="template.tab=1" ng-class="{'btn-default':template.tab==0,'btn-primary':template.tab==1}">
-	  		{{ info.txt.template.Aggregations }}
-	  	</button>
-		<div class="margin-top" ng-show="template.tab == 0" ng-include="'partials/template_tab/result_items_sub_tab.html'">
+
+	<div class="row">
+		<div class="col-sm-6">
+			<div class="input-group">
+				<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.Template }}</span>
+				<select ng-model="template.selected" ui-select2 class="form-control" ng-change="changeTemplate('aggregationsTemplates',template,'currentTemplate',template.selected)">
+					<option ng-repeat="template in data.aggregationsTemplates" value="{{$index}}" >
+						{{ template.name }}
+					</option>  
+				</select>
+			</div>
 		</div>
-		<div class="margin-top" ng-show="template.tab == 1" ng-include="'partials/template_tab/aggregation_sub_tab.html'">
-		</div>	
+		<div class="spacer"></div>
+		<div class="margin-top col-sm-12">
+			<textarea ng-model="template.currentTemplate.value" class="form-control" rows="10">
+			</textarea>
+		</div>
 	</div>
 	
 	<div class="modal-footer">
-		<button class="btn btn-default" ng-click='close()'>Close</button>
+		<button class="btn btn-default" ng-click='ok()'>Ok</button>
 	</div>	
 
 </div>

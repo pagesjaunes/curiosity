@@ -89,5 +89,8 @@ Curiosity.factory('template', function($http, $templateCache, $rootScope, conf){
 		}
 	}
 
+	templateObj.addTemplateToCacheFromValue = function (name, value) {
+		$templateCache.put(name, value);
+	}
 	return (templateObj);
 })

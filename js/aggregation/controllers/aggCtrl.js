@@ -83,6 +83,14 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	}
 
 	/**
+	* @desc ask template service to add a template to the $templateCache whenever the template id different from default 
+	* @param string the template name
+	*/
+	$scope.loadLocalTpl = function (agg) {
+		template.addTemplateToCacheFromValue(agg.name, agg.customTemplate);
+	}
+
+	/**
 	* @desc add an interval to a range aggregation
 	* @param object agg target aggregation
 	*/
@@ -109,7 +117,7 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	*/
 	$scope.openModalFields = function (size, curAgg) {
 		var modalInstance = $modal.open({
-			templateUrl: 'partials/modal/fieldsModal.html',
+			templateUrl: 'partials/modal/field_modal.html',
 			controller: mappingModalCtrl,
 			resolve: {
 				item: function () {
@@ -122,12 +130,29 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 		})
 	};
 
+	/**
+	* @desc open a modal which contains the fields list. When closed change aggregation field attr value
+	* @params 'sm' | 'lg' size modal size 
+	*/
+	$scope.openModalTemplates = function (size, curAgg) {
+		var modalInstance = $modal.open({
+			templateUrl: 'partials/modal/template_modal.html',
+			controller: templateModalCtrl,
+			size: size,
+			resolve: {
+				item: function () {
+					return curAgg;
+				}}
+			});
+	};
+
 	/** 
 	* @desc load aggregation and nested aggregation template in $templateCache 
 	* @param object agg target aggregation   
 	*/
 	function initTemplate(agg) {
 		$scope.loadTpl(agg.tpl);
+		if (agg.customTemplate) $scope.loadLocalTpl(agg);
 		if (typeof(agg.nested) !== "undefined") {
 			for (sub_agg in agg.nested) {
 				initTemplate(agg.nested[sub_agg]);

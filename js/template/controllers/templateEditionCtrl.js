@@ -1,4 +1,4 @@
-var templateCtrl = function($scope, $modalInstance, template, mapping, $http){	
+var templateEditionCtrl = function($scope, $modalInstance, template, mapping, $http){	
 	$scope.info = {};
 	$scope.info.txt = global_text;
 

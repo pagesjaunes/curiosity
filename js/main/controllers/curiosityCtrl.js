@@ -133,9 +133,9 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	function openTemplateModal() {
 		var modalInstance = $modal.open({
-			templateUrl: 'partials/modal/template_modal.html',
+			templateUrl: 'partials/modal/template_modal_edition.html',
 			size: 'lg',
-			controller:templateCtrl,
+			controller:templateEditionCtrl,
 			resolve: {
 				item: function () {
 				}}
