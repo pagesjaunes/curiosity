@@ -4,6 +4,14 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 	$scope.showAggregationFilter = true;
 	$scope.data = result.info;
 
+
+	/**
+	* @desc function call by ng-init to load template in $templateCache
+	*/ 
+	$scope.init = function () {
+		if ($scope.data.validate==true && $scope.data.useTemplate=='local') $scope.selectLocalTemplate('local',$scope.data.customTemplate);
+	}
+
 	/* PAGER : go to queryFactory.js for more informations*/ 
 	$scope.nextPage = function () {
 		query.nextPage();
@@ -27,6 +35,10 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 
 	$scope.selectTemplate = function(type, id) {
 		result.changeCurrentTemplate(type, id);
+	}
+
+	$scope.selectLocalTemplate = function(name,data) {
+		template.addTemplateToCacheFromValue(name, data);
 	}
 
 	$scope.switchDisplayMode = function (type, id) {
@@ -73,6 +85,21 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		});
 	}
 
+	/**
+	* @desc open a modal which contains the fields list. When closed change aggregation field attr value
+	* @params 'sm' | 'lg' size modal size 
+	*/
+	$scope.openModalTemplates = function (size, type) {
+		var modalInstance = $modal.open({
+			templateUrl: 'partials/modal/template_modal.html',
+			controller: templateModalCtrl,
+			size: size,
+			resolve: {
+				type: function () {
+					return type;
+				}}
+			});
+	};
 
 	/**
 	* @desc function used to open modals in results

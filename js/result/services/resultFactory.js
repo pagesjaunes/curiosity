@@ -3,16 +3,16 @@
 Curiosity.factory('result', function($rootScope, template, context){
 	var resultObj = {};
 	resultObj.info = {};
-	resultObj.info.useTemplate = false;
+	resultObj.info.useTemplate = "none";
 	resultObj.info.currentTemplate = "";
 	
 	resultObj.changeCurrentTemplate = function(type, templateId) {	
 		resultObj.info.currentTemplate = template.addTemplateToCache(type, templateId);
 		if (resultObj.info.currentTemplate == "") {
-			resultObj.info.useTemplate = false;
+			resultObj.info.useTemplate = "none";
 		}
 		else {
-			resultObj.info.useTemplate = true;
+			resultObj.info.useTemplate = "global";
 		}
 	}
 

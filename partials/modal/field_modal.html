@@ -5,7 +5,7 @@
 
 	<div class="modal-body">
 		<div>
-			<label>Selected Field : </label><span title="{{ selected.ancestor  }}"> {{ selected.name}} </span>
+			<label>Selected Field : </label><span title="{{ selected.ancestor  }}"> {{ selected.ancestor}} </span>
 		</div>
 
 		<div class="input-group">
@@ -24,7 +24,7 @@
 		<hr>
 		
 		<div ng-repeat="field in data.fields | filter:fieldFilter | limitTo:fieldLimit track by $index" class="field col-sm-4 dropdown" >
-			<span class="link" href ="#" ng-click="selectField(field)" title="{{ field.ancestor  }}">{{ field.name }}</span>
+			<span class="link" href ="#" ng-click="selectField(field)" title="{{ field.ancestor  }}">{{ field.ancestor }}</span>
 		</div>
 		<div class="spacer"></div>
 	</div>

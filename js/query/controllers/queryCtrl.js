@@ -78,7 +78,7 @@ Curiosity.controller('queryCtrl', ['$scope', 'query', 'mapping', '$modal',
 		*/
 		$scope.openModalFields = function (size, curAgg) {
 			var modalInstance = $modal.open({
-				templateUrl: 'partials/modal/fieldsModal.html',
+				templateUrl: 'partials/modal/field_modal.html',
 				controller: mappingModalCtrl,
 				resolve: {
 					item: function () {

@@ -1,0 +1,29 @@
+<div>
+	<div class="input-group">
+		<span class="input-group-addon">Name ({{ curAgg.name }})</span> 
+		<input type="text" class="form-control" ng-model="curAgg.displayName"> 
+	</div>
+
+	<button class="btn btn-default margin-top" ng-click="curAgg.useCustomTemplate=!curAgg.useCustomTemplate" ng-class="{'btn-primary':curAgg.useCustomTemplate}">Local template</button>
+	<button class="btn btn-default margin-top" ng-click="curAgg.useCustomTemplate=!curAgg.useCustomTemplate" ng-class="{'btn-primary':!curAgg.useCustomTemplate}">Global template</button>
+	<button class="btn btn-default  margin-top" ng-click="openModalTemplates('lg', 'aggregation')">View global templates code</button>
+
+	<div class="input-group" ng-if="!curAgg.useCustomTemplate">
+		<span class="input-group-addon">Template :</span>
+		<select ng-model="curAgg.tpl" ui-select2 class="form-control" ng-change="loadTpl(curAgg.tpl)">
+			<option value="default">Default</option>
+			<option ng-repeat="tpl in tplData.aggregationsTemplates" value="{{ tpl.name }}"> {{tpl.name}} </option>
+		</select>
+		<div class="input-group-btn">
+			<button title="Open templates" type="button" class="btn btn-default" ng-click="openModalTemplates('lg', curAgg)">
+				<span class="glyphicon glyphicon-align-justify"></span>
+			</button>
+		</div>
+	</div>
+
+	<div>
+		<span ng-if="curAgg.useCustomTemplate" class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCustomTemplate,'glyphicon-plus':curAgg.hideCustomTemplate}" ng-click="curAgg.hideCustomTemplate = !curAgg.hideCustomTemplate" title="{{ info.txt.log.Hide }}">
+		</span>
+		<textarea ng-if="(curAgg.useCustomTemplate && !curAgg.hideCustomTemplate)?true:false" ng-model="curAgg.customTemplate" ng-change="loadLocalTpl(curAgg)" class="form-control" rows="10"></textarea>
+	</div>
+</div>

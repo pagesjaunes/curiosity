@@ -1,0 +1,24 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">
+			Template		
+		</h3>
+	</div>
+	<div class="modal-body">
+	  	<button type="button" class="btn" ng-click="template.tab=0" ng-class="{'btn-default':template.tab==1,'btn-primary':template.tab==0}">
+	  		{{ info.txt.template.ResultItems }}
+	  	</button>
+	  	<button type="button" class="btn" ng-click="template.tab=1" ng-class="{'btn-default':template.tab==0,'btn-primary':template.tab==1}">
+	  		{{ info.txt.template.Aggregations }}
+	  	</button>
+		<div class="margin-top" ng-show="template.tab == 0" ng-include="'partials/template_tab/result_items_sub_tab.html'">
+		</div>
+		<div class="margin-top" ng-show="template.tab == 1" ng-include="'partials/template_tab/aggregation_sub_tab.html'">
+		</div>	
+	</div>
+	
+	<div class="modal-footer">
+		<button class="btn btn-default" ng-click='close()'>Close</button>
+	</div>	
+
+</div>
