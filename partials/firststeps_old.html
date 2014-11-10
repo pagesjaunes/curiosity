@@ -2,7 +2,7 @@
 <html ng-app="curiosityDoc" ng-controller="pageCtrl">
 <head>
 	<title>
-	  Curiosity concepts
+	  First steps with Curiosity 
 	</title>
     <meta charset="utf-8">
 	<meta name="description" content="First steps with Cursioty: Application overview, elasticsearch's servers and indexs selection, workspaces and modules systems and ElasticSearch simple queries"/>
@@ -90,7 +90,7 @@
 		</div>
 	</div>
 	<div class="container" >
-		<h1>Curiosity concepts </h1>
+		<h1>First steps</h1>
 
 		<h3>Main page overview</h3>
 
@@ -117,7 +117,7 @@
 		</p>
 
 		<h3>
-			First area : Select your server and index 
+			Step 1 : Select your server and index 
 		</h3>
 		<div class="margin-top">
 			<div class="col-sm-5">
@@ -152,7 +152,7 @@
 		</div>
 
 		<h3>
-			Center area : Basic Search context
+			Step 2 : Basic Search context
 		</h3>
 
 		<p>
@@ -160,7 +160,7 @@
 		</p>
 		<div>
 			<div class="col-sm-12">
-				<img src="../img/curiosity-context-basicsearch.png" alt="Basic search context" title="Curiosity's home">
+				<img src="../img/curiosity-context-basicsearch.png" alt="Screenshot of Curiosity's home" title="Curiosity's home">
 			</div>
 			<div class="spacer"></div>
 		</div>
@@ -169,124 +169,80 @@
 		</p>
 
 		<h3>
-			Bottom area : Action's links
+			Step 2 : Configure your layout
 		</h3>
 
+		<p>
+			Now you have chosen your server and index, it's time to create your first workspace and customize its layout.
+		</p>
 		<div>
-			<div class="col-sm-12">
-				<img src="../img/curiosity-actions-links.png" alt="Screenshot of Curiosity's home" title="Curiosity action's links">
+			<div class="col-sm-7">
+				<img src="../img/curiosity-ws-creator.png" alt="Screenshot of Curiosity's workspace configuration screen" title="Curiosity's workspace customization screen">
+			</div>
+			<div class="col-sm-5">
+				<p>
+					First step, give a name to your workspace (1) (not required), then, you have to choose the number of line and columns of your workspace. You can do this by filling corresponding inputs (2,3) or through the square (4) by clicking on the layout you want. Then click on "ok" (4).
+				</p>
 			</div>
 			<div class="spacer"></div>
 		</div>
 		<p>
-			Button's details
+			Your layout is created, let's add some modules.
 		</p>
-		<div class="margin-top">
-			<hr />
-			<div class="col-sm-1">
-				<div>
-					<div class="ico blue" title="Search" ng-click="search()">
-        				<span class="glyphicon glyphicon-search">
-        				</span>
-    				</div>
-    			</div>
-    		</div>
-			<div class="col-sm-11">
-				<p></p>
-				<p>
-					The search icon launch a search.
-				</p>
-			</div>
-			<div class="spacer"></div>
-			<hr />
-			<div class="col-sm-1">
-				<div>
-					<div class="ico black" title="Home (basic search context)">
-        				<span class="glyphicon glyphicon-home">
-        				</span>
-    				</div>
-    			</div>
-    		</div>
-			<div class="col-sm-11">
-				<p></p>
-				<p >
-					Back to basic search context. 
-					    <div class="alert alert-warning" role="alert">
-					    	Be carefull, if your context isn't saved, the changes are lost.  
-					    </div>
 
-				</p>
-			</div>
-			<div class="spacer"></div>
-			<hr />
-			<div class="col-sm-1">
-				<div>
-					<div class="ico brown" title="Open the context list and choose one">
-        				<span class="glyphicon glyphicon-th-list">
-        				</span>
-    				</div>
-    			</div>
-    		</div>
-			<div class="col-sm-11">
-				<p></p>
-				<p>
-					Open a context that list all context saved in the curiosity index.
-				</p>
-			</div>
-			<div class="spacer"></div>
-			<hr />
-			<div class="col-sm-1">
-					<div class="ico context-button"> 
-						<span class="glyphicon glyphicon-dashboard blue" title="Manage your dashbord">
-						</span>
-						<div>
-							<span class="glyphicon glyphicon-floppy-disk blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Save your context" ng-click="quickSaveContext()">
-							</span>
-							<span class="glyphicon glyphicon-floppy-save blue" ng-click="newContext()"title="Save As">
-							</span>
-						</div>
-					</div>
-    		</div>
-			<div class="col-sm-11">
-				<p></p>
-				<p>
-					These buttons are useful when you customize your search context and you want to save it.
-					<div class="col-sm-5">
-						<img src="../img/curiosity-new-context-window.png" alt="Context save as" title="Context save as">
-					</div>
-				</p>
-			</div>
-			<div class="spacer"></div>
-			<hr />
-			<div class="col-sm-1">
-				<div>
-					<div class="ico red context-button">
-						<span class="glyphicon glyphicon-plus" title="New Workspace"></span>
-						<span class="glyphicon glyphicon-cog" title="Edit Workspace"></span>
-						<span class="glyphicon glyphicon-trash" title="Remove Workspace"></span>
-					</div>
-    			</div>
-    		</div>
-			<div class="col-sm-11">
-				<p></p>
-				<p>
-					<div class="col-sm-8">
-						<img src="../img/curiosity-add-page.png" alt="New page" title="New page">
-					</div>
-					<div class="col-sm-4">
-						Plus add a page in the current context.<br />
-						These page will be accessible by the arrows on the middle left and right of screen.
-						<div class="ico blue context-button"><span class="glyphicon glyphicon-arrow-left"> <span class="glyphicon glyphicon-arrow-right"></span></div>
-						<div class="alert alert-warning" role="alert">
-					    	Be carefull, save your context otherwise the changes are lost.  
-					    </div>
-					</div>					 
-				</p>
-			</div>
-			<div class="spacer"></div>
-			<hr />
+		<h3>
+			Step 3 : Add modules 
+		</h3>
 
+		<p>
+			Curiosity works with modules, each module has differing goals, there are modules to display results, built queries, make aggregations... Each workspace is divide in cards that are the representation of your layout. In each card you can add as many module as you want.
+		</p>
+
+		<div>
+			<div class="col-sm-5">
+				<p>When you want to add a module to a card :</p>
+				<ul>
+					<li>Click on the well on the top right corner of the card (1).</li>	
+					<li>A window will appear, select a module in the module list (2), click on "add module", the the module will be added in the card's temporary module list (3).For this example add  "Query" and "result" modules to your card.</li>
+					<li>
+						Then press "ok"(6) to add your module in your card.
+					</li>
+				</ul>
+				<p>
+					If you want to add some styles to your card, fill the Card's style (5) input with css styles.
+				</p>
+			</div>
+
+			
+			<div class="col-sm-7">
+				<img src="../img/curiosity-add-modules.png" alt="Screenshot of Curiosity's workspace configuration screen" title="Curiosity's workspace customization screen">
+			</div>
+
+
+			<div class="spacer"></div>
 		</div>
+
+		<h3>
+			Step 4 : Launch a query
+		</h3>
+
+		<p>Curiosity use elasticsearch's <a href="www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html" title="Query string query documentation">query string query syntax</a>, so you can easily create complex queries. Click in the query form (first form in page center), enter your query then press "enter" or click on search button. If your request is syntaxly correct, the status light remains green and the result will appear at the bottom center of the page.
+		</p>
+		<p>
+			Here are some basics for building a query : 
+			<ul>
+				<li>
+					If you want to search a string on a specific field : 
+					<pre style="background:rgba(238,238,238,0.92);color:#000">the<span style="color:#36c;font-style:italic">.path</span><span style="color:#36c;font-style:italic">.to</span><span style="color:#36c;font-style:italic">.my</span><span style="color:#36c;font-style:italic">.fields</span>:"string you search"
+					</pre>					
+				</li>
+				<li>
+					Getting docs that matchs a value range for a specific field :
+					<pre style="background:rgba(238,238,238,0.92);color:#000">the<span style="color:#36c;font-style:italic">.path</span><span style="color:#36c;font-style:italic">.to</span><span style="color:#36c;font-style:italic">.my</span><span style="color:#36c;font-style:italic">.fields</span>:[Start TO End]
+					</pre>
+				</li>
+			</ul>
+		</p>
 
 		<ul class="pager">
 

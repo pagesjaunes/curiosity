@@ -38,3 +38,38 @@ h3 {
 	margin-top: 50px;
 }
 
+.blue {
+  color: #1EA3B9;
+}
+
+.yellow {
+  color: #FFCD05;
+}
+
+.orange {
+  color: #FF5E38;
+}
+
+.green {
+  color : #41D394;
+}
+
+.violet {
+  color : #C33AEB;
+}
+
+.red {
+  color: #FF1F2B;
+}
+
+.brown {
+	color: Brown;
+}
+
+.black {
+  color: #000000;
+}
+
+div.ico {
+	font-size: 50px;
+}
