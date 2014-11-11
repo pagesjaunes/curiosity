@@ -238,8 +238,7 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 	* @return true if it's an aggregation, false instead
 	*/
 	aggObj.isAgg = function (key){
-		var re = new RegExp("^" + "agg" + ".*");
-		return (re.test(key));
+		return (key.substring(0,3) == "agg");
 	}
 	
 	/**
