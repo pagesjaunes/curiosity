@@ -177,16 +177,11 @@ Curiosity.factory('aggConstructor', function(){
 	obj.Range = function (agg) {
 
 		initError(agg);
-		console.log (agg)
 
 		if (!checkValue(agg.intervals) || !(checkValue(agg.field) || checkValue(agg.script))) {
 			setError(agg, "you need to fill interval and script or field input.");
 			return ;
 		}
-
-		console.log(checkValue(agg.intervals))
-		console.log(checkValue(agg.field))
-		console.log(checkValue(agg.script))
 
 		var result = ejs.RangeAggregation(agg.name);
 
@@ -488,9 +483,6 @@ Curiosity.factory('aggConstructor', function(){
 		if (checkValue(agg.field)) 
 			result.field(agg.field);
 
-		if (checkValue(agg.keyed)) 
-			result.keyed(agg.keyed);
-
 		if (checkValue(agg.unit)) 
 			result.unit(agg.unit);
 
@@ -577,6 +569,40 @@ Curiosity.factory('aggConstructor', function(){
 		}
 		return (result);
 	}
+
+	/**
+	 * @desc Built nested aggregation 
+	 * @param object agg contains all aggregation's param
+	 */
+	obj.GeoBounds = function (agg) {      
+
+		initError(agg);
+
+		if (!checkValue(agg.field)) {
+			setError(agg, "you need to specify field.");
+			return ;
+		}
+
+		var result = ejs.GeoBoundsAggregation(agg.name);
+
+		if (checkValue(agg.field)) 
+			result.field(agg.field);
+
+		if (agg.wrap_longitude=="false" || agg.wrap_longitude=="0") 
+			result.wrapLongitude(false);		
+		if (agg.wrap_longitude=="true" || agg.wrap_longitude=="1") 
+			result.wrapLongitude(true);
+
+		for (key in agg.nested) {
+			if (agg.nested[key].validate) {
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+			}
+		}
+		return (result);
+	}
+
+
+
 
 	// More Incoming !!!!!
 

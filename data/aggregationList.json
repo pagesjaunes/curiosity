@@ -179,12 +179,17 @@
     }, {
         "type": "GeoHashGrid",
         "template": "partials/aggregation_module/settings_partials/geohashgrid.html",
-        "resultTemplate": "partials/aggregation/default.html",
+        "resultTemplate": "partials/aggregation/Terms.html",
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-geohashgrid-aggregation.html"
     }, {
         "type": "Nested",
         "template": "partials/aggregation_module/settings_partials/nested.html",
         "resultTemplate": "partials/aggregation/nested.html",
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-nested-aggregation.html"
+    }, {
+        "type": "GeoBounds",
+        "template": "partials/aggregation_module/settings_partials/geobounds.html",
+        "resultTemplate": "partials/aggregation/default.html",
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-geobounds-aggregation.html"
     }]
 }
