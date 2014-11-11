@@ -1,0 +1,27 @@
+<form class="agg_option">
+
+	<div ng-include="'partials/aggregation_module/aggSettingsHeader.html'"></div>
+
+	<div class="input-group margin-top" ng-class="{'has-error':curAgg.field?false:true}">
+		<span class="input-group-addon">Field :</span>
+		<input class="form-control" type="text" ng-model="curAgg.field">
+		<div class="input-group-btn">
+			<button title="Display Fields" type="button" class="btn btn-default" ng-click="openModalFields('sm', curAgg)">
+				<span class="glyphicon glyphicon-align-justify"></span>
+			</button>
+		</div>	
+	</div>
+
+	<div class="input-group margin-top">
+		<span class="input-group-addon">Wrap longitude (true /false) :</span>
+		<input class="form-control" type="text"  ng-model="curAgg.wrap_longitude">
+	</div>
+
+	<div class="margin-top">
+		<button class="btn btn-default" ng-click="validateAgg(curAgg)">
+			<span ng-if="curAgg.validate">Deactivate</span>
+			<span ng-if="!curAgg.validate">Activate</span>
+		</button>
+	</div>
+
+</form>
