@@ -483,11 +483,6 @@ Curiosity.factory('aggConstructor', function(){
 		if (checkValue(agg.field)) 
 			result.field(agg.field);
 
-		if (agg.keyed=="false" || agg.keyed=="0") 
-			result.keyed(false);		
-		if (agg.keyed=="true" || agg.keyed=="1") 
-			result.keyed(true);
-
 		if (checkValue(agg.unit)) 
 			result.unit(agg.unit);
 
