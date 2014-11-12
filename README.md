@@ -27,6 +27,25 @@ Then you have to modify few values in conf.js located at the folder root.
 Then open index.html. Let curiosity initializes its data (about 5 or 10 secondes) and reload the page. You are now ready to use curiosity. 
 Note : If you don't run curiosity on a web server then use firefox instead of chrome because of the same origin policy.
 
+How To Contribute
+=================
+If you get interet in this project, help us increasing its features. Here is how to do !
+
+1. Clone the repo
+> git clone https://github.com/pagesjaunes/curiosity.git
+
+2. Switch to the develop-1 branch
+> git branch develop-1
+
+3. Edit the code, commit your changes
+
+4. Push your commit to github
+> git push origin develop-1
+
+It will be visible in github as "pull request". Once a month at least, we review all the incomming requests, test and eventually merge them with the master branch. Then a new tag is set on it.
+
+Thanks for your interest !
+
 Documentation
 =============
 
