@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, curiosity, keyword, context, log, aggFactory, filters, url){
+Curiosity.factory('query', function($rootScope, elasticClient, ejsResource, curiosity, keyword, context, log, aggFactory, filters, url){
 	var queryObj = {};
 	var client;
 	var currentKeyword = [];
@@ -283,8 +283,13 @@ Curiosity.factory('query', function($rootScope, elasticClient, curiosity, keywor
 	}
 
 	queryObj.updateDataFromUrl = function () {
-		queryObj.info.simplifiedRequest = (typeof(url.getData('simplifiedRequest'))!== "undefined")?url.getData('simplifiedRequest'):"";
-		queryObj.info.page = (typeof(url.getData('page'))!== "undefined")?parseInt(url.getData('page')):0;
+		var obj = {simplifiedRequest:"", page:""};
+		url.dataToObj(obj);
+		for (key in obj) {
+			if (typeof(obj[key]) !== "undefined") {
+				queryObj.info[key] = obj[key];
+			}
+		}
 	}
 
 	queryObj.updateUrlData = function () {
