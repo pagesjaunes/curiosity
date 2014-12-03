@@ -11,3 +11,10 @@ Curiosity.service('elasticClient', function(esFactory) {
    		}
    	}
 );
+
+// add this to allow controler in custom result template
+Curiosity.config(['$controllerProvider', function($controllerProvider) {
+  // this option might be handy for migrating old apps, but please don't use it
+  // in new ones!
+  $controllerProvider.allowGlobals();
+}]);
