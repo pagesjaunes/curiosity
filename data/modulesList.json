@@ -20,6 +20,8 @@
 	{"type" :"Notebook", "url":"partials/notebook/notebook.html","tags":["Advanced","Diverse","BETA"], 
 	"desc":"An Advanced module which you can use to add information to your context, each informations are synchronized with es server","visual":"resources/modules/diary.png"},
 	{"type" :"Doc", "url":"partials/doc_module/docModuleBlock.html","tags":["Advanced","Diverse","BETA"], 
-	"desc":"An Advanced module which you can use to add edit, clone and delete documents in index. Use carefully.","visual":"resources/modules/editor.png"}
+	"desc":"An Advanced module which you can use to add edit, clone and delete documents in index. Use carefully.","visual":"resources/modules/editor.png"},
+	{"type" :"History", "url":"partials/history/history.html","tags":["Basic","Query"], 
+	"desc":"Get queries from an history list","visual":"resources/modules/history.png"}
 ]
 }

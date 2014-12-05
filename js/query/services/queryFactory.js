@@ -1,6 +1,6 @@
 // queryFactory.js
 
-Curiosity.factory('query', function($rootScope, elasticClient, curiosity, keyword, context, log, aggFactory, filters, url){
+Curiosity.factory('query', function($rootScope, history, elasticClient, curiosity, keyword, context, log, aggFactory, filters, url){
 	var queryObj = {};
 	var client;
 	var currentKeyword = [];
@@ -147,6 +147,8 @@ Curiosity.factory('query', function($rootScope, elasticClient, curiosity, keywor
 				$rootScope.$broadcast("QueryLaunched");
 				log.log("Request : ok", "success");
 				queryObj.updateUrlData(); // Update url data on success
+				// Adds the query to the user history
+				history.addQuery(queryObj.simplifiedRequest, queryObj.complexRequest);
 			},
 			function err(err) {
 				curiosity.setLoad(false);
