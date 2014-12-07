@@ -104,7 +104,7 @@ Curiosity.factory('query', function($rootScope, history, elasticClient, curiosit
 		var array = string.split(" ");
 		if (array.length) {
 			return (array[array.length-1]);		
-		}
+		}query
 		return ("");
 	}
 
@@ -148,7 +148,7 @@ Curiosity.factory('query', function($rootScope, history, elasticClient, curiosit
 				log.log("Request : ok", "success");
 				queryObj.updateUrlData(); // Update url data on success
 				// Adds the query to the user history
-				history.addQuery(queryObj.simplifiedRequest, queryObj.complexRequest);
+				history.addQuery(queryObj.info.simplifiedRequest);
 			},
 			function err(err) {
 				curiosity.setLoad(false);

@@ -1,5 +1,3 @@
 <div ng-controller='historyCtrl'>
-	<ul>
-		<li ng-repeat='query in data.queries'>{{query.name}}</li>
-	</ul>
+	<p style='margin-top:5px;'><span class='label label-primary' style='margin:5px;' ng-repeat='query in data.queries' ng-click='searchFromHistory(query)'> {{query}} </span></p>
 </div>
