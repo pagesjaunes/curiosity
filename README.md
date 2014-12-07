@@ -35,7 +35,7 @@ If you get interet in this project, help us increasing its features. Here is how
 > git clone https://github.com/pagesjaunes/curiosity.git
 
 2. Switch to the develop-1 branch
-> git branch develop-1
+> git checkout develop-1
 
 3. Edit the code, commit your changes
 
@@ -54,7 +54,7 @@ Documentation
 Contact
 =======
 
-If you have any question about curisity you can contact Erwan PIGNEUL and Fabrice DEPAULIS : epigneul@pagesjaunes.fr / fdepaulis@pagesjaunes.fr
+If you have any question about curiosity you can contact Erwan PIGNEUL and Fabrice DEPAULIS : epigneul@pagesjaunes.fr / fdepaulis@pagesjaunes.fr
 
 Initial dev is the work of Arthur BABEY : 	arthur.babey@epitech.eu (many thanks Arthur)
 
