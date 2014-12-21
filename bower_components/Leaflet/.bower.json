@@ -1,0 +1,12 @@
+{
+  "name": "Leaflet",
+  "_cacheHeaders": {
+    "ETag": "\"5dc2e4a69c6bf0a97df0513095c31a47\"",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "_release": "e-tag:5dc2e4a69",
+  "main": "index",
+  "_source": "https://github.com/Leaflet/Leaflet",
+  "_target": "*",
+  "_originalSource": "https://github.com/Leaflet/Leaflet"
+}

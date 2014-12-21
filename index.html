@@ -14,6 +14,9 @@
 		<link href="bower_components/select2/select2.css" rel="stylesheet">
 		<link href="bower_components/select2/select2-bootstrap.css" rel="stylesheet">
 		<!-- <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet"> -->
+		<link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet">
+		<link href="bower_components/leaflet-dvf/dist/css/dvf.css" rel="stylesheet">
+
 			<!-- Project specifique file !-->
 		<link href="css/curiosity.css" rel="stylesheet">
 		<link href="css/modules.css" rel="stylesheet">
@@ -37,7 +40,12 @@
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
    		<script type="text/javascript">
       		  google.load("visualization", "1", {packages:["corechart", "table", "calendar"]});
-      		</script>
+      	</script>
+      	<script type="text/javascript" src="bower_components/leaflet/dist/leaflet.js"></script>
+      	<script type="text/javascript" src="bower_components/leaflet-dvf/dist/leaflet-dvf.min.js"></script>
+      	<script type="text/javascript" src="bower_components/geohash-js/geohash.js"></script>
+
+
 		<!-- Project specique files !-->
 		<!-- Conf file !-->
 		<script type="text/javascript" src="conf.js"></script>
@@ -105,6 +113,7 @@
 		<script type="text/javascript" src="js/graph/directives/scatterChartDirective.js"></script>
 		<!--<script type="text/javascript" src="js/graph/directives/diffChartDirective.js"></script>!-->
 		<script type="text/javascript" src="js/graph/misc/utils.js"></script>
+		<script type="text/javascript" src="js/maps/directives/mapGeoHash.js"></script>
 		<!-- ModuleManager !-->
 		<script type="text/javascript" src="js/moduleManager/services/moduleManagerFactory.js"></script>
 		<script type="text/javascript" src="js/moduleManager/controllers/moduleManagerCtrl.js"></script>

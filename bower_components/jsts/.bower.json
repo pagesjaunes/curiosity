@@ -1,0 +1,12 @@
+{
+  "name": "jsts",
+  "_cacheHeaders": {
+    "ETag": "\"d7fcd86ef8fc830db9a6cfd4698ff244\"",
+    "Content-Type": "text/html; charset=utf-8"
+  },
+  "_release": "e-tag:d7fcd86ef",
+  "main": "index",
+  "_source": "https://github.com/bjornharrtell/jsts",
+  "_target": "*",
+  "_originalSource": "https://github.com/bjornharrtell/jsts"
+}
