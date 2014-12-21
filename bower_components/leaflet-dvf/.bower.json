@@ -1,0 +1,32 @@
+{
+  "name": "leaflet-dvf",
+  "homepage": "https://github.com/humangeo/leaflet-dvf",
+  "authors": [
+    "Scott Fairgrieve <https://github.com/sfairgrieve>"
+  ],
+  "description": "The Leaflet Data Visualization Framework (DVF) is an extension to the Leaflet JavaScript mapping library. The primary goal of the framework is to simplify data visualization and thematic mapping using Leaflet - making it easier to turn raw data into compelling maps.",
+  "main": "dist/leaflet-dvf.min.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jsts": "https://github.com/bjornharrtell/jsts",
+    "Leaflet": "https://github.com/Leaflet/Leaflet",
+    "geohash-js": "git://github.com/thurmda/geohash-js",
+    "underscore": "~1.6.0",
+    "moment": "~2.8.1"
+  },
+  "_release": "9d915fae08",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "9d915fae087493a21ba72057b19c34ba8521db9f"
+  },
+  "_source": "https://github.com/humangeo/leaflet-dvf.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/humangeo/leaflet-dvf.git",
+  "_direct": true
+}

@@ -1,0 +1,14 @@
+{
+  "name": "geohash-js",
+  "homepage": "https://github.com/thurmda/geohash-js",
+  "_release": "fbfbf89d18",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fbfbf89d1880302f8db756907488300a9fde314c"
+  },
+  "_source": "git://github.com/thurmda/geohash-js.git",
+  "_target": "*",
+  "_originalSource": "git://github.com/thurmda/geohash-js",
+  "_direct": true
+}

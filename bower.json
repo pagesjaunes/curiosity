@@ -34,7 +34,10 @@
     "elasticsearch": "~3.0.0",
     "FileSaver": "*",
     "ng-json-explorer": "*",
-    "angular-ui-select2": "~0.0.5"
+    "angular-ui-select2": "~0.0.5",
+    "leaflet": "~0.7.3",
+    "geohash-js": "git://github.com/thurmda/geohash-js",
+    "leaflet-dvf": "https://github.com/humangeo/leaflet-dvf.git"
   },
   "resolutions": {
     "angular": "~1.3.3"

@@ -1,0 +1,18 @@
+{
+  "name": "geohash",
+  "version": "0.0.0",
+  "description": "Geohash Javascript Demonstration (c) 2008 David Troy Released under the MIT License",
+  "main": "module.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thurmda/geohash-js.git"
+  },
+  "author": "David Troy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thurmda/geohash-js/issues"
+  }
+}
