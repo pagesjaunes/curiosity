@@ -14,7 +14,7 @@ Main curiosity's functionality are :
 * Result Export
 * Research Context
 
-Install 
+Install (on a web server)
 ===========
 
 Curiosity hasn't external dependency. There is nothing to install. You just have to clone the git repository or uncompress the archive where you want. 
@@ -26,6 +26,20 @@ Then you have to modify few values in conf.js located at the folder root.
 
 Then open index.html. Let curiosity initializes its data (about 5 or 10 secondes) and reload the page. You are now ready to use curiosity. 
 Note : If you don't run curiosity on a web server then use firefox instead of chrome because of the same origin policy.
+
+
+Install (as a plugin site on Elasticsearch)
+=================
+
+Another way of installing Curiosity is by using the site plugin feature of Elasticsearch (makes use of netty to serve static content).
+
+This method will help to solve _cross-domain http issues_ with recent versions of Elasticsearch (1.4+).
+
+1. Go to your elasticsearch's bin subdirectory
+2. Install Curiosity as a site plugin (from github) :
+> ./plugin -install pagesjaunes/curiosity
+3. Edit ../plugins/curiosity/\_site/conf.js (see § install on a web server)
+4. Go to http://HOSTNAME:PORT/_plugin/curiosity/
 
 How To Contribute
 =================
