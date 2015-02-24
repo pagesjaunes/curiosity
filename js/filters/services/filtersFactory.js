@@ -134,6 +134,7 @@ Curiosity.factory('filters', function($rootScope, context){
 	*/
 	filterObj.removeFilterFromId = function(id) {
 		removeFilterRec(id, filterObj.info.filters.nestedFilter);
+		queryObj.notify();
 	}
 
 	filterObj.notifyUpdate = function () {
