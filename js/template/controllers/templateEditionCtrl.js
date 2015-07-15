@@ -19,14 +19,13 @@ var templateEditionCtrl = function($scope, $modalInstance, template, mapping, $h
 
 	$scope.fieldLimit = 12;
 
-	$scope.changeTemplate = function (type, obj, attr, index) {
-		if (index !== "undefined" && index >= 0) {
-			obj[attr] = $scope.data[type][index];
+	$scope.changeTemplate = function (type, obj, attr, name) {
+		if (name !== "undefined") {
+			obj[attr] = template.getByName(type, name);
 			if (globalConf.readonlyTemplate.indexOf(obj[attr].name) == -1) $scope.readonlyTemplate = 0;
 			else $scope.readonlyTemplate = 1;
 		}
-	}
-	
+	}	
 	/**
 	* $scope.new
 	* Add a new template in the template list
@@ -48,8 +47,8 @@ var templateEditionCtrl = function($scope, $modalInstance, template, mapping, $h
 	* $scope.delete 
 	* Remove the selected template from the local template list
 	*/
-	$scope.delete = function (type, obj, attr, index) {
-		template.delete(type, index);
+	$scope.delete = function (type, obj, attr, name) {
+		template.delete(type, name);
 		obj[attr] = {};
 		index = 0;
 	}

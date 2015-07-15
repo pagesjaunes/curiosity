@@ -574,3 +574,28 @@ body.toolbar-hidden {
 .agg_option ul li{
   list-style: none;
 }
+
+a:link.none {
+  text-decoration: none;
+  color: #000000;
+}
+
+a:hover.none {
+  text-decoration: none;
+  color: #000000;
+}
+
+a:active.none {
+  text-decoration: none;
+  color: #000000;
+}
+
+a:visited.none {
+  text-decoration: none;
+  color: #000000;
+}
+
+a.none {
+  text-decoration: none;
+  color: #000000;
+}

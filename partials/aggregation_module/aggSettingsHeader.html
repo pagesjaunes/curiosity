@@ -10,10 +10,12 @@
 
 	<div class="input-group" ng-if="!curAgg.useCustomTemplate">
 		<span class="input-group-addon">Template :</span>
-		<select ng-model="curAgg.tpl" ui-select2 class="form-control" ng-change="loadTpl(curAgg.tpl)">
-			<option value="default">Default</option>
-			<option ng-repeat="tpl in tplData.aggregationsTemplates" value="{{ tpl.name }}"> {{tpl.name}} </option>
-		</select>
+		<ui-select ng-model="curAgg.tpl" on-select="loadTpl(curAgg.tpl)" theme="select2" class="form-control" style="min-width: 300px;" append-to-body="true">
+			<ui-select-match placeholder="Select a template in the list...">{{$select.selected.name}}</ui-select-match>
+        	<ui-select-choices repeat="tpl.name as tpl in tplData.aggregationsTemplates | filter: {name: $select.search}">
+        		<a class="none" title="{{ tpl.name }}" ng-bind-html="tpl.name | highlight: $select.search"></a>
+        	</ui-select-choices>
+      	</ui-select>
 		<div class="input-group-btn">
 			<button title="Open templates" type="button" class="btn btn-default" ng-click="openModalTemplates('lg', curAgg)">
 				<span class="glyphicon glyphicon-align-justify"></span>

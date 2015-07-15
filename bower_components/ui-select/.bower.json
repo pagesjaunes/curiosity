@@ -1,0 +1,29 @@
+{
+  "author": "Brett Shollenberger",
+  "name": "angular-ui-select3",
+  "homepage": "https://github.com/brettshollenberger/ui-select",
+  "keywords": [
+    "angular",
+    "angularui",
+    "select2"
+  ],
+  "main": "./src/select3.js",
+  "dependencies": {
+    "angular": ">=1.0.2 <1.2",
+    "select2": "~3.4",
+    "jquery": ">=1.6.4"
+  },
+  "devDependencies": {
+    "angular-mocks": ">=1.0.2 <1.2"
+  },
+  "_release": "fa739d3363",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "fa739d33630764e7e3112b2432cb1b4325fe040b"
+  },
+  "_source": "git://github.com/brettshollenberger/ui-select.git",
+  "_target": "*",
+  "_originalSource": "ui-select",
+  "_direct": true
+}

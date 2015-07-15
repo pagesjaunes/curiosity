@@ -1,7 +1,7 @@
 /*!
  * ui-select
  * http://github.com/angular-ui/ui-select
- * Version: 0.8.3 - 2014-10-14T18:22:05.435Z
+ * Version: 0.12.0 - 2015-05-28T07:44:11.364Z
  * License: MIT
  */
 
@@ -36,6 +36,43 @@
   padding-left: 0;
 }
 
+.select2-locked > .select2-search-choice-close{
+  display:none;
+}
+
+.select-locked > .ui-select-match-close{
+    display:none;
+}
+
+body > .select2-container.open {
+  z-index: 9999; /* The z-index Select2 applies to the select2-drop */
+}
+
+/* Handle up direction Select2 */
+.ui-select-container[theme="select2"].direction-up .ui-select-match {
+    border-radius: 4px; /* FIXME hardcoded value :-/ */
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.ui-select-container[theme="select2"].direction-up .ui-select-dropdown {
+    border-radius: 4px; /* FIXME hardcoded value :-/ */
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    border-top-width: 1px;  /* FIXME hardcoded value :-/ */
+    border-top-style: solid;
+
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
+
+    margin-top: -4px; /* FIXME hardcoded value :-/ */
+}
+.ui-select-container[theme="select2"].direction-up .ui-select-dropdown .select2-search {
+    margin-top: 4px; /* FIXME hardcoded value :-/ */
+}
+.ui-select-container[theme="select2"].direction-up.select2-dropdown-open .ui-select-match {
+    border-bottom-color: #5897fb;
+}
+
 /* Selectize theme */
 
 /* Helper class to show styles when focus */
@@ -58,6 +95,12 @@
     border-color: #D44950;
 }
 
+/* Handle up direction Selectize */
+.ui-select-container[theme="selectize"].direction-up .ui-select-dropdown {
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
+
+    margin-top: -2px; /* FIXME hardcoded value :-/ */
+}
 
 /* Bootstrap theme */
 
@@ -72,6 +115,17 @@
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
+.ui-select-bootstrap .ui-select-toggle {
+  position: relative;
+}
+
+.ui-select-bootstrap .ui-select-toggle > .caret {
+  position: absolute;
+  height: 10px;
+  top: 50%;
+  right: 10px;
+  margin-top: -2px;
+}
 
 /* Fix Bootstrap dropdown position when inside a input-group */
 .input-group > .ui-select-bootstrap.dropdown {
@@ -84,10 +138,15 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+.input-group > .ui-select-bootstrap > input.ui-select-search.form-control.direction-up {
+  border-radius: 4px !important; /* FIXME hardcoded value :-/ */
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
 
-.ui-select-bootstrap > .ui-select-match {
+.ui-select-bootstrap > .ui-select-match > .btn{
   /* Instead of center because of .btn */
-  text-align: left;
+  text-align: left !important;
 }
 
 .ui-select-bootstrap > .ui-select-match > .caret {
@@ -102,11 +161,16 @@
   height: auto;
   max-height: 200px;
   overflow-x: hidden;
+  margin-top: -1px;
+}
+
+body > .ui-select-bootstrap.open {
+  z-index: 1000; /* Standard Bootstrap dropdown z-index */
 }
 
 .ui-select-multiple.ui-select-bootstrap {
   height: auto;
-  padding: .3em;
+  padding: 3px 3px 0 3px;
 }
 
 .ui-select-multiple.ui-select-bootstrap input.ui-select-search {
@@ -114,6 +178,7 @@
   border: none;
   outline: none;
   height: 1.666666em;
+  margin-bottom: 3px;
 }
 
 .ui-select-multiple.ui-select-bootstrap .ui-select-match .close {
@@ -121,8 +186,33 @@
   line-height: 0.75;
 }
 
-.ui-select-multiple.ui-select-bootstrap .ui-select-match-item{
+.ui-select-multiple.ui-select-bootstrap .ui-select-match-item {
   outline: 0;
+  margin: 0 3px 3px 0;
+}
+
+.ui-select-multiple .ui-select-match-item {
+  position: relative;
+}
+
+.ui-select-multiple .ui-select-match-item.dropping-before:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 100%;
+  height: 100%;
+  margin-right: 2px;
+  border-left: 1px solid #428bca;
+}
+
+.ui-select-multiple .ui-select-match-item.dropping-after:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 100%;
+  height: 100%;
+  margin-left: 2px;
+  border-right: 1px solid #428bca;
 }
 
 .ui-select-bootstrap .ui-select-choices-row>a {
@@ -164,4 +254,9 @@
 /* Mark invalid Bootstrap */
 .ui-select-bootstrap.ng-dirty.ng-invalid > button.btn.ui-select-match {
     border-color: #D44950;
+}
+
+/* Handle up direction Bootstrap */
+.ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
 }

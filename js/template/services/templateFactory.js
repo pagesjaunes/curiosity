@@ -20,9 +20,6 @@ Curiosity.factory('template', function($http, $templateCache, $rootScope, conf){
 			templateObj.info.template = [];
 		}
 		templateObj.info.aggregationsTemplates = conf.getConfDocument("aggregationsTemplates").templates;
-		if (typeof(templateObj.info.aggregationsTemplates) === "undefined") {
-			templateObj.info.aggregationsTemplates = [];
-		}	
 	}
 
 	/* 
@@ -55,12 +52,33 @@ Curiosity.factory('template', function($http, $templateCache, $rootScope, conf){
 	* templateObj.delete
 	* delete a template in a template list 
 	* @param type : template list's type
-	* @param index : template's index in the list
+	* @param name : template's name
 	*/
-	templateObj.delete = function (type, index) {
-		if (index >= 0){
-			templateObj.info[type].splice(index, 1);
+	templateObj.delete = function (type, name) {
+		var i = 0;
+		while (i < templateObj.info[type].length) {
+			if (templateObj.info[type][i].name == name) {
+				templateObj.info[type].splice(i, 1);
+			}
+			i++;
 		}
+	}
+
+	/**
+	* templateObj.getByName
+	* get a template 
+	* @param type : template list's type
+	* @param name : template's name
+	*/
+	templateObj.getByName = function (type, name) {
+		var i = 0;
+		while (i < templateObj.info[type].length) {
+			if (templateObj.info[type][i].name == name) {
+				return templateObj.info[type][i];
+			}
+			i++;
+		}
+		return false;
 	}
 
 	/**
@@ -79,14 +97,12 @@ Curiosity.factory('template', function($http, $templateCache, $rootScope, conf){
 	}
 
 	templateObj.addTemplateToCacheFromName = function (type, name) {
-		var i = 0;
-		while (i < templateObj.info[type].length) {
-			if (templateObj.info[type][i].name == name) {
-				$templateCache.put(templateObj.info[type][i].name, templateObj.info[type][i].value);
-				break ;
-			}
-			i++;
+		tpl = templateObj.getByName(type, name);
+		if (tpl !== false) {
+			$templateCache.put(tpl.name, tpl.value);
+			return (tpl.name);
 		}
+		return false;
 	}
 
 	templateObj.addTemplateToCacheFromValue = function (name, value) {

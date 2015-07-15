@@ -1,5 +1,6 @@
 {
   "name": "leaflet-dvf",
+  "version": "0.2.3",
   "homepage": "https://github.com/humangeo/leaflet-dvf",
   "authors": [
     "Scott Fairgrieve <https://github.com/sfairgrieve>"
@@ -14,19 +15,18 @@
   ],
   "dependencies": {
     "jsts": "https://github.com/bjornharrtell/jsts",
-    "Leaflet": "https://github.com/Leaflet/Leaflet",
+    "leaflet": "~0.7.3",
     "geohash-js": "git://github.com/thurmda/geohash-js",
     "underscore": "~1.6.0",
     "moment": "~2.8.1"
   },
-  "_release": "9d915fae08",
+  "_release": "0.2.3",
   "_resolution": {
-    "type": "branch",
-    "branch": "master",
-    "commit": "9d915fae087493a21ba72057b19c34ba8521db9f"
+    "type": "version",
+    "tag": "v0.2.3",
+    "commit": "059d4af748a15cae10b27b6c3d7fdceacdb6d221"
   },
   "_source": "https://github.com/humangeo/leaflet-dvf.git",
   "_target": "*",
-  "_originalSource": "https://github.com/humangeo/leaflet-dvf.git",
-  "_direct": true
+  "_originalSource": "https://github.com/humangeo/leaflet-dvf.git"
 }

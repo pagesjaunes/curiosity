@@ -20,11 +20,12 @@
 	<div ng-if="!curAgg.hideCurAgg">
 		<div ng-if="!curAgg.displayResult">
 			<div class="margin-top">
-				<select class="form-control" ui-select2 ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg,curAgg.aggregationTypeIdx)">
-					<option ng-repeat="item in data.aggList"  value="{{ $index }}">
-						{{ item.type }}
-					</option>
-				</select>
+				<ui-select ng-model="curAgg.type" on-select="changeAggType(curAgg,$item)" theme="select2" class="form-control" style="min-width: 300px;">
+        			<ui-select-match placeholder="Select an agg in the list...">{{$select.selected.type}}</ui-select-match>
+	            	<ui-select-choices repeat="item.type as item in data.aggList | filter: {type: $select.search}">
+	            		<a class="none" title="{{ item.type }}" ng-bind-html="item.type | highlight: $select.search"></a>
+	            	</ui-select-choices>
+	          	</ui-select>
 			</div>
 
 			<a target="_blank" ng-if="curAgg.aggTypeSelected" href="{{ curAgg.officialDoc }}">official doc about {{ curAgg.type }}</a>

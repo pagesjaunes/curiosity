@@ -13,7 +13,7 @@
 			</div>
 			<div class="margin-top input-group">
 				<label class="input-group-addon"> Mappings :</label>
-				<select ng-model="mappingData.selectedMapping" class="form-control" ng-change="updateMapping()" ui-select2>
+				<select ng-model="mappingData.selectedMapping" class="form-control" ng-change="updateMapping()">
 					<option ng-repeat="(key, value) in mappingData.mappingsList" value="{{ key }}">
 						{{ key }}
 					</option>

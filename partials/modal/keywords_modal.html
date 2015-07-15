@@ -5,19 +5,12 @@
 	<div class="modal-body">
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.keyword.Index }}</span>
-		<select ng-model="keyword.selectedIndex" ng-change="selectIndex()" ui-select2 class="form-control" tabindex="-1">
-			<option value="global" >global</option>
-			<optgroup label="Alias">
-	          	<option ng-repeat="alias in curiosityData.aliases" value="{{ alias }}">
-	          			{{ alias }}
-	          	</option>
-          	</optgroup>
-          	<optgroup label="Index">
-	          	<option ng-repeat="index in curiosityData.indexList" value ="{{ index }}"> 
-					{{ index }}
-				</option>
-			</optgroup>
-		</select>
+		<ui-select ng-model="keyword.selectedIndex" ng-change="selectIndex()" theme="select2" class="form-control" style="min-width: 300px;" tabindex="-1">
+			<ui-select-match placeholder="Select an alias or index in the list...">{{$select.selected}}</ui-select-match>
+        	<ui-select-choices group-by="groupIndexFind" repeat="index in curiosityData.indexDisplayValues | filter:$select.search">
+        		<a class="none" title="{{ index }}" ng-bind-html="index | highlight: $select.search"></a>
+        	</ui-select-choices>
+      	</ui-select>
 	</div>
 	<div class="spacer"></div>
 	<div class="btn-group btn-keyword">

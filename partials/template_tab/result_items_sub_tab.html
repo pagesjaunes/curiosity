@@ -1,9 +1,12 @@
 <div class="col-sm-6">
 	<div class="input-group">
 		<span class="input-group-addon">{{ info.txt.template.result_items_sub_tab.Template }}</span>
-		<select ng-model="template.selected" ui-select2 class="form-control" ng-change="changeTemplate('template', template,'currentTemplate', template.selected)">
-			<option ng-repeat="template in data.template" value="{{$index}}" >{{ template.name }}</option>  
-		</select>
+		<ui-select ng-model="template.selected" on-select="changeTemplate('template', template,'currentTemplate', template.selected)" theme="select2" class="form-control" style="min-width: 300px;" append-to-body="true">
+			<ui-select-match placeholder="Select a template in the list...">{{$select.selected.name}}</ui-select-match>
+        	<ui-select-choices repeat="tpl.name as tpl in data.template | filter: {name: $select.search}">
+        		<a class="none" title="{{ tpl.name }}" ng-bind-html="tpl.name | highlight: $select.search"></a>
+        	</ui-select-choices>
+      	</ui-select>
 	</div>
 </div>
 <div class="spacer"></div>

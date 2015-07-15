@@ -5,7 +5,8 @@
 Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	$scope.aggTypeSelected = false;
 	$scope.data = aggFactory.info;
-	$scope.tplData = template.info; 
+	$scope.tplData = template.info;
+	$scope.tplData.aggregationsTemplates = [{'name': 'default'}].concat($scope.tplData.aggregationsTemplates);
 
 	/**
 	* @desc function call by ng-init, called to load aggregation specifique data, and load template in $templateCache
@@ -46,12 +47,12 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	* @param object agg the aggregation to change type
 	* @idx int idx the index of the new aggregation type in aggList
 	*/
-	$scope.changeAggType = function (agg,idx) {
-		if (typeof (idx) != "undefined" && idx != null && idx >= 0) {
-			agg.type = $scope.data.aggList[idx].type;
-			agg.displayTemplate = $scope.data.aggList[idx].template;
-			agg.resultTemplate = $scope.data.aggList[idx].resultTemplate;
-			agg.officialDoc = $scope.data.aggList[idx].officialDoc;
+	$scope.changeAggType = function (agg,aggType) {
+		if (typeof (aggType) != "undefined") {
+			agg.type = aggType.type;
+			agg.displayTemplate = aggType.template;
+			agg.resultTemplate = aggType.resultTemplate;
+			agg.officialDoc = aggType.officialDoc;
 			agg.aggTypeSelected = true;
 		}
 	}
@@ -77,7 +78,8 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	* @param string the template name
 	*/
 	$scope.loadTpl = function (tpl) {
-		if (typeof(tpl) !== "undefined" && tpl != "default") {
+		console.log(tpl)
+		if (typeof(tpl) !== "undefined" && tpl !== "default") {
 			template.addTemplateToCacheFromName("aggregationsTemplates", tpl);
 		}
 	}

@@ -32,9 +32,12 @@ Curiosity.controller('resultCtrl', function($scope, $modal, result, query, templ
 		context.loadContext(idContext);
 	}
 
+	$scope.selectTemplate = function(type, name) {
+		result.changeCurrentTemplate(type, name);
+	}
 
-	$scope.selectTemplate = function(type, id) {
-		result.changeCurrentTemplate(type, id);
+	$scope.selectTemplate2 = function(type, name) {
+		result.changeCurrentTemplate2(type, name);
 	}
 
 	$scope.selectLocalTemplate = function(name,data) {
