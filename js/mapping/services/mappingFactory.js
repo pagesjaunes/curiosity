@@ -75,7 +75,6 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 	*/
 	function updateMappingCB(error, resp) {		
 		mappingObj.info.mappingsList = resp;
-		console.log(resp)
 		mappingObj.info.currentMapping = resp[mappingObj.info.currentIndex];
 		if (typeof(mappingObj.info.currentMapping) === "undefined") {
 			for(key in  resp) {

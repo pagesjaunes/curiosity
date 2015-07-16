@@ -19,14 +19,14 @@
     "components",
     "docs"
   ],
-  "homepage": "https://github.com/fullscale/elastic.js",
+  "homepage": "https://github.com/ErwanPigneul/elastic.js",
   "_release": "1.2.0",
   "_resolution": {
     "type": "version",
     "tag": "1.2.0",
     "commit": "e84fa4b50f9f6c625ad5906bbc444b5dc60a573d"
   },
-  "_source": "git://github.com/fullscale/elastic.js.git",
+  "_source": "https://github.com/ErwanPigneul/elastic.js.git",
   "_target": "*",
-  "_originalSource": "elastic.js"
+  "_originalSource": "https://github.com/ErwanPigneul/elastic.js.git"
 }
