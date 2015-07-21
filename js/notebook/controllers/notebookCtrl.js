@@ -30,7 +30,6 @@ Curiosity.controller('notebookCtrl', function($scope, $modal, notebook, query) {
 	* @param string queryString : the string to search for
 	*/ 
 	$scope.search = function (queryString) {
-		console.log(queryString)
 		$scope.queryData.simplifiedRequest = queryString;
 		query.search();
 	}

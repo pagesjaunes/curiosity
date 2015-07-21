@@ -7,7 +7,7 @@
 			<p class="navbar-text">{{ info.txt.header.Server}} : </p>
 			<form class="navbar-form navbar-left" ng-show="!displayNewServer" title="{{data.currentServer}}">
 				<div class="form-group">
-					<ui-select ng-model="data.currentServer" on-select="connectServer(data.currentServer, false)" theme="bootstrap" title="{{data.currentServer}}"  style="min-width: 200px;">
+					<ui-select ng-model="data.currentServer" on-select="connectServer(data.currentServer, false)" theme="select2" title="{{data.currentServer}}"  style="min-width: 200px;">
             			<ui-select-match placeholder="Select or search a server in the list...">{{$select.selected}}</ui-select-match>
 		            	<ui-select-choices repeat="server in data.serverList | filter:$select.search">
 		              		<div><a class="none" title="{{server}}" ng-bind-html="server | highlight: $select.search"></a></div>

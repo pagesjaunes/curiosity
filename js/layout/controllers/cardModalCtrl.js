@@ -32,7 +32,4 @@ var cardModalCtrl = function($scope, $modalInstance, moduleManager, item){
 		$scope.res.modules.push({'name':$scope.data.moduleList[idx].type, idx:idx});
 		$scope.selectedModule[idx]++; 
 	}
-	$scope.ty = function (idx) {
-		console.log(idx);
-	}
 };

@@ -1,6 +1,6 @@
 // app.js
 
-var Curiosity = angular.module('curiosity', ['elasticsearch', 'ui.select', 'ui.bootstrap', 'ngAnimate', 'ngCookies','gd.ui.jsonexplorer','ngSanitize']);
+var Curiosity = angular.module('curiosity', ['elasticsearch', 'ui.select', 'ui.bootstrap', 'ngCookies','gd.ui.jsonexplorer','ngSanitize','digestHud']);
 Curiosity.service('elasticClient', function(esFactory) {
 		return { 
 			getClient: function(server) {	
@@ -13,8 +13,10 @@ Curiosity.service('elasticClient', function(esFactory) {
 );
 
 // add this to allow controler in custom result template
-Curiosity.config(['$controllerProvider', function($controllerProvider) {
+Curiosity.config(['$controllerProvider', 'digestHudProvider', function($controllerProvider, digestHudProvider) {
   // this option might be handy for migrating old apps, but please don't use it
   // in new ones!
   $controllerProvider.allowGlobals();
+  digestHudProvider.enable();
+
 }]);

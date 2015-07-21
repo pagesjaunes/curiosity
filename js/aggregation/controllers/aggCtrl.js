@@ -78,7 +78,6 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	* @param string the template name
 	*/
 	$scope.loadTpl = function (tpl) {
-		console.log(tpl)
 		if (typeof(tpl) !== "undefined" && tpl !== "default") {
 			template.addTemplateToCacheFromName("aggregationsTemplates", tpl);
 		}
