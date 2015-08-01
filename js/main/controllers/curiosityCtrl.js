@@ -9,6 +9,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 	$scope.showHeader = true;	
 	$scope.info = {};
 	$scope.info.txt = global_text;
+
 	
 	$scope.selectIndex = function (){
 		curiosity.selectIndex();
@@ -155,9 +156,4 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		modalInstance.result.then(function (value) {
 		}, function () {})	
 	}
-
-	$scope.groupIndexFind = function(item){
-    	return $scope.data.aliases.indexOf(item) > -1 ? "Alias": "Index";
-    }
-
 });

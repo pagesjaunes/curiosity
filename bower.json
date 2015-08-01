@@ -1,6 +1,6 @@
 {
   "name": "curiosity",
-  "version": "0.2.7",
+  "version": "0.4.0",
   "homepage": "https://github.com/pagesjaunes/curiosity",
   "authors": [
     "Erwan Pigneul <epigneul@pagesjaunes.fr",
@@ -30,13 +30,17 @@
     "angular-bootstrap": "*",
     "bootstrap": "*",
     "angular-sanitize": "*",
-    "angular-ui-select": "*",
-    "select2": "3.5.2",
     "elastic.js": "https://github.com/ErwanPigneul/elastic.js.git",
     "elasticsearch": "*",
     "FileSaver": "*",
     "leaflet": "*",
     "geohash-js": "git://github.com/thurmda/geohash-js",
-    "leaflet-dvf": "https://github.com/humangeo/leaflet-dvf.git"
+    "leaflet-dvf": "https://github.com/humangeo/leaflet-dvf.git",
+    "ng-json-explorer": "ErwanPigneul/ng-json-explorer",
+    "angular-ui-select2": "*"
+
+  },
+  "resolutions": {
+    "angular": "~1.4.3"
   }
 }

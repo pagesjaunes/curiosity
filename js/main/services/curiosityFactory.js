@@ -56,7 +56,6 @@ Curiosity.factory('curiosity', function($http, $rootScope, aggFactory, conf, log
 			curiosityObj.info.currentServer = url;
 			globalConf.curentServer = url;
 			getAlias(data);
-			curiosityObj.info.indexDisplayValues = curiosityObj.info.aliases.concat(curiosityObj.info.indexList);
 			$rootScope.$broadcast("ServerChange");
 			curiosityObj.info.err = false;
 			log.log("Connection to \'" + url + "\' success", "success");

@@ -12,6 +12,17 @@ var TextFunctions = TextFunctions || {
 		if (this.options.text) {
 			this._createText(this.options.text);
 		}
+		
+		if (this.options.wordCloud) {
+			var options = this.options.wordCloud;
+			
+			if (options.words.length > 0) {
+				var me = this;
+				setTimeout(function () {
+					me._createWordCloudPattern(options);
+				}, 0);
+			}
+		}
 	},
 
 	_initText: function () {
@@ -149,90 +160,143 @@ var PathFunctions = PathFunctions || {
 		this._container.appendChild(this._defs);
 	},
 
-	_createGradient: function (options) {
-		if (!this._defs) {
-			this._createDefs();
-		}
+    _createMarker: function (type, options) {
+        if (!this._defs) {
+            this._createDefs();
+        }
 
-		if (this._gradient) {
-			this._defs.removeChild(this._gradient);
-		}
+        this._markers = this._markers || {};
+        this._markerPath = this._markerPath || {};
 
-		options = options !== true ? L.extend({}, options) : {};
-		var gradientGuid = L.Util.guid();
-		this._gradientGuid = gradientGuid;
+        if (this._markers[type]) {
+            this._defs.removeChild(this._markers[type]);
+        }
 
-		var gradient;
-		var gradientOptions;
-		if (options.gradientType == "radial") {
-			gradient = this._createElement("radialGradient");
-			gradientOptions = options.radial || { cx: '50%', cy: '50%', r: '50%', fx: '50%', fy: '50%' };
-		} else {
-			gradient = this._createElement("linearGradient");
-			var vector = options.vector || [ [ "0%", "0%" ], [ "100%", "100%" ] ];
-			gradientOptions = {
-				x1: vector[0][0],
-				x2: vector[1][0],
-				y1: vector[0][1],
-				y2: vector[1][1]
-			};
-		}
-		gradientOptions.id = "grad" + gradientGuid;
+        this._markers[type] = this._createElement('marker');
 
-		var stops = options.stops || [
-			{
-				offset: '0%',
-				style: {
-					color: 'rgb(255, 255, 255)',
-					opacity: 1
-				}
-			},
-			{
-				offset: '60%',
-				style: {
-					color: this.options.fillColor || this.options.color,
-					opacity: 1
-				}
-			}
-		];
+        var markerGuid = L.Util.guid();
 
-		var key;
-		
-		for (key in gradientOptions) {
-			gradient.setAttribute(key, gradientOptions[key]);
-		}
+        var exaggeration = options.exaggeration || 2;
+        var size = 2 * exaggeration;
 
-		for (var i = 0; i < stops.length; ++i) {
-			var stop = stops[i];
-			var stopElement = this._createElement('stop');
+        this._markers[type].setAttribute('id', markerGuid);
+        this._markers[type].setAttribute('markerWidth', size);
+        this._markers[type].setAttribute('markerHeight', size);
+        this._markers[type].setAttribute('refX', exaggeration);
+        this._markers[type].setAttribute('refY', exaggeration);
+        this._markers[type].setAttribute('orient', 'auto');
+        this._markers[type].setAttribute('markerUnits', 'strokeWidth');
 
-			stop.style = stop.style || {};
+        this._markerPath[type] = this._createElement('path');
 
-			for (key in stop) {
-				var stopProperty = stop[key];
+        if (options.reverse) {
+            this._markerPath[type].setAttribute('d', 'M0,' + exaggeration + ' L' + size + ',' + size + ' L' + size + ',0 L0,' + exaggeration);
+        }
+        else {
+            this._markerPath[type].setAttribute('d', 'M' + size + ',' + exaggeration + ' L0,' + size + ' L0,0 L' + size + ',' + exaggeration);
+        }
 
-				if (key === 'style') {
-					var styleProperty = '';
+        this._markerPath[type].setAttribute('style', 'fill: ' + this.options.color + '; opacity: ' + this.options.opacity);
 
-					stopProperty.color = stopProperty.color || (this.options.fillColor || this.options.color);
-					stopProperty.opacity = typeof stopProperty.opacity === 'undefined' ? 1 : stopProperty.opacity;
+        this._markers[type].appendChild(this._markerPath[type]);
 
-					for (var propKey in stopProperty) {
-						styleProperty += 'stop-' + propKey + ':' + stopProperty[propKey] + ';';
-					}
+        this._defs.appendChild(this._markers[type]);
+    },
 
-					stopProperty = styleProperty;
-				}
+    _createGradient: function (options) {
+        if (!this._defs) {
+            this._createDefs();
+        }
 
-				stopElement.setAttribute(key, stopProperty);
-			}
+        options = options !== true ? L.extend({}, options) : {};
+        var gradient = this._gradient;
+        var gradientOptions;
+        var gradientType = options.gradientType || 'linear';
 
-			gradient.appendChild(stopElement);
-		}
+        if (!gradient) {
+            gradient = this._createElement(gradientType + 'Gradient');
+            gradient.id = L.stamp(gradient);
+            this._defs.appendChild(gradient);
+            this._gradient = gradient;
+        }
 
-		this._gradient = gradient;
-		this._defs.appendChild(gradient);
-	},
+        if (gradientType === "radial") {
+            gradientOptions = options.radial || {cx: '50%', cy: '50%', r: '50%', fx: '50%', fy: '50%'};
+        } else {
+            var vector = options.vector || [["0%", "0%"], ["100%", "100%"]];
+            gradientOptions = {
+                x1: vector[0][0],
+                x2: vector[1][0],
+                y1: vector[0][1],
+                y2: vector[1][1]
+            };
+        }
+
+        gradientOptions.id = gradient.id;
+
+        if (options.gradientUnits) {
+            gradient.setAttribute('gradientUnits', options.gradientUnits);
+        }
+
+        var stops = options.stops || [
+                {
+                    offset: '0%',
+                    style: {
+                        color: 'rgb(255, 255, 255)',
+                        opacity: 1
+                    }
+                },
+                {
+                    offset: '60%',
+                    style: {
+                        color: this.options.fillColor || this.options.color,
+                        opacity: 1
+                    }
+                }
+            ];
+
+        var key;
+
+        for (key in gradientOptions) {
+            gradient.setAttribute(key, gradientOptions[key]);
+        }
+
+        var children = gradient.children;
+        var childLength = children.length;
+
+        for (var i = 0, len = stops.length; i < len; ++i) {
+            var stop = stops[i];
+            var stopElement = childLength > i ? children[i] : this._createElement('stop');
+
+            stop.style = stop.style || {};
+
+            for (key in stop) {
+                var stopProperty = stop[key];
+
+                if (key === 'style') {
+                    var styleProperty = '';
+
+                    stopProperty.color = stopProperty.color || (this.options.fillColor || this.options.color);
+                    stopProperty.opacity = typeof stopProperty.opacity === 'undefined' ? 1 : stopProperty.opacity;
+
+                    for (var propKey in stopProperty) {
+                        styleProperty += 'stop-' + propKey + ':' + stopProperty[propKey] + ';';
+                    }
+
+                    stopProperty = styleProperty;
+                }
+
+                stopElement.setAttribute(key, stopProperty);
+            }
+
+            if (childLength <= i) {
+                gradient.appendChild(stopElement);
+            }
+        }
+
+        this._gradient = gradient;
+        return gradientOptions.id;
+    },
 
 	_createDropShadow: function (options) {
 
@@ -336,6 +400,127 @@ var PathFunctions = PathFunctions || {
 		this._pattern = pattern;
 		
 		return pattern;
+	},
+	
+	_createWordCloudPattern: function (wordCloudOptions) {
+		var patternGuid = ''; //L.Util.guid();
+		var patternOptions = wordCloudOptions.patternOptions = wordCloudOptions.patternOptions || {};
+		
+		if (!this._defs) {
+			this._createDefs();
+		}
+
+        wordCloudOptions.textField = wordCloudOptions.textField || 'key';
+        wordCloudOptions.countField = wordCloudOptions.countField || 'doc_count';
+
+        for (var i = 0; i < wordCloudOptions.words.length; ++i) {
+            var word = wordCloudOptions.words[i];
+
+            patternGuid += word[wordCloudOptions.textField] + "_" + word[wordCloudOptions.countField];
+        }
+
+        if (patternGuid !== this._wordCloudGuid) {
+            this._wordCloudGuid = patternGuid;
+
+            // Hash words to see if we need to create a new word cloud pattern or use the existing one
+            var clonedPath = this._createElement('path');
+            clonedPath.setAttribute('d', this._path.getAttribute('d'));
+            clonedPath.setAttribute('id', patternGuid);
+
+            patternOptions.id = patternGuid;
+            patternOptions.patternUnits = patternOptions.patternUnits || 'userSpaceOnUse'; //'objectBoundingBox';
+            //patternOptions.patternContentUnits = 'userSpaceOnUse';
+
+            var bbox = this.getBounds();
+
+            var bounds = new L.Bounds(this._map.project(bbox.getNorthWest()), this._map.project(bbox.getSouthEast()));
+            var ratio = bounds.getSize().x / bounds.getSize().y;
+
+            patternOptions.width = patternOptions.width || 500;
+            patternOptions.height = patternOptions.height || (500 * ratio) || 500;
+
+            patternOptions.width = Math.min(patternOptions.width, patternOptions.height);
+            patternOptions.height = patternOptions.width;
+            //patternOptions.width = bounds.getSize().x || 500;
+            //patternOptions.height = bounds.getSize().y || 500;
+
+            this._wordCloud = this._createElement('g');
+
+            //this._container.appendChild(this._wordCloud);
+            this._wordPattern = this._createPattern(patternOptions);
+            this._wordPattern.appendChild(this._wordCloud);
+
+            this._defs.appendChild(this._wordPattern);
+
+            this._createWordCloud(this._wordCloud, wordCloudOptions);
+        }
+
+        var existingFill = this._path.getAttribute('fill');
+
+        if (existingFill.indexOf(this._wordCloudGuid) === -1) {
+            this._path.setAttribute('fill', 'url(#' + this._wordCloudGuid + ')');
+        }
+
+	},
+	
+	_createWordCloud: function (element, wordCloudOptions) {
+		//var fragment = document.createDocumentFragment();
+		var width = wordCloudOptions.patternOptions.width;
+		var height = wordCloudOptions.patternOptions.height;
+		var words = wordCloudOptions.words;
+		var anchor = this.getTextAnchor();
+		var rect = this._createElement('rect');
+		var countField = wordCloudOptions.countField;
+        var textField = wordCloudOptions.textField;
+        var rotation = wordCloudOptions.rotation || function(d) { return 0; }; //function(d) { return scale(~~(Math.random() * d[countField])); }
+		rect.setAttribute('width', width);
+		rect.setAttribute('height', height);
+		rect.style.fill = this.options.fillColor || '#000';
+		rect.setAttribute('transform', "translate(" + -width/2 + ',' + -height/2 + ")");
+		element.appendChild(rect);
+		
+		var draw = function (words, element) {
+			return function (words) {
+			  var id = "svg" + L.Util.guid();
+		        d3.select(element)
+		        .attr("transform", "translate(" + width/2 + "," + height/2 + ")")
+		        .selectAll("text")
+		        .data(words)
+		        .enter().append("text")
+		        .style("font-size", function(d) { return d.size + "px"; })
+		        .style("font-family", wordCloudOptions.fontFamily || 'Impact')
+		        .style("fill", function(d, i) { return fill(i); })
+		        .attr("text-anchor", "middle")
+		        .attr("transform", function(d) {
+		          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+		        })
+		        .text(function(d) { return d[textField]; });
+			};
+		  };
+		  
+		var fill = wordCloudOptions.textFillColor || d3.scale.category20();
+		var scale = d3.scale.linear();
+		
+		var max = words[0][countField];
+		var min = words[words.length - 1][countField];
+		
+		var fontSize = wordCloudOptions.fontSize || d3.scale.log().domain([min, max]).range([10, 40]);
+		
+		scale.domain([0, 10]).range([-60, 60]);
+		
+        d3.layout.cloud().size([width, height])
+          .spiral('rectangular')
+          .timeInterval(Infinity)
+          .words(words)
+          .padding(5)
+          .rotate(rotation)
+          .font(wordCloudOptions.fontFamily || 'Impact')
+          .fontSize(function(d) { return fontSize(d[countField]); })
+          .on("end", draw(words, element))
+          .start();
+
+		return element;
+
 	},
 
 	_createShape: function (type, shapeOptions) {
@@ -484,10 +669,24 @@ var PathFunctions = PathFunctions || {
 			}
 		}
 
-		if (context.options.gradient) {
-			context._createGradient(context.options.gradient);
+        if (context.options.markers) {
+            for (var key in context.options.markers) {
+                if (context.options.markers.hasOwnProperty(key)) {
+                    context._createMarker(key, context.options.markers[key]);
+                    context._path.setAttribute('marker-' + key, 'url(#' + context._markers[key].getAttribute('id') + ')');
+                }
+            }
+        }
 
-			context._path.setAttribute('fill', 'url(#' + context._gradient.getAttribute('id') + ')');
+		if (context.options.gradient) {
+			var guid = context._createGradient(context.options.gradient);
+
+            if (context.options.stroke && !context.options.fill) {
+                context._path.setAttribute('stroke', 'url(#' + guid + ')');
+            }
+            else {
+                context._path.setAttribute('fill', 'url(#' + guid + ')');
+            }
 		}
 		else if (!context.options.fill) {
 			context._path.setAttribute('fill', 'none');
@@ -505,6 +704,17 @@ var PathFunctions = PathFunctions || {
 		if (context.options.fillPattern) {
 			context._createFillPattern(context.options.fillPattern);
 		}
+
+        if (context.options.wordCloud) {
+            var options = context.options.wordCloud;
+
+            if (options.words.length > 0) {
+                var me = this;
+                setTimeout(function () {
+                    me._createWordCloudPattern(options);
+                }, 0);
+            }
+        }
 		
 		context._applyCustomStyles();
 

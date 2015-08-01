@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="libs/angular/angular.js"></script>
+		<script src="../dist/angular-json-explorer.js"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="../dist/angular-json-explorer.css" />
+		<script>
+			angular
+			.module('demo', ['ngJsonExplorer'])
+			.controller('DemoCtrl', ['$scope', function ($scope) {
+				$scope.url = 'data.js';
+				$scope.collapsed = true;
+				$scope.toggle = function() {
+					$scope.collapsed = !$scope.collapsed;
+				};
+				$scope.json = {
+					"id": "54cbbbc8bf3cba42aea6ffc4",
+					"index": 0,
+					"guid": "0127d734-75a3-4d76-8ad5-8af0478043dd",
+					"isActive": false,
+					"balance": "$3,775.10",
+					"picture": "http://placehold.it/32x32",
+					"age": 22,
+					"eyeColor": "brown",
+					"name": "Arnold Romero",
+					"gender": "male",
+					"company": "BUZZOPIA",
+					"email": "arnoldromero@buzzopia.com",
+					"phone": "+1 (973) 531-2834",
+					"address": "999 Rapelye Street, Fowlerville, Illinois, 1664",
+					"about": "Eiusmod ex velit voluptate veniam culpa. Cupidatat aliqua consectetur reprehenderit cupidatat pariatur sunt velit ut ad non veniam id proident fugiat. Aute aliquip consequat ullamco incididunt cupidatat. Nostrud pariatur eu ex deserunt pariatur mollit reprehenderit sunt in qui. Velit proident deserunt quis commodo esse duis consectetur Lorem magna nostrud culpa.\r\n",
+					"registered": "2014-05-12T12:59:32 +03:00",
+					"latitude": 20.153763,
+					"longitude": 42.329199,
+					"tags": [
+						"ut",
+						"ad",
+						"consequat",
+						"eu",
+						"ea",
+						"do",
+						"aliqua"
+					],
+					"friends": [
+						{
+							"id": 0,
+							"name": "Terra Booker"
+						},
+						{
+							"id": 1,
+							"name": "Gilmore Saunders"
+						},
+						{
+							"id": 2,
+							"name": "Nash Riggs"
+						}
+					],
+					"greeting": "Hello, Arnold Romero! You have 9 unread messages.",
+					"favoriteFruit": "banana"
+				};
+			}]);
+		</script>
+	</head>
+	<body ng-app="demo">
+		<div ng-controller="DemoCtrl">
+			<json-explorer data="json"></json-explorer>
+			<!--<hr />
+			<json-explorer url="url"></json-explorer>-->
+			<hr />
+			<a href ng-click="toggle()">toggle</a>
+			<json-explorer data="json" collapsed="collapsed"></json-explorer>
+		</div>
+	</body>
+</html>

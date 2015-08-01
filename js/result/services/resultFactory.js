@@ -6,11 +6,14 @@ Curiosity.factory('result', function($rootScope, template, context){
 	resultObj.info.useTemplate = "none";
 	resultObj.info.currentTemplate = "";
 	
-	resultObj.changeCurrentTemplate = function(type, name) {	
-		tpl = template.getByName(type, name);
-		resultObj.info.currentTemplate = name;
-		template.addTemplateToCacheFromValue(tpl.name, tpl.value);
-		resultObj.info.useTemplate = "global";
+	resultObj.changeCurrentTemplate = function(type, templateId) {	
+		resultObj.info.currentTemplate = template.addTemplateToCache(type, templateId);
+		if (resultObj.info.currentTemplate == "") {
+			resultObj.info.useTemplate = "none";
+		}
+		else {
+			resultObj.info.useTemplate = "global";
+		}
 	}
 
 	resultObj.init = function () {
@@ -23,9 +26,11 @@ Curiosity.factory('result', function($rootScope, template, context){
 
 	resultObj.load = function (obj) {
 		resultObj.info =  obj;
-		//to preserve compatibility with old context
-		resultObj.info.templateSelected = resultObj.info.currentTemplate
-		resultObj.changeCurrentTemplate("template", resultObj.info.templateSelected)			
+		resultObj.switchDisplayMode("template", resultObj.info.templateSelected)			
+	}
+
+	resultObj.switchDisplayMode = function (type, templateId) {
+		resultObj.info.currentTemplate = template.addTemplateToCache(type, templateId);
 	}
 
 	$rootScope.$on("ContextLoaded", function () {

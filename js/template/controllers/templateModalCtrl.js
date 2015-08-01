@@ -5,14 +5,16 @@ var templateModalCtrl = function($scope, $modalInstance, template, type){
 	$scope.data = template.info;
 	
 	$scope.template = {};
-	$scope.template.selected = "";
+	$scope.template.selected = -1;
 
 	$scope.template.currentTemplate = {};
 
 	$scope.type = type;
 
-	$scope.getTemplate = function (type, name) {
-		$scope.template.currentTemplate = template.getByName(type, name);
+	$scope.changeTemplate = function (type, obj, attr, index) {
+		if (index !== "undefined" && index >= 0) {
+			obj[attr] = $scope.data[type][index];
+		}
 	}
 	
 	$scope.ok = function (customTemplate) {

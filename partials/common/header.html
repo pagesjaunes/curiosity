@@ -7,17 +7,14 @@
 			<p class="navbar-text">{{ info.txt.header.Server}} : </p>
 			<form class="navbar-form navbar-left" ng-show="!displayNewServer" title="{{data.currentServer}}">
 				<div class="form-group">
-					<ui-select ng-model="data.currentServer" on-select="connectServer(data.currentServer, false)" theme="select2" title="{{data.currentServer}}"  style="min-width: 200px;">
-            			<ui-select-match placeholder="Select or search a server in the list...">{{$select.selected}}</ui-select-match>
-		            	<ui-select-choices repeat="server in data.serverList | filter:$select.search">
-		              		<div><a class="none" title="{{server}}" ng-bind-html="server | highlight: $select.search"></a></div>
-		            	</ui-select-choices>
-		          	</ui-select>
+					<select ng-model="data.currentServer" ng-change="connectServer(data.currentServer, false)" ui-select2="" class="form-control select-header" style="width:250px">
+						<option ng-repeat="server in data.serverList" value ="{{ server }}" >{{ server }}</option> 
+					</select>
 				</div>
 			</form>
 			<form class="navbar-form navbar-left" ng-show="displayNewServer">
 				<div class="form-group">
-					<input type="text" class="form-control" ng-model="newServer" placeholder="adresse" />
+					<input type="text" class="form-control" ng-model="newServer" placeholder="adresse">
 				</div>
 				<button class="btn" ng-click="connectServer(newServer, true)" ng-class="{'btn-success':data.connected, 'btn-danger':!data.connected}" title="{{ info.txt.header.ConnectTitle }}">
 					{{ info.txt.header.Connect }}
@@ -34,18 +31,24 @@
 			<p class="navbar-text">{{ info.txt.header.Index }} :</p>
 			<form class="navbar-form navbar-left" title="{{ data.selectedIndex }}">
 				<div class="form-group">
-					<ui-select ng-model="data.selectedIndex" ng-change="selectIndex()" theme="select2" style="min-width: 200px;">
-            			<ui-select-match placeholder="Select an alias or index in the list...">{{$select.selected}}</ui-select-match>
-		            	<ui-select-choices group-by="groupIndexFind" repeat="index in data.indexDisplayValues | filter:$select.search">
-		            		<a class="none" title="{{ index }}" ng-bind-html="index | highlight: $select.search"></a>
-		            	</ui-select-choices>
-		          	</ui-select>
+					<select ng-model="data.selectedIndex" class="form-control select-header" ng-change="selectIndex()" ui-select2="" >	
+						<option value="">{{ info.txt.header.AllIndex }}</option>
+						<optgroup label="Alias">
+							<option ng-repeat="alias in data.aliases" value="{{ alias }}">
+								{{ alias }}
+							</option>
+						</optgroup>
+						<optgroup label="Index">
+							<option ng-repeat="index in data.indexList" value ="{{ index }}"> 
+								{{ index }}
+							</option>
+						</optgroup>
+					</select>
 				</div>
 			</form>
-					
 			<p class="navbar-text navbar-left light">
-				<img ng-if="data.err" src="resources/red_light.png" />
-				<img ng-if="!data.err" src="resources/green_light.png" />
+				<img ng-if="data.err" src="resources/red_light.png">
+				<img ng-if="!data.err" src="resources/green_light.png">
 			</p>
 
 			<p class="navbar-text">{{ info.txt.header.Context }} : {{ contextData.currentContext.contextName }} -> {{layoutData.currentWorkspace.displayName}}</p>

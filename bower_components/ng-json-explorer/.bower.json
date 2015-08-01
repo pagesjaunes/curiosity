@@ -1,37 +1,27 @@
 {
   "name": "ng-json-explorer",
+  "license": "MIT",
   "main": [
-    "src/gd-ui-jsonexplorer.css",
-    "src/gd-ui-jsonexplorer.js"
+    "dist/angular-json-explorer.js",
+    "dist/angular-json-explorer.css"
   ],
   "ignore": [
-    ".jshintrc",
-    "**/*.txt",
     "**/.*",
     "node_modules",
-    "app",
-    "demo",
-    "dist",
-    "test"
+    "test",
+    "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.15",
-    "json3": "~3.2.6",
-    "es5-shim": "~2.1.0"
+    "angularjs": "*"
   },
-  "devDependencies": {
-    "angular-mocks": "~1.2.15",
-    "angular-scenario": "~1.2.15"
-  },
-  "homepage": "https://github.com/Goldark/ng-json-explorer",
-  "_release": "51c0f84be1",
+  "homepage": "https://github.com/ErwanPigneul/ng-json-explorer",
+  "_release": "4c52974c11",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "51c0f84be165683c5153f2bbd58ae6a9189381a3"
+    "commit": "4c52974c11294cf18fc65d90c5d85c109b022e3a"
   },
-  "_source": "git://github.com/Goldark/ng-json-explorer.git",
+  "_source": "git://github.com/ErwanPigneul/ng-json-explorer.git",
   "_target": "*",
-  "_originalSource": "ng-json-explorer",
-  "_direct": true
+  "_originalSource": "ErwanPigneul/ng-json-explorer"
 }

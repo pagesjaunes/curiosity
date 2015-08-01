@@ -1,6 +1,6 @@
 {
   "name": "leaflet-dvf",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "homepage": "https://github.com/humangeo/leaflet-dvf",
   "authors": [
     "Scott Fairgrieve <https://github.com/sfairgrieve>"
@@ -20,11 +20,11 @@
     "underscore": "~1.6.0",
     "moment": "~2.8.1"
   },
-  "_release": "0.2.3",
+  "_release": "0.2.4",
   "_resolution": {
     "type": "version",
-    "tag": "v0.2.3",
-    "commit": "059d4af748a15cae10b27b6c3d7fdceacdb6d221"
+    "tag": "v0.2.4",
+    "commit": "7ed5b81eb037460cee2e4c08d2e5722ce99789f2"
   },
   "_source": "https://github.com/humangeo/leaflet-dvf.git",
   "_target": "*",

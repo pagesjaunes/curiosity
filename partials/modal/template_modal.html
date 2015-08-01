@@ -10,22 +10,21 @@
 		<div class="col-sm-6" ng-if="type=='aggregation'">
 			<div class="input-group">
 				<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.Template }}</span>
-				<ui-select ng-model="template.selected" theme="select2" class="form-control" style="min-width: 300px;" on-select="getTemplate('aggregationsTemplates', template.selected)">
-        			<ui-select-match placeholder="Select a template in the list...">{{$select.selected.name}}</ui-select-match>
-	            	<ui-select-choices repeat="template.name as template in data.aggregationsTemplates | filter:{name:$select.search}">
-	            		<a class="none" title="{{ template.name }}" ng-bind-html="template.name | highlight: $select.search"></a>
-	            	</ui-select-choices>
-	          	</ui-select>
+				<select ng-model="template.selected" ui-select2="" class="form-control" ng-change="changeTemplate('aggregationsTemplates',template,'currentTemplate',template.selected)">
+					<option ng-repeat="template in data.aggregationsTemplates" value="{{$index}}" >
+						{{ template.name }}
+					</option>  
+				</select>
 			</div>
 		</div>
 		<div class="col-sm-6" ng-if="type=='result'">
 			<div class="input-group">
-				<ui-select ng-model="template.selected" theme="select2" class="form-control" style="min-width: 300px;"  on-select="getTemplate('template', template.selected)">
-        			<ui-select-match placeholder="Select a template in the list...">{{$select.selected.name}}</ui-select-match>
-	            	<ui-select-choices repeat="template.name as template in data.template | filter:{name:$select.search}">
-	            		<a class="none" title="{{ template.name }}" ng-bind-html="template.name | highlight: $select.search"></a>
-	            	</ui-select-choices>
-	          	</ui-select>
+				<span class="input-group-addon">{{ info.txt.template.result_items_sub_tab.Template }}</span>
+				<select ng-model="template.selected" ui-select2="" class="form-control" ng-change="changeTemplate('template',template,'currentTemplate',template.selected)">
+					<option ng-repeat="template in data.template" value="{{$index}}" >
+						{{ template.name }}
+					</option>  
+				</select>
 			</div>
 		</div>
 		<div class="spacer"></div>

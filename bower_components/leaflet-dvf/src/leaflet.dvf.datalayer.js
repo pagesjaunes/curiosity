@@ -338,17 +338,42 @@ L.DataLayer = L.LayerGroup.extend({
 		}
 	},
 
-	onAdd: function (map) {
-		L.LayerGroup.prototype.onAdd.call(this, map);
+    _addLayer: function (map, layer) {
+        return function () {
+            map.addLayer(layer);
+        };
+    },
 
-		map.on('zoomend', this._zoomFunction, this);
-	},
+    _removeLayer: function (map, layer) {
+        return function () {
+            map.removeLayer(layer);
+        };
+    },
 
-	onRemove: function (map) {
-		L.LayerGroup.prototype.onRemove.call(this, map);
+    onAdd: function (map) {
+        var me = this;
+        this._map = map;
 
-		map.off('zoomend', this._zoomFunction, this);
-	},
+        for (var i in me._layers) {
+            if (me._layers.hasOwnProperty(i)) {
+                setTimeout(this._addLayer(map, me._layers[i]), 0);
+            }
+        }
+
+        map.on('zoomend', me._zoomFunction, me);
+    },
+
+    onRemove: function (map) {
+        var me = this;
+
+        for (var i in me._layers) {
+            if (me._layers.hasOwnProperty(i)) {
+                setTimeout(this._removeLayer(map, me._layers[i]), 0);
+            }
+        }
+
+        map.off('zoomend', me._zoomFunction, me);
+    },
 	
 	bringToBack: function () {		
 		this.invoke('bringToBack');
@@ -447,6 +472,7 @@ L.DataLayer = L.LayerGroup.extend({
 		var markerLayer;
 		
 		if (location) {
+            this._markerFunction = this.options.getMarker || this._getMarker;
 			markerLayer = this._markerFunction.call(this, location, options, record);
 			markerLayer.boundaryLayer = boundaryLayer;
 		}
@@ -476,7 +502,8 @@ L.DataLayer = L.LayerGroup.extend({
 	},
 
 	_shouldLoadRecord: function (record) {
-		return this._includeFunction ? this._includeFunction.call(this, record) : true;
+        this._includeFunction = this.options.filter || this.options.includeLayer;
+        return this._includeFunction ? this._includeFunction.call(this, record) : true;
 	},
 
 	_loadRecords: function (records) {
@@ -497,6 +524,13 @@ L.DataLayer = L.LayerGroup.extend({
 
 					this.locationToLayer(location, record);
 				}
+                else if (this._layerIndex) {
+                    var key = this.options.getIndexKey.call(this, location, record);
+                    if (key in this._layerIndex) {
+                        this.removeLayer(this._layerIndex[key]);
+                        delete this._layerIndex[key];
+                    }
+                }
 			}
 		}
 	},
@@ -601,13 +635,12 @@ L.DataLayer = L.LayerGroup.extend({
 	},
 
 	locationToLayer: function (location, record) {
-		var layer;
+        var me = this;
+        var layer = me.recordToLayer(location, record);
 
-		layer = this.recordToLayer(location, record);
-
-		if (layer) {
-			this.addLayer(layer);
-		}
+        if (layer) {
+            me.addLayer(layer);
+        }
 	},
 
 	_bindMouseEvents: function (layer, layerOptions, legendDetails) {
@@ -750,7 +783,21 @@ L.DataLayer = L.LayerGroup.extend({
 		};
 	},
 
+    _recursiveLayerUpdate: function (layer, callee) {
+        var me = this;
+
+        if (layer.eachLayer) {
+            layer.eachLayer(function (subLayer) {
+                me._recursiveLayerUpdate(subLayer, callee);
+            });
+        }
+        else {
+            callee.call(me, layer);
+        }
+    },
+
 	_getIndexedLayer: function (index, location, layerOptions, record) {
+        var me = this;
 		if (this.options.getIndexKey) {
 			var indexKey = this.options.getIndexKey.call(this, location, record);
 			
@@ -771,7 +818,9 @@ L.DataLayer = L.LayerGroup.extend({
 						
 					}
 					else {
-						layer.redraw();
+                        me._recursiveLayerUpdate(layer, function (layer) {
+                            layer.redraw();
+                        });
 					}
 				};
 				
@@ -803,7 +852,7 @@ L.DataLayer = L.LayerGroup.extend({
 		
 		return layer;
 	},
-	
+
 	recordToLayer: function (location, record) {
 		var layerOptions = L.Util.extend({},this.options.layerOptions);
 		var layer;
@@ -816,7 +865,7 @@ L.DataLayer = L.LayerGroup.extend({
 		}
 
 		if (includeLayer) {
-			
+
 			var dynamicOptions = this._getDynamicOptions(record);
 
 			layerOptions = dynamicOptions.layerOptions;
@@ -827,7 +876,7 @@ L.DataLayer = L.LayerGroup.extend({
 
 				// If layer indexing is being used, then load the existing layer from the index
 				layer = this._getIndexedLayer(this._layerIndex, location, layerOptions, record);
-				
+
 				if (layer) {
 					if (this.options.showLegendTooltips) {
 						this._bindMouseEvents(layer, layerOptions, legendDetails);

@@ -1,10 +1,35 @@
 <div>
 	<div class="modal-header">
 		<h3 class="modal-title">Card's Options</h3>
+		<button class="btn btn-default" ng-click="advancedOpt=!advancedOpt">Show/Hide Advanced Opt</button>
 	</div>
 	
 	<div class="modal-body">
-		<div>
+		<div ng-show="!advancedOpt">
+			<label>Add Modules</label>
+		
+			<div class="margin-top">
+				<select ng-model="selectedModuleIdx" ui-select2="" class="form-control margin-top">
+					<option ng-repeat="module in data.moduleList" value="{{$index}}">{{ module.type }}</option>
+				</select>
+			</div>
+			
+			<button ng-click="addModule(selectedModuleIdx)" class="btn btn-default margin-top"> 
+				Add module
+			</button>
+			
+			<ul class="margin-top">
+				<li ng-repeat="module in res.modules">
+					{{module.name}} <span class="glyphicon glyphicon-trash" ng-click="removeModule($index)"></span>
+				</li>
+			</ul>
+			<div>
+				<label>Card's Styles</label>
+				<input type="text" class="form-control" ng-model="item.styles">
+			</div>
+		</div>
+
+		<div ng-show="advancedOpt">
 			<ul class="margin-top">
 				<li ng-repeat="module in res.modules">
 					{{module.name}} <span class="glyphicon glyphicon-trash" ng-click="removeModule($index)"></span>

@@ -6,7 +6,6 @@ var keywordCtrl = function($scope, $modalInstance, keyword, curiosity, mapping){
 	$scope.info = {};
 	$scope.info.txt = global_text;
 	$scope.curiosityData = curiosity.info;
-	$scope.curiosityData.indexDisplayValues.splice(0,0,"global");
 	$scope.keyword = {};
 	$scope.currentKeywords = [];
 	$scope.keyword.selectedIndex = "global";
@@ -59,11 +58,5 @@ var keywordCtrl = function($scope, $modalInstance, keyword, curiosity, mapping){
 	$scope.close = function () {
 		$modalInstance.close();
 	}
-
-	$scope.groupIndexFind = function(item){
-		if (item == 'global') return "Global";
-    	else return $scope.curiosityData.aliases.indexOf(item) > -1 ? "Alias": "Index";
-    }
-
 };
 
