@@ -28,7 +28,7 @@ exports.aggregations = {
     done();
   },
   exists: function (test) {
-    test.expect(22);
+    test.expect(24);
 
     test.ok(ejs.GlobalAggregation, 'GlobalAggregation');
     test.ok(ejs.FilterAggregation, 'FilterAggregation');
@@ -52,6 +52,9 @@ exports.aggregations = {
     test.ok(ejs.DateRangeAggregation, 'DateRangeAggregation');
     test.ok(ejs.GeoDistanceAggregation, 'GeoDistanceAggregation');
     test.ok(ejs.IPv4RangeAggregation, 'IPv4RangeAggregation');
+    test.ok(ejs.TopHitsAggregation, 'TopHitsAggregation');
+    test.ok(ejs.GeoBoundsAggregation, 'GeoBoundsAggregation');
+
 
     test.done();
   },
@@ -1403,6 +1406,108 @@ exports.aggregations = {
     test.throws(function () {
       agg.agg('invalid');
     }, TypeError);
+
+    test.done();
+  },
+  TopHitsAggregation: function (test) {
+    test.expect(15);
+
+    var agg = ejs.TopHitsAggregation('myagg'),
+      expected,
+      doTest = function () {
+        test.deepEqual(agg.toJSON(), expected);
+      };
+
+    expected = {
+      myagg: {
+        top_hits: {}
+      }
+    };
+
+    test.ok(agg, 'TopHitsAggregation exists');
+    test.ok(agg.toJSON(), 'toJSON() works');
+
+    agg.size(10);
+    expected.myagg.top_hits.size = 10;
+    doTest();
+
+    agg.sort('foo');
+    expected.myagg.top_hits.sort = 'foo';
+    doTest();
+
+    agg.trackScores(true);
+    expected.myagg.top_hits.track_scores = true;
+    doTest();
+
+    agg.version(true);
+    expected.myagg.top_hits.version = true;
+    doTest();
+
+    agg.explain(true);
+    expected.myagg.top_hits.explain = true;
+    doTest();
+
+    agg.explain(true);
+    expected.myagg.top_hits.explain = true;
+    doTest();
+
+    agg.highlight(ejs.Highlight(['title', 'content']));
+    expected.myagg.top_hits.highlight =  { fields: { title: {}, content: {} } };
+    doTest();
+
+    agg.scriptField(ejs.ScriptField('f'));
+    expected.myagg.top_hits.script_fields = { f: {} };
+    doTest();
+
+    agg.fieldDataFields(['foo', 'bar']);
+    expected.myagg.top_hits.fielddata_fields = ['foo', 'bar'];
+    doTest();
+
+    agg.fieldDataFields(['foo', 'bar']);
+    expected.myagg.top_hits.fielddata_fields = ['foo', 'bar'];
+    doTest();
+
+    agg.source(true);
+    expected.myagg.top_hits._source = true;
+    doTest();
+
+    agg.source(['foo', 'bar']);
+    expected.myagg.top_hits._source = {includes: ['foo', 'bar']};
+    doTest();
+
+    agg.source(['foo'], 'bar');
+    expected.myagg.top_hits._source = 'bar';
+    doTest();
+
+
+    test.done();
+  },
+  GeoBoundsAggregation: function (test) {
+    test.expect(6);
+
+    var agg = ejs.GeoBoundsAggregation('myagg'),
+      expected,
+      doTest = function () {
+        test.deepEqual(agg.toJSON(), expected);
+      };
+
+    expected = {
+      myagg: {geo_bounds: {}}
+    };
+
+    test.ok(agg, 'GeoBoundsAggregation exists');
+    test.ok(agg.toJSON(), 'toJSON() works');
+    doTest();
+
+    agg.field('f1');
+    expected.myagg.geo_bounds.field = 'f1';
+    doTest();
+
+    agg.wrapLongitude(false);
+    expected.myagg.geo_bounds.wrap_longitude = false;
+    doTest();
+
+    test.strictEqual(agg._type(), 'aggregation');
 
     test.done();
   }
