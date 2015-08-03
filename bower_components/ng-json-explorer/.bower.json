@@ -15,11 +15,11 @@
     "angularjs": "*"
   },
   "homepage": "https://github.com/ErwanPigneul/ng-json-explorer",
-  "_release": "4c52974c11",
+  "_release": "0f61201e72",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "4c52974c11294cf18fc65d90c5d85c109b022e3a"
+    "commit": "0f61201e72bb4911f43a741872a1aaa39b19ed92"
   },
   "_source": "git://github.com/ErwanPigneul/ng-json-explorer.git",
   "_target": "*",

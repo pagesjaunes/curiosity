@@ -4,11 +4,8 @@ angular.module('ngJsonExplorer', [])
 	return {
 		restrict: 'E',
 		scope: {
-			data: '=',
 			jsonData: '@',
-			url: '=',
-			collapsed: '=',
-			sortBy: '='
+			collapsed: '@'
 		},
 		link: function (scope, elem, attrs) {
 			if (!angular.isBoolean) {
@@ -180,34 +177,14 @@ angular.module('ngJsonExplorer', [])
 				}
 			}
 
-			scope.$watch('url', function (val) {
-				if (val) {
-					$http.get(val)
-					.success(function (response) {
-						scope.requestData = response;
-					});
-				}
-			});
-
-			scope.$watch('data', function (val) {
-				if (val) {
-					parse(val);
-				}
-			});
-
-			scope.$watch('jsonData', function (val) {
+			attrs.$observe('jsonData', function (val) {
 				if (val) {
 
 					parse(val);
 				}
 			});
 
-			scope.$watch('requestData', function (val) {
-				if (val) {
-					parse(val);
-				}
-			});
-			scope.$watch('collapsed', function (val) {
+			attrs.$observe('collapsed', function (val) {
 				if (val != undefined) {
 					var collections = elem[0].getElementsByTagName('a');
 					for (var i = 0; i < collections.length; i++) {

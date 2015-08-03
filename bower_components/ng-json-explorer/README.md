@@ -11,7 +11,7 @@ Check the demo folder (demo/demo.html) for examples.
 ## Installation
 
 ```
-bower install ng-json-explorer
+bower install ErwanPigneul/ng-json-explorer
 ```
 
 ## Module dependency
@@ -29,6 +29,8 @@ Files to be used in production are located in the folder "ng-json-explorer/dist"
 <script src="angular-json-explorer.min.js"></script> 
 <link rel="stylesheet" type="text/css" media="screen" href="angular-json-explorer.css" />
 ```
+
+It's https://github.com/Goldark/ng-json-explorer but I remove some watcher and features not necessary for me.
 
 ## Sending the json data to your template
 
@@ -53,17 +55,5 @@ $scope.data = {
 ## Using the directive to display the data
 
 ```html
-<json-explorer json-data="{{data}}"></json-explorer>
-```
-
-## Using the directive to display the data from a URL
-
-```html
-<json-explorer json-url="http://myurl.com"></json-explorer>
-```
-
-## Using the collapsed attribute
-
-```html
-<json-explorer json-data="{{data}}" collapsed="true"></json-explorer>
+<json-explorer json-data="{{data}}" collapsed="false"></json-explorer>
 ```
