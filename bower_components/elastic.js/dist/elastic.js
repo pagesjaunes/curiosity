@@ -1,4 +1,4 @@
-/*! elastic.js - v1.2.0 - 2015-08-02
+/*! elastic.js - v1.3.3 - 2015-08-03
  * https://github.com/fullscale/elastic.js
  * Copyright (c) 2015 FullScale Labs, LLC; Licensed MIT */
 
@@ -938,7 +938,10 @@
   ejs.ScoreFunctionMixin = function (name) {
 
     var func = {};
-    func[name] = {};
+
+    if (name != null) {
+      func[name] = {};
+    }
 
     return {
 
@@ -959,6 +962,26 @@
         }
 
         func.filter = oFilter.toJSON();
+        return this;
+      },
+
+      /**
+      Sets the weight of the score function
+
+      @member ejs.ScoreFunctionMixin
+      @param {Number} oWeight The weight of this score function.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      weight: function (oWeight) {
+        if (oWeight == null) {
+          return func.weight;
+        }
+
+        if (!isNumber(oWeight)) {
+          throw new TypeError('Argument must be a Number');
+        }
+
+        func.weight = oWeight;
         return this;
       },
 
@@ -5040,6 +5063,270 @@
 
   /**
     @class
+    <p>A metric aggregation that executes using scripts to provide a metric output.</p>
+
+    @name ejs.ScriptedMetricAggregation
+    @ejs aggregation
+    @borrows ejs.MetricsAggregationMixin.lang as lang
+    @borrows ejs.MetricsAggregationMixin.params as params
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    @desc
+    <p>Aggregation that keeps track and returns the minimum value among numeric
+    values extracted from the aggregated documents.</p>
+
+    @param {String} name The name which be used to refer to this aggregation.
+
+    */
+  ejs.ScriptedMetricAggregation = function (name) {
+
+    var
+      _common = ejs.MetricsAggregationMixin(name, 'scripted_metric'),
+      agg = _common.toJSON();
+      
+    delete _common.field;
+
+    return extend(_common, {
+
+      /**
+      <p>Sets the initialization script.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} initScript The initialization script
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      initScript: function (initScript) {
+        if (initScript == null) {
+          return agg[name].scripted_metric.init_script;
+        }
+
+        agg[name].scripted_metric.init_script = initScript;
+        return this;
+      },
+
+      /**
+      <p>Sets the map script. This is the only required script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} mapScript The map script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      mapScript: function (mapScript) {
+        if (mapScript == null) {
+          return agg[name].scripted_metric.map_script;
+        }
+
+        agg[name].scripted_metric.map_script = mapScript;
+        return this;
+      },
+
+      /**
+      <p>Sets the combine phase script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} combineScript The combine script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      combineScript: function (combineScript) {
+        if (combineScript == null) {
+          return agg[name].scripted_metric.combine_script;
+        }
+
+        agg[name].scripted_metric.combine_script = combineScript;
+        return this;
+      },
+
+      /**
+      <p>Sets the combine phase script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduceScript The reduce script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceScript: function (reduceScript) {
+        if (reduceScript == null) {
+          return agg[name].scripted_metric.reduce_script;
+        }
+
+        agg[name].scripted_metric.reduce_script = reduceScript;
+        return this;
+      },
+
+      /**
+      <p>Sets the init_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} init_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      initScriptFile: function (init_script_file) {
+        if (init_script_file == null) {
+          return agg[name].scripted_metric.init_script_file;
+        }
+
+        agg[name].scripted_metric.init_script_file = init_script_file;
+        return this;
+      },
+
+      /**
+      <p>Sets the init_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} init_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      initScriptId: function (init_script_id) {
+        if (init_script_id == null) {
+          return agg[name].scripted_metric.init_script_id;
+        }
+
+        agg[name].scripted_metric.init_script_id = init_script_id;
+        return this;
+      },
+        
+      /**
+      <p>Sets the map_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} map_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      mapScriptFile : function (map_script_file) {
+        if (map_script_file == null) {
+          return agg[name].scripted_metric.map_script_file;
+        }
+
+        agg[name].scripted_metric.map_script_file = map_script_file;
+        return this;
+      },
+
+      /**
+      <p>Sets the map_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} map_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      mapScriptId : function (map_script_id) {
+        if (map_script_id == null) {
+          return agg[name].scripted_metric.map_script_id;
+        }
+
+        agg[name].scripted_metric.map_script_id = map_script_id;
+        return this;
+      },
+
+      /**
+      <p>Sets the combine_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} combine_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      combineScriptFile: function (combine_script_file) {
+        if (combine_script_file == null) {
+          return agg[name].scripted_metric.combine_script_file;
+        }
+
+        agg[name].scripted_metric.combine_script_file = combine_script_file;
+        return this;
+      },
+        
+      /**
+      <p>Sets the combine_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} combine_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      combineScriptId: function (combine_script_id) {
+        if (combine_script_id == null) {
+          return agg[name].scripted_metric.combine_script_id;
+        }
+
+        agg[name].scripted_metric.combine_script_id = combine_script_id;
+        return this;
+      },
+
+      /**
+      <p>Sets the reduce_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduce_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceScriptFile: function (reduce_script_file) {
+        if (reduce_script_file == null) {
+          return agg[name].scripted_metric.reduce_script_file;
+        }
+
+        agg[name].scripted_metric.reduce_script_file = reduce_script_file;
+        return this;
+      },
+
+      /**
+      <p>Sets the reduce_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduce_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceScriptId: function (reduce_script_id) {
+        if (reduce_script_id == null) {
+          return agg[name].scripted_metric.reduce_script_id;
+        }
+
+        agg[name].scripted_metric.reduce_script_id = reduce_script_id;
+        return this;
+      },
+
+      /**
+      <p>Set parameters which will be passed to the init, map and combine scripts.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} params Parameters passed to the init, map and combine scripts.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      params: function (params) {
+        if (params == null) {
+          return agg[name].scripted_metric.params;
+        }
+
+        agg[name].scripted_metric.params = params;
+        return this;
+      },
+
+      /**
+      <p>Set parameters which will be passed to the reduce script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduceParams Paramters to pass to the recude script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceParams: function (reduceParams) {
+        if (reduceParams == null) {
+          return agg[name].scripted_metric.reduce_params;
+        }
+
+        agg[name].scripted_metric.reduce_params = reduceParams;
+        return this;
+      },
+
+      /**
+      <p>Set the scripting language used for this aggregation.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} lang The script langauge.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      lang: function (lang) {
+        if (lang == null) {
+          return agg[name].scripted_metric.lang;
+        }
+
+        agg[name].scripted_metric.lang = lang;
+        return this;
+      }
+    });
+  };
+
+  /**
+    @class
     <p>An aggregation that returns interesting or unusual occurrences of terms in
     a set.</p>
 
@@ -5829,8 +6116,8 @@
             includes: includes
           };
 
-          if (excludes !== undefined) {
-            agg[name].top_hits._source = excludes;
+          if (excludes != null) {
+            agg[name].top_hits._source.excludes = excludes;
           }
         }
 
@@ -10137,6 +10424,38 @@
       },
 
       /**
+      Sets the maximum boost value.
+
+      @member ejs.FunctionScoreQuery
+      @param {Float} maxBoost A positive <code>float</code> value.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      maxBoost: function (maxBoost) {
+        if (maxBoost == null) {
+          return query.function_score.max_boost;
+        }
+
+        query.function_score.max_boost = maxBoost;
+        return this;
+      },
+
+      /**
+      Sets the minimum score a document should have to be included.
+
+      @member ejs.FunctionScoreQuery
+      @param {Float} minScore A positive <code>float</code> value.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      minScore: function (minScore) {
+        if (minScore == null) {
+          return query.function_score.min_score;
+        }
+
+        query.function_score.min_score = minScore;
+        return this;
+      },
+
+      /**
       Add a single score function to the list of existing functions.
 
       @member ejs.FunctionScoreQuery
@@ -12138,23 +12457,14 @@
     @param {String} likeText The text to find documents like it.
   
      */
-  ejs.MoreLikeThisQuery = function (fields, likeText) {
+  ejs.MoreLikeThisQuery = function (likeText) {
 
     var 
       _common = ejs.QueryMixin('mlt'),
       query = _common.toJSON();
     
     query.mlt.like_text = likeText;
-    query.mlt.fields = [];
 
-    if (isString(fields)) {
-      query.mlt.fields.push(fields);
-    } else if (isArray(fields)) {
-      query.mlt.fields = fields;
-    } else {
-      throw new TypeError('Argument must be string or array');
-    }
-    
     return extend(_common, {
   
       /**
@@ -12168,20 +12478,29 @@
              */
       fields: function (f) {
         if (f == null) {
-          return query.mlt.fields;
+          return this;
         }
     
         if (isString(f)) {
-          query.mlt.fields.push(f);
+          query.mlt.fields = [f];
         } else if (isArray(f)) {
           query.mlt.fields = f;
         } else {
-          throw new TypeError('Argument must be a string or array');
+          throw new TypeError('Must pass a field or an array of fields');
         }
     
         return this;
       },
-  
+
+      docs: function(doc) {
+        if (isArray(doc)) {
+          query.mlt.docs = doc;
+        } else {
+          throw new TypeError('Must pass an array of docs as argument');
+        }
+        return this;
+      },
+
       /**
             The text to find documents like
 
@@ -12674,7 +12993,7 @@
         }
 
         type = type.toLowerCase();
-        if (type === 'boolean' || type === 'phrase' || type === 'phrase_prefix') {
+        if (type === 'best_fields' || type === 'most_fields' || type === 'cross_fields' || type === 'phrase' || type === 'phrase_prefix') {
           query.multi_match.type = type;
         }
 
@@ -15184,6 +15503,70 @@
 
   /**
     @class
+    <p>The field_value_factor function allows you to use a field from a document to
+    influence the score. It’s similar to using the script_score function, however,
+    it avoids the overhead of scripting. If used on a multi-valued field, only the
+    first value of the field is used in calculations.</p>
+
+    @name ejs.FieldValueFactorFunction
+    @ejs scorefunction
+    @borrows ejs.ScoreFunctionMixin.filter as filter
+    @borrows ejs.ScoreFunctionMixin._type as _type
+    @borrows ejs.ScoreFunctionMixin.toJSON as toJSON
+
+    @param {String} field the field to apply the function to.
+
+    @desc
+    <p>Multiply the score by the value of the field, multiplied by the factor.</p>
+
+    */
+  ejs.FieldValueFactorFunction = function (field) {
+
+    var
+      _common = ejs.ScoreFunctionMixin('field_value_factor'),
+      func = _common.toJSON();
+
+    func.field_value_factor.field = field;
+
+    return extend(_common, {
+
+      /**
+      Sets the factor.
+
+      @member ejs.FieldValueFactorFunction
+      @param {Float} factor the factor.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      factor: function (factor) {
+        if (factor == null) {
+          return func.field_value_factor.factor;
+        }
+
+        func.field_value_factor.factor = factor;
+        return this;
+      },
+
+      /**
+      Sets the modifier.
+
+      @member ejs.FieldValueFactorFunction
+      @param {Float} modifier the modifier, one of none, log, log1p, log2p, ln, ln1p, ln2p, square, sqrt or reciprocal
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      modifier: function (modifier) {
+        if (modifier == null) {
+          return func.field_value_factor.modifier;
+        }
+
+        func.field_value_factor.modifier = modifier;
+        return this;
+      }
+
+    });
+  };
+
+  /**
+    @class
     <p>The random_score generates scores via a pseudo random number algorithm
     that is initialized with a seed.</p>
 
@@ -15226,6 +15609,30 @@
 
   /**
     @class
+    <p>A basic filter score function, which mathces a filter and applies a
+    weight.</p>
+
+    @name ejs.ScoreFunction
+    @ejs scorefunction
+    @borrows ejs.ScoreFunctionMixin.filter as filter
+    @borrows ejs.ScoreFunctionMixin.weight as weight
+    @borrows ejs.ScoreFunctionMixin._type as _type
+    @borrows ejs.ScoreFunctionMixin.toJSON as toJSON
+
+    @desc
+    <p>Randomly score documents.</p>
+
+    */
+  ejs.ScoreFunction = function () {
+
+    var
+      _common = ejs.ScoreFunctionMixin();
+
+    return _common;
+  };
+
+  /**
+    @class
     <p>The script_score function allows you to wrap another query and customize
     the scoring of it optionally with a computation derived from other numeric
     field values in the doc using a script expression.</p>
@@ -15261,6 +15668,32 @@
         }
 
         func.script_score.script = scriptCode;
+
+        if (func.script_score.script_id) {
+          delete func.script_score.script_id;
+        }
+
+        return this;
+      },
+
+      /**
+      Set the script id that will modify the score.
+
+      @member ejs.ScriptScoreFunction
+      @param {String} scriptId Id of an indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptId: function (scriptId) {
+        if (scriptId == null) {
+          return func.script_score.scriptId;
+        }
+
+        func.script_score.script_id = scriptId;
+
+        if (func.script_score.script) {
+          delete func.script_score.script;
+        }
+
         return this;
       },
 
@@ -16398,6 +16831,26 @@
         }
 
         query.filter = filter.toJSON();
+        return this;
+      },
+
+      /**
+            Allows you to set a specified post_filter on this request object.
+
+            @member ejs.Request
+            @param {Object} filter Any valid <code>Filter</code> object.
+            @returns {Object} returns <code>this</code> so that calls can be chained.
+            */
+      post_filter: function (filter) {
+        if (filter == null) {
+          return query.filter;
+        }
+
+        if (!isFilter(filter)) {
+          throw new TypeError('Argument must be a Filter');
+        }
+
+        query.post_filter = filter.toJSON();
         return this;
       },
 
