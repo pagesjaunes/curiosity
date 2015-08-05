@@ -1,6 +1,6 @@
 {
   "name": "elastic.js",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "description": "Javascript API for ElasticSearch DSL",
   "license": "MIT",
   "keywords": [
@@ -20,11 +20,11 @@
     "docs"
   ],
   "homepage": "https://github.com/ErwanPigneul/elastic.js",
-  "_release": "1.3.3",
+  "_release": "1.3.4",
   "_resolution": {
     "type": "version",
-    "tag": "1.3.3",
-    "commit": "1247400ba0ab780d4c3e8b31cc71fa96fe183e02"
+    "tag": "v1.3.4",
+    "commit": "215b11486ace87a37f95e83b774bee14d2331e85"
   },
   "_source": "git://github.com/ErwanPigneul/elastic.js.git",
   "_target": "*",

@@ -1,4 +1,4 @@
-/*! elastic.js - v1.3.3 - 2015-08-03
+/*! elastic.js - v1.3.3 - 2015-08-06
  * https://github.com/fullscale/elastic.js
  * Copyright (c) 2015 FullScale Labs, LLC; Licensed MIT */
 
@@ -310,6 +310,132 @@
       }
 
     };
+  };
+
+  /**
+    @mixin
+    <p>The BucketsAggregationMixin provides support for common options used across
+    various buckets <code>Aggregation</code> implementations.  This object should
+    not be used directly.</p>
+
+    @name ejs.BucketsAggregationMixin
+    @ejs aggregation
+    @borrows ejs.AggregationMixin.aggregation as aggregation
+    @borrows ejs.AggregationMixin.agg as agg
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    */
+  ejs.BucketsAggregationMixin = function (name, type) {
+
+    var
+      _common = ejs.AggregationMixin(name),
+      agg = _common.toJSON();
+
+
+    agg[name][type] = {};
+
+    return extend(_common, {
+
+      /**
+      <p>Sets the field to operate on.</p>
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} field a valid field name..
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      field: function (field) {
+        if (field == null) {
+          return agg[name][type].field;
+        }
+
+        agg[name][type].field = field;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} scriptCode A valid script string to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      script: function (scriptCode) {
+        if (scriptCode == null) {
+          return agg[name][type].script;
+        }
+
+        agg[name][type].script = scriptCode;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} scriptId A valid script id to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptId: function (scriptId) {
+        if (scriptId == null) {
+          return agg[name][type].script_id;
+        }
+
+        agg[name][type].script_id = scriptId;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} scriptFile A valid script file to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptFile: function (scriptFile) {
+        if (scriptFile == null) {
+          return agg[name][type].script_file;
+        }
+
+        agg[name][type].script_file = scriptFile;
+        return this;
+      },
+
+      /**
+      The script language being used.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} language The language of the script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      lang: function (language) {
+        if (language == null) {
+          return agg[name][type].lang;
+        }
+
+        agg[name][type].lang = language;
+        return this;
+      },
+
+      /**
+      Sets parameters that will be applied to the script.  Overwrites
+      any existing params.
+
+      @member ejs.BucketsAggregationMixin
+      @param {Object} p An object where the keys are the parameter name and
+        values are the parameter value.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      params: function (p) {
+        if (p == null) {
+          return agg[name][type].params;
+        }
+
+        agg[name][type].params = p;
+        return this;
+      }
+
+    });
   };
 
   /**
@@ -820,6 +946,38 @@
       },
 
       /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.MetricsAggregationMixin
+      @param {String} scriptId A valid script id to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptId: function (scriptId) {
+        if (scriptId == null) {
+          return agg[name][type].script_id;
+        }
+
+        agg[name][type].script_id = scriptId;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.MetricsAggregationMixin
+      @param {String} scriptFile A valid script file to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptFile: function (scriptFile) {
+        if (scriptFile == null) {
+          return agg[name][type].script_file;
+        }
+
+        agg[name][type].script_file = scriptFile;
+        return this;
+      },
+
+      /**
       The script language being used.
 
       @member ejs.MetricsAggregationMixin
@@ -832,22 +990,6 @@
         }
 
         agg[name][type].lang = language;
-        return this;
-      },
-
-      /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.MetricsAggregationMixin
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name][type].script_values_sorted;
-        }
-
-        agg[name][type].script_values_sorted = trueFalse;
         return this;
       },
 
@@ -3097,8 +3239,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -3129,6 +3272,8 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
@@ -3145,9 +3290,6 @@
     var
       _common = ejs.MetricsAggregationMixin(name, 'cardinality'),
       agg = _common.toJSON();
-
-    // not supported in cardinality aggregation
-    delete _common.scriptValuesSorted;
 
     return extend(_common, {
 
@@ -3222,60 +3364,10 @@
   ejs.DateHistogramAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'date_histogram'),
       agg = _common.toJSON();
 
-    agg[name].date_histogram = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.DateHistogramAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].date_histogram.field;
-        }
-
-        agg[name].date_histogram.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.DateHistogramAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].date_histogram.script;
-        }
-
-        agg[name].date_histogram.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.DateHistogramAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].date_histogram.lang;
-        }
-
-        agg[name].date_histogram.lang = language;
-        return this;
-      },
 
       /**
       Set the date time zone.
@@ -3438,22 +3530,6 @@
       },
 
       /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.DateHistogramAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].date_histogram.script_values_sorted;
-        }
-
-        agg[name].date_histogram.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
       Set to true to apply interval adjusts to day and above intervals.
 
       @member ejs.DateHistogramAggregation
@@ -3482,24 +3558,6 @@
         }
 
         agg[name].date_histogram.min_doc_count = num;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.DateHistogramAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].date_histogram.params;
-        }
-
-        agg[name].date_histogram.params = p;
         return this;
       },
 
@@ -3547,6 +3605,12 @@
 
     @name ejs.DateRangeAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -3561,60 +3625,10 @@
   ejs.DateRangeAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'date_range'),
       agg = _common.toJSON();
 
-    agg[name].date_range = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.DateRangeAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].date_range.field;
-        }
-
-        agg[name].date_range.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.DateRangeAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].date_range.script;
-        }
-
-        agg[name].date_range.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.DateRangeAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].date_range.lang;
-        }
-
-        agg[name].date_range.lang = language;
-        return this;
-      },
 
       /**
       Sets the date format expression.
@@ -3682,42 +3696,8 @@
 
         agg[name].date_range.keyed = trueFalse;
         return this;
-      },
-
-      /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.DateRangeAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].date_range.script_values_sorted;
-        }
-
-        agg[name].date_range.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.DateRangeAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].date_range.params;
-        }
-
-        agg[name].date_range.params = p;
-        return this;
       }
-
+      
     });
   };
 
@@ -3736,8 +3716,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -3808,6 +3789,66 @@
     });
   };
 
+  /**
+    @class
+    <p>Defines a multi bucket aggregations where each bucket is 
+    associated with a filter. Each bucket will collect all documents 
+    that match its associated filter.</p>
+
+    @name ejs.FiltersAggregation
+    @ejs aggregation
+    @borrows ejs.AggregationMixin.aggregation as aggregation
+    @borrows ejs.AggregationMixin.agg as agg
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    @desc
+    <p>Defines a multi bucket aggregations where each bucket is 
+    associated with a filter. Each bucket will collect all documents 
+    that match its associated filter.</p>
+
+    @param {String} name The name which be used to refer to this aggregation.
+
+    */
+  ejs.FiltersAggregation = function (name) {
+
+    var
+      _common = ejs.AggregationMixin(name),
+      agg = _common.toJSON();
+
+    agg[name].filters = {'filters':{}};
+
+    return extend(_common, {
+
+      /**
+      <p>Sets the filters to be used for this aggregation.</p>
+
+      @member ejs.FiltersAggregation
+      @param {Filter} oFilter A valid <code>Filter</code> object.
+      @param {string} id A name for the filter.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      filter: function (oFilter, id) {
+        var filters = {};
+        // if (agg[name].filters.filters == null) {
+        //   agg[name].filters.filters = {};
+        // }
+
+        if (!isFilter(oFilter)) {
+          throw new TypeError('First argument must be a Filter');
+        }
+
+        if (id == null) {
+          throw new TypeError('Second argument must be a name for the filter');
+        }
+
+        agg[name].filters.filters[id] = oFilter.toJSON();
+        return this;
+      }
+
+    });
+  };
+
 /**
     @class
     <p>A metric aggregation that computes the bounding box containing all geo_point values for a field.</p>
@@ -3831,8 +3872,9 @@
       agg = _common.toJSON();
 
     // not supported in geo bounds aggregation
-    delete _common.scriptValuesSorted;
     delete _common.script;
+    delete _common.scriptId;
+    delete _common.scriptFile;
     delete _common.lang;
     delete _common.params;
 
@@ -3842,7 +3884,7 @@
       /**
       Optional parameter which specifies whether the bounding box should be allowed to overlap the international date line. The default value is true
 
-      @member ejs.wrapLongitude
+      @member ejs.GeoBoundsAggregation
       @param {Boolean} trueFalse to overlap the international date line. 
       @returns {Object} returns <code>this</code> so that calls can be chained.
       */
@@ -4213,6 +4255,12 @@
 
     @name ejs.HistogramAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -4228,60 +4276,10 @@
   ejs.HistogramAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'histogram'),
       agg = _common.toJSON();
 
-    agg[name].histogram = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.HistogramAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].histogram.field;
-        }
-
-        agg[name].histogram.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.HistogramAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].histogram.script;
-        }
-
-        agg[name].histogram.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.HistogramAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].histogram.lang;
-        }
-
-        agg[name].histogram.lang = language;
-        return this;
-      },
 
       /**
       Sets the format expression for the terms.  Use for number or date
@@ -4380,40 +4378,6 @@
       },
 
       /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.HistogramAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].histogram.script_values_sorted;
-        }
-
-        agg[name].histogram.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.HistogramAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].histogram.params;
-        }
-
-        agg[name].histogram.params = p;
-        return this;
-      },
-
-      /**
       Sets order for the aggregated values.
 
       @member ejs.HistogramAggregation
@@ -4452,6 +4416,12 @@
 
     @name ejs.IPv4RangeAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -4466,60 +4436,10 @@
   ejs.IPv4RangeAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'ip_range'),
       agg = _common.toJSON();
 
-    agg[name].ip_range = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.IPv4RangeAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].ip_range.field;
-        }
-
-        agg[name].ip_range.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.IPv4RangeAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].ip_range.script;
-        }
-
-        agg[name].ip_range.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.IPv4RangeAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].ip_range.lang;
-        }
-
-        agg[name].ip_range.lang = language;
-        return this;
-      },
 
       /**
       Adds a range to the list of exsiting range expressions.
@@ -4575,40 +4495,6 @@
 
         agg[name].ip_range.keyed = trueFalse;
         return this;
-      },
-
-      /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.IPv4RangeAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].ip_range.script_values_sorted;
-        }
-
-        agg[name].ip_range.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.IPv4RangeAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].ip_range.params;
-        }
-
-        agg[name].ip_range.params = p;
-        return this;
       }
 
     });
@@ -4625,8 +4511,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -4658,8 +4545,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -4787,8 +4675,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -4902,6 +4791,12 @@
 
     @name ejs.RangeAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params    
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -4917,60 +4812,10 @@
   ejs.RangeAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'range'),
       agg = _common.toJSON();
 
-    agg[name].range = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.RangeAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].range.field;
-        }
-
-        agg[name].range.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.RangeAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].range.script;
-        }
-
-        agg[name].range.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.RangeAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].range.lang;
-        }
-
-        agg[name].range.lang = language;
-        return this;
-      },
 
       /**
       Adds a range to the list of exsiting range expressions.
@@ -5024,40 +4869,6 @@
         return this;
       },
 
-      /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.RangeAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].range.script_values_sorted;
-        }
-
-        agg[name].range.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.RangeAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].range.params;
-        }
-
-        agg[name].range.params = p;
-        return this;
-      }
-
     });
   };
 
@@ -5086,7 +4897,10 @@
       agg = _common.toJSON();
       
     delete _common.field;
-
+    delete _common.script;
+    delete _common.scriptId;
+    delete _common.scriptFile;
+  
     return extend(_common, {
 
       /**
@@ -5534,8 +5348,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -5567,8 +5382,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -5596,6 +5412,12 @@
 
     @name ejs.TermsAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -5610,82 +5432,12 @@
   ejs.TermsAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'terms'),
       agg = _common.toJSON();
 
     agg[name].terms = {};
 
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.TermsAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].terms.field;
-        }
-
-        agg[name].terms.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.TermsAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].terms.script;
-        }
-
-        agg[name].terms.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.TermsAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].terms.lang;
-        }
-
-        agg[name].terms.lang = language;
-        return this;
-      },
-
-      /**
-      Sets the type of the field value for use in scripts.  Current values are:
-      string, double, float, long, integer, short, and byte.
-
-      @member ejs.TermsAggregation
-      @param {String} v The value type
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      valueType: function (v) {
-        if (v == null) {
-          return agg[name].terms.value_type;
-        }
-
-        v = v.toLowerCase();
-        if (v === 'string' || v === 'double' || v === 'float' || v === 'long' ||
-            v === 'integer' || v === 'short' || v === 'byte') {
-          agg[name].terms.value_type = v;
-        }
-
-        return this;
-      },
 
       /**
       Sets the format expression for the terms.  Use for number or date
@@ -5786,22 +5538,6 @@
       },
 
       /**
-      Set to true to assume script values are unique.
-
-      @member ejs.TermsAggregation
-      @param {Boolean} trueFalse assume unique values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesUnique: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].terms.script_values_unique;
-        }
-
-        agg[name].terms.script_values_unique = trueFalse;
-        return this;
-      },
-
-      /**
       Sets the number of aggregation entries that will be returned.
 
       @member ejs.TermsAggregation
@@ -5848,24 +5584,6 @@
         }
 
         agg[name].terms.min_doc_count = num;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.TermsAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].terms.params;
-        }
-
-        agg[name].terms.params = p;
         return this;
       },
 
@@ -5922,8 +5640,10 @@
   ejs.TopHitsAggregation = function (name) {
 
     var
-    _common = ejs.MetricsAggregationMixin(name, 'top_hits'),
-    agg = _common.toJSON();
+      _common = ejs.AggregationMixin(name),
+      agg = _common.toJSON();
+
+    agg[name].top_hits = {};
 
     return extend(_common, {
       /**
@@ -6138,6 +5858,8 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
@@ -6156,28 +5878,7 @@
       _common = ejs.MetricsAggregationMixin(name, 'value_count'),
       agg = _common.toJSON();
 
-    // not supported in value count aggregation
-    delete _common.scriptValuesSorted;
-
-    return extend(_common, {
-
-      /**
-      Set to true to assume script values are unique.
-
-      @member ejs.ValueCountAggregation
-      @param {Boolean} trueFalse assume unique values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesUnique: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].value_count.script_values_unique;
-        }
-
-        agg[name].value_count.script_values_unique = trueFalse;
-        return this;
-      }
-
-    });
+    return _common;
 
   };
 
