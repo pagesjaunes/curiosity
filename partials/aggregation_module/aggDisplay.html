@@ -19,6 +19,7 @@
 
 	<div ng-if="!curAgg.hideCurAgg">
 		<div ng-if="!curAgg.displayResult">
+			<button class="btn btn-default" ng-click="addParentAgg(curAgg)">Add parent Agg</button>
 			<div class="margin-top">
 				<select class="form-control" ui-select2="" ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg,curAgg.aggregationTypeIdx)">
 					<option ng-repeat="item in data.aggList"  value="{{ $index }}">

@@ -129,6 +129,16 @@ Curiosity.factory('aggFactory', function($http, $rootScope, moduleManager, aggCo
 
 
 	/**
+	* @desc add a aggregation at the top
+	* @param object agg the aggregation where to add 
+	*/
+	aggObj.addParentAgg = function (agg) {
+		var tmp = aggObj.newEmptyAggregation(true);
+		agg.nested[agg.name] = angular.copy(agg);
+		agg.name = angular.copy(tmp.name);
+	}
+
+	/**
 	* @desc add reference from aggregation's object to aggregation's result then browse bukett's to add reference recursivly 
 	* @param object agg the reference to the aggregation 
 	* @param object aggResult result aggregation

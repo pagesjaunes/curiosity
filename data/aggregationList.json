@@ -41,7 +41,7 @@
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-datehistogram-aggregation.html"
     }, {
         "type": "Avg",
-        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "template": "partials/aggregation_module/settings_partials/simpleval.html",
         "resultTemplate": "partials/aggregation/default.html",
         "mapping": {
             "value": ""
@@ -49,7 +49,7 @@
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-avg-aggregation.html"
     }, {
         "type": "Stats",
-        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "template": "partials/aggregation_module/settings_partials/simpleval.html",
         "resultTemplate": "partials/aggregation/default.html",
         "mapping": {
             "count": "",
@@ -61,7 +61,7 @@
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-stats-aggregation.html"
     }, {
         "type": "Min",
-        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "template": "partials/aggregation_module/settings_partials/simpleval.html",
         "resultTemplate": "partials/aggregation/default.html",
         "mapping": {
             "value": ""
@@ -69,7 +69,7 @@
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-min-aggregation.html"
     }, {
         "type": "Sum",
-        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "template": "partials/aggregation_module/settings_partials/simpleval.html",
         "resultTemplate": "partials/aggregation/default.html",
         "mapping": {
             "value": ""
@@ -100,7 +100,7 @@
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-extendedstats-aggregation.html"
     }, {
         "type": "Max",
-        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "template": "partials/aggregation_module/settings_partials/simpleval.html",
         "resultTemplate": "partials/aggregation/default.html",
         "mapping": {
             "value": ""
@@ -117,7 +117,7 @@
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html"
     }, {
         "type": "IPv4Range",
-        "template": "partials/aggregation_module/settings_partials/date_range.html",
+        "template": "partials/aggregation_module/settings_partials/ip_range.html",
         "resultTemplate": "partials/aggregation/Terms.html",
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-iprange-aggregation.html"
     }, {
@@ -130,7 +130,7 @@
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-metrics-cardinality-aggregation.html"
     }, {
         "type": "Percentiles",
-        "template": "partials/aggregation_module/settings_partials/simple.html",
+        "template": "partials/aggregation_module/settings_partials/simpleval.html",
         "resultTemplate": "partials/aggregation/percentiles.html",
         "mapping": {
             "value": ""
