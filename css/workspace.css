@@ -96,6 +96,12 @@
 	.card .card-content {
 		z-index: 1;
 	}
+	.card .center {
+	  top :150;
+	  left :49%;
+	  font-size: 3em;
+	  z-index: 166;
+	}
 
 /* 
 * Card options modal

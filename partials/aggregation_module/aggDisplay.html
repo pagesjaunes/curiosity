@@ -1,7 +1,7 @@
 <div ng-controller="aggCtrl" class="module" ng-init="init(module.name)">
 	
 	<h4 ng-hide="card.hideTitle"> {{ curAgg.displayName }}
-		<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ info.txt.log.Hide }}">	
+		<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ ::info.txt.log.Hide }}">	
 		</span>
 		
 		<span class="glyphicon" ng-class="{'glyphicon-cog':curAgg.displayResult, 'glyphicon-list-alt':!curAgg.displayResult}" ng-click="curAgg.displayResult = !curAgg.displayResult">
@@ -22,8 +22,8 @@
 			<button class="btn btn-default" ng-click="addParentAgg(curAgg)">Add parent Agg</button>
 			<div class="margin-top">
 				<select class="form-control" ui-select2="" ng-model="curAgg.aggregationTypeIdx" ng-change="changeAggType(curAgg,curAgg.aggregationTypeIdx)">
-					<option ng-repeat="item in data.aggList"  value="{{ $index }}">
-						{{ item.type }}
+					<option ng-repeat="item in data.aggList"  value="{{ ::$index }}">
+						{{ ::item.type }}
 					</option>
 				</select>
 			</div>

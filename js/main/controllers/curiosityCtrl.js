@@ -52,6 +52,12 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		layout.goTo(idx);
 	}
 
+	$scope.activeWorkspace = function (idx) {
+		if ($scope.layoutData.idx == idx)
+			return true;
+		return false;
+	}
+
 	$scope.newContext = function () {
 		openNewContextModal();
 	}

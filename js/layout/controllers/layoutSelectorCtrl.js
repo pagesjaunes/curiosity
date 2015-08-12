@@ -28,4 +28,8 @@ Curiosity.controller('layoutSelectorCtrl', function($scope, layout){
 			layout.setData(name, col, row);
 		}
 	}
+
+	$scope.remove = function () {
+		layout.removeWorkspace($scope.data.idx);
+	}	
 });

@@ -8,7 +8,7 @@
 
 body {
   padding-top : 70px;
-  padding-bottom : 40px;
+  padding-bottom : 0px;
 }
 
 body.header-hidden {
@@ -74,6 +74,9 @@ body.toolbar-hidden {
   color: #FF1F2B;
 }
 
+.white {
+  color: #FFFFFF;
+}
 
 /* Workspace Selector */
 
@@ -275,6 +278,22 @@ body.toolbar-hidden {
 
 
 /* header */
+/* header */
+.btn-show-menu { 
+  position  : fixed;
+  opacity   : 0.25;
+  font-size : 20px;
+  left      : 0;
+  top       : 0;
+  z-index   : 1040;
+  transition: 0.5s;
+}
+
+  .btn-show-menu:hover {
+    opacity: 1;
+    font-size: 30px; 
+  }
+
 .btn-show-header { 
   position  : fixed;
   opacity   : 0.25;
@@ -598,4 +617,14 @@ a:visited.none {
 a.none {
   text-decoration: none;
   color: #000000;
+}
+
+.gi-2x{font-size: 2em;}
+.gi-3x{font-size: 3em;}
+.gi-4x{font-size: 4em;}
+.gi-5x{font-size: 5em;}
+
+#center {
+  top :49%;
+  left :49%;
 }

@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-sm-6" ng-if="type=='aggregation'">
 			<div class="input-group">
-				<span class="input-group-addon">{{ info.txt.template.aggregation_sub_tab.Template }}</span>
+				<span class="input-group-addon">{{ ::info.txt.template.aggregation_sub_tab.Template }}</span>
 				<select ng-model="template.selected" ui-select2="" class="form-control" ng-change="changeTemplate('aggregationsTemplates',template,'currentTemplate',template.selected)">
 					<option ng-repeat="template in data.aggregationsTemplates" value="{{$index}}" >
 						{{ template.name }}
@@ -19,7 +19,7 @@
 		</div>
 		<div class="col-sm-6" ng-if="type=='result'">
 			<div class="input-group">
-				<span class="input-group-addon">{{ info.txt.template.result_items_sub_tab.Template }}</span>
+				<span class="input-group-addon">{{ ::info.txt.template.result_items_sub_tab.Template }}</span>
 				<select ng-model="template.selected" ui-select2="" class="form-control" ng-change="changeTemplate('template',template,'currentTemplate',template.selected)">
 					<option ng-repeat="template in data.template" value="{{$index}}" >
 						{{ template.name }}

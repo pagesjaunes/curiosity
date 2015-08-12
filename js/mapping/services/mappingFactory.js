@@ -98,7 +98,6 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 		// mappingObj.info.fields = [{'ancestor':'_type','name':'_type','type':'string'},{'ancestor':'_id','name':'_id','type':'string'}]
 		mappingObj.info.fields = [{'ancestor':'_type','name':'_type','type':'string'},
 			{'ancestor':'_id','name':'_id','type':'string'}].concat(builtFullFieldArrayDocuments(mappingObj.info.currentMapping));
-		console.log(mappingObj.info.fields)
 	}
 
 	// TODO : Maybe delete this function

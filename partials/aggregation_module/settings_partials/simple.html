@@ -5,7 +5,7 @@
 	<div class="input-group margin-top" ng-class="{'has-error':curAgg.field||curAgg.script?false:true}">
 		<span class="input-group-addon">Field :</span>
 		<select ng-model="curAgg.field" ui-select2="" class="form-control">
-			<option ng-repeat="field in mapping.fields track by $index" value ="{{ field.ancestor  }}" >{{ field.ancestor  }}</option> 
+			<option ng-repeat="field in ::mapping.fields track by $index" value ="{{ ::field.ancestor  }}" >{{ ::field.ancestor  }}</option> 
 		</select>
 	</div>
 

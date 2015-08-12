@@ -1,6 +1,6 @@
 <div ng-controller="resultCtrl" ng-init="init()">
 	<p class="text-muted result-info">
-		{{queryData.hits}} {{ info.txt.result.request_sub_tab.Results}}
+		{{queryData.hits}} {{ ::info.txt.result.request_sub_tab.Results}}
 	</p>
 	<hr/>
 	<div id="json-answer" ng-if="data.showJsonResult">

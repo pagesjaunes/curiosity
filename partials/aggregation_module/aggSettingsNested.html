@@ -3,7 +3,7 @@
 		<li ng-repeat="curAgg in curAgg.nested" class="margin-top">
 			<h4>
 				{{ curAgg.displayName }}
-				<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ info.txt.log.Hide }}">	
+				<span class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCurAgg,'glyphicon-plus':curAgg.hideCurAgg}" ng-click="curAgg.hideCurAgg = !curAgg.hideCurAgg" title="{{ ::info.txt.log.Hide }}">	
 				</span>
 				<span ng-if="curAgg.validate" class="glyphicon glyphicon-ok">
 				</span>

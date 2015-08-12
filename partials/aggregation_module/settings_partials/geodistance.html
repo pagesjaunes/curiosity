@@ -2,7 +2,7 @@
 
 	<div ng-include="'partials/aggregation_module/aggSettingsHeader.html'"></div>
 	
-	<div class="input-group margin-top" ng-class="{'has-error':curAgg.field||curAgg.script?false:true}">
+	<div class="input-group margin-top form-inline" ng-class="{'has-error':curAgg.field||curAgg.script?false:true}">
 		<span class="input-group-addon">Geo field :</span>
 		<select ng-model="curAgg.field" ui-select2="" class="form-control">
 			<option ng-repeat="field in mapping.fields | filter:{type:'geo_point'} track by $index" value ="{{ field.ancestor  }}" >{{ field.ancestor  }}</option> 
