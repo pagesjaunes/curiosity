@@ -35,7 +35,7 @@ var global_text = {
 		ShowAll : "Show All",
 		Hide : "Hide", 
 		SimplifiedRequest:"Simplified Request",
-		ComplexeRequest:"Complexe Request",
+		ComplexeRequest:"Complex Request",
 		ResultPerPage:"Result per page",
 		Search:"Search",
 		JsonQuery: "Json Query",
@@ -58,7 +58,7 @@ var global_text = {
 			Template : "Template",
 			AdvancedRequest : "Advanced Request",
 			ResultList : "Results list",
-			JsonResult : "JsonResult",
+			JsonResult : "Json Result",
 			First: "First",
 			Csv: "To CSV",
 			Prev: "Prev",
@@ -104,11 +104,11 @@ var global_text = {
 		Alias : "Alias",
 		Show :  "Show",
 		Hide : "Hide",
-		CurrentResult : "CurrentResult",
+		CurrentResult : "Current Result",
 		CurrentResultTitle : "Export current result to csv file",
 		SomeResult : "Some Result",
 		SomeResultTitle : "Export some of the result (nb) to csv file",
-		FullResultTitle : "Export all result to csv File !!! Warning : can take a large ammount of time and ressource if there is a lot of results",
+		FullResultTitle : "Export all results to csv File !!! Warning : can take a large amount of time and resources if there are a lot of results",
 		FullResult : "Full Result",
 	},
 	context : {
@@ -132,4 +132,4 @@ var global_text = {
 		RestartInterface : "Restart interface",
 		Lock : "Lock/Unlock interface"
 	}
-}
+};
