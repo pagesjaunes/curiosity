@@ -105,6 +105,7 @@
 		<script type="text/javascript" src="js/notebook/services/notebookFactory.js"></script>
 		<script type="text/javascript" src="js/notebook/controllers/notebookCtrl.js"></script>
 		<!-- json !-->
+		<script type="text/javascript" src="js/json/directives/jsonDirective.js"></script>
 		<!-- Charts !-->
 		<script type="text/javascript" src="js/graph/directives/barChartDirective.js"></script>
 		<script type="text/javascript" src="js/graph/directives/columnChartDirective.js"></script>
@@ -150,7 +151,7 @@
                           		
 			<div ng-controller="workspaces">
 			<tabset>
-			    <tab active="false">
+			    <tab disable="true">
 			      <tab-heading>
 					<a href="#" class="glyphicon glyphicon-search blue" ng-click="search()" title="Search">
 					</a>
@@ -177,7 +178,7 @@
 						</div>
 					</div>
 			    </tab>
-			    <tab>
+			    <tab disable="true">
 			      <tab-heading>
 					<span class="glyphicon glyphicon-plus green" ng-click="newWorkspace()" title="New tab"></span>
 					&nbsp;

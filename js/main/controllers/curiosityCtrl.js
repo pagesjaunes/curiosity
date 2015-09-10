@@ -79,6 +79,10 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		}
 	}
 
+	$scope.changeServerIndex = function () {
+		openSelectServerIndexModal();
+	}
+
 	$scope.manageContext = function () {
 		openManageContextModal();
 	}
@@ -97,6 +101,19 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 
 	$scope.removeWorkspace = function () {
 		layout.removeWorkspace(layout.info.idx);
+	}
+
+	function openSelectServerIndexModal() {
+		var modalInstance = $modal.open({
+			templateUrl: 'partials/modal/select_server_index_modal.html',
+			controller: serverIndexManagerModalCtrl,
+			size: 'lg',	
+			resolve: {
+				item: function () {
+				}}
+			});
+		modalInstance.result.then(function (value) {
+		}, function () {})	
 	}
 
 	function openNewContextModal() {
@@ -129,6 +146,7 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		var modalInstance = $modal.open({
 			templateUrl: 'partials/modal/manage_context_modal.html',
 			controller: contextManagerModalCtrl,
+			size: 'lg',	
 			resolve: {
 				item: function () {
 				}}
@@ -163,3 +181,21 @@ Curiosity.controller('curiosityCtrl', function($scope, $modal, conf, curiosity, 
 		}, function () {})	
 	}
 });
+
+var serverIndexManagerModalCtrl = function($scope, $modalInstance, curiosity){	
+	$scope.data = curiosity.info;
+	$scope.info = {};
+	$scope.info.txt = global_text;
+	
+	$scope.selectIndex = function (){
+		curiosity.selectIndex();
+	}	
+
+	$scope.connectServer = function (url, add){
+		curiosity.connectToServer(url, add);
+	}
+
+	$scope.close = function () {
+		$modalInstance.close();
+	}
+};

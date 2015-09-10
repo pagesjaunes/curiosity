@@ -1,5 +1,7 @@
 Curiosity.controller('layoutSelectorCtrl', function($scope, layout){
 	$scope.data = layout.info;
+	$scope.info = {};
+	$scope.info.txt = global_text;
 
 
 	$scope.colh = 0;
