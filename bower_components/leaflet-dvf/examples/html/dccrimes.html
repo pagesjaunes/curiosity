@@ -62,7 +62,7 @@
 	</script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script type="text/javascript" src="../lib/bootstrap/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet-src.js"></script>
 	<!--<script type="text/javascript" src="../js/leaflet-0.8.js"></script>-->
 	<script type="text/javascript" src="../lib/jsts/javascript.util.js"></script>
 	<script type="text/javascript" src="../lib/jsts/jsts.js"></script>
@@ -106,9 +106,6 @@ $(document).ready(function() {
 	});
 	
 	baseLayer.addTo(map);
-
-	// Define a fill color function for Romney (light red to red) and a fill color function for Obama (light blue to blue)
-	var fillColorFunctionObama = new L.HSLLuminosityFunction(new L.Point(crimeStats.precincts[0].count, 0.95), new L.Point(crimeStats.precincts[crimeStats.precincts.length -1].count, 0.4), {outputHue: 240, outputSaturation: '100%'});
 
 	var opacityFunction = new L.PiecewiseFunction([new L.LinearFunction(new L.Point(0, 0), new L.Point(1, 0.7)), new L.LinearFunction(new L.Point(1, 0.7), new L.Point(55, 0.7))]);
 
@@ -157,13 +154,6 @@ $(document).ready(function() {
 				fillColor: colorFunction,
 				color: colorFunction
 			}
-			/*
-			'count': {
-				displayName: 'Total',
-				fillColor: fillColorFunctionObama,
-				fillOpacity: opacityFunction
-			}
-			*/
 		},
 		layerOptions: {
 			fillOpacity: 0.4,

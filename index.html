@@ -9,35 +9,37 @@
 		<link rel="icon" type="image/png" href="resources/favicon-16x16.png" sizes="16x16" />
 		<!-- CSS !-->    
 		<!-- Latest compiled and minified CSS -->
-		<link href="bower_components/ng-json-explorer/src/gd-ui-jsonexplorer.css" rel="stylesheet">
 		<link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="bower_components/select2/select2.css" rel="stylesheet">
-		<link href="bower_components/select2/select2-bootstrap.css" rel="stylesheet">
-		<!-- <link href="bower_components/angular-ui-select/dist/select.min.css" rel="stylesheet"> -->
 		<link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet">
 		<link href="bower_components/leaflet-dvf/dist/css/dvf.css" rel="stylesheet">
 
+		<link href="bower_components/ng-json-explorer/dist/angular-json-explorer.css" rel="stylesheet">
+		<link href="bower_components/select2/select2.css" rel="stylesheet">
+		<link href="bower_components/select2/select2-bootstrap.css" rel="stylesheet">
+		
 			<!-- Project specifique file !-->
 		<link href="css/curiosity.css" rel="stylesheet">
 		<link href="css/modules.css" rel="stylesheet">
 		<link href="css/workspace.css" rel="stylesheet">
 		<!-- Dependency  Libs !--> 
 		<!-- Latest compiled and minified JavaScript -->
+
+
 		<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+		<script type="text/javascript" src="bower_components/select2/select2.min.js"></script>
+		<script type="text/javascript" src="bower_components/angular-ui-select2/src/select2.js"></script>
+		<script type="text/javascript" src="bower_components/ng-json-explorer/dist/angular-json-explorer.js"></script>
+
 		<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
 		<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-		<script type="text/javascript" src="bower_components/select2/select2.min.js"></script>
-		<script type="text/javascript" src="bower_components/angular-ui-select2/src/select2.js"></script>
+		<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 		<script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-		<!-- <script type="text/javascript" src="bower_components/angular-ui-select/dist/select.min.js"></script> -->
-		<script type="text/javascript" src="bower_components/elastic.js/custom/elasticGeoBounds.min.js"></script>
+		<script type="text/javascript" src="bower_components/elastic.js/dist/elastic.min.js"></script>
 		<script type="text/javascript" src="bower_components/elasticsearch/elasticsearch.angular.min.js"></script>
 		<script type="text/javascript" src="bower_components/FileSaver/FileSaver.min.js"></script>
-		<script type="text/javascript" src="bower_components/ng-json-explorer/src/gd-ui-jsonexplorer.js"></script>
 		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
    		<script type="text/javascript">
       		  google.load("visualization", "1", {packages:["corechart", "table", "calendar"]});
@@ -143,17 +145,60 @@
 			<div id="loading-image" ng-show="data.loading">
 				<span><img src="resources/ajax-loader.gif" id="loading-image"></span>
 			</div>
-			<div ng-show="showHeader">
+			<div ng-if="showHeader">
 				<div id="header" ng-include="'partials/common/header.html'"></div>
 			</div>
-			
-			<div ng-show="data.tab == 0" ng-include="'partials/layout/workspaces.html'" class="content">
+                          		
+			<div ng-controller="workspaces">
+			<tabset>
+			    <tab disable="true">
+			      <tab-heading>
+					<a href="#" class="glyphicon glyphicon-search blue" ng-click="search()" title="Search">
+					</a>
+			      </tab-heading>
+			    </tab>
+			    <tab ng-repeat="ws in layoutData.workspaces" active="ws.active" disable="ws.disabled" ng-click="goToWorkspace($index)" >
+			    	<tab-heading>
+			    		{{ws.displayName}} &nbsp;
+			    		<a href="#" class="glyphicon glyphicon-cog grey" ng-click="modifyWorkspace()" title="Edit Workspace"></a>
+					</tab-heading>
+				    <div class="container-fluid workspace" ng-if="layoutData.idx == $index">
+						<div ng-if="ws.new">
+							<div ng-include="'partials/layout/layout_selector.html'"></div>
+						</div>
+						<div ng-if="!ws.new">
+							<div ng-repeat="row in ws.cards" 
+								class="cards-row row-{{12/data.currentWorkspace.row}}" >
+								<div ng-repeat="card in row" class="{{card.colType}}" style="{{card.styles}}">
+									<div class="card" ng-include="'partials/layout/card.html'" >
+									</div>
+								</div>
+								<div class="spacer"></div>
+							</div>
+						</div>
+					</div>
+			    </tab>
+			    <tab disable="true">
+			      <tab-heading>
+					<span class="glyphicon glyphicon-plus green" ng-click="newWorkspace()" title="New tab"></span>
+					&nbsp;
+					<span class="glyphicon glyphicon-floppy-disk blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Save your context" ng-click="quickSaveContext()">
+					</span>
+					&nbsp;			
+					<span class="glyphicon glyphicon-floppy-save red" ng-click="newContext()"title="Save As">
+					</span>
+			      </tab-heading>
+			    </tab>
+			</tabset>
 			</div>
+
+<!-- 			<div ng-show="data.tab == 0" ng-include="'partials/layout/workspaces.html'" class="content">
+			</div> -->
 						
 			<!--<div ng-include="'partials/context/context_selector_tab.html'">
 			</div>!-->
 
-			<div class="workspace-selector">
+<!-- 			<div class="workspace-selector">
 				<div ng-click="hideWSS = !hideWSS" class="hider">
 					<span class="glyphicon" ng-class="{'glyphicon-chevron-right':!hideWSS,'glyphicon-chevron-left':hideWSS}">
 					</span>
@@ -162,86 +207,14 @@
 					title="Go To {{ws.displayName}}" ng-class="{'selected':$index == layoutData.idx}">
 				</div>
 				<div class="spacer"></div>
-			</div>
+			</div> -->
 
 			<div class="btn-show-header" ng-click="showHeader = !showHeader" title="Show/Hide header">		
 				<span class="glyphicon" 
 					ng-class="{'glyphicon-chevron-down':!showHeader,'glyphicon-chevron-up': showHeader}">
 				</span>
 			</div>
-
-			<div class="control cleft blue" ng-click="prevWorkspace()" title="Prev Workspace">
-				<span class="glyphicon glyphicon-arrow-left"></span>	
-			</div>
-
-			<div class="control cright blue" ng-click="nextWorkspace()" title="Next Workspace">
-				<span class="glyphicon glyphicon-arrow-right" ></span>					
-			</div>
-
-			<div class="btn-hide-toolbar" ng-class="{'toolbar-hidden':hideToolbar}" ng-click="hideToolbar = !hideToolbar" title="Hide/Show Toolbar">
-					<span class="glyphicon" 
-					ng-class="{'glyphicon-chevron-down':!hideToolbar,'glyphicon-chevron-up':hideToolbar}">
-				</span>		
-			</div>
 			
-			<div class="toolbar-bottom" ng-hide="hideToolbar">
-				<div class="ico-container">
-					<div ng-click="search()" title="Search" class="ico blue">
-						<span class="glyphicon glyphicon-search">
-						</span>
-					</div>
-					<div ng-click="loadContext('basicSearch')" title="Home (basic search context)" class="ico black">
-						<span class="glyphicon glyphicon-home">
-						</span>
-					</div>
-					<div ng-click="loadContext('exploreContext')" title="Open the context list and choose one" class="ico brown">
-						<span class="glyphicon glyphicon-th-list">
-						</span>
-					</div>
-					<div ng-click="manageKeyword()" title="Open Keywords window " class="ico yellow">
-						<span class="glyphicon" 
-							ng-class="{'glyphicon-font':data.tab != 2, 'glyphicon-home': data.tab == 2}">
-						</span>
-					</div>
-					<div ng-click="manageTemplate()" title="Open Templates window" class="ico green">
-						<span class="glyphicon glyphicon-align-justify">
-						</span>
-					</div>
-					
-					<div class="ico red context-button">
-						<span class="glyphicon glyphicon-plus" ng-click="newWorkspace()" title="New Workspace"></span>
-						<div class="ico-hidden">
-							<span class="glyphicon glyphicon-cog" ng-click="modifyWorkspace()" title="Edit Workspace"></span>
-							<span class="glyphicon glyphicon-trash" ng-click="removeWorkspace()" title="Remove Workspace"></span>
-						</div>
-					</div>
-
-					<div ng-click="moduleManagerData.lock = !moduleManagerData.lock" title="Lock/Unlock modules" class="ico violet">
-						<span class="glyphicon" ng-class="{'glyphicon-lock':!moduleManagerData.lock,'glyphicon-fullscreen':moduleManagerData.lock}">
-						</span>
-					</div>
-					
-					<div class="ico context-button"> 
-						<span class="glyphicon glyphicon-dashboard blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Manage your dashbord">
-						</span>
-						<div class="ico-hidden">
-							<span class="glyphicon glyphicon-folder-open blue" ng-click="manageContext()" title="Manage Context">
-							</span>
-							<span class="glyphicon glyphicon-floppy-save blue" ng-click="newContext()"title="Save As">
-							</span>
-							<span class="glyphicon glyphicon-floppy-disk blue" ng-class="{'rotating':contextData.updateStatus == 'updating'}" title="Save your context" ng-click="quickSaveContext()">
-							</span>							
-						</div>
-					</div>
-
-					<div class="ico" title="Trash (drop module here to remove them)">
-						<span class="glyphicon glyphicon-trash orange"></span>
-						<div moduleblock name="trash" type="trash" class="trash"></div>
-					</div>
-
-					<div class="spacer"></div>
-				</div>
-			</div>
 			<div class="spacer"></div>
 		</div>
 	</body>

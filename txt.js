@@ -1,8 +1,9 @@
 var global_text = {
+	Ok : "Ok",
 	header : {
 		Status : "Status", 
 		Server : "Server",
-		New : "New",
+		New : "Add a new server",
 		Hide: "Hide",
 		AddServer : "Add a new server",
 		Connect : "Connect",
@@ -17,6 +18,7 @@ var global_text = {
 		Customization : "Customization",
 		NewServerTitle : "Hide / Show new server form",
 		ConnectTitle : "Establish the connection with the server",
+		ServerAndIndexModalTitle : "Change or add new server and choose an alias / index",
 		navBar : {
 			Request : "Request",
 			Keywords : "Keywords",
@@ -51,6 +53,12 @@ var global_text = {
 		SortBy : "Order by",
 		Field : "Field",
 		AddSort : "Add sort"
+	},
+	layout : {
+		DeletePage : "Delete this Page",
+		Row : "Row",
+		Col : "Col",
+		Name : "Name"
 	},
 	result : {
 		request_sub_tab : {

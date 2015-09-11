@@ -16,6 +16,7 @@ var global_text = {
 		Customization : "Customization",
 		NewServerTitle : "Hide / Show new server form",
 		ConnectTitle : "Establish the connection with the server",
+		ServerAndIndexModalTitle : "Change or add new server and choose an alias / index",
 		navBar : {
 			Request : "Request",
 			Keywords : "Keywords",
@@ -50,6 +51,9 @@ var global_text = {
 		SortBy : "Order by",
 		Field : "Field",
 		AddSort : "Add sort"
+	},
+	layout : {
+		DeletePage : "Delete this Page"
 	},
 	result : {
 		request_sub_tab : {

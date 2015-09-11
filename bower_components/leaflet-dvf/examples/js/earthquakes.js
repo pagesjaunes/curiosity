@@ -10,7 +10,7 @@ var eqfeed_callback = function (data) {
 	var magnitudeColorFunction = new L.HSLHueFunction(new L.Point(0,90), new L.Point(10,0), {outputSaturation: '100%', outputLuminosity: '25%'});
 	var magnitudeFillColorFunction = new L.HSLHueFunction(new L.Point(0,90), new L.Point(10,0), {outputSaturation: '100%', outputLuminosity: '50%'});
 	var magnitudeRadiusFunction = new L.LinearFunction(new L.Point(0,10), new L.Point(10,30));
-
+	
 	// Color scale - white to orange to red using a PiecewiseFunction
 	// NOTE:  Uncomment these lines to see the difference
 	/*
@@ -18,7 +18,7 @@ var eqfeed_callback = function (data) {
 		new L.HSLLuminosityFunction(new L.Point(0,0.8), new L.Point(4,0.3), {outputSaturation: '100%', outputHue: 30}),
 		new L.HSLHueFunction(new L.Point(4,30), new L.Point(10,0), {outputLuminosity: '30%'})
 	]);
-
+	
 	var magnitudeFillColorFunction = new L.PiecewiseFunction([
 		new L.HSLLuminosityFunction(new L.Point(0,1), new L.Point(4,0.5), {outputSaturation: '100%', outputHue: 30}),
 		new L.HSLHueFunction(new L.Point(4,30), new L.Point(10,0))
@@ -141,19 +141,25 @@ $(document).ready(function() {
 
 	layerControl.addTo(map);
 
-	// Function for requesting the latest earthquakes from USGS
-	var getData = function () {
+    $.ajaxSetup({
+        cache:true
+    });
 
-		if (lastLayer) {
-			map.removeLayer(lastLayer);
-		}
+    // Function for requesting the latest earthquakes from USGS
+    var getData = function () {
 
-		$.ajax({
-			url: 'http://earthquake.usgs.gov/earthquakes/feed/geojsonp/all/day',
-			type: 'GET',
-			dataType: 'jsonp'
-		});
-	};
+        if (lastLayer) {
+            map.removeLayer(lastLayer);
+        }
+
+        $.ajax({
+            //url: 'http://earthquake.usgs.gov/earthquakes/feed/geojsonp/all/day',
+            url: 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojsonp',
+            type: 'GET',
+            dataType: 'jsonp',
+            jsonp: false
+        });
+    };
 
 	// Get the latest earthquake data
 	getData();

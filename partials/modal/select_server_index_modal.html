@@ -1,0 +1,61 @@
+<div>
+	<div class="modal-header">
+		<h3 class="modal-title">
+			{{ ::info.txt.header.ServerAndIndexModalTitle }}
+		</h3>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="form-group">
+				<p class="light">
+					<img ng-if="data.err" src="resources/red_light.png">
+					<img ng-if="!data.err" src="resources/green_light.png">
+				</p>
+			</div>
+		 	<div class="form-group">
+		    	<label for="server">{{ ::info.txt.header.Server}} : </label>
+				<select ng-model="data.currentServer" ng-change="connectServer(data.currentServer, false)" ui-select2="" class="form-control select-header">
+					<option ng-repeat="server in ::data.serverList" value ="{{ ::server }}" >{{ ::server }}</option>
+				</select>
+			</div>
+
+			<div ng-show="displayNewServer" class="row">	
+				<div class="form-group col-xs-8">
+					<input type="text" class="form-control" ng-model="newServer" placeholder="adresse">
+				</div>
+				<button class="btn" ng-click="connectServer(newServer, true)" ng-class="{'btn-success':data.connected, 'btn-danger':!data.connected}" title="{{ ::info.txt.header.ConnectTitle }}">
+					{{ ::info.txt.header.Connect }}
+				</button>
+			</div>
+			<button type="button" class="btn btn-primary" ng-click="displayNewServer = !displayNewServer" title="{{ ::info.txt.header.NewServerTitle }}">
+				<span ng-if="!displayNewServer">
+					{{ ::info.txt.header.New }}
+				</span>
+				<span ng-if="displayNewServer">
+					{{ ::info.txt.header.Hide }}
+				</span>
+			</button>
+		</form>
+		<form title="{{ data.selectedIndex }}">
+			<div class="form-group">
+				<label for="index">{{ ::info.txt.header.Index}} : </label>
+				<select ng-model="data.selectedIndex" class="form-control select-header" ng-change="selectIndex()" ui-select2="" id="index">	
+					<option value="">{{ ::info.txt.header.AllIndex }}</option>
+					<optgroup label="Alias">
+						<option ng-repeat="alias in data.aliases" value="{{ ::alias }}">
+							{{ ::alias }}
+						</option>
+					</optgroup>
+					<optgroup label="Index">
+						<option ng-repeat="index in data.indexList" value ="{{ ::index }}"> 
+							{{ ::index }}
+						</option>
+					</optgroup>
+				</select>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+	    <button class="btn btn-primary" type="button" ng-click="close()">Close</button>
+    </div>
+</div>

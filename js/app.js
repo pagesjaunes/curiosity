@@ -1,6 +1,6 @@
 // app.js
 
-var Curiosity = angular.module('curiosity', ['elasticsearch', 'ui.select2', 'ui.bootstrap', 'ngAnimate', 'ngCookies','gd.ui.jsonexplorer']);
+var Curiosity = angular.module('curiosity', ['elasticsearch', 'ui.select2', 'ui.bootstrap', 'ngAnimate', 'ngCookies', 'ngJsonExplorer']);
 Curiosity.service('elasticClient', function(esFactory) {
 		return { 
 			getClient: function(server) {	

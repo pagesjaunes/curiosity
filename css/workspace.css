@@ -3,7 +3,7 @@
 */
 
 .workspace {
-	height: 100%;
+	height: 92%;
 }
 
 	.workspace .cards-row > div {
@@ -96,6 +96,13 @@
 	.card .card-content {
 		z-index: 1;
 	}
+	.card .center {
+	  top :150;
+	  text-align	: center;
+	  font-size: 3em;
+	  z-index: 10000;
+	  position: absolute;
+	}
 
 /* 
 * Card options modal
@@ -161,4 +168,9 @@
 	box-shadow 			: 1px 1px 1px 1px rgba(150,150,150,125);
 	overflow			: hidden;
 	position			: relative;		
+}
+
+.see {
+	text-align	: center;
+	top :150;
 }

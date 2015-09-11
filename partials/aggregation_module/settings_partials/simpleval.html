@@ -1,0 +1,24 @@
+<form class="agg_option">
+
+	<div ng-include="'partials/aggregation_module/aggSettingsHeader.html'"></div>
+
+	<div class="input-group margin-top" ng-class="{'has-error':curAgg.field||curAgg.script?false:true}">
+		<span class="input-group-addon">Field :</span>
+		<select ng-model="curAgg.field" ui-select2="" class="form-control">
+			<option ng-repeat="field in ::mapping.fields | filter:filterInt track by $index" value ="{{ ::field.ancestor  }}" >{{ ::field.ancestor  }}</option> 
+		</select>
+	</div>
+
+	<div class="input-group margin-top">
+		<span class="input-group-addon">Script :</span>
+		<input class="form-control" type="text" ng-model="curAgg.script">
+	</div>
+
+	<div class="margin-top">
+		<button class="btn btn-default" ng-click="validateAgg(curAgg)">
+			<span ng-if="curAgg.validate">Deactivate</span>
+			<span ng-if="!curAgg.validate">Activate</span>
+		</button>
+	</div>
+
+</form>

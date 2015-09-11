@@ -148,8 +148,17 @@ Curiosity.directive('mapgeohash', function($rootScope){
 							doc_count: {
 								color: '#FF0000',
 								fillColor: fillColorFunction,
-								gradient: false
+								gradient: false,
+								text: function (value) {
+									return {
+										text: value,
+										style: {
+											'font-size': '10px', 'font-weight': 'bold'
+										}
+									}
+								}
 							}
+
 						},
 						layerOptions: {
 							fillOpacity: 0.7,							

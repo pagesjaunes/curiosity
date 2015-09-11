@@ -10,7 +10,7 @@
 
 	<div class="input-group" ng-if="!curAgg.useCustomTemplate">
 		<span class="input-group-addon">Template :</span>
-		<select ng-model="curAgg.tpl" ui-select2 class="form-control" ng-change="loadTpl(curAgg.tpl)">
+		<select ng-model="curAgg.tpl" ui-select2="" class="form-control" ng-change="loadTpl(curAgg.tpl)">
 			<option value="default">Default</option>
 			<option ng-repeat="tpl in tplData.aggregationsTemplates" value="{{ tpl.name }}"> {{tpl.name}} </option>
 		</select>
@@ -22,7 +22,7 @@
 	</div>
 
 	<div>
-		<span ng-if="curAgg.useCustomTemplate" class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCustomTemplate,'glyphicon-plus':curAgg.hideCustomTemplate}" ng-click="curAgg.hideCustomTemplate = !curAgg.hideCustomTemplate" title="{{ info.txt.log.Hide }}">
+		<span ng-if="curAgg.useCustomTemplate" class="glyphicon" ng-class="{'glyphicon-minus':!curAgg.hideCustomTemplate,'glyphicon-plus':curAgg.hideCustomTemplate}" ng-click="curAgg.hideCustomTemplate = !curAgg.hideCustomTemplate" title="{{ ::info.txt.log.Hide }}">
 		</span>
 		<textarea ng-if="(curAgg.useCustomTemplate && !curAgg.hideCustomTemplate)?true:false" ng-model="curAgg.customTemplate" ng-change="loadLocalTpl(curAgg)" class="form-control" rows="10"></textarea>
 	</div>

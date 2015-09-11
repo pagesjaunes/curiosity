@@ -40,7 +40,7 @@ app.service('es', function (esFactory) {
 ```
 
 ## If you are using jQuery
-Use elasticsearch.jquery.js` instead. Rather than a global `elasticsearch` it will create a `jQuery.es` namespace.
+Use `elasticsearch.jquery.js` instead. Rather than a global `elasticsearch` it will create a `jQuery.es` namespace.
 ```
 var client = new $.es.Client({
   hosts: 'localhost:9200'

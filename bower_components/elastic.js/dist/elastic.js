@@ -1,6 +1,6 @@
-/*! elastic.js - v1.2.0 - 2014-09-07
+/*! elastic.js - v1.3.3 - 2015-08-06
  * https://github.com/fullscale/elastic.js
- * Copyright (c) 2014 FullScale Labs, LLC; Licensed MIT */
+ * Copyright (c) 2015 FullScale Labs, LLC; Licensed MIT */
 
 /**
  @namespace
@@ -310,6 +310,132 @@
       }
 
     };
+  };
+
+  /**
+    @mixin
+    <p>The BucketsAggregationMixin provides support for common options used across
+    various buckets <code>Aggregation</code> implementations.  This object should
+    not be used directly.</p>
+
+    @name ejs.BucketsAggregationMixin
+    @ejs aggregation
+    @borrows ejs.AggregationMixin.aggregation as aggregation
+    @borrows ejs.AggregationMixin.agg as agg
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    */
+  ejs.BucketsAggregationMixin = function (name, type) {
+
+    var
+      _common = ejs.AggregationMixin(name),
+      agg = _common.toJSON();
+
+
+    agg[name][type] = {};
+
+    return extend(_common, {
+
+      /**
+      <p>Sets the field to operate on.</p>
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} field a valid field name..
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      field: function (field) {
+        if (field == null) {
+          return agg[name][type].field;
+        }
+
+        agg[name][type].field = field;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} scriptCode A valid script string to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      script: function (scriptCode) {
+        if (scriptCode == null) {
+          return agg[name][type].script;
+        }
+
+        agg[name][type].script = scriptCode;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} scriptId A valid script id to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptId: function (scriptId) {
+        if (scriptId == null) {
+          return agg[name][type].script_id;
+        }
+
+        agg[name][type].script_id = scriptId;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} scriptFile A valid script file to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptFile: function (scriptFile) {
+        if (scriptFile == null) {
+          return agg[name][type].script_file;
+        }
+
+        agg[name][type].script_file = scriptFile;
+        return this;
+      },
+
+      /**
+      The script language being used.
+
+      @member ejs.BucketsAggregationMixin
+      @param {String} language The language of the script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      lang: function (language) {
+        if (language == null) {
+          return agg[name][type].lang;
+        }
+
+        agg[name][type].lang = language;
+        return this;
+      },
+
+      /**
+      Sets parameters that will be applied to the script.  Overwrites
+      any existing params.
+
+      @member ejs.BucketsAggregationMixin
+      @param {Object} p An object where the keys are the parameter name and
+        values are the parameter value.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      params: function (p) {
+        if (p == null) {
+          return agg[name][type].params;
+        }
+
+        agg[name][type].params = p;
+        return this;
+      }
+
+    });
   };
 
   /**
@@ -820,6 +946,38 @@
       },
 
       /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.MetricsAggregationMixin
+      @param {String} scriptId A valid script id to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptId: function (scriptId) {
+        if (scriptId == null) {
+          return agg[name][type].script_id;
+        }
+
+        agg[name][type].script_id = scriptId;
+        return this;
+      },
+
+      /**
+      Allows you generate or modify the terms/values using a script.
+
+      @member ejs.MetricsAggregationMixin
+      @param {String} scriptFile A valid script file to execute.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptFile: function (scriptFile) {
+        if (scriptFile == null) {
+          return agg[name][type].script_file;
+        }
+
+        agg[name][type].script_file = scriptFile;
+        return this;
+      },
+
+      /**
       The script language being used.
 
       @member ejs.MetricsAggregationMixin
@@ -832,22 +990,6 @@
         }
 
         agg[name][type].lang = language;
-        return this;
-      },
-
-      /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.MetricsAggregationMixin
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name][type].script_values_sorted;
-        }
-
-        agg[name][type].script_values_sorted = trueFalse;
         return this;
       },
 
@@ -938,7 +1080,10 @@
   ejs.ScoreFunctionMixin = function (name) {
 
     var func = {};
-    func[name] = {};
+
+    if (name != null) {
+      func[name] = {};
+    }
 
     return {
 
@@ -959,6 +1104,26 @@
         }
 
         func.filter = oFilter.toJSON();
+        return this;
+      },
+
+      /**
+      Sets the weight of the score function
+
+      @member ejs.ScoreFunctionMixin
+      @param {Number} oWeight The weight of this score function.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      weight: function (oWeight) {
+        if (oWeight == null) {
+          return func.weight;
+        }
+
+        if (!isNumber(oWeight)) {
+          throw new TypeError('Argument must be a Number');
+        }
+
+        func.weight = oWeight;
         return this;
       },
 
@@ -3074,8 +3239,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -3106,6 +3272,8 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
@@ -3122,9 +3290,6 @@
     var
       _common = ejs.MetricsAggregationMixin(name, 'cardinality'),
       agg = _common.toJSON();
-
-    // not supported in cardinality aggregation
-    delete _common.scriptValuesSorted;
 
     return extend(_common, {
 
@@ -3199,60 +3364,10 @@
   ejs.DateHistogramAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'date_histogram'),
       agg = _common.toJSON();
 
-    agg[name].date_histogram = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.DateHistogramAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].date_histogram.field;
-        }
-
-        agg[name].date_histogram.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.DateHistogramAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].date_histogram.script;
-        }
-
-        agg[name].date_histogram.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.DateHistogramAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].date_histogram.lang;
-        }
-
-        agg[name].date_histogram.lang = language;
-        return this;
-      },
 
       /**
       Set the date time zone.
@@ -3415,22 +3530,6 @@
       },
 
       /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.DateHistogramAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].date_histogram.script_values_sorted;
-        }
-
-        agg[name].date_histogram.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
       Set to true to apply interval adjusts to day and above intervals.
 
       @member ejs.DateHistogramAggregation
@@ -3459,24 +3558,6 @@
         }
 
         agg[name].date_histogram.min_doc_count = num;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.DateHistogramAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].date_histogram.params;
-        }
-
-        agg[name].date_histogram.params = p;
         return this;
       },
 
@@ -3524,6 +3605,12 @@
 
     @name ejs.DateRangeAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -3538,60 +3625,10 @@
   ejs.DateRangeAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'date_range'),
       agg = _common.toJSON();
 
-    agg[name].date_range = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.DateRangeAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].date_range.field;
-        }
-
-        agg[name].date_range.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.DateRangeAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].date_range.script;
-        }
-
-        agg[name].date_range.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.DateRangeAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].date_range.lang;
-        }
-
-        agg[name].date_range.lang = language;
-        return this;
-      },
 
       /**
       Sets the date format expression.
@@ -3659,42 +3696,8 @@
 
         agg[name].date_range.keyed = trueFalse;
         return this;
-      },
-
-      /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.DateRangeAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].date_range.script_values_sorted;
-        }
-
-        agg[name].date_range.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.DateRangeAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].date_range.params;
-        }
-
-        agg[name].date_range.params = p;
-        return this;
       }
-
+      
     });
   };
 
@@ -3713,8 +3716,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -3783,6 +3787,118 @@
       }
 
     });
+  };
+
+  /**
+    @class
+    <p>Defines a multi bucket aggregations where each bucket is 
+    associated with a filter. Each bucket will collect all documents 
+    that match its associated filter.</p>
+
+    @name ejs.FiltersAggregation
+    @ejs aggregation
+    @borrows ejs.AggregationMixin.aggregation as aggregation
+    @borrows ejs.AggregationMixin.agg as agg
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    @desc
+    <p>Defines a multi bucket aggregations where each bucket is 
+    associated with a filter. Each bucket will collect all documents 
+    that match its associated filter.</p>
+
+    @param {String} name The name which be used to refer to this aggregation.
+
+    */
+  ejs.FiltersAggregation = function (name) {
+
+    var
+      _common = ejs.AggregationMixin(name),
+      agg = _common.toJSON();
+
+    agg[name].filters = {'filters':{}};
+
+    return extend(_common, {
+
+      /**
+      <p>Sets the filters to be used for this aggregation.</p>
+
+      @member ejs.FiltersAggregation
+      @param {Filter} oFilter A valid <code>Filter</code> object.
+      @param {string} id A name for the filter.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      filter: function (oFilter, id) {
+        var filters = {};
+        // if (agg[name].filters.filters == null) {
+        //   agg[name].filters.filters = {};
+        // }
+
+        if (!isFilter(oFilter)) {
+          throw new TypeError('First argument must be a Filter');
+        }
+
+        if (id == null) {
+          throw new TypeError('Second argument must be a name for the filter');
+        }
+
+        agg[name].filters.filters[id] = oFilter.toJSON();
+        return this;
+      }
+
+    });
+  };
+
+/**
+    @class
+    <p>A metric aggregation that computes the bounding box containing all geo_point values for a field.</p>
+
+    @name ejs.GeoBoundsAggregation
+    @ejs aggregation
+    @borrows ejs.MetricsAggregationMixin.field as field
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    @desc
+    <p>Aggregation that computes the bounding box containing all geo_point values for a field.</p>
+
+    @param {String} name The name which be used to refer to this aggregation.
+
+    */
+  ejs.GeoBoundsAggregation = function (name) {
+
+    var
+      _common = ejs.MetricsAggregationMixin(name, 'geo_bounds'),
+      agg = _common.toJSON();
+
+    // not supported in geo bounds aggregation
+    delete _common.script;
+    delete _common.scriptId;
+    delete _common.scriptFile;
+    delete _common.lang;
+    delete _common.params;
+
+
+    return extend(_common, {
+
+      /**
+      Optional parameter which specifies whether the bounding box should be allowed to overlap the international date line. The default value is true
+
+      @member ejs.GeoBoundsAggregation
+      @param {Boolean} trueFalse to overlap the international date line. 
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      wrapLongitude: function (trueFalse) {
+        if (trueFalse == null) {
+          return agg[name].geo_bounds.wrap_longitude;
+        }
+
+        agg[name].geo_bounds.wrap_longitude = trueFalse;
+        return this;
+      }
+
+    });
+
   };
 
   /**
@@ -4139,6 +4255,12 @@
 
     @name ejs.HistogramAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -4154,60 +4276,10 @@
   ejs.HistogramAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'histogram'),
       agg = _common.toJSON();
 
-    agg[name].histogram = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.HistogramAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].histogram.field;
-        }
-
-        agg[name].histogram.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.HistogramAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].histogram.script;
-        }
-
-        agg[name].histogram.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.HistogramAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].histogram.lang;
-        }
-
-        agg[name].histogram.lang = language;
-        return this;
-      },
 
       /**
       Sets the format expression for the terms.  Use for number or date
@@ -4306,40 +4378,6 @@
       },
 
       /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.HistogramAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].histogram.script_values_sorted;
-        }
-
-        agg[name].histogram.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.HistogramAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].histogram.params;
-        }
-
-        agg[name].histogram.params = p;
-        return this;
-      },
-
-      /**
       Sets order for the aggregated values.
 
       @member ejs.HistogramAggregation
@@ -4378,6 +4416,12 @@
 
     @name ejs.IPv4RangeAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -4392,60 +4436,10 @@
   ejs.IPv4RangeAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'ip_range'),
       agg = _common.toJSON();
 
-    agg[name].ip_range = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.IPv4RangeAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].ip_range.field;
-        }
-
-        agg[name].ip_range.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.IPv4RangeAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].ip_range.script;
-        }
-
-        agg[name].ip_range.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.IPv4RangeAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].ip_range.lang;
-        }
-
-        agg[name].ip_range.lang = language;
-        return this;
-      },
 
       /**
       Adds a range to the list of exsiting range expressions.
@@ -4501,40 +4495,6 @@
 
         agg[name].ip_range.keyed = trueFalse;
         return this;
-      },
-
-      /**
-      Set to true to assume script values are sorted.
-
-      @member ejs.IPv4RangeAggregation
-      @param {Boolean} trueFalse assume sorted values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].ip_range.script_values_sorted;
-        }
-
-        agg[name].ip_range.script_values_sorted = trueFalse;
-        return this;
-      },
-
-      /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.IPv4RangeAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].ip_range.params;
-        }
-
-        agg[name].ip_range.params = p;
-        return this;
       }
 
     });
@@ -4551,8 +4511,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -4584,8 +4545,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -4713,8 +4675,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -4828,6 +4791,12 @@
 
     @name ejs.RangeAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params    
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -4843,60 +4812,10 @@
   ejs.RangeAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'range'),
       agg = _common.toJSON();
 
-    agg[name].range = {};
-
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.RangeAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].range.field;
-        }
-
-        agg[name].range.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.RangeAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].range.script;
-        }
-
-        agg[name].range.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.RangeAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].range.lang;
-        }
-
-        agg[name].range.lang = language;
-        return this;
-      },
 
       /**
       Adds a range to the list of exsiting range expressions.
@@ -4950,40 +4869,273 @@
         return this;
       },
 
-      /**
-      Set to true to assume script values are sorted.
+    });
+  };
 
-      @member ejs.RangeAggregation
-      @param {Boolean} trueFalse assume sorted values or not
+  /**
+    @class
+    <p>A metric aggregation that executes using scripts to provide a metric output.</p>
+
+    @name ejs.ScriptedMetricAggregation
+    @ejs aggregation
+    @borrows ejs.MetricsAggregationMixin.lang as lang
+    @borrows ejs.MetricsAggregationMixin.params as params
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    @desc
+    <p>Aggregation that keeps track and returns the minimum value among numeric
+    values extracted from the aggregated documents.</p>
+
+    @param {String} name The name which be used to refer to this aggregation.
+
+    */
+  ejs.ScriptedMetricAggregation = function (name) {
+
+    var
+      _common = ejs.MetricsAggregationMixin(name, 'scripted_metric'),
+      agg = _common.toJSON();
+      
+    delete _common.field;
+    delete _common.script;
+    delete _common.scriptId;
+    delete _common.scriptFile;
+  
+    return extend(_common, {
+
+      /**
+      <p>Sets the initialization script.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} initScript The initialization script
       @returns {Object} returns <code>this</code> so that calls can be chained.
       */
-      scriptValuesSorted: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].range.script_values_sorted;
+      initScript: function (initScript) {
+        if (initScript == null) {
+          return agg[name].scripted_metric.init_script;
         }
 
-        agg[name].range.script_values_sorted = trueFalse;
+        agg[name].scripted_metric.init_script = initScript;
         return this;
       },
 
       /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.RangeAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
+      <p>Sets the map script. This is the only required script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} mapScript The map script.
       @returns {Object} returns <code>this</code> so that calls can be chained.
       */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].range.params;
+      mapScript: function (mapScript) {
+        if (mapScript == null) {
+          return agg[name].scripted_metric.map_script;
         }
 
-        agg[name].range.params = p;
+        agg[name].scripted_metric.map_script = mapScript;
+        return this;
+      },
+
+      /**
+      <p>Sets the combine phase script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} combineScript The combine script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      combineScript: function (combineScript) {
+        if (combineScript == null) {
+          return agg[name].scripted_metric.combine_script;
+        }
+
+        agg[name].scripted_metric.combine_script = combineScript;
+        return this;
+      },
+
+      /**
+      <p>Sets the combine phase script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduceScript The reduce script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceScript: function (reduceScript) {
+        if (reduceScript == null) {
+          return agg[name].scripted_metric.reduce_script;
+        }
+
+        agg[name].scripted_metric.reduce_script = reduceScript;
+        return this;
+      },
+
+      /**
+      <p>Sets the init_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} init_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      initScriptFile: function (init_script_file) {
+        if (init_script_file == null) {
+          return agg[name].scripted_metric.init_script_file;
+        }
+
+        agg[name].scripted_metric.init_script_file = init_script_file;
+        return this;
+      },
+
+      /**
+      <p>Sets the init_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} init_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      initScriptId: function (init_script_id) {
+        if (init_script_id == null) {
+          return agg[name].scripted_metric.init_script_id;
+        }
+
+        agg[name].scripted_metric.init_script_id = init_script_id;
+        return this;
+      },
+        
+      /**
+      <p>Sets the map_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} map_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      mapScriptFile : function (map_script_file) {
+        if (map_script_file == null) {
+          return agg[name].scripted_metric.map_script_file;
+        }
+
+        agg[name].scripted_metric.map_script_file = map_script_file;
+        return this;
+      },
+
+      /**
+      <p>Sets the map_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} map_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      mapScriptId : function (map_script_id) {
+        if (map_script_id == null) {
+          return agg[name].scripted_metric.map_script_id;
+        }
+
+        agg[name].scripted_metric.map_script_id = map_script_id;
+        return this;
+      },
+
+      /**
+      <p>Sets the combine_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} combine_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      combineScriptFile: function (combine_script_file) {
+        if (combine_script_file == null) {
+          return agg[name].scripted_metric.combine_script_file;
+        }
+
+        agg[name].scripted_metric.combine_script_file = combine_script_file;
+        return this;
+      },
+        
+      /**
+      <p>Sets the combine_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} combine_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      combineScriptId: function (combine_script_id) {
+        if (combine_script_id == null) {
+          return agg[name].scripted_metric.combine_script_id;
+        }
+
+        agg[name].scripted_metric.combine_script_id = combine_script_id;
+        return this;
+      },
+
+      /**
+      <p>Sets the reduce_script_file.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduce_script_file A valid script file name.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceScriptFile: function (reduce_script_file) {
+        if (reduce_script_file == null) {
+          return agg[name].scripted_metric.reduce_script_file;
+        }
+
+        agg[name].scripted_metric.reduce_script_file = reduce_script_file;
+        return this;
+      },
+
+      /**
+      <p>Sets the reduce_script_id.</p>
+
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduce_script_id A valid id from indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceScriptId: function (reduce_script_id) {
+        if (reduce_script_id == null) {
+          return agg[name].scripted_metric.reduce_script_id;
+        }
+
+        agg[name].scripted_metric.reduce_script_id = reduce_script_id;
+        return this;
+      },
+
+      /**
+      <p>Set parameters which will be passed to the init, map and combine scripts.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} params Parameters passed to the init, map and combine scripts.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      params: function (params) {
+        if (params == null) {
+          return agg[name].scripted_metric.params;
+        }
+
+        agg[name].scripted_metric.params = params;
+        return this;
+      },
+
+      /**
+      <p>Set parameters which will be passed to the reduce script.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} reduceParams Paramters to pass to the recude script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      reduceParams: function (reduceParams) {
+        if (reduceParams == null) {
+          return agg[name].scripted_metric.reduce_params;
+        }
+
+        agg[name].scripted_metric.reduce_params = reduceParams;
+        return this;
+      },
+
+      /**
+      <p>Set the scripting language used for this aggregation.</p>
+      @member ejs.ScriptedMetricAggregation
+      @param {String} lang The script langauge.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      lang: function (lang) {
+        if (lang == null) {
+          return agg[name].scripted_metric.lang;
+        }
+
+        agg[name].scripted_metric.lang = lang;
         return this;
       }
-
     });
   };
 
@@ -5196,8 +5348,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -5229,8 +5382,9 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
-    @borrows ejs.MetricsAggregationMixin.scriptValuesSorted as scriptValuesSorted
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
     @borrows ejs.AggregationMixin.toJSON as toJSON
@@ -5258,6 +5412,12 @@
 
     @name ejs.TermsAggregation
     @ejs aggregation
+    @borrows ejs.BucketsAggregationMixin.field as field
+    @borrows ejs.BucketsAggregationMixin.script as script
+    @borrows ejs.BucketsAggregationMixin.scriptId as scriptId
+    @borrows ejs.BucketsAggregationMixin.scriptFile as scriptFile
+    @borrows ejs.BucketsAggregationMixin.lang as lang
+    @borrows ejs.BucketsAggregationMixin.params as params
     @borrows ejs.AggregationMixin.aggregation as aggregation
     @borrows ejs.AggregationMixin.agg as agg
     @borrows ejs.AggregationMixin._type as _type
@@ -5272,82 +5432,12 @@
   ejs.TermsAggregation = function (name) {
 
     var
-      _common = ejs.AggregationMixin(name),
+      _common = ejs.BucketsAggregationMixin(name, 'terms'),
       agg = _common.toJSON();
 
     agg[name].terms = {};
 
     return extend(_common, {
-
-      /**
-      <p>Sets the field to gather terms from.</p>
-
-      @member ejs.TermsAggregation
-      @param {String} field a valid field name..
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      field: function (field) {
-        if (field == null) {
-          return agg[name].terms.field;
-        }
-
-        agg[name].terms.field = field;
-        return this;
-      },
-
-      /**
-      Allows you generate or modify the terms using a script.
-
-      @member ejs.TermsAggregation
-      @param {String} scriptCode A valid script string to execute.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      script: function (scriptCode) {
-        if (scriptCode == null) {
-          return agg[name].terms.script;
-        }
-
-        agg[name].terms.script = scriptCode;
-        return this;
-      },
-
-      /**
-      The script language being used.
-
-      @member ejs.TermsAggregation
-      @param {String} language The language of the script.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      lang: function (language) {
-        if (language == null) {
-          return agg[name].terms.lang;
-        }
-
-        agg[name].terms.lang = language;
-        return this;
-      },
-
-      /**
-      Sets the type of the field value for use in scripts.  Current values are:
-      string, double, float, long, integer, short, and byte.
-
-      @member ejs.TermsAggregation
-      @param {String} v The value type
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      valueType: function (v) {
-        if (v == null) {
-          return agg[name].terms.value_type;
-        }
-
-        v = v.toLowerCase();
-        if (v === 'string' || v === 'double' || v === 'float' || v === 'long' ||
-            v === 'integer' || v === 'short' || v === 'byte') {
-          agg[name].terms.value_type = v;
-        }
-
-        return this;
-      },
 
       /**
       Sets the format expression for the terms.  Use for number or date
@@ -5448,22 +5538,6 @@
       },
 
       /**
-      Set to true to assume script values are unique.
-
-      @member ejs.TermsAggregation
-      @param {Boolean} trueFalse assume unique values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesUnique: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].terms.script_values_unique;
-        }
-
-        agg[name].terms.script_values_unique = trueFalse;
-        return this;
-      },
-
-      /**
       Sets the number of aggregation entries that will be returned.
 
       @member ejs.TermsAggregation
@@ -5514,24 +5588,6 @@
       },
 
       /**
-      Sets parameters that will be applied to the script.  Overwrites
-      any existing params.
-
-      @member ejs.TermsAggregation
-      @param {Object} p An object where the keys are the parameter name and
-        values are the parameter value.
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      params: function (p) {
-        if (p == null) {
-          return agg[name].terms.params;
-        }
-
-        agg[name].terms.params = p;
-        return this;
-      },
-
-      /**
       Sets order for the aggregated values.
 
       @member ejs.TermsAggregation
@@ -5563,6 +5619,235 @@
 
   /**
     @class
+    <p>A top_hits metric aggregator keeps track of the most relevant document being
+    aggregated. This aggregator is intended to be used as a sub aggregator, so that
+    the top matching documents can be aggregated per bucket. </p>
+
+    @name ejs.TopHitsAggregation
+    @ejs aggregation
+    @borrows ejs.AggregationMixin.aggregation as aggregation
+    @borrows ejs.AggregationMixin.agg as agg
+    @borrows ejs.AggregationMixin._type as _type
+    @borrows ejs.AggregationMixin.toJSON as toJSON
+
+    @desc
+    <p>top_hits metric aggregator keeps track of the most relevant document being
+    aggregated.</p>
+
+    @param {String} name The name which be used to refer to this aggregation.
+
+    */
+  ejs.TopHitsAggregation = function (name) {
+
+    var
+      _common = ejs.AggregationMixin(name),
+      agg = _common.toJSON();
+
+    agg[name].top_hits = {};
+
+    return extend(_common, {
+      /**
+      <p> The offset from the first result you want to fetch. </p>
+
+      @member ejs.TopHitsAggregation
+      @param {Integer} from The offset from the first result you want to fetch.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      from: function (from) {
+        if (from === null) {
+          return agg[name].top_hits.from;
+        }
+
+        agg[name].top_hits.from = from;
+        return this;
+      },
+
+      /**
+      <p> Sets the maximum number of top matching hits to return per bucket. </p>
+
+      @member ejs.TopHitsAggregation
+      @param {Integer} size The numer of aggregation entries to be returned per bucket.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      size: function (size) {
+        if (size === null) {
+          return agg[name].top_hits.size;
+        }
+
+        agg[name].top_hits.size = size;
+        return this;
+      },
+
+      /**
+      <p>The maximum number of top matching hits to return per bucket.</p>
+
+      @member ejs.TopHitsAggregation
+      @param {Array} sort How to sort the the top matching hits
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      sort: function (sort) {
+        if (sort === null) {
+          return agg[name].top_hits.sort;
+        }
+
+        agg[name].top_hits.sort = sort;
+        return this;
+      },
+
+      /**
+      <p>Enables score computation and tracking during sorting.
+      By default, sorting scores are not computed. <p/>
+
+      @member ejs.TopHitsAggregation
+      @param {Boolean} trueFalse If scores should be computed and tracked.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      trackScores: function (trueFalse) {
+        if (trueFalse === null) {
+          return agg[name].top_hits.track_scores;
+        }
+
+        agg[name].top_hits.track_scores = trueFalse;
+        return this;
+      },
+
+      /**
+      <p>Enable/Disable returning version number for each hit.</p>
+
+      @member ejs.TopHitsAggregation
+      @param {Boolean} trueFalse true to enable, false to disable
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      version: function (trueFalse) {
+        if (trueFalse === null) {
+          return agg[name].top_hits.version;
+        }
+
+        agg[name].top_hits.version = trueFalse;
+        return this;
+      },
+
+      /**
+      <p>Enable/Disable explanation of score for each hi.</p>
+
+      @member ejs.TopHitsAggregation
+      @param {Boolean} trueFalse true to enable, false to disable
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      explain: function (trueFalse) {
+        if (trueFalse === null) {
+          return agg[name].top_hits.explain;
+        }
+
+        agg[name].top_hits.explain = trueFalse;
+        return this;
+      },
+
+      /**
+      <p>Performs highlighting based on the <code>Highlight</code> settings.</p>
+
+      @member ejs.TopHitsAggregation
+      @param {Highlight} h A valid Highlight object
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      highlight: function (h) {
+        if (h === null) {
+          return agg[name].top_hits.highlight;
+        }
+
+        if (!isHighlight(h)) {
+          throw new TypeError('Argument must be a Highlight object');
+        }
+
+        agg[name].top_hits.highlight = h.toJSON();
+        return this;
+      },
+
+      /**
+      <p>Computes a document property dynamically based on the supplied <code>ScriptField</code>.</p>
+
+      @member ejs.TopHitsAggregation
+      @param {ScriptField} oScriptField A valid <code>ScriptField</code>.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptField: function (oScriptField) {
+        if (oScriptField === null) {
+          return agg[name].top_hits.script_fields;
+        }
+
+        if (agg[name].top_hits.script_fields === undefined) {
+          agg[name].top_hits.script_fields = {};
+        }
+
+        if (!isScriptField(oScriptField)) {
+          throw new TypeError('Argument must be a ScriptField');
+        }
+
+        extend(agg[name].top_hits.script_fields, oScriptField.toJSON());
+        return this;
+      },
+
+    /**
+      <p>Allows to return the field data representation of a field for each hit.</p>
+
+      @member ejs.TopHitsAggregation
+      @param {Array} Fields to return field data representation for.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      fieldDataFields: function (fielddata_fields) {
+        if (fielddata_fields === null) {
+          return agg[name].top_hits.fielddata_fields;
+        }
+
+        agg[name].top_hits.fielddata_fields = fielddata_fields;
+        return this;
+      },
+
+      /**
+      <p> Allows to control how the _source field is returned with every hit.
+       By default operations return the contents of the _source field
+       unless you have used the fields parameter or if the _source field
+       is disabled.  Set the includes parameter to false to completely
+       disable returning the source field. </p>
+
+       @member ejs.TopHitsAggregation
+       @param {(String|Boolean|String[])} includes The field or list of fields to include as array.
+         Set to a boolean false to disable the source completely.
+       @param {(String|String[])} excludes The  optional field or list of fields to exclude.
+       @returns {Object} returns <code>this</code> so that calls can be chained.
+       */
+      source: function (includes, excludes) {
+        if (includes === undefined && excludes === undefined) {
+          return agg[name].top_hits._source;
+        }
+
+        if (!isArray(includes) && !isString(includes) && !isBoolean(includes)) {
+          throw new TypeError('Argument includes must be a string, an array, or a boolean');
+        }
+
+        if (excludes !== undefined && !isArray(excludes) && !isString(excludes)) {
+          throw new TypeError('Argument excludes must be a string or an array');
+        }
+
+        if (isBoolean(includes)) {
+          agg[name].top_hits._source = includes;
+        } else {
+          agg[name].top_hits._source = {
+            includes: includes
+          };
+
+          if (excludes != null) {
+            agg[name].top_hits._source.excludes = excludes;
+          }
+        }
+
+        return this;
+      }
+    });
+  };
+
+  /**
+    @class
     <p>A single-value metrics aggregation that counts the number of values that
     are extracted from the aggregated documents. These values can be extracted
     either from specific fields in the documents, or be generated by a provided
@@ -5573,6 +5858,8 @@
     @ejs aggregation
     @borrows ejs.MetricsAggregationMixin.field as field
     @borrows ejs.MetricsAggregationMixin.script as script
+    @borrows ejs.MetricsAggregationMixin.scriptId as scriptId
+    @borrows ejs.MetricsAggregationMixin.scriptFile as scriptFile
     @borrows ejs.MetricsAggregationMixin.lang as lang
     @borrows ejs.MetricsAggregationMixin.params as params
     @borrows ejs.AggregationMixin._type as _type
@@ -5591,28 +5878,7 @@
       _common = ejs.MetricsAggregationMixin(name, 'value_count'),
       agg = _common.toJSON();
 
-    // not supported in value count aggregation
-    delete _common.scriptValuesSorted;
-
-    return extend(_common, {
-
-      /**
-      Set to true to assume script values are unique.
-
-      @member ejs.ValueCountAggregation
-      @param {Boolean} trueFalse assume unique values or not
-      @returns {Object} returns <code>this</code> so that calls can be chained.
-      */
-      scriptValuesUnique: function (trueFalse) {
-        if (trueFalse == null) {
-          return agg[name].value_count.script_values_unique;
-        }
-
-        agg[name].value_count.script_values_unique = trueFalse;
-        return this;
-      }
-
-    });
+    return _common;
 
   };
 
@@ -6800,7 +7066,7 @@
 
   /**
     @class
-    <p>The has_child filter results in parent documents that have child docs 
+    <p>The has_child filter results in parent documents that have child docs
     matching the query being returned.</p>
 
     @name ejs.HasChildFilter
@@ -6814,20 +7080,23 @@
     @desc
     Returns results that have child documents matching the filter.
 
-    @param {Object} qry A valid query object.
+    @param {Object} qryOrFltr A valid query or filter object.
     @param {String} type The child type
     */
-  ejs.HasChildFilter = function (qry, type) {
+  ejs.HasChildFilter = function (qryOrFltr, type) {
 
-    if (!isQuery(qry)) {
-      throw new TypeError('No Query object found');
-    }
-    
-    var 
+    var
       _common = ejs.FilterMixin('has_child'),
       filter = _common.toJSON();
-    
-    filter.has_child.query = qry.toJSON();
+
+    if (isQuery(qryOrFltr)) {
+      filter.has_child.query = qryOrFltr.toJSON();
+    } else if (isFilter(qryOrFltr)) {
+      filter.has_child.filter = qryOrFltr.toJSON();
+    } else if (qryOrFltr != null) {
+      throw new TypeError('Argument must be query or filter');
+    }
+
     filter.has_child.type = type;
 
     return extend(_common, {
@@ -6843,11 +7112,11 @@
         if (q == null) {
           return filter.has_child.query;
         }
-  
+
         if (!isQuery(q)) {
           throw new TypeError('Argument must be a Query object');
         }
-        
+
         filter.has_child.query = q.toJSON();
         return this;
       },
@@ -6864,11 +7133,11 @@
         if (f == null) {
           return filter.has_child.filter;
         }
-  
+
         if (!isFilter(f)) {
           throw new TypeError('Argument must be a Filter object');
         }
-        
+
         filter.has_child.filter = f.toJSON();
         return this;
       },
@@ -6884,7 +7153,7 @@
         if (t == null) {
           return filter.has_child.type;
         }
-  
+
         filter.has_child.type = t;
         return this;
       },
@@ -6904,10 +7173,10 @@
         filter.has_child.short_circuit_cutoff = cutoff;
         return this;
       },
-      
+
       /**
-            Sets the scope of the filter.  A scope allows to run facets on the 
-            same scope name that will work against the child documents. 
+            Sets the scope of the filter.  A scope allows to run facets on the
+            same scope name that will work against the child documents.
 
             @deprecated since elasticsearch 0.90
             @member ejs.HasChildFilter
@@ -6917,13 +7186,13 @@
       scope: function (s) {
         return this;
       }
-      
+
     });
   };
 
   /**
     @class
-    <p>The has_parent results in child documents that have parent docs matching 
+    <p>The has_parent results in child documents that have parent docs matching
     the query being returned.</p>
 
     @name ejs.HasParentFilter
@@ -6937,20 +7206,23 @@
     @desc
     Returns results that have parent documents matching the filter.
 
-    @param {Object} qry A valid query object.
+    @param {Object} qryOrFltr A valid query or filter object.
     @param {String} parentType The child type
     */
-  ejs.HasParentFilter = function (qry, parentType) {
+  ejs.HasParentFilter = function (qryOrFltr, parentType) {
 
-    if (!isQuery(qry)) {
-      throw new TypeError('No Query object found');
-    }
-    
-    var 
+    var
       _common = ejs.FilterMixin('has_parent'),
       filter = _common.toJSON();
-    
-    filter.has_parent.query = qry.toJSON();
+
+    if (isQuery(qryOrFltr)) {
+      filter.has_parent.query = qryOrFltr.toJSON();
+    } else if (isFilter(qryOrFltr)) {
+      filter.has_parent.filter = qryOrFltr.toJSON();
+    } else if (qryOrFltr != null) {
+      throw new TypeError('Argument must be query or filter');
+    }
+
     filter.has_parent.parent_type = parentType;
 
     return extend(_common, {
@@ -6970,11 +7242,11 @@
         if (!isQuery(q)) {
           throw new TypeError('Argument must be a Query object');
         }
-        
+
         filter.has_parent.query = q.toJSON();
         return this;
       },
-      
+
       /**
             Sets the filter
 
@@ -6991,7 +7263,7 @@
         if (!isFilter(f)) {
           throw new TypeError('Argument must be a Filter object');
         }
-        
+
         filter.has_parent.filter = f.toJSON();
         return this;
       },
@@ -7013,8 +7285,8 @@
       },
 
       /**
-            Sets the scope of the filter.  A scope allows to run facets on the 
-            same scope name that will work against the parent documents. 
+            Sets the scope of the filter.  A scope allows to run facets on the
+            same scope name that will work against the parent documents.
 
             @deprecated since elasticsearch 0.90
             @member ejs.HasParentFilter
@@ -7024,7 +7296,7 @@
       scope: function (s) {
         return this;
       }
-      
+
     });
   };
 
@@ -9853,6 +10125,38 @@
       },
 
       /**
+      Sets the maximum boost value.
+
+      @member ejs.FunctionScoreQuery
+      @param {Float} maxBoost A positive <code>float</code> value.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      maxBoost: function (maxBoost) {
+        if (maxBoost == null) {
+          return query.function_score.max_boost;
+        }
+
+        query.function_score.max_boost = maxBoost;
+        return this;
+      },
+
+      /**
+      Sets the minimum score a document should have to be included.
+
+      @member ejs.FunctionScoreQuery
+      @param {Float} minScore A positive <code>float</code> value.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      minScore: function (minScore) {
+        if (minScore == null) {
+          return query.function_score.min_score;
+        }
+
+        query.function_score.min_score = minScore;
+        return this;
+      },
+
+      /**
       Add a single score function to the list of existing functions.
 
       @member ejs.FunctionScoreQuery
@@ -11854,23 +12158,14 @@
     @param {String} likeText The text to find documents like it.
   
      */
-  ejs.MoreLikeThisQuery = function (fields, likeText) {
+  ejs.MoreLikeThisQuery = function (likeText) {
 
     var 
       _common = ejs.QueryMixin('mlt'),
       query = _common.toJSON();
     
     query.mlt.like_text = likeText;
-    query.mlt.fields = [];
 
-    if (isString(fields)) {
-      query.mlt.fields.push(fields);
-    } else if (isArray(fields)) {
-      query.mlt.fields = fields;
-    } else {
-      throw new TypeError('Argument must be string or array');
-    }
-    
     return extend(_common, {
   
       /**
@@ -11884,20 +12179,29 @@
              */
       fields: function (f) {
         if (f == null) {
-          return query.mlt.fields;
+          return this;
         }
     
         if (isString(f)) {
-          query.mlt.fields.push(f);
+          query.mlt.fields = [f];
         } else if (isArray(f)) {
           query.mlt.fields = f;
         } else {
-          throw new TypeError('Argument must be a string or array');
+          throw new TypeError('Must pass a field or an array of fields');
         }
     
         return this;
       },
-  
+
+      docs: function(doc) {
+        if (isArray(doc)) {
+          query.mlt.docs = doc;
+        } else {
+          throw new TypeError('Must pass an array of docs as argument');
+        }
+        return this;
+      },
+
       /**
             The text to find documents like
 
@@ -12390,7 +12694,7 @@
         }
 
         type = type.toLowerCase();
-        if (type === 'boolean' || type === 'phrase' || type === 'phrase_prefix') {
+        if (type === 'best_fields' || type === 'most_fields' || type === 'cross_fields' || type === 'phrase' || type === 'phrase_prefix') {
           query.multi_match.type = type;
         }
 
@@ -14900,6 +15204,70 @@
 
   /**
     @class
+    <p>The field_value_factor function allows you to use a field from a document to
+    influence the score. It’s similar to using the script_score function, however,
+    it avoids the overhead of scripting. If used on a multi-valued field, only the
+    first value of the field is used in calculations.</p>
+
+    @name ejs.FieldValueFactorFunction
+    @ejs scorefunction
+    @borrows ejs.ScoreFunctionMixin.filter as filter
+    @borrows ejs.ScoreFunctionMixin._type as _type
+    @borrows ejs.ScoreFunctionMixin.toJSON as toJSON
+
+    @param {String} field the field to apply the function to.
+
+    @desc
+    <p>Multiply the score by the value of the field, multiplied by the factor.</p>
+
+    */
+  ejs.FieldValueFactorFunction = function (field) {
+
+    var
+      _common = ejs.ScoreFunctionMixin('field_value_factor'),
+      func = _common.toJSON();
+
+    func.field_value_factor.field = field;
+
+    return extend(_common, {
+
+      /**
+      Sets the factor.
+
+      @member ejs.FieldValueFactorFunction
+      @param {Float} factor the factor.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      factor: function (factor) {
+        if (factor == null) {
+          return func.field_value_factor.factor;
+        }
+
+        func.field_value_factor.factor = factor;
+        return this;
+      },
+
+      /**
+      Sets the modifier.
+
+      @member ejs.FieldValueFactorFunction
+      @param {Float} modifier the modifier, one of none, log, log1p, log2p, ln, ln1p, ln2p, square, sqrt or reciprocal
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      modifier: function (modifier) {
+        if (modifier == null) {
+          return func.field_value_factor.modifier;
+        }
+
+        func.field_value_factor.modifier = modifier;
+        return this;
+      }
+
+    });
+  };
+
+  /**
+    @class
     <p>The random_score generates scores via a pseudo random number algorithm
     that is initialized with a seed.</p>
 
@@ -14942,6 +15310,30 @@
 
   /**
     @class
+    <p>A basic filter score function, which mathces a filter and applies a
+    weight.</p>
+
+    @name ejs.ScoreFunction
+    @ejs scorefunction
+    @borrows ejs.ScoreFunctionMixin.filter as filter
+    @borrows ejs.ScoreFunctionMixin.weight as weight
+    @borrows ejs.ScoreFunctionMixin._type as _type
+    @borrows ejs.ScoreFunctionMixin.toJSON as toJSON
+
+    @desc
+    <p>Randomly score documents.</p>
+
+    */
+  ejs.ScoreFunction = function () {
+
+    var
+      _common = ejs.ScoreFunctionMixin();
+
+    return _common;
+  };
+
+  /**
+    @class
     <p>The script_score function allows you to wrap another query and customize
     the scoring of it optionally with a computation derived from other numeric
     field values in the doc using a script expression.</p>
@@ -14977,6 +15369,32 @@
         }
 
         func.script_score.script = scriptCode;
+
+        if (func.script_score.script_id) {
+          delete func.script_score.script_id;
+        }
+
+        return this;
+      },
+
+      /**
+      Set the script id that will modify the score.
+
+      @member ejs.ScriptScoreFunction
+      @param {String} scriptId Id of an indexed script.
+      @returns {Object} returns <code>this</code> so that calls can be chained.
+      */
+      scriptId: function (scriptId) {
+        if (scriptId == null) {
+          return func.script_score.scriptId;
+        }
+
+        func.script_score.script_id = scriptId;
+
+        if (func.script_score.script) {
+          delete func.script_score.script;
+        }
+
         return this;
       },
 
@@ -15516,8 +15934,9 @@
             to a specific field by passing the field name in to the
             <code>oField</code> parameter.  Valid values for order are:
 
-            fast-vector-highlighter - the fast vector based highligher
-            highlighter - the slower plain highligher
+            plain - the slower Lucene standard highligher
+            postings - the postings highligher
+            fvh - the fast vector based highligher
 
             @member ejs.Highlight
             @param {String} t The highligher.
@@ -15532,7 +15951,7 @@
         }
 
         t = t.toLowerCase();
-        if (t === 'fast-vector-highlighter' || t === 'highlighter' ||
+        if (t === 'fvh' || t === 'plain' ||
             t === 'postings') {
           addOption(oField, 'type', t);
         }
@@ -16113,6 +16532,26 @@
         }
 
         query.filter = filter.toJSON();
+        return this;
+      },
+
+      /**
+            Allows you to set a specified post_filter on this request object.
+
+            @member ejs.Request
+            @param {Object} filter Any valid <code>Filter</code> object.
+            @returns {Object} returns <code>this</code> so that calls can be chained.
+            */
+      post_filter: function (filter) {
+        if (filter == null) {
+          return query.filter;
+        }
+
+        if (!isFilter(filter)) {
+          throw new TypeError('Argument must be a Filter');
+        }
+
+        query.post_filter = filter.toJSON();
         return this;
       },
 

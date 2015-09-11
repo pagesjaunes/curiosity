@@ -4,12 +4,9 @@
 
 	<div class="input-group margin-top" ng-class="{'has-error':curAgg.field||curAgg.script?false:true}">
 		<span class="input-group-addon">Field :</span>
-		<input class="form-control" type="text" ng-model="curAgg.field">
-		<div class="input-group-btn">
-			<button title="Display Fields" type="button" class="btn btn-default" ng-click="openModalFields('sm', curAgg)">
-				<span class="glyphicon glyphicon-align-justify"></span>
-			</button>
-		</div>
+		<select ng-model="curAgg.field" ui-select2="" class="form-control">
+			<option ng-repeat="field in mapping.fields | filter:filterInt track by $index" value ="{{ field.ancestor  }}" >{{ field.ancestor  }}</option> 
+		</select>
 	</div>
 	
 	<div class="input-group margin-top">

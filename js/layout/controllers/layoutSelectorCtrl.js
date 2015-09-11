@@ -1,5 +1,7 @@
 Curiosity.controller('layoutSelectorCtrl', function($scope, layout){
 	$scope.data = layout.info;
+	$scope.info = {};
+	$scope.info.txt = global_text;
 
 
 	$scope.colh = 0;
@@ -28,4 +30,8 @@ Curiosity.controller('layoutSelectorCtrl', function($scope, layout){
 			layout.setData(name, col, row);
 		}
 	}
+
+	$scope.remove = function () {
+		layout.removeWorkspace($scope.data.idx);
+	}	
 });

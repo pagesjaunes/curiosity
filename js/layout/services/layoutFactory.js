@@ -15,6 +15,7 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 			layoutObj.info[key] = obj[key];
 		}
 		layoutObj.info.currentWorkspace = layoutObj.info.workspaces[layoutObj.info.idx];
+		layoutObj.info.currentWorkspace.active = true;
 	}
 
 	layoutObj.store = function () {
@@ -44,12 +45,13 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 	layoutObj.newWorkspace = function () {
 		var newWS = {};
 		newWS.name = "ws" +  Math.floor((Math.random() * 1000000) + 1);
-		newWS.displayName = "New Workspace";
+		newWS.idx = layoutObj.info.workspaces.length;
+		newWS.displayName = "tab " + newWS.idx;
 		newWS.col = 0;
 		newWS.row = 0; 
 		newWS.new = true;
+		newWS.active = true;
 		newWS.cards = [];
-		newWS.idx = layoutObj.info.workspaces.length;
 		layoutObj.info.workspaces.push(newWS);
 		layoutObj.info.currentWorkspace = newWS;
 		layoutObj.info.idx = layoutObj.info.workspaces.length - 1;

@@ -1,7 +1,7 @@
 <div class="col-sm-6">
 	<div class="input-group">
-		<span class="input-group-addon">{{ info.txt.template.result_items_sub_tab.Template }}</span>
-		<select ng-model="template.selected" ui-select2 class="form-control" ng-change="changeTemplate('template', template,'currentTemplate', template.selected)">
+		<span class="input-group-addon">{{ ::info.txt.template.result_items_sub_tab.Template }}</span>
+		<select ng-model="template.selected" ui-select2="" class="form-control" ng-change="changeTemplate('template', template,'currentTemplate', template.selected)">
 			<option ng-repeat="template in data.template" value="{{$index}}" >{{ template.name }}</option>  
 		</select>
 	</div>
@@ -9,16 +9,16 @@
 <div class="spacer"></div>
 <div class="btn-group col-sm-6 margin-top">
 	<button ng-click="new('template', template, 'currentTemplate')" class="btn btn-default">
-		{{ info.txt.template.result_items_sub_tab.New }}
+		{{ ::info.txt.template.result_items_sub_tab.New }}
 	</button>
 	<button ng-if="!readonlyTemplate" ng-click="save('template')" class="btn btn-default">
-		{{ info.txt.template.result_items_sub_tab.Save }}
+		{{ ::info.txt.template.result_items_sub_tab.Save }}
 	</button>
 </div>
 <div class="spacer"></div>
 <div class="col-sm-6 margin-top">
 	<div class="input-group">
-		<span class="input-group-addon">{{ info.txt.template.result_items_sub_tab.TemplateName }}</span>
+		<span class="input-group-addon">{{ ::info.txt.template.result_items_sub_tab.TemplateName }}</span>
 		<input type="text" ng-model="template.currentTemplate.name" class="form-control"></input>
 	</div>
 </div>
@@ -32,14 +32,14 @@
 	<div class="panel panel-info">
 		<div class="panel-heading">
 			<h3 class="panel-title col-sm-6">
-				{{ info.txt.template.result_items_sub_tab.Fields }}
+				{{ ::info.txt.template.result_items_sub_tab.Fields }}
 			</h3>
 			<div class="col-sm-5">
 				<input type="text" class="form-control" ng-model="fieldFilter">
 			</div>
-			<button class="btn btn-default col-sm-1" ng-click="updateLimiteValueField()" ng-switch on="fieldLimit" title="{{ info.txt.request.ShowAllFieldTitle }}">
-				<span ng-switch-when="12">{{ info.txt.request.ShowAll }}</span>
-				<span ng-switch-default>{{ info.txt.request.Hide }}</span>
+			<button class="btn btn-default col-sm-1" ng-click="updateLimiteValueField()" ng-switch on="fieldLimit" title="{{ ::info.txt.request.ShowAllFieldTitle }}">
+				<span ng-switch-when="12">{{ ::info.txt.request.ShowAll }}</span>
+				<span ng-switch-default>{{ ::info.txt.request.Hide }}</span>
 			</button>
 			<div class="spacer"></div>
 		</div>

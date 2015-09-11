@@ -14,7 +14,7 @@ Curiosity.factory('moduleManager', function($rootScope, $http, context){
 	}
 
 	moduleManagerObj.load = function (obj) {
-		udpadeModuleFromContext(obj)
+		udpadeModuleFromContext(obj);
 	}
 
 	moduleManagerObj.store = function () {

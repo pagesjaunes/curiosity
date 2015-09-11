@@ -1,6 +1,6 @@
 {
   "name": "curiosity",
-  "version": "0.2.7",
+  "version": "0.4.0",
   "homepage": "https://github.com/pagesjaunes/curiosity",
   "authors": [
     "Erwan Pigneul <epigneul@pagesjaunes.fr",
@@ -24,22 +24,23 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.3.3",
-    "angular-animate": "~1.3.3",
-    "angular-bootstrap": "~0.12.0",
-    "bootstrap": "~3.3.1",
-    "angular-sanitize": "~1.3.3",
-    "angular-ui-select": "~0.8.3",
-    "elastic.js": "~1.2.0",
-    "elasticsearch": "~3.0.0",
+    "angular": "*",
+    "angular-animate": "*",
+    "angular-cookies": "*",
+    "angular-bootstrap": "*",
+    "bootstrap": "*",
+    "angular-sanitize": "*",
+    "elastic.js": "ErwanPigneul/elastic.js",
+    "elasticsearch": "*",
     "FileSaver": "*",
-    "ng-json-explorer": "*",
-    "angular-ui-select2": "~0.0.5",
-    "leaflet": "~0.7.3",
+    "leaflet": "*",
     "geohash-js": "git://github.com/thurmda/geohash-js",
-    "leaflet-dvf": "https://github.com/humangeo/leaflet-dvf.git"
+    "leaflet-dvf": "https://github.com/humangeo/leaflet-dvf.git",
+    "ng-json-explorer": "ErwanPigneul/ng-json-explorer",
+    "angular-ui-select2": "*"
   },
   "resolutions": {
-    "angular": "~1.3.3"
+    "angular": "~1.4.3",
+    "elastic.js": "~1.3.0"
   }
 }

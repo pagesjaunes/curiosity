@@ -1,61 +1,53 @@
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div >
-		<div class="navbar-header">
-			<a href="https://github.com/pagesjaunes/curiosity" class="navbar-brand" target="_blank">Curiosity <small>{{ data.version }}</small></a>			
-		</div>
-		<div class="collapse navbar-collapse">
-			<p class="navbar-text">{{ info.txt.header.Server}} : </p>
-			<form class="navbar-form navbar-left" ng-show="!displayNewServer" title="{{data.currentServer}}">
-				<div class="form-group">
-					<select ng-model="data.currentServer" ng-change="connectServer(data.currentServer, false)" ui-select2 class="form-control select-header">
-						<option ng-repeat="server in data.serverList" value ="{{ server }}" >{{ server }}</option> 
-					</select>
-				</div>
-			</form>
-			<form class="navbar-form navbar-left" ng-show="displayNewServer">
-				<div class="form-group">
-					<input type="text" class="form-control" ng-model="newServer" placeholder="adresse">
-				</div>
-				<button class="btn" ng-click="connectServer(newServer, true)" ng-class="{'btn-success':data.connected, 'btn-danger':!data.connected}" title="{{ info.txt.header.ConnectTitle }}">
-					{{ info.txt.header.Connect }}
-				</button>
-			</form>
-			<button type="button" class="btn btn-default navbar-btn navbar-left" ng-click="displayNewServer = !displayNewServer" title="{{ info.txt.header.NewServerTitle }}">
-				<span ng-if="!displayNewServer">
-					{{ info.txt.header.New }}
-				</span>
-				<span ng-if="displayNewServer">
-					{{ info.txt.header.Hide }}
-				</span>
-			</button>
-			<p class="navbar-text">{{ info.txt.header.Index }} :</p>
-			<form class="navbar-form navbar-left" title="{{ data.selectedIndex }}">
-				<div class="form-group">
-					<select ng-model="data.selectedIndex" class="form-control select-header" ng-change="selectIndex()" ui-select2 >	
-						<option value="">{{ info.txt.header.AllIndex }}</option>
-						<optgroup label="Alias">
-							<option ng-repeat="alias in data.aliases" value="{{ alias }}">
-								{{ alias }}
-							</option>
-						</optgroup>
-						<optgroup label="Index">
-							<option ng-repeat="index in data.indexList" value ="{{ index }}"> 
-								{{ index }}
-							</option>
-						</optgroup>
-					</select>
-				</div>
-			</form>
-			<p class="navbar-text navbar-left light">
-				<img ng-if="data.err" src="resources/red_light.png">
-				<img ng-if="!data.err" src="resources/green_light.png">
-			</p>
-
-			<p class="navbar-text">{{ info.txt.header.Context }} : {{ contextData.currentContext.contextName }} -> {{layoutData.currentWorkspace.displayName}}</p>
-		</div>
+<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+		<a href="https://github.com/pagesjaunes/curiosity" class="navbar-brand" target="_blank">Curiosity <small>{{ ::data.version }}</small></a>	
 	</div>
-</div>
+    <!-- Collection of nav links, forms, and other content for toggling -->
+    <div id="navbarCollapse" class="collapse navbar-collapse">
+		<p class="navbar-text  gi-20px"><span class="label label-success">{{ contextData.currentContext.contextName }}</span></p>
+<!-- 		<p class="navbar-text">
+			<a href="#" ng-click="search()" title="Search" class="glyphicon glyphicon-search white">
+			</a>
+		</p> -->
+		<p class="navbar-text ico">
+			<a href="#" class="glyphicon glyphicon-home white gi-20px" ng-click="loadContext('basicSearch')" title="Home (basic search context)">
+			</a>
+		</p>
+
+		<p class="navbar-text ico">
+			<a href="#" class="glyphicon glyphicon-folder-open white gi-20px" ng-click="loadContext('exploreContext')" title="Search for a previous saved context">
+			</a>
+		</p>
+
+
+		<p class="navbar-text" ng-click="changeServerIndex()" title="{{ ::info.txt.header.ServerAndIndexModalTitle }}">{{ data.currentServer }} / {{ data.selectedIndex | limitTo: 40 }} {{data.selectedIndex.length < 40 ? '' : '...'}} &nbsp;
+			<a href="#" ng-click="changeServerIndex()" title="{{ ::info.txt.header.ServerAndIndexModalTitle }}" class="glyphicon glyphicon-edit white"></a>
+		</p>
+		<p class="navbar-text navbar-left light">
+			<img ng-if="data.err" src="resources/red_light.png">
+			<img ng-if="!data.err" src="resources/green_light.png">
+		</p>
+
+		<p class="navbar-text ico">
+			<a href="#" class="glyphicon glyphicon-font white gi-20px" ng-click="manageKeyword()" title="Open Keywords window">
+			</a>
+		</p>
+
+		<p class="navbar-text ico">
+			<a href="#" class="glyphicon glyphicon-align-justify white gi-20px" ng-click="manageTemplate()" title="Open Templates window">
+			</a>
+		</p>
+
+    </div>
+</nav>
 <div class="alert alert-danger alert-dismissible" role="alert" ng-if="ConfCreation">
 	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	<strong>Warning!</strong> Curiosity assume that your elasticsearch cluster's is {{ confServer }}. If it's not the case, please change your settings in conf.js at root of the project. If it's ok, please just reload the page.
+	<strong>Warning!</strong> Curiosity assume that your elasticsearch cluster's is {{ ::confServer }}. If it's not the case, please change your settings in conf.js at root of the project. If it's ok, please just reload the page.
 </div>

@@ -185,7 +185,7 @@ L.Callout = L.LayerGroup.extend({
 	
 	addArrow: function (angle, direction, position) {
 		if (this.options.arrow) {
-			var angle = L.LatLng.RAD_TO_DEG * angle;
+			angle = L.LatLng.RAD_TO_DEG * angle;
 			var numberOfSides = this.options.numberOfSides || 3;
 			var radius = this.options.radius || 6;
 			
@@ -406,8 +406,8 @@ L.FlowLine = L.FlowLine.extend({
 			
 			if (this._lastRecord && includeLayer) {
 				
-				var options = this._getDynamicOptions(this._lastRecord);
-				
+				options = this._getDynamicOptions(this._lastRecord);
+
 				line = this.options.getLine.call(this, this._lastMarker.getLatLng(), marker.getLatLng(), options.layerOptions);
 			
 				this.addLayer(line);
@@ -418,7 +418,7 @@ L.FlowLine = L.FlowLine.extend({
 				
 				this.onEachSegment(this._lastRecord, record, line);
 				
-			};
+			}
 			
 			if (includeLayer) {
 				this._lastRecord = record;
@@ -506,6 +506,8 @@ L.ArcedPolyline = L.Path.extend({
 	drawSegment: function (point1, point2) {
 		var distance = Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
 		var heightOffset = this.options.distanceToHeight.evaluate(distance);
+
+        this._angle = Math.atan((2 * heightOffset)/(0.5 * distance));
 
 		var parts = ['M', point1.x, ',', point1.y, ' C', point1.x, ',', point1.y - heightOffset, ' ', point2.x, ',', point2.y - heightOffset, ' ', point2.x, ',', point2.y ];
 		

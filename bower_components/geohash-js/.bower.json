@@ -9,6 +9,5 @@
   },
   "_source": "git://github.com/thurmda/geohash-js.git",
   "_target": "*",
-  "_originalSource": "git://github.com/thurmda/geohash-js",
-  "_direct": true
+  "_originalSource": "git://github.com/thurmda/geohash-js"
 }

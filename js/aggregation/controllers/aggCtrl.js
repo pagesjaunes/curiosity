@@ -2,10 +2,12 @@
 * aggCtrl 
 * @desc this controller is attached to each aggregation displayed 
 */
-Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
+Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template, mapping){
 	$scope.aggTypeSelected = false;
 	$scope.data = aggFactory.info;
 	$scope.tplData = template.info; 
+	$scope.mapping = mapping.info;
+
 
 	/**
 	* @desc function call by ng-init, called to load aggregation specifique data, and load template in $templateCache
@@ -73,6 +75,14 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 	}
 
 	/**
+	* @desc add a aggregation at the top
+	* @param object agg the agg to modify
+	*/
+	$scope.addParentAgg = function (agg) {
+		aggFactory.addParentAgg(agg)
+	}
+
+	/**
 	* @desc ask template service to add a template to the $templateCache whenever the template id different from default 
 	* @param string the template name
 	*/
@@ -110,6 +120,17 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template){
 			agg.intervals.splice(index, 1);
 		}
 	}
+
+	$scope.filterInt = function(field)
+	{
+	    if (['double','float','integer','long','boolean'].indexOf(field.type) != -1)
+	    {
+	        return true; // this will be listed in the results
+	    }
+
+	    return false; // otherwise it won't be within the results
+	};
+
 
 	/**
 	* @desc open a modal which contains the fields list. When closed change aggregation field attr value

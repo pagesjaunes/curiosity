@@ -28,7 +28,7 @@ exports.queries = {
     done();
   },
   exists: function (test) {
-    test.expect(40);
+    test.expect(42);
 
     test.ok(ejs.CommonTermsQuery, 'CommonTermsQuery');
     test.ok(ejs.RegexpQuery, 'RegexpQuery');
@@ -70,8 +70,10 @@ exports.queries = {
     // scoring functions for FunctionScoreQuery
     test.ok(ejs.BoostFactorScoreFunction, 'BoostFactorScoreFunction');
     test.ok(ejs.DecayScoreFunction, 'DecayScoreFunction');
+    test.ok(ejs.DecayScoreFunction, 'FieldValueFactorFunction');
     test.ok(ejs.RandomScoreFunction, 'RandomScoreFunction');
     test.ok(ejs.ScriptScoreFunction, 'ScriptScoreFunction');
+    test.ok(ejs.ScoreFunction, 'ScoreFunction');
 
     test.done();
   },
@@ -146,6 +148,35 @@ exports.queries = {
     test.throws(function () {
       scoreFunc.origin(termFilter1);
     }, TypeError);
+
+    test.done();
+  },
+  FieldValueFactorFunction: function (test) {
+    test.expect(6);
+
+    var func = ejs.FieldValueFactorFunction('f'),
+      expected,
+      doTest = function () {
+        test.deepEqual(func.toJSON(), expected);
+      };
+
+    expected = {
+      field_value_factor: { field: 'f' }
+    };
+
+    test.ok(func, 'FieldValueFactorFunction exists');
+    test.ok(func.toJSON(), 'toJSON() works');
+    doTest();
+
+    func.factor(2);
+    expected.field_value_factor.factor = 2;
+    doTest();
+
+    func.modifier('sqrt');
+    expected.field_value_factor.modifier = 'sqrt';
+    doTest();
+
+    test.strictEqual(func._type(), 'score function');
 
     test.done();
   },
@@ -259,8 +290,36 @@ exports.queries = {
 
     test.done();
   },
+  ScoreFunction: function (test) {
+    test.expect(5);
+
+    var scoreFunc = ejs.ScoreFunction(),
+      termFilter = ejs.TermFilter('tf1', 'vf1'),
+      expected,
+      doTest = function () {
+        test.deepEqual(scoreFunc.toJSON(), expected);
+      };
+
+    scoreFunc.weight(1.2);
+
+    expected = {
+      weight: 1.2
+    };
+
+    test.ok(scoreFunc, 'ScoreFunction exists');
+    test.ok(scoreFunc.toJSON(), 'toJSON() works');
+    doTest();
+
+    expected.filter = termFilter.toJSON();
+
+    scoreFunc.filter(termFilter);
+    doTest();
+ 
+    test.strictEqual(scoreFunc._type(), 'score function');
+    test.done();
+  },
   FunctionScoreQuery: function (test) {
-    test.expect(30);
+    test.expect(31);
 
     var termQuery1 = ejs.TermQuery('t1', 'v1'),
       termFilter1 = ejs.TermFilter('tf1', 'fv1'),
@@ -345,6 +404,10 @@ exports.queries = {
 
     funcQuery.boost(2);
     expected.function_score.boost = 2;
+    doTest();
+
+    funcQuery.maxBoost(5);
+    expected.function_score.max_boost = 5;
     doTest();
 
     funcQuery.function(randomScore);
@@ -1213,9 +1276,9 @@ exports.queries = {
     test.done();
   },
   MoreLikeThisQuery: function (test) {
-    test.expect(22);
+    test.expect(21);
 
-    var mltQuery = ejs.MoreLikeThisQuery(['f', 'f2'], 'like text'),
+    var mltQuery = ejs.MoreLikeThisQuery('like text'),
       expected,
       doTest = function () {
         test.deepEqual(mltQuery.toJSON(), expected);
@@ -1224,7 +1287,6 @@ exports.queries = {
     expected = {
       mlt: {
         like_text: 'like text',
-        fields: ['f', 'f2']
       }
     };
 
@@ -1232,16 +1294,16 @@ exports.queries = {
     test.ok(mltQuery.toJSON(), 'toJSON() works');
     doTest();
 
-    mltQuery = ejs.MoreLikeThisQuery('f', 'like text');
+    mltQuery = ejs.MoreLikeThisQuery('like text');
     expected = {
       mlt: {
         like_text: 'like text',
-        fields: ['f']
       }
     };
     doTest();
 
     mltQuery.fields('f2');
+    expected.mlt.fields = [];
     expected.mlt.fields.push('f2');
     doTest();
 
@@ -1302,11 +1364,6 @@ exports.queries = {
     doTest();
 
     test.strictEqual(mltQuery._type(), 'query');
-
-
-    test.throws(function () {
-      ejs.MoreLikeThisQuery(9, 'like');
-    }, TypeError);
 
     test.throws(function () {
       mltQuery.fields(3);
@@ -1985,7 +2042,7 @@ exports.queries = {
     test.done();
   },
   MultiMatchQuery: function (test) {
-    test.expect(45);
+    test.expect(47);
 
     var mmQuery = ejs.MultiMatchQuery('t', 'v1'),
       expected,
@@ -2032,8 +2089,16 @@ exports.queries = {
     expected.multi_match.tie_breaker = 0.6;
     doTest();
 
-    mmQuery.type('boolean');
-    expected.multi_match.type = 'boolean';
+    mmQuery.type('best_fields');
+    expected.multi_match.type = 'best_fields';
+    doTest();
+
+    mmQuery.type('cross_fields');
+    expected.multi_match.type = 'cross_fields';
+    doTest();
+
+    mmQuery.type('most_fields');
+    expected.multi_match.type = 'most_fields';
     doTest();
 
     mmQuery.type('junk');

@@ -6,10 +6,10 @@
 	</div>
 	<div class="modal-body">
 	  	<button type="button" class="btn" ng-click="template.tab=0" ng-class="{'btn-default':template.tab==1,'btn-primary':template.tab==0}">
-	  		{{ info.txt.template.ResultItems }}
+	  		{{ ::info.txt.template.ResultItems }}
 	  	</button>
 	  	<button type="button" class="btn" ng-click="template.tab=1" ng-class="{'btn-default':template.tab==0,'btn-primary':template.tab==1}">
-	  		{{ info.txt.template.Aggregations }}
+	  		{{ ::info.txt.template.Aggregations }}
 	  	</button>
 		<div class="margin-top" ng-show="template.tab == 0" ng-include="'partials/template_tab/result_items_sub_tab.html'">
 		</div>

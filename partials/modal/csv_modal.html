@@ -1,19 +1,19 @@
 <div>
 	
 	<div class="modal-header">
-		<h3 class="modal-title">{{ info.txt.csvModal.CsvExport }}</h3>	
+		<h3 class="modal-title">{{ ::info.txt.csvModal.CsvExport }}</h3>	
 		<div id="modal-csv-option">
 			<div class="input-group">
-				<label class="input-group-addon">{{ info.txt.csvModal.Sep }} :</label>
+				<label class="input-group-addon">{{ ::info.txt.csvModal.Sep }} :</label>
 				<input type="text" class="form-control" ng-model="data.sep"></input>
 			</div>
 			<div class="input-group margin-top">
-				<label class="input-group-addon">{{ info.txt.csvModal.TabSep }} :</label>
+				<label class="input-group-addon">{{ ::info.txt.csvModal.TabSep }} :</label>
 				<input class="form-control" type="text" ng-model="data.tabSep"></input>
 			</div>
 			<div class="margin-top input-group">
 				<label class="input-group-addon"> Mappings :</label>
-				<select ng-model="mappingData.selectedMapping" class="form-control" ng-change="updateMapping()" ui-select2>
+				<select ng-model="mappingData.selectedMapping" class="form-control" ng-change="updateMapping()" ui-select2="">
 					<option ng-repeat="(key, value) in mappingData.mappingsList" value="{{ key }}">
 						{{ key }}
 					</option>
@@ -32,14 +32,14 @@
 			</div>
 			<div class="margin-top">
 				<label class="col-sm-4">
-					{{ info.txt.csvModal.Name }}
+					{{ ::info.txt.csvModal.Name }}
 				</label>
 				<div class="col-sm-5">
-					<label>{{ info.txt.csvModal.Alias }}</label>
+					<label>{{ ::info.txt.csvModal.Alias }}</label>
 				</div>
-				<span title="{{ info.txt.csvModal.Hide }}" ng-if="!hideAll" class="col-sm-2 glyphicon glyphicon-ok ok hide-button" ng-click="hideAllField()">
+				<span title="{{ ::info.txt.csvModal.Hide }}" ng-if="!hideAll" class="col-sm-2 glyphicon glyphicon-ok ok hide-button" ng-click="hideAllField()">
 				</span>
-				<span ng-if="hideAll" class="col-sm-2 glyphicon glyphicon-remove ko hide-button" ng-click="hideAllField()" title="{{ info.txt.csvModal.Show }}">
+				<span ng-if="hideAll" class="col-sm-2 glyphicon glyphicon-remove ko hide-button" ng-click="hideAllField()" title="{{ ::info.txt.csvModal.Show }}">
 				</span>
 				<div class="spacer"></div>		
 			</div>
@@ -51,9 +51,9 @@
 				<div class="col-sm-5">
 					<input type="text" class="form-control" ng-model="field.alias">
 				</div>		
-				<span title="{{ info.txt.csvModal.Hide }}" ng-if="!field.hide" class="col-sm-2 glyphicon glyphicon-ok ok hide-button" ng-click="hideField($index)">
+				<span title="{{ ::info.txt.csvModal.Hide }}" ng-if="!field.hide" class="col-sm-2 glyphicon glyphicon-ok ok hide-button" ng-click="hideField($index)">
 				</span>
-				<span ng-if="field.hide" class="col-sm-2 glyphicon glyphicon-remove ko hide-button" ng-click="hideField($index)" title="{{ info.txt.csvModal.Show }}">
+				<span ng-if="field.hide" class="col-sm-2 glyphicon glyphicon-remove ko hide-button" ng-click="hideField($index)" title="{{ ::info.txt.csvModal.Show }}">
 				</span>
 				<div class="spacer"></div>
 			</div>
@@ -61,21 +61,21 @@
 
 		<div class="modal-footer">
 			<div class="col-sm-3">
-				<button ng-click="builtCsv()" class="btn btn-default" title="{{ info.txt.csvModal.CurrentResultTitle }}">{{ info.txt.csvModal.CurrentResult }}</button>
+				<button ng-click="builtCsv()" class="btn btn-default" title="{{ ::info.txt.csvModal.CurrentResultTitle }}">{{ ::info.txt.csvModal.CurrentResult }}</button>
 			</div>
 			<div class="col-sm-5">
 				<div class="input-group">
 					<span class="input-group-btn">
-						<button class="btn btn-default" ng-click="builtSplitCsv()" type="button" title="{{ info.txt.csvModal.SomeResultTitle }}">
-							{{ info.txt.csvModal.SomeResult }}
+						<button class="btn btn-default" ng-click="builtSplitCsv()" type="button" title="{{ ::info.txt.csvModal.SomeResultTitle }}">
+							{{ ::info.txt.csvModal.SomeResult }}
 						</button>
 					</span>
 					<input type="text" class="form-control" ng-model="data.nbResult">
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<button ng-click="builtFullCsv()" class="btn btn-default" title="{{ info.txt.csvModal.FullResultTitle }}">
-					{{ info.txt.csvModal.FullResult }}
+				<button ng-click="builtFullCsv()" class="btn btn-default" title="{{ ::info.txt.csvModal.FullResultTitle }}">
+					{{ ::info.txt.csvModal.FullResult }}
 				</button>	
 			</div>
 		</div>

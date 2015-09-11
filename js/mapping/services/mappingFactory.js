@@ -9,7 +9,7 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 		mappingObj.info.currentIndex = "";
 		mappingObj.info.currentMapping = {}; 
 		mappingObj.info.autoRefreshMapping = true;
-		mappingObj.info.fields = [];
+		mappingObj.info.fields = [{'ancestor':'_type','name':'_type','type':'string'},{'ancestor':'_id','name':'_id','type':'string'}];
 		mappingObj.info.mappingsList = {};
 	}
 
@@ -95,7 +95,9 @@ Curiosity.factory('mapping', function($rootScope, elasticClient, elasticFunc, cu
 			mappingObj.info.currentMapping = mappingObj.info.currentMapping.mappings; 
 		}
 		setAncestorDocuments(mappingObj.info.currentMapping);
-		mappingObj.info.fields = builtFullFieldArrayDocuments(mappingObj.info.currentMapping);			
+		// mappingObj.info.fields = [{'ancestor':'_type','name':'_type','type':'string'},{'ancestor':'_id','name':'_id','type':'string'}]
+		mappingObj.info.fields = [{'ancestor':'_type','name':'_type','type':'string'},
+			{'ancestor':'_id','name':'_id','type':'string'}].concat(builtFullFieldArrayDocuments(mappingObj.info.currentMapping));
 	}
 
 	// TODO : Maybe delete this function

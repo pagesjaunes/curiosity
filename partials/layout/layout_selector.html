@@ -2,16 +2,16 @@
 	<div>
 		<div>
 			<div class="input-group margin-top">
-				<span class="input-group-addon">Name</span>
+				<span class="input-group-addon">{{ ::info.txt.layout.Name }}</span>
 				<input ng-model="name" class="form-control" type="text" />
 			</div>		
 		</div>
 		<div class="input-group margin-top">
-			<span class="input-group-addon">Row</span>
+			<span class="input-group-addon">{{ ::info.txt.layout.Row }}</span>
 			<input ng-model="rows" class="form-control" type="number" max="4" min="1" />
 		</div>
 		<div class="input-group margin-top">
-			<span class="input-group-addon">Col</span>
+			<span class="input-group-addon">{{ ::info.txt.layout.Col }}</span>
 			<input ng-model="cols" class="form-control" type="number" max="4" min="1" />
 		</div>
 	</div>		
@@ -79,5 +79,7 @@
 			</div>
 		</div>
 	</div>
-	<button ng-click="validate(name, cols, rows)" class="btn btn-default">OK</button>
+	<button ng-click="validate(name, cols, rows)" class="btn btn-default">{{ ::info.txt.Ok }}</button>
+	<button ng-click="removeWorkspace()" class="btn btn-default">{{ ::info.txt.layout.DeletePage }}</button>
+
 </div>
