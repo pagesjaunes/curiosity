@@ -50,6 +50,7 @@ Curiosity.factory('layout', function($rootScope, context, moduleManager){
 		newWS.col = 0;
 		newWS.row = 0; 
 		newWS.new = true;
+		newWS.active = true;
 		newWS.cards = [];
 		layoutObj.info.workspaces.push(newWS);
 		layoutObj.info.currentWorkspace = newWS;

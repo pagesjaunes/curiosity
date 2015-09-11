@@ -80,7 +80,6 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template, m
 	*/
 	$scope.addParentAgg = function (agg) {
 		aggFactory.addParentAgg(agg)
-		console.log(agg)
 	}
 
 	/**

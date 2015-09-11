@@ -98,9 +98,10 @@
 	}
 	.card .center {
 	  top :150;
-	  left :49%;
+	  text-align	: center;
 	  font-size: 3em;
-	  z-index: 166;
+	  z-index: 10000;
+	  position: absolute;
 	}
 
 /* 
@@ -167,4 +168,9 @@
 	box-shadow 			: 1px 1px 1px 1px rgba(150,150,150,125);
 	overflow			: hidden;
 	position			: relative;		
+}
+
+.see {
+	text-align	: center;
+	top :150;
 }

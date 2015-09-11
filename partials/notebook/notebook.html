@@ -4,7 +4,7 @@
 		<span class="glyphicon" ng-class="{'glyphicon-minus':!curNotebook.hideCurNotebook,'glyphicon-plus':curNotebook.hideCurNotebook}" ng-click="curNotebook.hideCurNotebook = !curNotebook.hideCurNotebook" title="{{ ::info.txt.log.Hide }}">	
 		</span>
 		
-		<span class="glyphicon" ng-class="{'glyphicon-cog':curNotebook.displayResult, 'glyphicon-list-alt':!curNotebook.displayResult}" ng-click="switchDisplay()">
+		<span class="glyphicon" ng-class="{'glyphicon-edit':curNotebook.displayResult, 'glyphicon-list-alt':!curNotebook.displayResult}" ng-click="switchDisplay()">
 		</span>
 	</h4>
 
