@@ -121,6 +121,27 @@ Curiosity.controller('aggCtrl', function($scope, $modal, aggFactory, template, m
 		}
 	}
 
+	/**
+	* @desc add a filter to a filters aggregation
+	* @param object agg target aggregation
+	*/
+	$scope.addFilter = function (agg) {
+		if (typeof (agg.filters) === "undefined") {
+			agg.filters = [];
+		}
+		agg.filters.push({});
+	}
+	/**
+ 	* @desc remove a filter to a filters aggregation
+ 	* @param object agg target aggregation
+ 	* @param int index index to remove
+ 	*/
+	$scope.removeFilter =  function(agg, index) {
+		if (typeof (agg.filters) !== "undefined") {
+			agg.filters.splice(index, 1);
+		}
+	}
+
 	$scope.filterInt = function(field)
 	{
 	    if (['double','float','integer','long','boolean'].indexOf(field.type) != -1)

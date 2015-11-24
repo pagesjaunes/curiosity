@@ -116,6 +116,14 @@
         },
         "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html"
     }, {
+        "type": "Filters",
+        "template": "partials/aggregation_module/settings_partials/filters.html",
+        "resultTemplate": "partials/aggregation/Filter.html",
+        "mapping": {
+            "buckets": ["doc_count", "key"]
+        },
+        "officialDoc": "http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-aggregations-bucket-filter-aggregation.html"
+    }, {
         "type": "IPv4Range",
         "template": "partials/aggregation_module/settings_partials/ip_range.html",
         "resultTemplate": "partials/aggregation/Terms.html",

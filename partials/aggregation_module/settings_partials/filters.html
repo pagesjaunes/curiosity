@@ -1,0 +1,31 @@
+<form class="agg_option">
+
+	<div ng-include="'partials/aggregation_module/aggSettingsHeader.html'"></div>
+
+	<div ng-repeat="filter in curAgg.filters" class="margin-top">
+		
+		<div class="col-sm-5"> 
+			<input placeholder="filter" class="form-control" ng-model="filter.query" type="text"> 
+		</div>
+
+		<button class="col-sm-2 btn btn-danger" ng-click="removeFilter(curAgg,$index)">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
+
+		<div class="spacer"></div>
+	
+	</div>
+
+	<button class="btn btn-default margin-top" ng-click="addFilter(curAgg)" ng-class="{'btn-danger':curAgg.filters[0]?false:true}">Add filter</button>
+
+	<div class="margin-top">
+		<button class="btn btn-default" ng-click="validateAgg(curAgg)">
+			<span ng-if="curAgg.validate">Deactivate</span>
+			<span ng-if="!curAgg.validate">Activate</span>
+		</button>
+		<button class="btn btn-default" ng-click="addNestedAgg(curAgg)">Add Nested Agg</button>
+	</div>
+
+	<div ng-include="'partials/aggregation_module/aggSettingsNested.html'"></div>
+
+</form>

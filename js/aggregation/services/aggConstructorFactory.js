@@ -297,6 +297,31 @@ Curiosity.factory('aggConstructor', function(){
 
 
 	/**
+	* @desc Built filters aggregation 
+	* @param object agg contains all aggregation's param
+	*/
+	obj.Filters = function (agg) {
+
+		initError(agg);
+
+		var result = ejs.FiltersAggregation(agg.name);
+
+		var i = 0;
+		if (checkValue(agg.filters)) {
+			while (i < agg.filters.length) {
+				var tmp = ejs.QueryStringQuery(agg.filters[i].query);
+				result.filter(ejs.QueryFilter(tmp), agg.filters[i].query);
+				i++;
+			}
+		}
+		for (key in agg.nested) {
+			if (agg.nested[key].validate)
+				result.agg(obj[agg.nested[key].type](agg.nested[key]));	
+		}
+		return (result);
+	}
+
+	/**
 	* @desc Built avg aggregation with throught simple function
 	* @param object agg contains all aggregation's param
 	*/
