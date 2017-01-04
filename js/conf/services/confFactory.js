@@ -33,9 +33,9 @@ Curiosity.factory("conf", function($rootScope, elasticClient, elasticFunc, log){
 		"type":"aggregationsTemplates",
 		"templates":
 			[
-				{"name":"pieChart","value" : "<div piechart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"},
-				{"name":"barChart","value" : "<div barchart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"},
-				{"name":"lineChart","value": "<div linechart data=\"agg.buckets\" cols=\"[{id: 'Date', label: 'Date', type: 'date', path:'key'},{id: 'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"></div>"}
+				{"name":"pieChart","value" : "<div piechart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key_as_string'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"},
+				{"name":"barChart","value" : "<div barchart data=\"agg.buckets\" cols=\"[{id: 'Terms', label: 'Terms', type: 'string', path:'key_as_string'}, {id:'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"> </div>"},
+				{"name":"lineChart","value": "<div linechart data=\"agg.buckets\" cols=\"[{id: 'Date', label: 'Date', type: 'date', path:'key_as_string'},{id: 'Doc_count', label: 'Count', type: 'number', path:'doc_count'}]\"></div>"}
 			]
 	};
 
